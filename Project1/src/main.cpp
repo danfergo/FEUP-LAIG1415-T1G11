@@ -17,7 +17,7 @@ using std::exception;
 
 
 int main(int argc, char* argv[]) {
-
+	/* XML Scene object here */
 	XMLScene teste = XMLScene("demograph.xml");
 
 
