@@ -1,6 +1,6 @@
 /* 
- * G0_Base: projeto inicial de CGra
- * 
+ * G0_Base: projeto inicial de Laig*
+ * O Nelson mexeu aqui!
  */
 
 #include <iostream>
