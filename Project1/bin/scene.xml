@@ -103,15 +103,23 @@
              <!-- bloco "primitives" --> 
             <primitives>
                 <!-- podem existir varias primitivas -->
+              <triangle xyz3="0 0 0" xyz2="2 0 0" xyz1="1 2.4 0" />
+              
+              <triangle xyz1="0 0 0" xyz2="0 0 2" xyz3="1 2.4 0" />
+              <triangle xyz1="0 0 2" xyz2="1 2.4 2" xyz3="1 2.4 0" />
+              
+              <triangle xyz1="0 0 2" xyz2="2 0 2" xyz3="1 2.4 2" />
 
-                <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus -->
-                <!--   Comandos a serem interpretados genericamente como em OpenGL/GLUT, exceto -->
-                <!--   o cilindro, que deve adicionalmente ter topos ou tampas) -->            
-                <rectangle xy1="ff ff" xy2="ff ff" />
-                <triangle xyz1="ff ff ff" xyz2="ff ff ff" xyz3="ff ff ff" />
-                <cylinder base="ff" top="ff" height="ff" slices="ii" stacks="ii" />      <!-- deve ter topos -->
-                <sphere radius="ff" slices="ii" stacks="ii" />
-                <torus inner="ff" outer="ff" slices="ii" loops="ii" />
+     
+              
+              <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus -->
+              <!--   Comandos a serem interpretados genericamente como em OpenGL/GLUT, exceto -->
+              <!--   o cilindro, que deve adicionalmente ter topos ou tampas) -->
+              <!-- <rectangle xy1="ff ff" xy2="ff ff" />
+               
+                <cylinder base="ff" top="ff" height="ff" slices="ii" stacks="ii" /> -->     <!-- deve ter topos -->
+               <!-- <sphere radius="ff" slices="ii" stacks="ii" />
+                <torus inner="ff" outer="ff" slices="ii" loops="ii" />-->
              </primitives>
                
              <!-- bloco "descendants" -->

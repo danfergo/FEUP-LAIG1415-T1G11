@@ -8,8 +8,7 @@
  
 #include "CGFapplication.h"
 #include "Scene.h"
-
-#include "XMLScene.h"
+#include "parser/ANFparser.h"
 
 using std::cout; 
 using std::exception;
@@ -17,26 +16,33 @@ using std::exception;
 
 
 int main(int argc, char* argv[]) {
-	/* XML Scene object here */
-	XMLScene teste = XMLScene("demograph.xml");
-
-
-
-
-
-
-	/* Starting CGF application*/
-
-
+	
 	CGFapplication app = CGFapplication();
 
 	try {
 		app.init(&argc, argv);
 
-		app.setScene(new Scene());
+		Scene * scene = new Scene();
+
+		std::string filename;
+		std::cout << "Insert the ANF filename: \n>";
+		std::cin >> filename;
+
+		if(!ParseANFscene::parse(scene,filename.c_str())){
+			printf("Press Any Key to Continue\n");  
+			std::cin >> filename;
+			return 0;
+		}
+
+		/* Running CGF scene */
+		
+
+		app.setScene(scene);
 		app.setInterface(new CGFinterface());
+
 		
 		app.run();
+		
 	}
 	catch(GLexception& ex) {
 		cout << "Erro: " << ex.what();

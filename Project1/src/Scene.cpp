@@ -4,13 +4,13 @@
 
 #include <math.h>
 
-float pi = acos(-1.0);
-float deg2rad=pi/180.0;
+//float pi = acos(-1.0);
+//float deg2rad=pi/180.0;
 
 #include "CGFappearance.h"
 #include "MyUnitCube.h" 
 
-CGFappearance *mat1;
+//CGFappearance *mat1;
 
 void Scene::init() 
 {
@@ -30,7 +30,6 @@ void Scene::init()
 	glNormal3f(0,0,1);
 
 	// Init myObject
-
 }
 
 void Scene::display() 
@@ -57,7 +56,8 @@ void Scene::display()
 	// ---- BEGIN Draw table
 
 	// DRAW STUFF
-	MyUnitCube().draw();
+	//MyUnitCube().draw();
+	root->processNode(NULL);
 
 	// ---- END Draw table
 

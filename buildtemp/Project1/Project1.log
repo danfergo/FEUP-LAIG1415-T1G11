@@ -1,45 +1,56 @@
-﻿Build started 9/23/2014 12:11:54 PM.
-     1>Project "C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\Project1.vcxproj" on node 2 (build target(s)).
-     1>InitializeBuildStatus:
+﻿Build started 9/25/2014 12:02:10 AM.
+     1>Project "C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\Project1.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "..\buildtemp\Project1\Project1.lastbuildstate".
+       InitializeBuildStatus:
          Creating "..\buildtemp\Project1\Project1.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\buildtemp\Project1\\" /Fd"..\buildtemp\Project1\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt src\main.cpp src\MyUnitCube.cpp src\Scene.cpp src\XMLScene.cpp
-         XMLScene.cpp
-     1>c:\users\utilizador\documents\github\feup-laig1415-t1g11\project1\src\xmlscene.cpp(70): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\buildtemp\Project1\\" /Fd"..\buildtemp\Project1\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt src\main.cpp src\MyUnitCube.cpp src\parser\ANFparser.cpp src\parser\XMLScene.cpp src\Scene.cpp src\scenegraph\Node.cpp src\scenegraph\Triangle.cpp
+         Triangle.cpp
+         Node.cpp
          Scene.cpp
+         XMLScene.cpp
+     1>c:\users\daniel\documents\faculdade\l.a.i.g\feup-laig1415-t1g11\project1\src\parser\xmlscene.cpp(70): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+         ANFparser.cpp
+     1>c:\users\daniel\documents\faculdade\l.a.i.g\feup-laig1415-t1g11\project1\src\parser\anfparser.cpp(91): warning C4806: '==' : unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
+     1>c:\users\daniel\documents\faculdade\l.a.i.g\feup-laig1415-t1g11\project1\src\parser\anfparser.cpp(91): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
          MyUnitCube.cpp
          main.cpp
          Generating Code...
        Link:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\Project1.exe" /NOLOGO tinyxml.lib glew32.lib CGFlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"..\buildtemp\Project1\Project1.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\Project1.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"bin\Project1.lib" /MACHINE:X86 ..\buildtemp\Project1\main.obj
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\Project1.exe" /NOLOGO tinyxml.lib glew32.lib CGFlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"..\buildtemp\Project1\Project1.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\Project1.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"bin\Project1.lib" /MACHINE:X86 ..\buildtemp\Project1\main.obj
          ..\buildtemp\Project1\MyUnitCube.obj
-         ..\buildtemp\Project1\Scene.obj
+         ..\buildtemp\Project1\ANFparser.obj
          ..\buildtemp\Project1\XMLScene.obj
+         ..\buildtemp\Project1\Scene.obj
+         ..\buildtemp\Project1\Node.obj
+         ..\buildtemp\Project1\Triangle.obj
      1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-     1>tinyxml.lib(tinystr.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinystr.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>tinyxml.lib(tinyxml.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxml.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>tinyxml.lib(tinyxmlerror.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxmlerror.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>tinyxml.lib(tinyxmlparser.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxmlparser.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFappearance.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFappearance.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFapplication.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFapplication.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFaxis.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFaxis.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFcamera.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFcamera.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFinterface.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFinterface.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFlight.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFlight.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFobject.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFobject.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFscene.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFscene.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(CGFtexture.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFtexture.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(imagetools.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(imagetools.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-     1>CGFlib.lib(stb_image.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(stb_image.obj)' or at 'C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
-         Project1.vcxproj -> C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\bin\Project1.exe
+     1>tinyxml.lib(tinystr.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinystr.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>tinyxml.lib(tinyxml.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxml.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>tinyxml.lib(tinyxmlerror.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxmlerror.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>tinyxml.lib(tinyxmlparser.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxmlparser.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFappearance.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFappearance.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFapplication.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFapplication.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFaxis.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFaxis.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFcamera.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFcamera.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFinterface.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFinterface.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFlight.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFlight.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFobject.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFobject.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFscene.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFscene.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(CGFtexture.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(CGFtexture.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(imagetools.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(imagetools.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+     1>CGFlib.lib(stb_image.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'CGFlib.lib(stb_image.obj)' or at 'C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\vc100.pdb'; linking object as if no debug info
+         Project1.vcxproj -> C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\bin\Project1.exe
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"bin\Project1.exe;#1" /manifest ..\buildtemp\Project1\Project1.exe.intermediate.manifest
        FinalizeBuildStatus:
          Deleting file "..\buildtemp\Project1\Project1.unsuccessfulbuild".
          Touching "..\buildtemp\Project1\Project1.lastbuildstate".
-     1>Done Building Project "C:\Users\Utilizador\Documents\GitHub\FEUP-LAIG1415-T1G11\Project1\Project1.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\Daniel\Documents\Faculdade\L.A.I.G\FEUP-LAIG1415-T1G11\Project1\Project1.vcxproj" (rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.57
+Time Elapsed 00:00:02.81
