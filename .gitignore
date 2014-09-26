@@ -25,3 +25,13 @@ buildtemp/Project1/Project1.log
 Project1/bin/Project1.exe
 Project1/bin/Project1.ilk
 Project1/bin/Project1.pdb
+buildtemp/*
+buildtemp/
+
+
+buildtemp/Project1/ANFparser.obj
+buildtemp/Project1/Project1.log
+Project1/bin/Project1.exe
+Project1/bin/Project1.ilk
+Project1/bin/Project1.pdb
+Project1/Project1.suo
