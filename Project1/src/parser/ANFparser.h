@@ -1,15 +1,18 @@
 #pragma once
-	
+
+
+#include "../scenegraph/Point.h"
+#include "../scenegraph/Triangle.h"
 #include "../Scene.h"
 #include "tinyxml.h"
+#include "CGFobject.h"
 
 
 class ParseANFscene{
 private:
-	static Scene * scene;
-	static bool parseGraph(TiXmlElement * anfGraph);
-	static bool parseNode(TiXmlElement * anfNode);
-	static bool parseTriangle(TiXmlElement * anfTriangle);
+	static Node * parseGraph(TiXmlElement * anfGraph);
+	static Node * parseNode(TiXmlElement * anfNode);
+	static Triangle * parseTriangle(TiXmlElement * anfTriangle);
 
 public:
 	static bool parse(Scene * scene,const char* filename);

@@ -67,6 +67,13 @@ void Scene::display()
 	glutSwapBuffers();
 }
 
+
+void Scene::setRoot(Node * root){
+	delete(this->root);
+	this->root = root;
+}
+
+
 /******************* Old  transformation section *******************
 
 	glPushMatrix();

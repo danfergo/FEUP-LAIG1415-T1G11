@@ -1,19 +1,13 @@
 #include "ANFparser.h"
 #include <string>
 #include <iostream>
-
-
-#include "../scenegraph/Point.h"
-#include "../scenegraph/Triangle.h"
-
-Scene* ParseANFscene::scene = NULL;
+#include <map>
 
 
 bool ParseANFscene::parse(Scene * scene,const char* filename){
-	ParseANFscene::scene = scene;
+
 	TiXmlDocument * doc = new TiXmlDocument(filename);
 
-	scene->root = new Node();
 
 	if (!doc->LoadFile()){
 		printf("ERROR! Could not load file '%s'. Error='%s'.", filename, doc->ErrorDesc());
@@ -32,54 +26,60 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 		printf("ERROR! Block 'graph' not found! \n");
 		return false;
 	}else{
-		if(!parseGraph(anfGraph)){
-			return false;
+		Node * root = parseGraph(anfGraph);
+		if(root != NULL){
+			scene->setRoot(root);
 		}
 	}
-
 
 	return true;
 }
 
 
-bool ParseANFscene::parseGraph(TiXmlElement * anfGraph){
+Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph){
 
 	TiXmlElement *node = anfGraph->FirstChildElement();
 
-	while(node){
-		if(!parseNode(node)){
-			return false;
-		}
+	while(node){        // draft code. must be improved. only supporting one good node.
+		return parseNode(node);
+
 		node=node->NextSiblingElement();
 	}
 
-	return true;
+	return NULL;
 }
 
 
-bool ParseANFscene::parseNode(TiXmlElement * anfNode){
+Node * ParseANFscene::parseNode(TiXmlElement * anfNode){
+	std::map<std::string,CGFobject* (*)(TiXmlElement *)> subParsers;
+	
+	//insert primitive parsers here
+	//subParsers.insert(std::pair<string,Triangle* (*)(TiXmlElement *)>("triangle",ParseANFscene::parseTriangle));
 
-
+	Node * root = new Node();
+		
+/*
 	// Lets Parse node primitives
 	TiXmlElement * primitives = anfNode->FirstChildElement("primitives");
 	if (primitives == NULL){
 		printf("ERROR! Primitives block not found! \n");
-		return false;
+		return NULL;
 	}else{
-		TiXmlElement * primitive = primitives->FirstChildElement();
+		TiXmlElement * primitive = primitives->FirstChildElement();                 // draft algorithm must be improved. safty issues
 		while(primitive){
-			if(string(primitive->Value()) ==  "triangle"){
-				if(!parseTriangle(primitive)) return false;
-			}else{
-				printf("ERROR! Invalid primitive found! \n");
+			try{
+				root->addPrimitive(subParsers.at(primitive->Value())(primitive));
+			}catch(...){
+				printf("ERROR! Invalid primitive '%s' found! \n",primitive->Value());
 			}
+
 			primitive=primitive->NextSiblingElement();
 		}
-	}
-	return true;
+	}`*/
+	return root;
 }
 
-bool ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
+Triangle * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
 	char *valString;
 
 	Point3d data[3] = {{0,0,0},{0,0,0},{0,0,0}};
@@ -91,10 +91,9 @@ bool ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
 		if(!valString || !sscanf(valString,"%f %f %f",&data[i].x, &data[i].y, &data[i].z)==3){
 
 			printf("Error! error parsing xyz%d \n",i+1);
-			return false;
+			return NULL;
 		}
 	}
 	
-	scene->root->addPrimitive(new Triangle(data));
-	return true;
+	return new Triangle(data);
 }
