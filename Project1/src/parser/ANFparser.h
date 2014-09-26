@@ -12,7 +12,7 @@ class ParseANFscene{
 private:
 	static Node * parseGraph(TiXmlElement * anfGraph);
 	static Node * parseNode(TiXmlElement * anfNode);
-	static Triangle * parseTriangle(TiXmlElement * anfTriangle);
+	static CGFobject * parseTriangle(TiXmlElement * anfTriangle);
 
 public:
 	static bool parse(Scene * scene,const char* filename);

@@ -78,6 +78,50 @@
     <!-- bloco do grafo; "rootid" identifica o no de raiz -->
     <graph rootid="ss">
 
+      <node id="ss">
+        <!-- bloco "transforms" obrigatorio -->
+        <transforms>
+          <!-- deve conter transformacoes explicitas usando as instrucoes seguintes sem limite nem ordem -->
+          <!-- ex: bloco transforms pode ficar sem conteudo -->
+          <!-- ex: bloco transforms pode ser R,T (nao tem S) -->
+          <!-- ex: bloco transforms pode ser R,S,T,S -->
+          <!-- <transform type="translate" to="ff ff ff" />
+                <transform type="rotate" axis="ee" angle="ff" />
+                <transform type="scale" factor="ff ff ff" /> -->
+        </transforms>
+
+        <!-- declaracao da aparencia a utilizar -->
+        <!-- se id="inherit", o no' mantem (herda) a aparencia do "pai" -->
+
+        <appearanceref id="ss" />
+
+
+        <!-- conteudo do no; deve existir pelo menos um bloco "primitives" ou um "descendants" -->
+        <!-- podem existir ambos -->
+
+        <!-- bloco "primitives" -->
+        <primitives>
+          <!-- podem existir varias primitivas -->
+          <triangle xyz3="0 0 0" xyz2="2 0 0" xyz1="1 2.4 0" />
+
+
+
+
+
+          <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus -->
+          <!--   Comandos a serem interpretados genericamente como em OpenGL/GLUT, exceto -->
+          <!--   o cilindro, que deve adicionalmente ter topos ou tampas) -->
+          <!-- <rectangle xy1="ff ff" xy2="ff ff" />
+               
+                <cylinder base="ff" top="ff" height="ff" slices="ii" stacks="ii" /> -->
+          <!-- deve ter topos -->
+          <!-- <sphere radius="ff" slices="ii" stacks="ii" />
+                <torus inner="ff" outer="ff" slices="ii" loops="ii" />-->
+        </primitives>
+
+      </node>
+      
+      
         <!-- tem de existir, pelo menos, um bloco "node" -->
         <node id="ss">
             <!-- bloco "transforms" obrigatorio -->
@@ -103,7 +147,7 @@
              <!-- bloco "primitives" --> 
             <primitives>
                 <!-- podem existir varias primitivas -->
-              <triangle xyz3="0 0 0" xyz2="2 0 0" xyz1="1 2.4 0" />
+              <!--<triangle xyz3="0 0 0" xyz2="2 0 0" xyz1="1 2.4 0" />-->
               
               <triangle xyz1="0 0 0" xyz2="0 0 2" xyz3="1 2.4 0" />
               <triangle xyz1="0 0 2" xyz2="1 2.4 2" xyz3="1 2.4 0" />

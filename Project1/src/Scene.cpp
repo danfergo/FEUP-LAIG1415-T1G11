@@ -12,6 +12,10 @@
 
 //CGFappearance *mat1;
 
+Scene::Scene(): root(NULL), CGFscene(){
+}
+
+
 void Scene::init() 
 {
 	// Enables lighting computations
@@ -30,6 +34,7 @@ void Scene::init()
 	glNormal3f(0,0,1);
 
 	// Init myObject
+
 }
 
 void Scene::display() 
@@ -57,7 +62,8 @@ void Scene::display()
 
 	// DRAW STUFF
 	//MyUnitCube().draw();
-	root->processNode(NULL);
+	if(root != NULL)
+		root->processNode(NULL);
 
 	// ---- END Draw table
 
@@ -69,7 +75,7 @@ void Scene::display()
 
 
 void Scene::setRoot(Node * root){
-	delete(this->root);
+	//delete(this->root);
 	this->root = root;
 }
 

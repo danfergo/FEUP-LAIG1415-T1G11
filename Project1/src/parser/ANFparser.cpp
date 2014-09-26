@@ -40,13 +40,21 @@ Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph){
 
 	TiXmlElement *node = anfGraph->FirstChildElement();
 
-	while(node){        // draft code. must be improved. only supporting one good node.
-		return parseNode(node);
+	Node * root = NULL;
+	bool first = true;
 
+	while(node){        // draft code. must be improved. only supporting one good node.
+		if(first){
+			root = parseNode(node);
+		}else{
+			root->addDescendants(parseNode(node));
+		}
+		
 		node=node->NextSiblingElement();
+		first = false;
 	}
 
-	return NULL;
+	return root;
 }
 
 
@@ -54,11 +62,10 @@ Node * ParseANFscene::parseNode(TiXmlElement * anfNode){
 	std::map<std::string,CGFobject* (*)(TiXmlElement *)> subParsers;
 	
 	//insert primitive parsers here
-	//subParsers.insert(std::pair<string,Triangle* (*)(TiXmlElement *)>("triangle",ParseANFscene::parseTriangle));
+	subParsers.insert(std::pair<string,CGFobject* (*)(TiXmlElement *)>("triangle",ParseANFscene::parseTriangle));
 
 	Node * root = new Node();
-		
-/*
+
 	// Lets Parse node primitives
 	TiXmlElement * primitives = anfNode->FirstChildElement("primitives");
 	if (primitives == NULL){
@@ -75,11 +82,11 @@ Node * ParseANFscene::parseNode(TiXmlElement * anfNode){
 
 			primitive=primitive->NextSiblingElement();
 		}
-	}`*/
+	}
 	return root;
 }
 
-Triangle * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
+CGFobject * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
 	char *valString;
 
 	Point3d data[3] = {{0,0,0},{0,0,0},{0,0,0}};

@@ -9,6 +9,7 @@ class Scene : public CGFscene
 private:
 	Node * root;
 public:
+	Scene();
 	void init();
 	void display();
 	void setRoot(Node * root);

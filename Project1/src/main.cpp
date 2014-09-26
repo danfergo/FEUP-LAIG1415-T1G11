@@ -1,4 +1,4 @@
-/* 
+ /* 
  * G0_Base: projeto inicial de Laig* 
  * O Nelson mexeu aqui!
  */
@@ -24,6 +24,9 @@ int main(int argc, char* argv[]) {
 
 		Scene * scene = new Scene();
 
+		app.setScene(scene);
+		app.setInterface(new CGFinterface());
+		
 		std::string filename;
 		std::cout << "Insert the ANF filename: \n>";
 		std::cin >> filename;
@@ -37,9 +40,7 @@ int main(int argc, char* argv[]) {
 		/* Running CGF scene */
 		
 
-		app.setScene(scene);
-		app.setInterface(new CGFinterface());
-
+		
 		
 		app.run();
 		

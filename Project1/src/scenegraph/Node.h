@@ -14,5 +14,6 @@ public:
 	~Node();
 	void processNode(CGFappearance * parentAppearance);
 	void addPrimitive(CGFobject * primitive);
+	void Node::addDescendants(Node * descendant);
 };
 
