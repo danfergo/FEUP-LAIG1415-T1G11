@@ -2,7 +2,7 @@
  * G0_Base: projeto inicial de Laig* 
  * O Nelson mexeu aqui!
  */
-
+	
 #include <iostream>
 #include <exception>
  
@@ -31,16 +31,15 @@ int main(int argc, char* argv[]) {
 		std::cout << "Insert the ANF filename: \n>";
 		std::cin >> filename;
 
-		if(!ParseANFscene::parse(scene,filename.c_str())){
+		ParseANFscene parser = ParseANFscene(ParseANFscene::PERMISSIVE);
+
+		if(!parser.parse(scene,filename.c_str())){
 			printf("Press Any Key to Continue\n");  
 			std::cin >> filename;
 			return 0;
 		}
 
 		/* Running CGF scene */
-		
-
-		
 		
 		app.run();
 		
