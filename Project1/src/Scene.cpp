@@ -75,7 +75,7 @@ void Scene::display()
 
 
 void Scene::setRoot(Node * root){
-	//delete(this->root);
+	delete(this->root);
 	this->root = root;
 }
 
@@ -122,6 +122,7 @@ void Scene::setRoot(Node * root){
 	glMultMatrixf(rot);     // GT = GT * rot
 	glMultMatrixf(sca);     // GT = GT * sca 
 	glMultMatrixf(tra);     // GT = GT * tra 
+
 	//glRotated(30,0,1,0);
 	glScaled(2,2,1);
 	glTranslated(5, 0, 2);

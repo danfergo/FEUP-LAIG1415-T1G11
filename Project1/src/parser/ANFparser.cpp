@@ -49,7 +49,6 @@ Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph){
 	// init some local variables
 	map<std::string, NodeWrapper> nodeWrappers;
 	NodeWrapper nodeWrapper;
-	char * t;
 
 	// getting root id
 	std::string rootId = std::string(anfGraph->Attribute("rootid"));
@@ -87,7 +86,6 @@ Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph){
 	}
 	return nodeWrappers.at(rootId).node;
 } 
-
 
 bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFscene::NodeWrapper> & nodes){
 	//matching node descendantas. here we  also catch bad node's ids and such.
@@ -153,11 +151,24 @@ bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFs
 }
 
 
+
 ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode){
 	
 	// init the return var
 	NodeWrapper ret = {new Node(), std::vector<std::string>(), 0}; 
 	
+
+	// Check if node has transforms  block
+	TiXmlElement * transforms = anfNode->FirstChildElement("transforms");
+	if (transforms == NULL){
+		printf("WARNING! Transforms block not found! \n"); 
+		goto failreturn;
+	}
+
+	if(!ParseANFscene::parseTransforms(ret.node,transforms)){
+		goto failreturn;
+	}
+
 	// Check if node has primitives block
 	TiXmlElement * primitives = anfNode->FirstChildElement("primitives");
 	if (primitives == NULL){
@@ -209,15 +220,41 @@ failreturn:
 	return ret;
 }
 
+bool ParseANFscene::parseTransforms(Node * node, TiXmlElement * anfTransforms){
+	TiXmlElement * transform = anfTransforms->FirstChildElement("transform");
+	std::string type;
+	const char *factor;
+	float x,y,z;
+	while(transform){
+		type = std::string(transform->Attribute("type"));
+		
+		if(type == "scale"){ // Let's parse a Scaling
+			factor = transform->Attribute("factor");
+			if(!factor || !sscanf(factor,"%f %f %f",&x, &y, &z)==3){
+				printf("Error! error parsing scaling factor \n");
+				return false;
+			}
+			node->addScaling(x,y,z);
+		}else{ // Must be an invalid type.
+			std::cout << "WARNING! Invalid transform type found '" << type << "' ! \n"; 
+			return false;
+		}
+		transform = transform->NextSiblingElement("transform");
+	}
+	return true;
+}
+
+
+
 CGFobject * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
-	char *valString;
+	const char *valString;
 
 	Point3d data[3] = {{0,0,0},{0,0,0},{0,0,0}};
 
 	for(unsigned i = 0; i < 3; i++){
 
 		std::string attr = "xyz" + std::to_string((long double)(i+1));
-		valString=(char *) anfTriangle->Attribute(attr.c_str());
+		valString= anfTriangle->Attribute(attr.c_str());
 		if(!valString || !sscanf(valString,"%f %f %f",&data[i].x, &data[i].y, &data[i].z)==3){
 			printf("Error! error parsing xyz%d \n",i+1);
 			return NULL;

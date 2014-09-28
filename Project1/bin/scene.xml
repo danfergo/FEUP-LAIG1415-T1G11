@@ -87,7 +87,8 @@
           <!-- ex: bloco transforms pode ser R,S,T,S -->
           <!-- <transform type="translate" to="ff ff ff" />
                 <transform type="rotate" axis="ee" angle="ff" />
-                <transform type="scale" factor="ff ff ff" /> -->
+                 -->
+          <transform type="scale" factor="0.2 0.2 0.2" />
         </transforms>
 
         <!-- declaracao da aparencia a utilizar -->
@@ -121,7 +122,7 @@
 
 
         <descendants>
-          <noderef id="ss1"> </noderef>
+          <!--<noderef id="ss1"> </noderef>-->
           
         </descendants>
       </node>
@@ -138,6 +139,7 @@
                 <!-- <transform type="translate" to="ff ff ff" />
                 <transform type="rotate" axis="ee" angle="ff" />
                 <transform type="scale" factor="ff ff ff" /> -->
+              <transform type="scale" factor="5 5 5" />
             </transforms>
           
             <!-- declaracao da aparencia a utilizar -->

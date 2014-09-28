@@ -26,6 +26,7 @@ private:
 	Node * parseGraph(TiXmlElement * anfGraph);
 	NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode);
 	static CGFobject * parseTriangle(TiXmlElement * anfTriangle);
+	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
 	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
 public:
 	const static char STRICT;
