@@ -45,6 +45,9 @@
     <ClCompile Include="src\parser\ANFpaserPrimitives.cpp">
       <Filter>Source Files\parser</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenegraph\Sphere.cpp">
+      <Filter>Source Files\scenegraph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h">
@@ -61,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="src\parser\ANFparser.h">
       <Filter>Header Files\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Sphere.h">
+      <Filter>Header Files\scenegraph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
