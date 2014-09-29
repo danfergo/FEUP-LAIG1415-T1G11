@@ -4,7 +4,8 @@
 
 Node::Node()
 {
-	transforms.identity();
+	for(unsigned i=0; i<16; i++)
+		transforms[i] = (i%5 == 0) ? 1 : 0 ;
 }
 
 
@@ -23,7 +24,7 @@ void Node::addDescendants(Node * descendant){
 void Node::processNode(CGFappearance * parentAppearance){
 	glPushMatrix();
 		// ok lets apply this node transformations
-		glMultMatrixf(transforms.get());
+		glMultMatrixf( transforms );
 		
 		// we are going to draw this node's primitives
 		for(std::vector<CGFobject *>::iterator it = primitives.begin();
@@ -39,24 +40,47 @@ void Node::processNode(CGFappearance * parentAppearance){
 	glPopMatrix();
 }
 
-
-
 void Node::addRotationX(float angle){
-	transforms.rotate(angle, 1,0,0);  
+	glLoadMatrixf(transforms);
+	glRotatef(angle, 1,0,0);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 }
 
 void Node::addRotationY(float angle){
-	transforms.rotate(angle, 0,1,0); 
+	glLoadMatrixf(transforms);
+	glRotatef(angle, 0,1,0);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 }
 
 void Node::addRotationZ(float angle){
-	transforms.rotate(angle, 0,0,1); 
+	glLoadMatrixf(transforms);
+	glRotatef(angle, 0,0,1);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
 }
 
 void Node::addScaling(float x, float y, float z){
-	transforms.scale(x,y,z); 
+	glLoadMatrixf(transforms);
+	glScalef(x,y,z);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
 }
 
 void Node::addTranslation(float x, float y, float z){
-	transforms.translate(x, y, z);
+	glLoadMatrixf(transforms);
+	glTranslatef(x, y, z);
+	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 }
+
+bool Node::addRotation(std::string axis, float angle){
+	if(axis == "xx"){
+		addRotationX(angle);
+	}else if(axis == "yy"){
+		addRotationY(angle);
+	}else if(axis == "zz"){
+		addRotationZ(angle);
+	}else{
+		return false;	
+	}	
+	return true;
+}
+
+

@@ -17,18 +17,32 @@ ParseANFscene::ParseANFscene(const char parseMode): parseMode(parseMode){
 bool ParseANFscene::parse(Scene * scene,const char* filename){
 	TiXmlDocument * doc = new TiXmlDocument(filename);
 
+	//First things first, reading the XML/ANF file
 	if (!doc->LoadFile()){
 		printf("ERROR! Could not load file '%s'. Error='%s'.", filename, doc->ErrorDesc());
 		return false;
 	}
 
+	//Must exist anf root block
 	TiXmlElement* anfRoot = doc->FirstChildElement("anf");
 	if (anfRoot == NULL){
 		printf("ERROR! Main block 'anf' block not found! \n");
 		return false;
 	}
 
+	//If appearances block exist, we call its parser
+	TiXmlElement* anfAppearances = anfRoot->FirstChildElement("appearances");
+	std::vector<CGFappearance *> appearances;
+	if(anfAppearances == NULL){
+		printf("ERROR! Block 'appearances' not found! \n");
+		return false;
+	}else{
+		if(!parseAppearances(anfAppearances,appearances)){
+			return false;
+		}
+	}
 
+	//If graph block exist, we call its parser
 	TiXmlElement* anfGraph = anfRoot->FirstChildElement("graph");
 	if(anfGraph == NULL){
 		printf("ERROR! Block 'graph' not found! \n");
@@ -41,6 +55,11 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 			return false;
 		}
 	}
+
+	return true;
+}
+
+bool ParseANFscene::parseAppearances(TiXmlElement * anfAppearances, std::vector<CGFappearance *> & appearances){
 
 	return true;
 }
@@ -150,8 +169,6 @@ bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFs
 	return true;
 }
 
-
-
 ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode){
 	
 	// init the return var
@@ -222,9 +239,11 @@ failreturn:
 
 bool ParseANFscene::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 	TiXmlElement * transform = anfTransforms->FirstChildElement("transform");
-	std::string type;
-	const char *factor;
-	float x,y,z;
+	std::string type, axis;
+	const char *factor, *to;
+	float x,y,z, angle;
+
+	// Parsing the node transformations.
 	while(transform){
 		type = std::string(transform->Attribute("type"));
 		
@@ -235,7 +254,24 @@ bool ParseANFscene::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 				return false;
 			}
 			node->addScaling(x,y,z);
-		}else{ // Must be an invalid type.
+		}else if(type == "translate"){ // Let's parse a Translation
+			to = transform->Attribute("to");
+			if(!to || !sscanf(to,"%f %f %f",&x, &y, &z)==3){
+				printf("Error! error parsing scaling factor \n");
+				return false;
+			}
+			node->addTranslation(x,y,z);
+		}else if(type == "rotate"){ // Let's parse a Rotation
+			axis = std::string(transform->Attribute("axis"));
+			transform->QueryFloatAttribute("angle",&angle);
+			/*if(!){ // bad angle value
+				printf("WARNING! Bad angle found at rotation transform ! \n");
+				return false;
+			}else */if(!node->addRotation(axis,angle)){ // bad axis value
+				printf("WARNING! Bad axis found at rotation transform ! \n");
+				return false;
+			}
+		}else{ // Must be an invalid transform type.
 			std::cout << "WARNING! Invalid transform type found '" << type << "' ! \n"; 
 			return false;
 		}
@@ -243,8 +279,6 @@ bool ParseANFscene::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 	}
 	return true;
 }
-
-
 
 CGFobject * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
 	const char *valString;

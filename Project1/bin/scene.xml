@@ -60,7 +60,7 @@
     <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
     <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
     <textures>       
-          <!-- <texture id="ss" file="ss" texlength_s="ff" texlength_t="ff" /> -->
+           <texture id="ss" file="ss" texlength_s="ff" texlength_t="ff" />
     </textures>
 
     <!-- bloco de materiais; -->
@@ -68,11 +68,11 @@
         <!-- deve existir um ou mais blocos "appearance" -->
         <!-- IMPORTANTE: -->
         <!--   textureref e opcional, a utilizar caso haja textura associada a esta aparencia --> 
-        <!-- <appearance id="ss" shininess="ff" textureref="ss" >
+         <appearance id="ss" shininess="ff" textureref="ss" >
                <component type="ambient" value="ff ff ff ff" />
                <component type="diffuse" value="ff ff ff ff" />
                <component type="specular" value="ff ff ff ff" />
-        </appearance> -->
+        </appearance> 
     </appearances>
 
     <!-- bloco do grafo; "rootid" identifica o no de raiz -->
@@ -88,7 +88,7 @@
           <!-- <transform type="translate" to="ff ff ff" />
                 <transform type="rotate" axis="ee" angle="ff" />
                  -->
-          <transform type="scale" factor="0.2 0.2 0.2" />
+          <transform type="scale" factor="1 1 1" />
         </transforms>
 
         <!-- declaracao da aparencia a utilizar -->
@@ -136,9 +136,11 @@
                 <!-- ex: bloco transforms pode ficar sem conteudo -->
                 <!-- ex: bloco transforms pode ser R,T (nao tem S) -->
                 <!-- ex: bloco transforms pode ser R,S,T,S -->
-                <!-- <transform type="translate" to="ff ff ff" />
+                <!-- 
                 <transform type="rotate" axis="ee" angle="ff" />
                 <transform type="scale" factor="ff ff ff" /> -->
+              <transform type="rotate" axis="xx" angle="90" />
+              <transform type="translate" to="1 1 1" />
               <transform type="scale" factor="5 5 5" />
             </transforms>
           
