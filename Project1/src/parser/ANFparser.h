@@ -33,11 +33,13 @@ private:
 	std::map<std::string,CGFobject* (*)(TiXmlElement *)> subParsers;
 
 	Node * parseGraph(TiXmlElement * anfGraph);
-	bool parseAppearances(TiXmlElement * anfAppearances, std::vector<CGFappearance *> & appearances);
+	bool parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances);
+	CGFappearance * parseAppearances(TiXmlElement * anfAppearance);
 	NodeWrapper parseNode(TiXmlElement * anfNode);
 	static CGFobject * parseTriangle(TiXmlElement * anfTriangle);
 	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
 	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
+	void initPrimitiveParsers();
 public:
 	class ParseExep{
 	private:

@@ -107,8 +107,6 @@
 
 
 
-
-
           <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus -->
           <!--   Comandos a serem interpretados genericamente como em OpenGL/GLUT, exceto -->
           <!--   o cilindro, que deve adicionalmente ter topos ou tampas) -->

@@ -3,10 +3,6 @@
 
 #include "tinyxml.h"
 
-
-
-
-
 class XMLScene
 {
 public:

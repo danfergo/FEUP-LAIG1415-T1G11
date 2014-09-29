@@ -8,10 +8,7 @@ const char ParseANFscene::PERMISSIVE = 1;
 const char ParseANFscene::SILENT = 2;
 
 ParseANFscene::ParseANFscene(const char parseMode): parseMode(parseMode){
-	
-	//insert here all the primitive's parser funcition
-	subParsers.insert(std::pair<std::string,CGFobject* (*)(TiXmlElement *)>("triangle",parseTriangle));
-  
+	initPrimitiveParsers();
 }
 
 bool ParseANFscene::parse(Scene * scene,const char* filename){
@@ -32,7 +29,7 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 
 	//If appearances block exist, we call its parser
 	TiXmlElement* anfAppearances = anfRoot->FirstChildElement("appearances");
-	std::vector<CGFappearance *> appearances;
+	map<std::string,CGFappearance *> appearances;
 	if(anfAppearances == NULL){
 		printf("ERROR! Block 'appearances' not found! \n");
 		return false;
@@ -59,9 +56,19 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 	return true;
 }
 
-bool ParseANFscene::parseAppearances(TiXmlElement * anfAppearances, std::vector<CGFappearance *> & appearances){
+bool ParseANFscene::parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances){
+	TiXmlElement * appearance = anfAppearances->FirstChildElement("appearance");
+
+	while(appearance){
+				
+		appearance = appearance->NextSiblingElement("appearance"); 
+	}
 
 	return true;
+}
+
+CGFappearance * ParseANFscene::parseAppearances(TiXmlElement * anfAppearance){
+
 }
 
 Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph){
@@ -279,22 +286,3 @@ bool ParseANFscene::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 	}
 	return true;
 }
-
-CGFobject * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
-	const char *valString;
-
-	Point3d data[3] = {{0,0,0},{0,0,0},{0,0,0}};
-
-	for(unsigned i = 0; i < 3; i++){
-
-		std::string attr = "xyz" + std::to_string((long double)(i+1));
-		valString= anfTriangle->Attribute(attr.c_str());
-		if(!valString || !sscanf(valString,"%f %f %f",&data[i].x, &data[i].y, &data[i].z)==3){
-			printf("Error! error parsing xyz%d \n",i+1);
-			return NULL;
-		}
-	}
-	
-	return new Triangle(data);
-}
-

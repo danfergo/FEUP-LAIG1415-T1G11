@@ -2,7 +2,6 @@
 #include "CGFobject.h"
 #include "CGFappearance.h"
 #include <vector>
-#include "Matrices.h"
 
 class Node
 {

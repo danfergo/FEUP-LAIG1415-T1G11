@@ -8,7 +8,6 @@
 //float deg2rad=pi/180.0;
 
 #include "CGFappearance.h"
-#include "MyUnitCube.h" 
 
 //CGFappearance *mat1;
 
