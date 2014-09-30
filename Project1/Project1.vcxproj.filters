@@ -1,88 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\scenegraph">
-      <UniqueIdentifier>{59a1a416-fc0d-4859-84fd-ed0a5878d968}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\scenegraph">
-      <UniqueIdentifier>{a5099e75-bb75-416a-9ab6-387bbd033555}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\parser">
-      <UniqueIdentifier>{b6fecce8-f952-46ef-80d5-d5f4832a48ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\parser">
-      <UniqueIdentifier>{439e7eba-46ba-4195-804e-359a0ad00bc6}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenegraph\Node.cpp">
-      <Filter>Source Files\scenegraph</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenegraph\Triangle.cpp">
-      <Filter>Source Files\scenegraph</Filter>
-    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\parser\ANFparser.cpp">
-      <Filter>Source Files\parser</Filter>
+      <Filter>parser</Filter>
     </ClCompile>
     <ClCompile Include="src\parser\ANFpaserPrimitives.cpp">
-      <Filter>Source Files\parser</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="src\parser\ANFparserGlobals.cpp">
-      <Filter>Source Files\parser</Filter>
+      <Filter>parser</Filter>
     </ClCompile>
     <ClCompile Include="src\parser\ANFparserAppearances.cpp">
-      <Filter>Source Files\parser</Filter>
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parser\ANFparserGlobals.cpp">
+      <Filter>parser</Filter>
     </ClCompile>
     <ClCompile Include="src\parser\ANFparserGraph.cpp">
-      <Filter>Source Files\parser</Filter>
-=======
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\Node.cpp">
+      <Filter>scenegraph</Filter>
+    </ClCompile>
     <ClCompile Include="src\scenegraph\Sphere.cpp">
-      <Filter>Source Files\scenegraph</Filter>
->>>>>>> 393359aaea33cbe3507bb0f3d14cc1b076a2b68e
+      <Filter>scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\Triangle.cpp">
+      <Filter>scenegraph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Scene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\parser\ANFparser.h">
+      <Filter>parser</Filter>
     </ClInclude>
     <ClInclude Include="src\scenegraph\Node.h">
-      <Filter>Header Files\scenegraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenegraph\Triangle.h">
-      <Filter>Header Files\scenegraph</Filter>
+      <Filter>scenegraph</Filter>
     </ClInclude>
     <ClInclude Include="src\scenegraph\Point.h">
-      <Filter>Header Files\scenegraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\parser\ANFparser.h">
-      <Filter>Header Files\parser</Filter>
+      <Filter>scenegraph</Filter>
     </ClInclude>
     <ClInclude Include="src\scenegraph\Sphere.h">
-      <Filter>Header Files\scenegraph</Filter>
+      <Filter>scenegraph</Filter>
     </ClInclude>
+    <ClInclude Include="src\scenegraph\Triangle.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="parser">
+      <UniqueIdentifier>{31a93751-5453-45c6-b4e3-7369d12722d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph">
+      <UniqueIdentifier>{c8330cfa-333b-41b7-b737-220ac0f8cee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{7f625083-6e7b-4ce4-b754-5957d03aed71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\scene.xml">
-      <Filter>Resource Files</Filter>
+      <Filter>resources</Filter>
     </None>
   </ItemGroup>
 </Project>
