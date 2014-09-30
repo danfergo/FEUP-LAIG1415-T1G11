@@ -45,6 +45,7 @@
     <ClCompile Include="src\parser\ANFpaserPrimitives.cpp">
       <Filter>Source Files\parser</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="src\parser\ANFparserGlobals.cpp">
       <Filter>Source Files\parser</Filter>
     </ClCompile>
@@ -53,6 +54,10 @@
     </ClCompile>
     <ClCompile Include="src\parser\ANFparserGraph.cpp">
       <Filter>Source Files\parser</Filter>
+=======
+    <ClCompile Include="src\scenegraph\Sphere.cpp">
+      <Filter>Source Files\scenegraph</Filter>
+>>>>>>> 393359aaea33cbe3507bb0f3d14cc1b076a2b68e
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +75,9 @@
     </ClInclude>
     <ClInclude Include="src\parser\ANFparser.h">
       <Filter>Header Files\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Sphere.h">
+      <Filter>Header Files\scenegraph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

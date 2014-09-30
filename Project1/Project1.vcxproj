@@ -75,6 +75,7 @@
     <ClCompile Include="src\parser\ANFpaserPrimitives.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\scenegraph\Node.cpp" />
+    <ClCompile Include="src\scenegraph\Sphere.cpp" />
     <ClCompile Include="src\scenegraph\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +83,7 @@
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\scenegraph\Node.h" />
     <ClInclude Include="src\scenegraph\Point.h" />
+    <ClInclude Include="src\scenegraph\Sphere.h" />
     <ClInclude Include="src\scenegraph\Triangle.h" />
   </ItemGroup>
   <ItemGroup>
