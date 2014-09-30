@@ -32,7 +32,7 @@ void Node::processNode(CGFappearance * parentAppearance){
 				(*it)->draw();
 		}
 
-		//now we process this node's descandents
+		//now we process this node's descendants
 		for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
 			(*it)->processNode(NULL);
 		}
@@ -43,6 +43,7 @@ void Node::processNode(CGFappearance * parentAppearance){
 void Node::addRotationX(float angle){
 	glLoadMatrixf(transforms);
 	glRotatef(angle, 1,0,0);
+
 	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 }
 

@@ -13,6 +13,9 @@
 
 class ParseANFscene{
 private:
+	class ParseExep{ 
+	};
+
 	typedef struct AppearanceWrapper{
 		CGFappearance * appearance;
 		bool used;
@@ -34,22 +37,19 @@ private:
 
 	Node * parseGraph(TiXmlElement * anfGraph);
 	bool parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances);
-	CGFappearance * parseAppearances(TiXmlElement * anfAppearance);
+	CGFappearance * parseAppearance(TiXmlElement * anfAppearance);
 	NodeWrapper parseNode(TiXmlElement * anfNode);
 	static CGFobject * parseTriangle(TiXmlElement * anfTriangle);
 	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
 	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
 	void initPrimitiveParsers();
+ 
+
+	const static char WARNING;
+	const static char ERROR;
+	static std::string str(const char * str);
+	void issue(std::string err, const char flag);
 public:
-	class ParseExep{
-	private:
-		std::string msg;
-	public:
-		ParseExep(std::string msg);
-		void at(std::string at);
-		std::string what();
-		void flush();
-	};
 
 	const static char STRICT;
 	const static char PERMISSIVE;
