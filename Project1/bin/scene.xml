@@ -15,15 +15,15 @@
         <!-- Parametros de desenho -->
         <!-- Valores para mode: "fill" , "line", "point" -->
         <!-- Valores para shading: "flat", "gouraud" ) -->
-        <!-- <drawing mode="ss" shading="ss" background="ff ff ff ff" /> -->
+          <drawing mode="ss" shading="ss" background="ff ff ff ff" />
  
         <!-- Parametros de culling -->
         <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
         <!-- Valores para cullorder : "ccw" ou "cw" -->
-        <!-- <culling face="ss" order="ss" /> -->
+           <culling face="ss" order="ss" />
  
         <!-- Parametros de iluminacao; seguem os parametros do OpenGL  -->
-        <!-- <lighting doublesided="tt" local="tt" enabled="tt" ambient="ff ff ff ff" /> -->
+            <lighting doublesided="tt" local="tt" enabled="tt" ambient="ff ff ff ff" />
 			
     </globals> 
     

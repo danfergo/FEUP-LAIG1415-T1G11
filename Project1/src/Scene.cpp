@@ -12,6 +12,16 @@
 //CGFappearance *mat1;
 
 Scene::Scene(): root(NULL), CGFscene(){
+	// Default settings ...
+	shaddingMode = ShaddingMode::GOURAUD;
+	drawingMode = DrawingMode::FILL;
+	cullingFace = CullingFace::BACK;
+	drawingOrder = DrawingOrder::CCW;
+	for(unsigned i = 0; i < 4; i++) backgroundColor[i]=0.0;
+	for(unsigned i = 0; i < 4; i++) ambientLight[i]=0.2;
+	lightingEnabled = true;
+	doublesidedEnabled = false;
+	localIliuminationEnabled = true;
 }
 
 
@@ -32,8 +42,7 @@ void Scene::init()
 	// Defines a default normal
 	glNormal3f(0,0,1);
 
-	// Init myObject
-
+	glEnable(GL_NORMALIZE);
 }
 
 void Scene::display() 
@@ -57,14 +66,11 @@ void Scene::display()
     // ---- END Background, camera and axis setup
 
 
-	// ---- BEGIN Draw table
 
-	// DRAW STUFF
-	//MyUnitCube().draw();
+	// Draw Scene
 	if(root != NULL)
 		root->processNode(NULL);
 
-	// ---- END Draw table
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer
@@ -79,60 +85,38 @@ void Scene::setRoot(Node * root){
 }
 
 
-/******************* Old  transformation section *******************
+void Scene::setShaddingMode(ShaddingMode shaddingMode){
+	this->shaddingMode = shaddingMode;
+}
 
-	glPushMatrix();
-	glTranslated(0, 5, 0);  // translate through yy, 5 units
-	myObject->draw();
-	glPopMatrix();
+void Scene::setDrawingMode(DrawingMode drawingMode){
+	this->drawingMode = drawingMode;
+}
 
+void Scene::setCullingFace(CullingFace cullingFace){
+	this->cullingFace = cullingFace;
+}
 
-	// ---- BEGIN Geometric transformation section
+void Scene::setDrawingMode(DrawingOrder drawingOrder){
+	this->drawingOrder = drawingOrder;
+}
 
-	// NOTE: OpenGL transformation matrices are transposed
+void Scene::setBackgroundColor(float backgroundColor[4]){
+	for(unsigned i = 0 ; i < 4; i++) this->backgroundColor[i] = backgroundColor[i]; 
+}
 
-	// Translate (5, 0, 2)
-	
-	float tra[16] = { 1.0, 0.0, 0.0, 0.0,
-                      0.0, 1.0, 0.0, 0.0,
-                      0.0, 0.0, 1.0, 0.0,
-                      5.0, 0.0, 2.0, 1.0}; 
+void Scene::setAmbientLight(float ambientLight[4]){
+	for(unsigned i = 0 ; i < 4; i++) this->ambientLight[i] = ambientLight[i];
+}
 
-	// Rotate 30 degrees around Y
-	// These constants would normally be pre-computed at initialization time
-	// they are placed here just to simplify the exampl
-	
-	float a_rad=30.0*deg2rad;
-	float cos_a = cos(a_rad);
-	float sin_a = sin(a_rad);
+void Scene::setLightingEnabled(bool lightingEnabled){
+	this->lightingEnabled = lightingEnabled;
+}
 
-	float rot[16] = { cos_a,  0.0,  -sin_a,  0.0,
-                      0.0,    1.0,   0.0,    0.0,
-                      sin_a,  0.0,   cos_a,  0.0,
-                      0.0,    0.0,   0.0,    1.0};
+void Scene::setDoubleSidedEnabled(bool doublesidedEnabled){
+	this->doublesidedEnabled = doublesidedEnabled;
+}
 
-	// Scaling by (2,2,1)
-	float sca[16] = { 2.0, 0.0, 0.0, 0.0,
-                      0.0, 2.0, 0.0, 0.0,
-                      0.0, 0.0, 1.0, 0.0,
-                      0.0, 0.0, 0.0, 1.0};
-
-	// Multiplication of the previous transformations
-	glMultMatrixf(rot);     // GT = GT * rot
-	glMultMatrixf(sca);     // GT = GT * sca 
-	glMultMatrixf(tra);     // GT = GT * tra 
-
-	//glRotated(30,0,1,0);
-	glScaled(2,2,1);
-	glTranslated(5, 0, 2);
-
-	// ---- END Geometric transformation section
-	
-
-	// ---- BEGIN Primitive drawing section
-
-    // NOTE: the visible face of the polygon is determined by the order of the vertices
-
-	myObject->draw();  
-
-	****************/
+void Scene::setLocalIlluminationEnabled(bool localIlluminationEnabled){
+	this->localIlliuminationEnabled = localIlluminationEnabled;
+}
