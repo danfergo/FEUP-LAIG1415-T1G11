@@ -104,7 +104,7 @@
         <primitives>
           <!-- podem existir varias primitivas -->
           <triangle xyz3="0 0 0" xyz2="2 0 0" xyz1="1 2.4 0" />
-
+          <square></square>
 
 
           <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus -->

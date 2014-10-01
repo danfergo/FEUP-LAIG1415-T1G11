@@ -58,5 +58,5 @@ std::string ParseANFscene::str(const char * str){
 void ParseANFscene::issue(std::string err, const char flag) {
 	std::string prefix = (flag == ERROR)? "ERROR! " : "WARNING! "; 
 	std::cout << prefix << err << std::endl;
-	if(flag == ERROR) throw ParseExep();
+	if(flag == ERROR || (parseMode == STRICT)) throw ParseExep();
 }; 

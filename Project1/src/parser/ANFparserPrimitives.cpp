@@ -4,10 +4,12 @@
 #include <queue>
 
 
+
+
 void ParseANFscene::initPrimitiveParsers(){
 	
 	//insert here all the primitive's parser funcition
-	subParsers.insert(std::pair<std::string,CGFobject* (*)(TiXmlElement *)>("triangle",parseTriangle));
+	subParsers.insert(std::pair<std::string,PrimitiveParser>("triangle",&ParseANFscene::parseTriangle));
 };
 
 
@@ -21,7 +23,7 @@ CGFobject * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
 		std::string attr = "xyz" + std::to_string((long double)(i+1));
 		valString= anfTriangle->Attribute(attr.c_str());
 		if(!valString || !sscanf(valString,"%f %f %f",&data[i].x, &data[i].y, &data[i].z)==3){
-			printf("Error! error parsing xyz%d \n",i+1);
+			issue("Error! error parsing xyz%" + (i+1),ERROR);
 			return NULL;
 		}
 	}

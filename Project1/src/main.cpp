@@ -30,12 +30,17 @@ int main(int argc, char* argv[]) {
 		std::cout << "Insert the ANF filename: \n>";
 		std::cin >> filename;
 
+		
 		ParseANFscene parser = ParseANFscene(ParseANFscene::PERMISSIVE);
 
 		if(!parser.parse(scene,filename.c_str())){
-			printf("Press Any Key to Continue\n");  
+			std::cout << "Build scene FAILED." << std::endl;
+			std::cout << "Press any key to continue..." << std::endl;
 			std::cin >> filename;
 			return 0;
+		}else{
+			std::cout << "Build scene DONE." << std::endl;
+			std::cout << "Running..." << std::endl;
 		}
 
 		/* Running CGF scene */

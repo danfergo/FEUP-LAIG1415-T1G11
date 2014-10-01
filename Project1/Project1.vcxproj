@@ -72,7 +72,7 @@
     <ClCompile Include="src\parser\ANFparserAppearances.cpp" />
     <ClCompile Include="src\parser\ANFparserGlobals.cpp" />
     <ClCompile Include="src\parser\ANFparserGraph.cpp" />
-    <ClCompile Include="src\parser\ANFpaserPrimitives.cpp" />
+    <ClCompile Include="src\parser\ANFparserPrimitives.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\scenegraph\Node.cpp" />
     <ClCompile Include="src\scenegraph\Sphere.cpp" />

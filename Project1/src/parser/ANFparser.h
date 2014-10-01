@@ -11,10 +11,16 @@
 #include <vector>
 #include <string>
 
+
+
 class ParseANFscene{
+
 private:
+	typedef CGFobject* (ParseANFscene::*PrimitiveParser)(TiXmlElement *);
+
 	class ParseExep{ 
 	};
+
 
 	typedef struct AppearanceWrapper{
 		CGFappearance * appearance;
@@ -33,13 +39,13 @@ private:
 	} NodeWrapper;
 	
 	char parseMode;
-	std::map<std::string,CGFobject* (*)(TiXmlElement *)> subParsers;
+	std::map<std::string,PrimitiveParser> subParsers;
 
 	Node * parseGraph(TiXmlElement * anfGraph);
 	bool parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances);
 	CGFappearance * parseAppearance(TiXmlElement * anfAppearance);
 	NodeWrapper parseNode(TiXmlElement * anfNode);
-	static CGFobject * parseTriangle(TiXmlElement * anfTriangle);
+	CGFobject * parseTriangle(TiXmlElement * anfTriangle);
 	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
 	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
 	void initPrimitiveParsers();

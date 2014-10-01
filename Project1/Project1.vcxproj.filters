@@ -6,9 +6,6 @@
     <ClCompile Include="src\parser\ANFparser.cpp">
       <Filter>parser</Filter>
     </ClCompile>
-    <ClCompile Include="src\parser\ANFpaserPrimitives.cpp">
-      <Filter>parser</Filter>
-    </ClCompile>
     <ClCompile Include="src\parser\ANFparserAppearances.cpp">
       <Filter>parser</Filter>
     </ClCompile>
@@ -26,6 +23,9 @@
     </ClCompile>
     <ClCompile Include="src\scenegraph\Triangle.cpp">
       <Filter>scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parser\ANFparserPrimitives.cpp">
+      <Filter>parser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

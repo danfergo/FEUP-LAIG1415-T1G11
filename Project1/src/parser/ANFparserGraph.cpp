@@ -63,7 +63,7 @@ bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFs
 	//searching for disconected nodes;
 	for(it = nodes.begin();it!= nodes.end(); it++){
 		if((*it).second.indegree == 0 && (*it).first != root){
-			issue("There is at least one disconnected node. '" + (*it).first + "' is one of them.");
+			issue("There is at least one disconnected node. '" + (*it).first + "' is one of them.",ERROR);
 		}
 	}
 
@@ -85,7 +85,7 @@ bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFs
 	}
 	// the conclusion:
 	if(t.size() != nodes.size()){
-		issue("Bad node structure found. This structure has cycles.");
+		issue("Bad node structure found. This structure has cycles.",ERROR);
 	}
 
 	return true;
@@ -114,9 +114,9 @@ ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode){
 			TiXmlElement * pr = primitives->FirstChildElement();
 			while(pr){
 				try{
-					ret.node->addPrimitive(subParsers.at(pr->Value())(pr));
+					ret.node->addPrimitive((this->*subParsers.at(pr->Value()))(pr));
 				}catch(std::out_of_range & e){
-					issue("Invalid primitive '"+str(pr->Value())+"' found! \n",WARNING);
+					issue("Invalid primitive '"+str(pr->Value())+"' found!",WARNING);
 				}
 				pr=pr->NextSiblingElement();
 			}
@@ -176,7 +176,7 @@ bool ParseANFscene::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 		}else if(type == "rotate"){ // Let's parse a Rotation
 			axis = std::string(transform->Attribute("axis"));
 			if(transform->QueryFloatAttribute("angle",&angle)!=TIXML_SUCCESS){ // bad angle value
-				issue("Bad angle found at rotation transform ! \n",WARNING);
+				issue("Bad angle found at rotation transform !",WARNING);
 			}else if(!node->addRotation(axis,angle)){ // bad axis value
 				issue("Bad axis found at rotation transform !",WARNING);
 			}
