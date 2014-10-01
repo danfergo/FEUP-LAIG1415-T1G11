@@ -9,12 +9,15 @@ private:
 	std::vector<Node *> descendants;
 	std::vector<CGFobject *> primitives;
 	float transforms[16];
+	CGFappearance * appearance;
 public:
 	Node();
 	~Node();
 	void processNode(CGFappearance * parentAppearance);
 	void addPrimitive(CGFobject * primitive);
 	void Node::addDescendants(Node * descendant);
+	void setAppearance(CGFappearance * appearance);
+	bool hasAppearance() const;
 
 	bool addRotation(std::string axis, float angle);
 	void addRotationX(float angle);

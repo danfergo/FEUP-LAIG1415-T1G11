@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Node::Node()
+Node::Node():appearance(NULL)
 {
 	for(unsigned i=0; i<16; i++)
 		transforms[i] = (i%5 == 0) ? 1 : 0 ;
@@ -24,8 +24,12 @@ void Node::addDescendants(Node * descendant){
 void Node::processNode(CGFappearance * parentAppearance){
 	glPushMatrix();
 		// ok lets apply this node transformations
-		glMultMatrixf( transforms );
+		glMultMatrixf(transforms);
 		
+		// before draw anything lets apply 
+		CGFappearance * currentAppearance = this->appearance?this->appearance: parentAppearance;
+		currentAppearance->apply();
+
 		// we are going to draw this node's primitives
 		for(std::vector<CGFobject *>::iterator it = primitives.begin();
 			it != primitives.end(); it++){
@@ -34,7 +38,7 @@ void Node::processNode(CGFappearance * parentAppearance){
 
 		//now we process this node's descendants
 		for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
-			(*it)->processNode(NULL);
+			(*it)->processNode(currentAppearance);
 		}
 
 	glPopMatrix();
@@ -85,3 +89,11 @@ bool Node::addRotation(std::string axis, float angle){
 }
 
 
+void Node::setAppearance(CGFappearance * appearance){
+	delete(this->appearance);
+	this->appearance = appearance;
+}
+
+bool Node::hasAppearance()  const{
+	return appearance!=NULL;
+};

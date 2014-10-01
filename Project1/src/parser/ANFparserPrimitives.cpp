@@ -3,9 +3,6 @@
 #include <map>
 #include <queue>
 
-
-
-
 void ParseANFscene::initPrimitiveParsers(){
 	
 	//insert here all the primitive's parser funcition

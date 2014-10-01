@@ -1,13 +1,15 @@
 #include "ANFparser.h"
+#include <iostream>
 
 void ParseANFscene::parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances){
 	TiXmlElement * anfAppearance = anfAppearances->FirstChildElement("appearance");
 	CGFappearance  * appearance;
 	std::string appeId;
 	while(anfAppearance){
-		appeId = anfAppearance->Value();
+		appeId = anfAppearance->Attribute("id");
 		if(appeId != ""){
 			if((appearance=parseAppearance(anfAppearance))){
+				std::cout << appeId << std::endl;
 				appearances.insert(std::pair<std::string,CGFappearance *>(appeId,appearance));
 			}
 		}else{

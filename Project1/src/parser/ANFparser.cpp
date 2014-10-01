@@ -44,8 +44,9 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 		if(!anfGraph){
 			issue("Block 'graph' not found!",ERROR);
 		}else{
-			scene->setRoot(parseGraph(anfGraph));
+			scene->setRoot(parseGraph(anfGraph,appearances));
 		}
+
 		return true; 
 	}catch(...){
 		return false;

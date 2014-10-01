@@ -40,12 +40,13 @@ private:
 	char parseMode;
 	typedef CGFobject* (ParseANFscene::*PrimitiveParser)(TiXmlElement *);
 	std::map<std::string,PrimitiveParser> subParsers;
-
 	CGFobject * parseTriangle(TiXmlElement * anfTriangle);
 	void initPrimitiveParsers();
 
+	
+	NodeWrapper parseNode(TiXmlElement * anfNode,std::map<std::string, CGFappearance *> & appearances);
+	Node * parseGraph(TiXmlElement * anfGraph,std::map<std::string, CGFappearance *> & appearances);
 	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
-	NodeWrapper parseNode(TiXmlElement * anfNode);
 	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
 
 	CGFappearance * parseAppearance(TiXmlElement * anfAppearance);
@@ -57,7 +58,6 @@ private:
 	static std::string str(const char * str);
 	void issue(std::string err, const char flag);
 
-	Node * parseGraph(TiXmlElement * anfGraph);
 public:
 
 	const static char STRICT;

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <queue>
 
-Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph){
+Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph,std::map<std::string, CGFappearance *> & appearances){
 	// init some local variables
 	map<std::string, NodeWrapper> nodeWrappers;
 	NodeWrapper nodeWrapper;
@@ -15,7 +15,7 @@ Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph){
 	TiXmlElement *node = anfGraph->FirstChildElement();
 	std::string nodeId;
 	while(node){
-		nodeWrapper = parseNode(node);
+		nodeWrapper = parseNode(node,appearances);
 		nodeId = str(node->Attribute("id"));
 		if(nodeId == "") issue("Each node must have an id!",ERROR);
 
@@ -55,6 +55,8 @@ bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFs
 	try{
 		if(nodes.at(root).indegree != 0){
 			issue("Root can't be a descendant!",ERROR);
+		}else if(nodes.at(root).node->hasAppearance()){
+			issue("Root doesn't has a Appearance. (default gray could be used)",WARNING);
 		}
 	}catch(...){
 		issue("Node root '" + root + "' not found!",ERROR);
@@ -91,7 +93,7 @@ bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFs
 	return true;
 }
 
-ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode){
+ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode,std::map<std::string, CGFappearance *> & appearances){
 	// init the return var
 	NodeWrapper ret = {new Node(), std::vector<std::string>(), 0}; 
 
@@ -143,6 +145,26 @@ ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode){
 				}
 				ds=ds->NextSiblingElement();
 			}
+		}
+
+
+		// lets just apply its appearance before leave
+		TiXmlElement * appearanceBlock  = anfNode->FirstChildElement("appearanceref");
+		if(appearanceBlock){
+			std::string appearanceId = str(appearanceBlock->Attribute("id"));	
+			if(appearanceId == "inherit"){
+				// nothing needs to be done here.
+			}else if(appearanceId != ""){
+				try{
+					ret.node->setAppearance(appearances.at(appearanceId));
+				}catch(...){
+					issue("Apperance width id '"+appearanceId+"' not found!",ERROR);
+				}
+			}else{
+				issue("Apperanceref 'id' not defined! ('inherit' could be assumed).",ERROR);
+			}
+		}else{
+			issue("Block 'appearanceref' not found! ('inherit' will be assumed).",WARNING);
 		}
 
 		return ret;

@@ -68,10 +68,10 @@
         <!-- deve existir um ou mais blocos "appearance" -->
         <!-- IMPORTANTE: -->
         <!--   textureref e opcional, a utilizar caso haja textura associada a esta aparencia --> 
-         <appearance id="ss" shininess="ff" textureref="ss" >
-               <component type="ambient" value="255 0 0 0.1" />
-               <component type="diffuse" value="0.1 0.1 0.1 0.1" />
-               <component type="specular" value="255 0.1 0.1 0.1" />
+         <appearance id="random_appearance" shininess="ff" textureref="ss" >
+               <component type="ambient" value="0.01 0.01 0.01 0.1" />
+               <component type="diffuse" value="0.9 0.9 0.9 0.9" />
+               <component type="specular" value="0.1 0.1 0.1 0.1" />
         </appearance> 
     </appearances>
 
@@ -94,7 +94,7 @@
         <!-- declaracao da aparencia a utilizar -->
         <!-- se id="inherit", o no' mantem (herda) a aparencia do "pai" -->
 
-        <appearanceref id="ss" />
+        <appearanceref id="random_appearance" />
 
 
         <!-- conteudo do no; deve existir pelo menos um bloco "primitives" ou um "desce ndants" -->
@@ -145,7 +145,7 @@
             <!-- declaracao da aparencia a utilizar -->
             <!-- se id="inherit", o no' mantem (herda) a aparencia do "pai" -->
 
-            <appearanceref id="ss" />
+            <appearanceref id="random_appearance" />
  
                               
              <!-- conteudo do no; deve existir pelo menos um bloco "primitives" ou um "descendants" -->
