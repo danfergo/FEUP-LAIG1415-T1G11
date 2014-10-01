@@ -28,16 +28,17 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 		if (!anfRoot){
 			issue("Main block 'anf' block not found!",ERROR);
 		}
-		/*
+		
 		//If appearances block exist, we call its parser
 		TiXmlElement* anfAppearances = anfRoot->FirstChildElement("appearances");
 		map<std::string,CGFappearance *> appearances;
 		if(!anfAppearances){
-			issue("Block 'appearances' not found! \n");
+			issue("Block 'appearances' not found!",WARNING);
 		}else{
 			parseAppearances(anfAppearances,appearances);
 		}
-		*/
+		
+
 		//If graph block exist, we call its parser
 		TiXmlElement* anfGraph = anfRoot->FirstChildElement("graph");
 		if(!anfGraph){

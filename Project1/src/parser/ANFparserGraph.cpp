@@ -107,6 +107,7 @@ ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode){
 
 		// Ok, lets process primitives.
 		TiXmlElement * primitives = anfNode->FirstChildElement("primitives");
+		CGFobject * primitive;
 		if (primitives == NULL){
 			issue("Primitives block not found!",WARNING); 
 		}else{
@@ -114,7 +115,9 @@ ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode){
 			TiXmlElement * pr = primitives->FirstChildElement();
 			while(pr){
 				try{
-					ret.node->addPrimitive((this->*subParsers.at(pr->Value()))(pr));
+					if((primitive = (this->*subParsers.at(pr->Value()))(pr))){
+						ret.node->addPrimitive(primitive);
+					}
 				}catch(std::out_of_range & e){
 					issue("Invalid primitive '"+str(pr->Value())+"' found!",WARNING);
 				}
@@ -159,8 +162,8 @@ bool ParseANFscene::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 
 	// Parsing the node transformations.
 	while(transform){
-		type = std::string(transform->Attribute("type"));
-		
+		type = str(transform->Attribute("type"));
+
 		if(type == "scale"){ // Let's parse a Scaling
 			factor = transform->Attribute("factor");
 			if(!factor || !sscanf(factor,"%f %f %f",&x, &y, &z)==3){

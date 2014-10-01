@@ -16,11 +16,10 @@
 class ParseANFscene{
 
 private:
-	typedef CGFobject* (ParseANFscene::*PrimitiveParser)(TiXmlElement *);
+
 
 	class ParseExep{ 
 	};
-
 
 	typedef struct AppearanceWrapper{
 		CGFappearance * appearance;
@@ -39,22 +38,26 @@ private:
 	} NodeWrapper;
 	
 	char parseMode;
+	typedef CGFobject* (ParseANFscene::*PrimitiveParser)(TiXmlElement *);
 	std::map<std::string,PrimitiveParser> subParsers;
 
-	Node * parseGraph(TiXmlElement * anfGraph);
-	bool parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances);
-	CGFappearance * parseAppearance(TiXmlElement * anfAppearance);
-	NodeWrapper parseNode(TiXmlElement * anfNode);
 	CGFobject * parseTriangle(TiXmlElement * anfTriangle);
-	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
-	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
 	void initPrimitiveParsers();
- 
 
+	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
+	NodeWrapper parseNode(TiXmlElement * anfNode);
+	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
+
+	CGFappearance * parseAppearance(TiXmlElement * anfAppearance);
+	void parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances);
+
+ 
 	const static char WARNING;
 	const static char ERROR;
 	static std::string str(const char * str);
 	void issue(std::string err, const char flag);
+
+	Node * parseGraph(TiXmlElement * anfGraph);
 public:
 
 	const static char STRICT;

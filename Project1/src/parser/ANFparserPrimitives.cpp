@@ -23,7 +23,7 @@ CGFobject * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
 		std::string attr = "xyz" + std::to_string((long double)(i+1));
 		valString= anfTriangle->Attribute(attr.c_str());
 		if(!valString || !sscanf(valString,"%f %f %f",&data[i].x, &data[i].y, &data[i].z)==3){
-			issue("Error! error parsing xyz%" + (i+1),ERROR);
+			issue("Error parsing triangle primitive!" + (i+1),WARNING);
 			return NULL;
 		}
 	}
