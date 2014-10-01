@@ -22,7 +22,7 @@ public:
 	float ambientLight[4];
 	bool lightingEnabled;
 	bool doublesidedEnabled;
-	bool localIlliuminationEnabled;
+	bool localIlluminationEnabled;
 
 	Scene();
 	void init();
@@ -32,7 +32,7 @@ public:
 	void setShaddingMode(ShaddingMode shaddingMode);
 	void setDrawingMode(DrawingMode drawingMode);
 	void setCullingFace(CullingFace cullingFace);
-	void setDrawingMode(DrawingOrder drawingOrder);
+	void setDrawingOrder(DrawingOrder drawingOrder);
 	void setBackgroundColor(float backgroundColor[4]);
 	void setAmbientLight(float ambientLight[4]);
 	void setLightingEnabled(bool lightingEnabled);

@@ -30,8 +30,9 @@ int main(int argc, char* argv[]) {
 		std::cout << "Insert the ANF filename: \n>";
 		std::cin >> filename;
 
-		
-		ParseANFscene parser = ParseANFscene(ParseANFscene::PERMISSIVE);
+		std::cout << "---------------------------------------------------" << std::endl;
+		ANFparser parser = ANFparser(ANFparser::PERMISSIVE);
+
 
 		if(!parser.parse(scene,filename.c_str())){
 			std::cout << "Build scene FAILED." << std::endl;
@@ -43,6 +44,8 @@ int main(int argc, char* argv[]) {
 			std::cout << "Running..." << std::endl;
 		}
 
+		std::cout << "---------------------------------------------------" << std::endl;
+		
 		/* Running CGF scene */
 		
 		app.run();

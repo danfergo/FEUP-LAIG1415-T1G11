@@ -13,11 +13,9 @@
 
 
 
-class ParseANFscene{
+class ANFparser{
 
 private:
-
-
 	class ParseExep{ 
 	};
 
@@ -38,7 +36,7 @@ private:
 	} NodeWrapper;
 	
 	char parseMode;
-	typedef CGFobject* (ParseANFscene::*PrimitiveParser)(TiXmlElement *);
+	typedef CGFobject* (ANFparser::*PrimitiveParser)(TiXmlElement *);
 	std::map<std::string,PrimitiveParser> subParsers;
 	CGFobject * parseTriangle(TiXmlElement * anfTriangle);
 	void initPrimitiveParsers();
@@ -51,20 +49,25 @@ private:
 
 	CGFappearance * parseAppearance(TiXmlElement * anfAppearance);
 	void parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances);
-
+	
+	void parseGlobals(TiXmlElement * anfGlobals);
+	void parseGlobalsDrawing(TiXmlElement * anfDrawing);
+	void parseGlobalsCulling(TiXmlElement * anfCulling);
+	void parseGlobalsLighting(TiXmlElement * anfLighting);
  
 	const static char WARNING;
 	const static char ERROR;
 	static std::string str(const char * str);
 	void issue(std::string err, const char flag);
 
+	Scene * scene;
 public:
 
 	const static char STRICT;
 	const static char PERMISSIVE;
 	const static char SILENT;
 	bool parse(Scene * scene,const char* filename);
-	ParseANFscene(const char parseMode);
+	ANFparser(const char parseMode);
 };
 
 

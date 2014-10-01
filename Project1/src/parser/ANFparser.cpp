@@ -3,18 +3,20 @@
 #include <map>
 
 
-const char ParseANFscene::STRICT = 0;
-const char ParseANFscene::PERMISSIVE = 1;
-const char ParseANFscene::SILENT = 2;
+const char ANFparser::STRICT = 0;
+const char ANFparser::PERMISSIVE = 1;
+const char ANFparser::SILENT = 2;
 
-const char ParseANFscene::WARNING = 0;
-const char ParseANFscene::ERROR = 1;
+const char ANFparser::WARNING = 0;
+const char ANFparser::ERROR = 1;
 
-ParseANFscene::ParseANFscene(const char parseMode): parseMode(parseMode){
+ANFparser::ANFparser(const char parseMode): parseMode(parseMode){
 	initPrimitiveParsers();
 }
 
-bool ParseANFscene::parse(Scene * scene,const char* filename){
+bool ANFparser::parse(Scene * scene,const char* filename){
+	this->scene = scene;
+
 	try{
 		TiXmlDocument * doc = new TiXmlDocument(filename);
 
@@ -27,6 +29,14 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 		TiXmlElement* anfRoot = doc->FirstChildElement("anf");
 		if (!anfRoot){
 			issue("Main block 'anf' block not found!",ERROR);
+		}
+
+		//Lets process the global variables
+		TiXmlElement* anfGlobals = anfRoot->FirstChildElement("globals");
+		if(!anfGlobals){
+			issue("Block 'globals' not found!",WARNING);
+		}else{
+			parseGlobals(anfGlobals);
 		}
 		
 		//If appearances block exist, we call its parser
@@ -44,7 +54,7 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 		if(!anfGraph){
 			issue("Block 'graph' not found!",ERROR);
 		}else{
-			scene->setRoot(parseGraph(anfGraph,appearances));
+			this->scene->setRoot(parseGraph(anfGraph,appearances));
 		}
 
 		return true; 
@@ -53,11 +63,11 @@ bool ParseANFscene::parse(Scene * scene,const char* filename){
 	}
 }
 
-std::string ParseANFscene::str(const char * str){
+std::string ANFparser::str(const char * str){
 	return std::string(str == NULL ? "" : str);
 }
 
-void ParseANFscene::issue(std::string err, const char flag) {
+void ANFparser::issue(std::string err, const char flag) {
 	std::string prefix = (flag == ERROR)? "ERROR! " : "WARNING! "; 
 	std::cout << prefix << err << std::endl;
 	if(flag == ERROR || (parseMode == STRICT)) throw ParseExep();

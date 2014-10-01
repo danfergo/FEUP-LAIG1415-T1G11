@@ -2,7 +2,7 @@
 #include <iostream>
 #include <queue>
 
-Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph,std::map<std::string, CGFappearance *> & appearances){
+Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, CGFappearance *> & appearances){
 	// init some local variables
 	map<std::string, NodeWrapper> nodeWrappers;
 	NodeWrapper nodeWrapper;
@@ -33,11 +33,11 @@ Node * ParseANFscene::parseGraph(TiXmlElement * anfGraph,std::map<std::string, C
 	return nodeWrappers.at(rootId).node;
 } 
 
-bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFscene::NodeWrapper> & nodes){
+bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::NodeWrapper> & nodes){
 	//matching node descendantas. here we  also catch bad node's ids and such.
 	std::vector<std::string> descendants;
 	std::vector<std::string>::iterator it2;
-	map<std::string, ParseANFscene::NodeWrapper>::iterator it = nodes.begin();
+	map<std::string, ANFparser::NodeWrapper>::iterator it = nodes.begin();
 	for(;it!= nodes.end(); it++){
 			descendants = (*it).second.descendants;
 			for(it2 = descendants.begin(); 
@@ -93,7 +93,7 @@ bool ParseANFscene::buildSceneGraph(std::string root, map<std::string, ParseANFs
 	return true;
 }
 
-ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode,std::map<std::string, CGFappearance *> & appearances){
+ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std::string, CGFappearance *> & appearances){
 	// init the return var
 	NodeWrapper ret = {new Node(), std::vector<std::string>(), 0}; 
 
@@ -104,7 +104,7 @@ ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode,std::
 		if (transforms == NULL){
 			issue("Transforms block not found!",WARNING); 
 		}else{
-			ParseANFscene::parseTransforms(ret.node,transforms);
+			ANFparser::parseTransforms(ret.node,transforms);
 		}
 
 		// Ok, lets process primitives.
@@ -120,7 +120,7 @@ ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode,std::
 					if((primitive = (this->*subParsers.at(pr->Value()))(pr))){
 						ret.node->addPrimitive(primitive);
 					}
-				}catch(std::out_of_range & e){
+				}catch(std::out_of_range){
 					issue("Invalid primitive '"+str(pr->Value())+"' found!",WARNING);
 				}
 				pr=pr->NextSiblingElement();
@@ -176,7 +176,7 @@ ParseANFscene::NodeWrapper ParseANFscene::parseNode(TiXmlElement * anfNode,std::
 	return ret;
 }
 
-bool ParseANFscene::parseTransforms(Node * node, TiXmlElement * anfTransforms){
+bool ANFparser::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 	TiXmlElement * transform = anfTransforms->FirstChildElement("transform");
 	std::string type, axis;
 	const char *factor, *to;

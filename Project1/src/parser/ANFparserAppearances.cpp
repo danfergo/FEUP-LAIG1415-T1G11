@@ -1,7 +1,7 @@
 #include "ANFparser.h"
 #include <iostream>
 
-void ParseANFscene::parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances){
+void ANFparser::parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances){
 	TiXmlElement * anfAppearance = anfAppearances->FirstChildElement("appearance");
 	CGFappearance  * appearance;
 	std::string appeId;
@@ -9,7 +9,6 @@ void ParseANFscene::parseAppearances(TiXmlElement * anfAppearances, std::map<std
 		appeId = anfAppearance->Attribute("id");
 		if(appeId != ""){
 			if((appearance=parseAppearance(anfAppearance))){
-				std::cout << appeId << std::endl;
 				appearances.insert(std::pair<std::string,CGFappearance *>(appeId,appearance));
 			}
 		}else{
@@ -21,7 +20,7 @@ void ParseANFscene::parseAppearances(TiXmlElement * anfAppearances, std::map<std
 
 
 
-CGFappearance * ParseANFscene::parseAppearance(TiXmlElement * anfAppearance){
+CGFappearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance){
 
 	TiXmlElement * component = anfAppearance->FirstChildElement("component");
 	std::string type;
@@ -30,7 +29,7 @@ CGFappearance * ParseANFscene::parseAppearance(TiXmlElement * anfAppearance){
 	bool a=false,d=false,s=false;
 
 	while(component){
-		type = ParseANFscene::str(component->Attribute("type"));
+		type = ANFparser::str(component->Attribute("type"));
 		val = component->Attribute("value");
 		if(type == "specular"){ //specular component
 			if(s) issue("Component 'specular' of appearance declared more than once. ",WARNING);
@@ -56,6 +55,11 @@ CGFappearance * ParseANFscene::parseAppearance(TiXmlElement * anfAppearance){
 		}
 		component = component->NextSiblingElement("component");
 	}
+
+	if(!s || !a || !d){
+		issue("One or more components missing from appearance.",ERROR);
+	}
+
 
 	return new CGFappearance(aa,dd,ss,NULL);
 }

@@ -3,14 +3,14 @@
 #include <map>
 #include <queue>
 
-void ParseANFscene::initPrimitiveParsers(){
+void ANFparser::initPrimitiveParsers(){
 	
 	//insert here all the primitive's parser funcition
-	subParsers.insert(std::pair<std::string,PrimitiveParser>("triangle",&ParseANFscene::parseTriangle));
+	subParsers.insert(std::pair<std::string,PrimitiveParser>("triangle",&ANFparser::parseTriangle));
 };
 
 
-CGFobject * ParseANFscene::parseTriangle(TiXmlElement * anfTriangle){
+CGFobject * ANFparser::parseTriangle(TiXmlElement * anfTriangle){
 	const char *valString;
 
 	Point3d data[3] = {{0,0,0},{0,0,0},{0,0,0}};
