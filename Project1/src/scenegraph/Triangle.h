@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TTRIANGLEP_F_H_
+#define TTRIANGLEP_F_H_
+
 #include "CGFobject.h"
 #include "Point.h"
 
@@ -11,4 +13,8 @@ public:
 	~Triangle(void);
 	void draw();
 };
+
+#endif
+
+
 

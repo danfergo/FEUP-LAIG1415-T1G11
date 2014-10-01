@@ -7,7 +7,7 @@ static float ambientNull[4]={0,0,0,1};
 
 Sphere::Sphere(unsigned st, unsigned sl): slices(sl< 3 ? 3 : sl),stacks(st < 1  ? 1 : st){
 	dots = new Point3d* [stacks+1];
-	for (int i = 0; i <= stacks; ++i)
+	for (unsigned i = 0; i <= stacks; ++i)
 		dots[i] = new Point3d[slices+1];
 	
 	angle_a = 2*PI/(float)slices;

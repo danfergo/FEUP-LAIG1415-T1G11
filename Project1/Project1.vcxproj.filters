@@ -27,6 +27,7 @@
     <ClCompile Include="src\parser\ANFparserPrimitives.cpp">
       <Filter>parser</Filter>
     </ClCompile>
+    <ClCompile Include="src\Light.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h" />
@@ -45,6 +46,7 @@
     <ClInclude Include="src\scenegraph\Triangle.h">
       <Filter>scenegraph</Filter>
     </ClInclude>
+    <ClInclude Include="src\Light.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="parser">

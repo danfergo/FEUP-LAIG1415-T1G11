@@ -13,10 +13,10 @@
 
 Scene::Scene(): root(NULL), CGFscene(){
 	// Default settings ...
-	shaddingMode = ShaddingMode::GOURAUD;
-	drawingMode = DrawingMode::FILL;
-	cullingFace = CullingFace::BACK;
-	drawingOrder = DrawingOrder::CCW;
+	shaddingMode = GOURAUD;
+	drawingMode = FILL;
+	cullingFace = BACK;
+	drawingOrder = CCW;
 	for(unsigned i = 0; i < 4; i++) backgroundColor[i]=0.0;
 	for(unsigned i = 0; i < 4; i++) ambientLight[i]=0.2;
 	lightingEnabled = true;

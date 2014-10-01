@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ANF_PARSER_F_H
+#define ANF_PARSER_F_H
 
 #include <map>
 
@@ -70,4 +71,5 @@ public:
 	ANFparser(const char parseMode);
 };
 
+#endif
 

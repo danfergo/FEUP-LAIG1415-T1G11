@@ -188,13 +188,13 @@ bool ANFparser::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 
 		if(type == "scale"){ // Let's parse a Scaling
 			factor = transform->Attribute("factor");
-			if(!factor || !sscanf(factor,"%f %f %f",&x, &y, &z)==3){
+			if(!factor || sscanf(factor,"%f %f %f",&x, &y, &z)!=3){
 				issue("Error parsing scaling factor.",WARNING);
 			}else node->addScaling(x,y,z);
 		
 		}else if(type == "translate"){ // Let's parse a Translation
 			to = transform->Attribute("to");
-			if(!to || !sscanf(to,"%f %f %f",&x, &y, &z)==3){
+			if(!to || sscanf(to,"%f %f %f",&x, &y, &z)!=3){
 				issue("Error parsing translate coordinates.",WARNING);
 			}else node->addTranslation(x,y,z);
 		

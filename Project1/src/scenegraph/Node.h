@@ -1,4 +1,6 @@
-#pragma once
+#ifndef NODE_F_H_
+#define NODE_F_H_
+
 #include "CGFobject.h"
 #include "CGFappearance.h"
 #include <vector>
@@ -28,3 +30,4 @@ public:
 
 };
 
+#endif
