@@ -18,12 +18,6 @@
     <ClCompile Include="src\scenegraph\Node.cpp">
       <Filter>scenegraph</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenegraph\Sphere.cpp">
-      <Filter>scenegraph</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenegraph\Triangle.cpp">
-      <Filter>scenegraph</Filter>
-    </ClCompile>
     <ClCompile Include="src\parser\ANFparserPrimitives.cpp">
       <Filter>parser</Filter>
     </ClCompile>
@@ -40,6 +34,15 @@
     <ClCompile Include="src\scenegraph\Camera.cpp">
       <Filter>scenegraph</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Triangle.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\utils\Normals.cpp">
+      <Filter>scenegraph\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Sphere.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h" />
@@ -49,15 +52,6 @@
     <ClInclude Include="src\scenegraph\Node.h">
       <Filter>scenegraph</Filter>
     </ClInclude>
-    <ClInclude Include="src\scenegraph\Point.h">
-      <Filter>scenegraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenegraph\Sphere.h">
-      <Filter>scenegraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenegraph\Triangle.h">
-      <Filter>scenegraph</Filter>
-    </ClInclude>
     <ClInclude Include="src\Light.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\scenegraph\Texture.h">
@@ -65,6 +59,18 @@
     </ClInclude>
     <ClInclude Include="src\scenegraph\Camera.h">
       <Filter>scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\utils\Point.h">
+      <Filter>scenegraph\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Triangle.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\utils\Normals.h">
+      <Filter>scenegraph\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Sphere.h">
+      <Filter>scenegraph\primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +82,12 @@
     </Filter>
     <Filter Include="resources">
       <UniqueIdentifier>{7f625083-6e7b-4ce4-b754-5957d03aed71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\utils">
+      <UniqueIdentifier>{6744e67b-ea74-4d3b-83bd-a0e1bf0234c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\primitives">
+      <UniqueIdentifier>{d9ee1a75-0f85-4703-9a5f-043526ccb881}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

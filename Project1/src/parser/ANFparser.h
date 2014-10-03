@@ -3,8 +3,8 @@
 
 #include <map>
 
-#include "../scenegraph/Point.h"
-#include "../scenegraph/Triangle.h"
+#include "../scenegraph/utils/Point.h"
+#include "../scenegraph/primitives/Triangle.h"
 #include "../Scene.h"
 #include "../Light.h"
 #include "../scenegraph/Texture.h"

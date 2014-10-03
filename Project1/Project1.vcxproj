@@ -80,9 +80,10 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\scenegraph\Camera.cpp" />
     <ClCompile Include="src\scenegraph\Node.cpp" />
-    <ClCompile Include="src\scenegraph\Sphere.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Sphere.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Triangle.cpp" />
     <ClCompile Include="src\scenegraph\Texture.cpp" />
-    <ClCompile Include="src\scenegraph\Triangle.cpp" />
+    <ClCompile Include="src\scenegraph\utils\Normals.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -91,10 +92,11 @@
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\scenegraph\Camera.h" />
     <ClInclude Include="src\scenegraph\Node.h" />
-    <ClInclude Include="src\scenegraph\Point.h" />
-    <ClInclude Include="src\scenegraph\Sphere.h" />
+    <ClInclude Include="src\scenegraph\primitives\Sphere.h" />
+    <ClInclude Include="src\scenegraph\primitives\Triangle.h" />
     <ClInclude Include="src\scenegraph\Texture.h" />
-    <ClInclude Include="src\scenegraph\Triangle.h" />
+    <ClInclude Include="src\scenegraph\utils\Normals.h" />
+    <ClInclude Include="src\scenegraph\utils\Point.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\scene.xml">

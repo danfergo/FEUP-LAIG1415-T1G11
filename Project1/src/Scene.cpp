@@ -33,7 +33,7 @@ void Scene::init()
 
 	// Sets up some lighting parameters
 	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, CGFlight::background_ambient);  // Define ambient light
+	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, CGFlight::background_ambient);  // Define ambient light
 	
 	// Declares and enables a light
 

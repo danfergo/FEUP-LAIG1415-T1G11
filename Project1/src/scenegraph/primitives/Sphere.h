@@ -4,7 +4,7 @@
 #include "CGFobject.h"
 #include "CGFappearance.h"
 #include "CGFlight.h"
-#include "Point.h"
+#include "../utils/Point.h"
 
 
 class Sphere: public CGFobject{

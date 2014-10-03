@@ -6,3 +6,5 @@ typedef struct Point3d{
 } Point3d;
 
 #endif
+
+typedef Point3d Vector3d;
