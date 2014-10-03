@@ -1,18 +1,22 @@
 #include "ANFparser.h"
 #include <iostream>
 
-void ANFparser::parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances){
+void ANFparser::parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances,
+	std::map<std::string, Texture *> & textures){
+
 	TiXmlElement * anfAppearance = anfAppearances->FirstChildElement("appearance");
 	CGFappearance  * appearance;
 	std::string appeId;
 	while(anfAppearance){
-		appeId = anfAppearance->Attribute("id");
+		appeId = str(anfAppearance->Attribute("id"));
 		if(appeId != ""){
-			if((appearance=parseAppearance(anfAppearance))){
+			
+			if((appearance=parseAppearance(anfAppearance,textures))){
 				appearances.insert(std::pair<std::string,CGFappearance *>(appeId,appearance));
 			}
+
 		}else{
-			issue("Appearance id is not defined!",WARNING);
+			issue("Appearance id is not defined!. (it will be ignored)",WARNING);
 		}
 		anfAppearance = anfAppearance->NextSiblingElement("appearance"); 
 	}
@@ -20,12 +24,33 @@ void ANFparser::parseAppearances(TiXmlElement * anfAppearances, std::map<std::st
 
 
 
-CGFappearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance){
+CGFappearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance,std::map<std::string, Texture *> & textures){
+	float aa[4],dd[4],ss[4];
+	parseComponent(anfAppearance,aa,dd,ss);
+	
 
-	TiXmlElement * component = anfAppearance->FirstChildElement("component");
+	Texture * texture = NULL;
+	std::string textureId = str(anfAppearance->Attribute("textureref"));
+	if(textureId != ""){
+		try{
+			texture = textures.at(textureId);
+		}catch(...){
+			issue("Texture width id='"+textureId+" not found . will not be ignored'.",WARNING);
+		}		
+
+	}
+
+	CGFappearance * appearance = new CGFappearance(aa,dd,ss,NULL);
+	appearance->setTexture(texture);
+	return appearance;
+}
+
+
+void ANFparser::parseComponent(TiXmlElement * anfParent, float aa[4], float dd[4], float ss[4]){
+
+	TiXmlElement * component = anfParent->FirstChildElement("component");
 	std::string type;
 	const char *val;
-	float aa[4],dd[4],ss[4];
 	bool a=false,d=false,s=false;
 
 	while(component){
@@ -57,9 +82,51 @@ CGFappearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance){
 	}
 
 	if(!s || !a || !d){
-		issue("One or more components missing from appearance.",ERROR);
+		std::string parentname = anfParent->Value();
+		issue("One or more components missing from "+parentname+".",ERROR);
 	}
 
+}
 
-	return new CGFappearance(aa,dd,ss,NULL);
+Texture * ANFparser::parseTexture(TiXmlElement * anfTexture){
+	std::string filename;
+	if((filename = str(anfTexture->Attribute("file")))==""){
+		issue("Texture filename not defined! (texture will be ignored)",WARNING);
+		return NULL;
+	}
+
+	float s,t;
+	if(anfTexture->QueryFloatAttribute("texlength_s",&s) != TIXML_SUCCESS){
+		issue("Bad value of texlength_s found! (texture will be ignored)",WARNING);
+		return NULL;
+	}
+
+	if(anfTexture->QueryFloatAttribute("texlength_t",&t) != TIXML_SUCCESS){
+		issue("Bad value of texlength_t found! (texture will be ignored)",WARNING);
+		return NULL;
+	}
+	try{
+		return new Texture(filename,s,t);
+	}catch(...){
+		issue("We couldn't open your texture file: "+ filename +".",WARNING);
+		return NULL;
+	}
+}
+
+void ANFparser::parseTextures(TiXmlElement * anfTextures,map<std::string,Texture *> & textures){
+	TiXmlElement * anfTexture = anfTextures->FirstChildElement("texture");
+	Texture * texture;				
+	std::string textureId;
+	while(anfTexture){
+		texture = NULL;		
+		if((textureId = str(anfTexture->Attribute("id")))!=""){
+			if((texture = parseTexture(anfTexture))){
+				textures.insert(std::pair<std::string,Texture *>(textureId,texture));
+			}
+		}else{
+			issue("Texture id is not defined!. (it will be ignored)",WARNING);
+		}
+
+		anfTexture = anfTexture->NextSiblingElement("texture");
+	}
 }

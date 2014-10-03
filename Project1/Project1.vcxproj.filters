@@ -28,6 +28,12 @@
       <Filter>parser</Filter>
     </ClCompile>
     <ClCompile Include="src\Light.cpp" />
+    <ClCompile Include="src\parser\ANFparserLights.cpp">
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\Texture.cpp">
+      <Filter>scenegraph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h" />
@@ -47,6 +53,10 @@
       <Filter>scenegraph</Filter>
     </ClInclude>
     <ClInclude Include="src\Light.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\scenegraph\Texture.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="parser">

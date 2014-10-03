@@ -3,6 +3,7 @@
 #include "Scene.h"
 
 #include <math.h>
+#include<iostream>
 
 //float pi = acos(-1.0);
 //float deg2rad=pi/180.0;
@@ -35,12 +36,9 @@ void Scene::init()
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, CGFlight::background_ambient);  // Define ambient light
 	
 	// Declares and enables a light
-	/*float light0_pos[4] = {4.0, 6.0, 5.0, 1.0};
-	CGFlight* light0 = new CGFlight(GL_LIGHT0, light0_pos);
-	light0->enable();*/
 
 	// Defines a default normal
-	glNormal3f(0,0,1);
+	glNormal3f(0,0,-1);
 
 	glEnable(GL_NORMALIZE);
 }
@@ -59,6 +57,15 @@ void Scene::display()
 
 	// Apply transformations corresponding to the camera position relative to the origin
 	CGFscene::activeCamera->applyView();
+	
+	/*
+	float light0_pos[4] = {4.0, 6.0, 7.0, 1.0};
+	CGFlight* light0 = new CGFlight(GL_LIGHT5, light0_pos);
+	light0->enable();
+	light0->draw(); */
+
+	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
+		(*it)->draw();
 
 	// Draw axis
 	axis.draw();
@@ -84,6 +91,30 @@ void Scene::setRoot(Node * root){
 	this->root = root;
 }
 
+bool Scene::addLight(float aa[4],float dd[4],float ss[4],bool enabled,
+	float location[4], bool visible,float angle, float exponent,float target[4]){
+	Light * light;
+	if(lights.size() >= 8)
+		return false;	
+
+	unsigned ids[8] = {GL_LIGHT0,GL_LIGHT1,GL_LIGHT2,GL_LIGHT3,GL_LIGHT4,GL_LIGHT5,GL_LIGHT6,GL_LIGHT7};
+	light = new Light(ids[lights.size()],location);
+	light->setAmbient(aa);
+	light->setDiffuse(dd);
+	light->setSpecular(ss);
+	light->setEnabled(enabled);
+	light->setVisible(visible);
+
+
+	if(target!=NULL){
+		light->setTarget(target);
+		light->setAngle(angle);
+		light->setExponent(exponent);
+	}
+	
+	lights.push_back(light);
+	return true;
+}
 
 void Scene::setShaddingMode(ShaddingMode shaddingMode){
 	this->shaddingMode = shaddingMode;

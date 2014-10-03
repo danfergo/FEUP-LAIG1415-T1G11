@@ -1,4 +1,4 @@
- /* 
+/* 
  * G0_Base: projeto inicial de Laig* 
  * O Nelson mexeu aqui!
  */
@@ -9,10 +9,6 @@
 #include "CGFapplication.h"
 #include "Scene.h"
 #include "parser/ANFparser.h"
-
-using std::cout; 
-using std::exception;
-
 
 
 int main(int argc, char* argv[]) {
@@ -26,6 +22,7 @@ int main(int argc, char* argv[]) {
 		app.setScene(scene);
 		app.setInterface(new CGFinterface());
 		
+
 		std::string filename;
 		std::cout << "Insert the ANF filename: \n>";
 		std::cin >> filename;
@@ -36,19 +33,21 @@ int main(int argc, char* argv[]) {
 
 		if(!parser.parse(scene,filename.c_str())){
 			std::cout << "Build scene FAILED." << std::endl;
-			std::cout << "Press any key to continue..." << std::endl;
-			std::cin >> filename;
-			return 0;
+			std::cout << "---------------------------------------------------" << std::endl;
 		}else{
 			std::cout << "Build scene DONE." << std::endl;
 			std::cout << "Running..." << std::endl;
+			std::cout << "---------------------------------------------------" << std::endl;
+			app.run();
 		}
 
-		std::cout << "---------------------------------------------------" << std::endl;
+		std::cout << "Press any key to continue..." << std::endl;
+		std::cin >> filename;
+
 		
-		/* Running CGF scene */
+		// Running CGF scene 
 		
-		app.run();
+		
 		
 	}
 	catch(GLexception& ex) {
@@ -59,6 +58,6 @@ int main(int argc, char* argv[]) {
 		cout << "Erro inesperado: " << ex.what();
 		return -1;
 	}
-
+	
 	return 0;
 }

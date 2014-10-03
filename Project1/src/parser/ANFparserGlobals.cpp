@@ -27,7 +27,6 @@ void ANFparser::parseGlobals(TiXmlElement * anfGlobals){
 	}
 
 
-	
 }
 
 void ANFparser::parseGlobalsDrawing(TiXmlElement * anfDrawing){

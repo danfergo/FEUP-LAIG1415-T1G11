@@ -25,6 +25,10 @@ CGFobject * ANFparser::parseTriangle(TiXmlElement * anfTriangle){
 		}
 	}
 	
+
+
+
+
 	return new Triangle(data);
 }
 

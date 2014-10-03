@@ -3,11 +3,13 @@
 
 #include "CGFscene.h"
 #include "scenegraph/Node.h"
+#include "Light.h"
 
 class Scene : public CGFscene
 {
 private:
 	Node * root;
+	std::vector<Light*> lights;
 public:
 	static enum ShaddingMode{FLAT,GOURAUD};
 	static enum DrawingMode{FILL,LINE,POINT};
@@ -28,6 +30,8 @@ public:
 	void init();
 	void display();
 	void setRoot(Node * root);
+	bool addLight(float aa[4],float dd[4],float ss[4],bool enabled, 
+		float location[4], bool visible,float angle=-1, float exponent=-1,float target[4] = NULL);
 
 	void setShaddingMode(ShaddingMode shaddingMode);
 	void setDrawingMode(DrawingMode drawingMode);
@@ -38,6 +42,7 @@ public:
 	void setLightingEnabled(bool lightingEnabled);
 	void setDoubleSidedEnabled(bool doublesidedEnabled);
 	void setLocalIlluminationEnabled(bool localIlliuminationEnabled);
+
 
 }; 
 

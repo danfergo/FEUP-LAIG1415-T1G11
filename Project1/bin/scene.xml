@@ -29,9 +29,9 @@
     <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial, que tem de existir -->
     <cameras initial="ss" >
         <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
-		
-        <!-- <perspective id="ss" near="ff" far="ff" angle="ff" pos="ff ff ff" target="ff ff ff" /> -->
-        <!-- <ortho id="ss" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" /> -->
+	
+         <perspective id="ss" near="ff" far="ff" angle="ff" pos="ff ff ff" target="ff ff ff" /> 
+         <ortho id="ss" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" /> 
 
     </cameras>
   
@@ -39,27 +39,25 @@
     <!-- bloco de luzes -->
     <lights>
             <!-- Deve existir pelo menos uma luz declarada -->
-             <!-- <light id="ss" type="omni" enabled="tt" location="ff ff ff" marker="tt">
-                <component type="ambient" value="ff ff ff ff" />
-               <component type="diffuse" value="ff ff ff ff" />
-               <component type="specular" value="ff ff ff ff" />
+            <light id="ss" type="omni" enabled="true" marker="true" pos="5 0 5" >
+              <component type="ambient" value="0.9 0.9 0.9 0.9" />
+              <component type="diffuse" value="0.9 0.9 0.9 0.9" />
+              <component type="specular" value="0.9 0.9 0.9 0.9" />
 
             </light>
 
-            <light id="ss" type="spot" enabled="tt" location="ff ff ff" marker="tt" 
-                angle="ff" exponent="ff" direction="ff ff ff" >
-
-               <component type="ambient" value="ff ff ff ff" />
-               <component type="diffuse" value="ff ff ff ff" />
-               <component type="specular" value="ff ff ff ff" />
-
-            </light> -->
+            <light id="ss" type="spot" enabled="true" marker="true" pos="5 5 5" target="5 0 5"
+                angle="10" exponent="1" >
+              <component type="ambient" value="0.9 0.9 0.9 0.9" />
+              <component type="diffuse" value="0.9 0.9 0.9 0.9" />
+              <component type="specular" value="0.9 0.9 0.9 0.9" />
+            </light>
     </lights>
 
     <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
     <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
     <textures>       
-           <texture id="ss" file="ss" texlength_s="ff" texlength_t="ff" />
+           <texture id="random_texture" file="texture.jpg" texlength_s="1" texlength_t="2" />
     </textures>
 
     <!-- bloco de materiais; -->
@@ -67,7 +65,7 @@
         <!-- deve existir um ou mais blocos "appearance" -->
         <!-- IMPORTANTE: -->
         <!--   textureref e opcional, a utilizar caso haja textura associada a esta aparencia --> 
-         <appearance id="random_appearance" shininess="ff" textureref="ss" >
+         <appearance id="random_appearance" shininess="ff" textureref="random_texture" >
                <component type="ambient" value="0.9 0.1 0.1 0.9" />
                <component type="diffuse" value="0.9 0.1 0.1 0.9" />
                <component type="specular" value="0.1 0.1 0.1 0.1" />

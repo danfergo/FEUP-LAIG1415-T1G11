@@ -39,13 +39,32 @@ bool ANFparser::parse(Scene * scene,const char* filename){
 			parseGlobals(anfGlobals);
 		}
 		
+
+		//Lets process the lights
+		TiXmlElement* anfLights = anfRoot->FirstChildElement("lights");
+		if(!anfLights){
+			issue("Block 'lights' not found!",WARNING);
+		}else{
+			parseLights(anfLights);
+		}
+
+		//If textures extist, we process it
+		TiXmlElement* anfTextures = anfRoot->FirstChildElement("textures");
+		map<std::string,Texture *> textures;
+		if(!anfTextures){
+			issue("Block 'textures' not found!",WARNING);
+		}else{
+			parseTextures(anfTextures,textures);
+		}
+
+
 		//If appearances block exist, we call its parser
 		TiXmlElement* anfAppearances = anfRoot->FirstChildElement("appearances");
 		map<std::string,CGFappearance *> appearances;
 		if(!anfAppearances){
 			issue("Block 'appearances' not found!",WARNING);
 		}else{
-			parseAppearances(anfAppearances,appearances);
+			parseAppearances(anfAppearances,appearances,textures);
 		}
 		
 
@@ -68,7 +87,7 @@ std::string ANFparser::str(const char * str){
 }
 
 void ANFparser::issue(std::string err, const char flag) {
-	std::string prefix = (flag == ERROR)? "ERROR! " : "WARNING! "; 
+	std::string prefix = (flag == ERROR)? " ERROR! " : " WARNING! "; 
 	std::cout << prefix << err << std::endl;
 	if(flag == ERROR || (parseMode == STRICT)) throw ParseExep();
 }; 
