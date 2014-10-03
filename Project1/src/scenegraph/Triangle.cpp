@@ -12,7 +12,6 @@ Triangle::~Triangle(void)
 	
 }
 
-
 void Triangle::draw(){
 	
 	glBegin(GL_TRIANGLES);

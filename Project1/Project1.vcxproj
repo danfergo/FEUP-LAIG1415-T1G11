@@ -72,11 +72,13 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\parser\ANFparser.cpp" />
     <ClCompile Include="src\parser\ANFparserAppearances.cpp" />
+    <ClCompile Include="src\parser\ANFparserCameras.cpp" />
     <ClCompile Include="src\parser\ANFparserGlobals.cpp" />
     <ClCompile Include="src\parser\ANFparserGraph.cpp" />
     <ClCompile Include="src\parser\ANFparserLights.cpp" />
     <ClCompile Include="src\parser\ANFparserPrimitives.cpp" />
     <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\scenegraph\Camera.cpp" />
     <ClCompile Include="src\scenegraph\Node.cpp" />
     <ClCompile Include="src\scenegraph\Sphere.cpp" />
     <ClCompile Include="src\scenegraph\Texture.cpp" />
@@ -87,6 +89,7 @@
     <ClInclude Include="src\Light.h" />
     <ClInclude Include="src\parser\ANFparser.h" />
     <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\scenegraph\Camera.h" />
     <ClInclude Include="src\scenegraph\Node.h" />
     <ClInclude Include="src\scenegraph\Point.h" />
     <ClInclude Include="src\scenegraph\Sphere.h" />

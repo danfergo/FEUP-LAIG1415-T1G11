@@ -69,6 +69,11 @@ private:
 	void parseGlobalsCulling(TiXmlElement * anfCulling);
 	void parseGlobalsLighting(TiXmlElement * anfLighting);
  
+	//Cameras 
+	//void parseCameras(TiXmlElement * anfCameras);
+	//CameraOrtho * parseCameraOrtho(TiXmlElement * anfCamera);
+	//CameraPrespective * parseCameraPrespective(TiXmlElement * anfCamera);
+
 	//Error handling
 	const static char WARNING;
 	const static char ERROR;
