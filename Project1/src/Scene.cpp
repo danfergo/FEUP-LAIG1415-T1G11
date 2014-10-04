@@ -1,6 +1,7 @@
 
 #include "CGFapplication.h"
 #include "Scene.h"
+#include "scenegraph\primitives\Toro.h"
 
 #include <math.h>
 #include<iostream>
@@ -67,12 +68,13 @@ void Scene::display()
 	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
 		(*it)->draw();
 
+	//(new Toro(5,7,10,10))->draw();
 	// Draw axis
 	axis.draw();
 	
     // ---- END Background, camera and axis setup
 
-
+	(new Toro(5,7,10,10))->draw();
 
 	// Draw Scene
 	if(root != NULL)

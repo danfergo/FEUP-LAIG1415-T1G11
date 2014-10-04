@@ -43,6 +43,15 @@
     <ClCompile Include="src\scenegraph\primitives\Sphere.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Retangle.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Toro.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Cylinder.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h" />
@@ -70,6 +79,12 @@
       <Filter>scenegraph\utils</Filter>
     </ClInclude>
     <ClInclude Include="src\scenegraph\primitives\Sphere.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Retangle.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Toro.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
   </ItemGroup>

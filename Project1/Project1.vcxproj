@@ -80,7 +80,10 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\scenegraph\Camera.cpp" />
     <ClCompile Include="src\scenegraph\Node.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Cylinder.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Retangle.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Sphere.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Toro.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Triangle.cpp" />
     <ClCompile Include="src\scenegraph\Texture.cpp" />
     <ClCompile Include="src\scenegraph\utils\Normals.cpp" />
@@ -92,7 +95,9 @@
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\scenegraph\Camera.h" />
     <ClInclude Include="src\scenegraph\Node.h" />
+    <ClInclude Include="src\scenegraph\primitives\Retangle.h" />
     <ClInclude Include="src\scenegraph\primitives\Sphere.h" />
+    <ClInclude Include="src\scenegraph\primitives\Toro.h" />
     <ClInclude Include="src\scenegraph\primitives\Triangle.h" />
     <ClInclude Include="src\scenegraph\Texture.h" />
     <ClInclude Include="src\scenegraph\utils\Normals.h" />

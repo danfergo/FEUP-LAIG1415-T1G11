@@ -19,7 +19,4 @@ class Sphere: public CGFobject{
 		~Sphere();
 };
 
-
-
-
 #endif
