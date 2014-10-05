@@ -8,6 +8,7 @@ class Toro: public CGFobject
 {
 private:
 	Point3d ** vertex;
+	Vector3d ** normal;
 	int slices, loops;
 	float raioCentral, raioLateral;
 

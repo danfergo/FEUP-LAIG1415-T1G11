@@ -74,12 +74,11 @@ void Scene::display()
 	
     // ---- END Background, camera and axis setup
 
-	(new Toro(5,7,10,10))->draw();
-
 	// Draw Scene
 	if(root != NULL)
 		root->processNode(NULL);
 
+	(new Toro(5,10,20,20))->draw();
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer
