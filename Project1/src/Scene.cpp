@@ -1,4 +1,4 @@
-
+﻿
 #include "CGFapplication.h"
 #include "Scene.h"
 #include "scenegraph\primitives\Toro.h"
@@ -30,13 +30,15 @@ Scene::Scene(): root(NULL), CGFscene(){
 void Scene::init() 
 {
 	// Enables lighting computations
-	glEnable(GL_LIGHTING);
+	if(lightingEnabled) glEnable(GL_LIGHTING);
 
 	// Sets up some lighting parameters
-	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
-	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, CGFlight::background_ambient);  // Define ambient light
-	
-	// Declares and enables a light
+	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, doublesidedEnabled ? 1 : GL_FALSE);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);  // Define ambient light
+	glClearColor(backgroundColor[0],backgroundColor[1],backgroundColor[2],backgroundColor[3]);
+	glFrontFace((drawingOrder == CW)? GL_CW : GL_CCW);
+	if(cullingFace != NONE) glCullFace((cullingFace == FRONT) ? GL_FRONT : ((cullingFace == BACK) ? GL_BACK : GL_FRONT_AND_BACK ));
+	glPolygonMode(GL_FRONT_AND_BACK, (drawingMode == POINT) ? GL_POINT : ((drawingMode == LINE) ? GL_LINE : GL_FILL));
 
 	// Defines a default normal
 	glNormal3f(0,0,-1);
@@ -73,12 +75,13 @@ void Scene::display()
 	axis.draw();
 	
     // ---- END Background, camera and axis setup
+	
+	(new Toro(5,10,20,20))->draw();
 
 	// Draw Scene
 	if(root != NULL)
 		root->processNode(NULL);
 
-	(new Toro(5,10,20,20))->draw();
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer

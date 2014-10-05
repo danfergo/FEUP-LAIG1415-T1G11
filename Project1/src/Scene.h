@@ -17,13 +17,13 @@ public:
 	static enum DrawingOrder{CCW,CW};
 
 	ShaddingMode shaddingMode;
-	DrawingMode drawingMode;
-	CullingFace cullingFace;
-	DrawingOrder drawingOrder;
-	float backgroundColor[4];
-	float ambientLight[4];
-	bool lightingEnabled;
-	bool doublesidedEnabled;
+	DrawingMode drawingMode;  // applyed
+	CullingFace cullingFace;  // applyed
+	DrawingOrder drawingOrder; // applyed
+	float backgroundColor[4]; // applyed
+	float ambientLight[4]; // applyed
+	bool lightingEnabled; // applyed
+	bool doublesidedEnabled; // applyed
 	bool localIlluminationEnabled;
 
 	Scene();
