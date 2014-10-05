@@ -20,7 +20,7 @@
         <!-- Parametros de culling -->
         <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
         <!-- Valores para cullorder : "ccw" ou "cw" -->
-           <culling face="ss" order="ss" />
+           <culling face="both" order="cw" />
  
         <!-- Parametros de iluminacao; seguem os parametros do OpenGL  -->
             <lighting doublesided="tt" local="tt" enabled="tt" ambient="ff ff ff ff" />			

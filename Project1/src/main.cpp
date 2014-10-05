@@ -19,8 +19,6 @@ int main(int argc, char* argv[]) {
 
 		Scene * scene = new Scene();
 
-		app.setScene(scene);
-		app.setInterface(new CGFinterface());
 		
 
 		std::string filename;
@@ -35,9 +33,12 @@ int main(int argc, char* argv[]) {
 			std::cout << "Build scene FAILED." << std::endl;
 			std::cout << "---------------------------------------------------" << std::endl;
 		}else{
+
 			std::cout << "Build scene DONE." << std::endl;
 			std::cout << "Running..." << std::endl;
-			std::cout << "---------------------------------------------------" << std::endl;
+			std::cout << "---------------------------------------------------" << std::endl;	
+			app.setScene(scene);
+			app.setInterface(new CGFinterface());
 			app.run();
 		}
 

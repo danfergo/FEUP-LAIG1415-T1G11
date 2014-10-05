@@ -70,7 +70,7 @@ void ANFparser::parseGlobalsCulling(TiXmlElement * anfCulling){
 	std::string face = str(anfCulling->Attribute("face")),
 		order = str(anfCulling->Attribute("order"));
 	
-	//drawing mode
+	//culling mode
 	if(face == "none"){
 		scene->setCullingFace(Scene::NONE);
 	}else if(face == "back"){
