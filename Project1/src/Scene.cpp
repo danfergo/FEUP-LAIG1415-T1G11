@@ -33,11 +33,10 @@ void Scene::init()
 	if(lightingEnabled) glEnable(GL_LIGHTING);
 
 	// Sets up some lighting parameters
-	//glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, doublesidedEnabled ? 1 : GL_FALSE);
+	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, doublesidedEnabled ? 1 : GL_FALSE);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);  // Define ambient light
 	glClearColor(backgroundColor[0],backgroundColor[1],backgroundColor[2],backgroundColor[3]);
 	glFrontFace((drawingOrder == CW)? GL_CW : GL_CCW);
-
 	if(cullingFace != NONE){
 		glEnable(GL_CULL_FACE);
 		glCullFace((cullingFace == FRONT) ? GL_FRONT : ((cullingFace == BACK) ? GL_BACK : GL_FRONT_AND_BACK ));
@@ -71,9 +70,10 @@ void Scene::display()
 	light0->enable();
 	light0->draw(); */
 
-	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
-		(*it)->draw();
 
+	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
+		if(localIlluminationEnabled && lightingEnabled) (*it)->draw(); else (*it)->disable();
+	
 	//(new Toro(5,7,10,10))->draw();
 	// Draw axis
 	axis.draw();

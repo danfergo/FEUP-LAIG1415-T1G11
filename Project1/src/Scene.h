@@ -24,7 +24,7 @@ public:
 	float ambientLight[4]; // applyed
 	bool lightingEnabled; // applyed
 	bool doublesidedEnabled; // applyed
-	bool localIlluminationEnabled;
+	bool localIlluminationEnabled; //applyed
 
 	Scene();
 	void init();

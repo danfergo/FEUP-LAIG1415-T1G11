@@ -15,15 +15,15 @@
         <!-- Parametros de desenho -->
         <!-- Valores para mode: "fill" , "line", "point" -->
         <!-- Valores para shading: "flat", "gouraud" ) -->
-          <drawing mode="ss" shading="ss" background="ff ff ff ff" />
+          <drawing mode="fill" shading="flat" background="0.37 0.63 0.9 0" />
  
         <!-- Parametros de culling -->
         <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
         <!-- Valores para cullorder : "ccw" ou "cw" -->
-           <culling face="both" order="cw" />
+           <culling face="none" order="ccw" />
  
         <!-- Parametros de iluminacao; seguem os parametros do OpenGL  -->
-            <lighting doublesided="tt" local="tt" enabled="tt" ambient="ff ff ff ff" />			
+            <lighting doublesided="false" local="true" enabled="false" ambient="0.7 0.7 0.7 0" />			
     </globals> 
     
     <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial, que tem de existir -->

@@ -21,7 +21,7 @@ void ANFparser::parseGlobals(TiXmlElement * anfGlobals){
 	// Processing lighting block
 	TiXmlElement * anfLighting = anfGlobals->FirstChildElement("lighting");
 	if(anfDrawing){
-		parseGlobalsDrawing(anfLighting);
+		parseGlobalsLighting(anfLighting);
 	}else{
 		issue("Globals block 'lighting' no found. (defaults should be assumed)",WARNING);
 	}
@@ -31,7 +31,7 @@ void ANFparser::parseGlobals(TiXmlElement * anfGlobals){
 
 void ANFparser::parseGlobalsDrawing(TiXmlElement * anfDrawing){
 	std::string mode = str(anfDrawing->Attribute("mode")),
-		shading = str(anfDrawing->Attribute("shadding"));
+		shading = str(anfDrawing->Attribute("shading"));
 	//drawing mode
 	if(mode == "fill"){
 		scene->setDrawingMode(Scene::FILL);
@@ -59,7 +59,7 @@ void ANFparser::parseGlobalsDrawing(TiXmlElement * anfDrawing){
 
 	//background color
 	float bg[4];
-	const char * anfBg = anfDrawing->Attribute("value");
+	const char * anfBg = anfDrawing->Attribute("background");
 	if(!anfBg || sscanf(anfBg,"%f %f %f %f",&bg[0],&bg[1],&bg[2],&bg[3])!=4) 
 		issue("Error parsing globals background color. ",WARNING);
 	else 
@@ -113,7 +113,7 @@ void ANFparser::parseGlobalsLighting(TiXmlElement * anfLighting){
 	}else if(doublesided == ""){
 		issue("Not defined value for doublesided drawing.(default assumed)",WARNING);
 	}else{
-		issue("Bad value for drawing doublesided drawing.(default assumed)",WARNING);
+		issue("Bad value for doublesided drawing.(default assumed)",WARNING);
 	}
 
 	//enable local lighting
@@ -124,7 +124,7 @@ void ANFparser::parseGlobalsLighting(TiXmlElement * anfLighting){
 	}else if(local == ""){
 		issue("Not defined value for local lighting.(default assumed)",WARNING);
 	}else{
-		issue("Bad value for drawing local lighting.(default assumed)",WARNING);
+		issue("Bad value for local lighting.(default assumed)",WARNING);
 	}
 
 	//enable lighting
