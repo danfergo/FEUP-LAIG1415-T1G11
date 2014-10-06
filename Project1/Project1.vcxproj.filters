@@ -34,25 +34,25 @@
     <ClCompile Include="src\scenegraph\Camera.cpp">
       <Filter>scenegraph</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenegraph\primitives\Triangle.cpp">
-      <Filter>scenegraph\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="src\scenegraph\utils\Normals.cpp">
       <Filter>scenegraph\utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenegraph\primitives\Sphere.cpp">
-      <Filter>scenegraph\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenegraph\primitives\Retangle.cpp">
-      <Filter>scenegraph\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenegraph\primitives\Toro.cpp">
-      <Filter>scenegraph\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenegraph\primitives\Cylinder.cpp">
-      <Filter>scenegraph\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="src\Interface.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Sphere.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Toro.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Triangle.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Cylinder.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Retangle.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h" />
@@ -73,22 +73,25 @@
     <ClInclude Include="src\scenegraph\utils\Point.h">
       <Filter>scenegraph\utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\scenegraph\primitives\Triangle.h">
-      <Filter>scenegraph\primitives</Filter>
-    </ClInclude>
     <ClInclude Include="src\scenegraph\utils\Normals.h">
       <Filter>scenegraph\utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\scenegraph\primitives\Sphere.h">
-      <Filter>scenegraph\primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenegraph\primitives\Retangle.h">
-      <Filter>scenegraph\primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenegraph\primitives\Toro.h">
-      <Filter>scenegraph\primitives</Filter>
-    </ClInclude>
     <ClInclude Include="src\Interface.h" />
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Retangle.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Sphere.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Toro.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Triangle.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Cylinder.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="parser">

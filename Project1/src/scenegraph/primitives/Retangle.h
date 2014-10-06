@@ -6,8 +6,13 @@
 
 class Retangle: public CGFobject
 {
+private:
+	Point2d vertex[2];
+	GLUquadricObj * obj;
+
 public:
-	Retangle(void);
+	Retangle(Point2d vertex[2]);
+	void draw();
 	~Retangle(void);
 };
 

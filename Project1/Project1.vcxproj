@@ -68,6 +68,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Cylinder.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Retangle.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Sphere.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Toro.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Triangle.cpp" />
     <ClCompile Include="src\Interface.cpp" />
     <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -81,15 +86,15 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\scenegraph\Camera.cpp" />
     <ClCompile Include="src\scenegraph\Node.cpp" />
-    <ClCompile Include="src\scenegraph\primitives\Cylinder.cpp" />
-    <ClCompile Include="src\scenegraph\primitives\Retangle.cpp" />
-    <ClCompile Include="src\scenegraph\primitives\Sphere.cpp" />
-    <ClCompile Include="src\scenegraph\primitives\Toro.cpp" />
-    <ClCompile Include="src\scenegraph\primitives\Triangle.cpp" />
     <ClCompile Include="src\scenegraph\Texture.cpp" />
     <ClCompile Include="src\scenegraph\utils\Normals.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Cylinder.h" />
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Retangle.h" />
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Sphere.h" />
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Toro.h" />
+    <ClInclude Include="..\..\..\..\Desktop\3ºano 1ºsemestre\FEUP-LAIG1415-T1G11\Project1\src\scenegraph\primitives\Triangle.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\Interface.h" />
     <ClInclude Include="src\Light.h" />
@@ -97,10 +102,6 @@
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\scenegraph\Camera.h" />
     <ClInclude Include="src\scenegraph\Node.h" />
-    <ClInclude Include="src\scenegraph\primitives\Retangle.h" />
-    <ClInclude Include="src\scenegraph\primitives\Sphere.h" />
-    <ClInclude Include="src\scenegraph\primitives\Toro.h" />
-    <ClInclude Include="src\scenegraph\primitives\Triangle.h" />
     <ClInclude Include="src\scenegraph\Texture.h" />
     <ClInclude Include="src\scenegraph\utils\Normals.h" />
     <ClInclude Include="src\scenegraph\utils\Point.h" />

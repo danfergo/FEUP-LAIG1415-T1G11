@@ -9,6 +9,7 @@ class Triangle: public CGFobject
 private:
 	Point3d vertex[3];
 	Vector3d normal;
+
 public:
 	Triangle(Point3d vertex[3]);
 	~Triangle(void);

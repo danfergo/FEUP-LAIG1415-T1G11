@@ -9,12 +9,12 @@
 
 class Sphere: public CGFobject{
 	private:
-		float angle_a, angle_b;
-		unsigned stacks, slices;
-		Point3d ** dots;
+		float radius;
+		int stacks, slices;
+		GLUquadricObj * obj;
 		
 	public:
-		Sphere(unsigned stacks, unsigned slices);
+		Sphere(float radius, int stacks, int slices);
 		void draw();
 		~Sphere();
 };
