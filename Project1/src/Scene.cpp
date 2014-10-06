@@ -85,6 +85,7 @@ void Scene::display()
 	// Draw Scene
 	if(root != NULL)
 		root->processNode(NULL);
+	
 
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
@@ -99,7 +100,7 @@ void Scene::setRoot(Node * root){
 	this->root = root;
 }
 
-bool Scene::addLight(float aa[4],float dd[4],float ss[4],bool enabled,
+bool Scene::addLight(std::string title,float aa[4],float dd[4],float ss[4],bool enabled,
 	float location[4], bool visible,float angle, float exponent,float target[4]){
 	Light * light;
 	if(lights.size() >= 8)
@@ -119,10 +120,12 @@ bool Scene::addLight(float aa[4],float dd[4],float ss[4],bool enabled,
 		light->setAngle(angle);
 		light->setExponent(exponent);
 	}
-	
+	light->setIdTitle(title);
+
 	lights.push_back(light);
 	return true;
 }
+
 
 void Scene::setShaddingMode(ShaddingMode shaddingMode){
 	this->shaddingMode = shaddingMode;
@@ -159,4 +162,9 @@ void Scene::setDoubleSidedEnabled(bool doublesidedEnabled){
 
 void Scene::setLocalIlluminationEnabled(bool localIlluminationEnabled){
 	this->localIlluminationEnabled = localIlluminationEnabled;
+}
+
+
+std::vector<Light *> Scene::getLights(){
+	return lights;
 }

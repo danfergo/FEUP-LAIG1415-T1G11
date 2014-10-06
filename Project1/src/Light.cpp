@@ -25,7 +25,7 @@ void Light::setVisible(bool visible){
 }
 
 void Light::setTarget(float target[4]){
-	//AB> = B - A 
+	//AB> = B - A <=> Direction = Target - Location
 	float direction[3] = {(target[0]-position[0]),(target[1]-position[1]),(target[2]-position[2])};
 	this->direction[0] = direction[0];
 	this->direction[1] = direction[1];
@@ -37,4 +37,20 @@ void Light::setAngle(float angle){
 }
 void Light::setExponent(float exponent){
 	glLightf(this->id,GL_SPOT_EXPONENT,exponent);
+}
+
+void Light::setIdTitle(std::string title){
+	this->titleId = title;
+}
+
+std::string Light::getIdTitle(){
+	return this->titleId;
+}
+
+bool Light::isEnabled(){
+	return enabled;
+}
+
+bool & Light::getEnableValue(){
+	return enabled;
 }

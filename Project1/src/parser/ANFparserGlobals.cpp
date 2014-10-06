@@ -32,6 +32,7 @@ void ANFparser::parseGlobals(TiXmlElement * anfGlobals){
 void ANFparser::parseGlobalsDrawing(TiXmlElement * anfDrawing){
 	std::string mode = str(anfDrawing->Attribute("mode")),
 		shading = str(anfDrawing->Attribute("shading"));
+	
 	//drawing mode
 	if(mode == "fill"){
 		scene->setDrawingMode(Scene::FILL);
@@ -44,6 +45,8 @@ void ANFparser::parseGlobalsDrawing(TiXmlElement * anfDrawing){
 	}else{
 		issue("Bad value for drawing mode.(default assumed)",WARNING);
 	}
+
+
 
 	//shadding mode
 	if(shading == "flat"){
@@ -137,7 +140,6 @@ void ANFparser::parseGlobalsLighting(TiXmlElement * anfLighting){
 	}else{
 		issue("Bad value for drawing lighting.(default assumed)",WARNING);
 	}
-
 
 	//ambient light
 	float light[4];

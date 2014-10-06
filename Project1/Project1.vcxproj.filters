@@ -52,6 +52,7 @@
     <ClCompile Include="src\scenegraph\primitives\Cylinder.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="src\Interface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h" />
@@ -87,6 +88,7 @@
     <ClInclude Include="src\scenegraph\primitives\Toro.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
+    <ClInclude Include="src\Interface.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="parser">

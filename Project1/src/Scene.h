@@ -30,8 +30,9 @@ public:
 	void init();
 	void display();
 	void setRoot(Node * root);
-	bool addLight(float aa[4],float dd[4],float ss[4],bool enabled, 
+	bool addLight(std::string title,float aa[4],float dd[4],float ss[4],bool enabled, 
 		float location[4], bool visible,float angle=-1, float exponent=-1,float target[4] = NULL);
+	std::vector<Light *> getLights();
 
 	void setShaddingMode(ShaddingMode shaddingMode);
 	void setDrawingMode(DrawingMode drawingMode);

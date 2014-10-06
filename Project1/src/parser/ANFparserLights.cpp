@@ -1,5 +1,6 @@
 #include "ANFparser.h"
 #include <iostream>
+#include <algorithm>
 
 void ANFparser::parseLights(TiXmlElement * anfLights){
 	TiXmlElement * anfLight = anfLights->FirstChildElement("light");
@@ -14,6 +15,21 @@ void ANFparser::parseLight(TiXmlElement * anfLight){
 	loc[3] = 1.0;
 	bool e=true, m=true, spot=false;
 	float angle,exponent;
+
+
+	std::string titleId = str(anfLight->Attribute("id"));
+	if(titleId == ""){
+		issue("Not defined id for light. assumed 'unknown' ",WARNING);
+		titleId = "uknown";
+	}else{
+		std::vector<Light *> lights = scene->getLights();
+		for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++){
+			if((*it)->getIdTitle() == titleId){
+				issue("Light with repeated id.",WARNING);
+				break;
+			}
+		}
+	}
 
 	std::string type = str(anfLight->Attribute("type"));
 	if(type =="omni" || type=="spot"){
@@ -65,8 +81,8 @@ void ANFparser::parseLight(TiXmlElement * anfLight){
 		}
 		// create a omni light
 		bool success;
-		if(!spot) success = scene->addLight(aa,dd,ss,e,loc,m,-1,-1,NULL);
-		else success = scene->addLight(aa,dd,ss,e,loc,m,angle,exponent,targ);
+		if(!spot) success = scene->addLight(titleId,aa,dd,ss,e,loc,m,-1,-1,NULL);
+		else success = scene->addLight(titleId,aa,dd,ss,e,loc,m,angle,exponent,targ);
 
 		if(!success) issue("Scene can only have 8 lights.This will be ignored.",WARNING);
 

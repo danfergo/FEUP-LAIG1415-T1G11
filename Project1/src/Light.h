@@ -5,6 +5,7 @@
 
 class Light: public CGFlight {
 	private:
+		std::string titleId;
 		bool visible;
 	public:
 		Light(unsigned int lightid, float* pos);
@@ -15,7 +16,13 @@ class Light: public CGFlight {
 		void setTarget(float target[4]);
 		void setAngle(float angle);
 		void setExponent(float exponent);
+		void setIdTitle(std::string title);
+		std::string getIdTitle();
+		bool isEnabled();
+		bool & getEnableValue();
+		 
 };
+
 
 #endif
 

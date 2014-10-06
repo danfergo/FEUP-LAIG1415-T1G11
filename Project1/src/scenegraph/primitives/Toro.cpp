@@ -13,6 +13,7 @@ Toro::Toro(float inner, float outer, int slices, int loops): slices(slices), loo
 		normal[i] = new Vector3d[loops+1];
 	}
 
+
 	this->raioCentral = (outer-inner)/2 + inner;
 	this->raioLateral = raioCentral-inner;
 
@@ -33,10 +34,9 @@ Toro::Toro(float inner, float outer, int slices, int loops): slices(slices), loo
 
 	Point3d triangle[3];
 	char arrayfull = 0;
-	int pos=0;
 	for(unsigned i=0; i<=slices; i++){
-		for(unsigned j=0; j<=loops; j++, pos=abs((pos-1)%3)){
-			triangle[2-pos]=vertex[i][j];
+		for(unsigned j=0, pos=0; j<=loops; j++, pos=(pos+1)%3){
+			triangle[pos]=vertex[i][j];
 			if(arrayfull>2){
 				normals::calculateSurfaceNormalTriangle(triangle,normal[i][j]);
 			}
@@ -59,11 +59,13 @@ void Toro::draw(){
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_STRIP);
 		for(unsigned j=0; j<=loops; j++){
+			glNormal3d(normal[i+1][j].x,normal[i+1][j].y,normal[i+1][j].z);
+			glVertex3f(vertex[i+1][j].x,vertex[i+1][j].y,vertex[i+1][j].z);
+
 			glNormal3d(normal[i][j].x,normal[i][j].y,normal[i][j].z);
 			glVertex3f(vertex[i][j].x,vertex[i][j].y,vertex[i][j].z);
 
-			glNormal3d(normal[i+1][j].x,normal[i+1][j].y,normal[i+1][j].z);
-			glVertex3f(vertex[i+1][j].x,vertex[i+1][j].y,vertex[i+1][j].z);
+
 		}
 		glEnd();
 		glPopMatrix();

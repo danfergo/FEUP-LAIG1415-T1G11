@@ -9,6 +9,7 @@
 #include "CGFapplication.h"
 #include "Scene.h"
 #include "parser/ANFparser.h"
+#include "Interface.h"
 
 
 int main(int argc, char* argv[]) {
@@ -19,7 +20,6 @@ int main(int argc, char* argv[]) {
 
 		Scene * scene = new Scene();
 
-		
 
 		std::string filename;
 		std::cout << "Insert the ANF filename: \n>";
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 			std::cout << "Running..." << std::endl;
 			std::cout << "---------------------------------------------------" << std::endl;	
 			app.setScene(scene);
-			app.setInterface(new CGFinterface());
+			app.setInterface(new Interface());
 			app.run();
 		}
 
@@ -47,8 +47,6 @@ int main(int argc, char* argv[]) {
 
 		
 		// Running CGF scene 
-		
-		
 		
 	}
 	catch(GLexception& ex) {
