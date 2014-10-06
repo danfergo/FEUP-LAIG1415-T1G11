@@ -79,8 +79,6 @@ void Scene::display()
 	axis.draw();
 	
     // ---- END Background, camera and axis setup
-	
-	(new Toro(5,10,20,20))->draw();
 
 	// Draw Scene
 	if(root != NULL)

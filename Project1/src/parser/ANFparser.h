@@ -4,7 +4,6 @@
 #include <map>
 
 #include "../scenegraph/utils/Point.h"
-#include "../scenegraph/primitives/Triangle.h"
 #include "../Scene.h"
 #include "../Light.h"
 #include "../scenegraph/Texture.h"
@@ -41,6 +40,10 @@ private:
 	typedef CGFobject* (ANFparser::*PrimitiveParser)(TiXmlElement *);
 	std::map<std::string,PrimitiveParser> subParsers;
 	CGFobject * parseTriangle(TiXmlElement * anfTriangle);
+	CGFobject * parseSphere(TiXmlElement * anfSphere);
+	CGFobject * parseToro(TiXmlElement * anfToro);
+	CGFobject * parseCylinder(TiXmlElement * anfCylinder);
+	CGFobject * parseRetangle(TiXmlElement * anfRetangle);
 	void initPrimitiveParsers();
 
 	//Graph

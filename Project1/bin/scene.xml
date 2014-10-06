@@ -15,7 +15,7 @@
         <!-- Parametros de desenho -->
         <!-- Valores para mode: "fill" , "line", "point" -->
         <!-- Valores para shading: "flat", "gouraud" ) -->
-          <drawing mode="point" shading="flat" background="0 0 0d 0" />
+          <drawing mode="fill" shading="flat" background="0 0 0d 0" />
  
         <!-- Parametros de culling -->
         <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
@@ -65,7 +65,7 @@
         <!-- deve existir um ou mais blocos "appearance" -->
         <!-- IMPORTANTE: -->
         <!--   textureref e opcional, a utilizar caso haja textura associada a esta aparencia --> 
-         <appearance id="random_appearance" shininess="ff" textureref="" >
+         <appearance id="random_appearance" shininess="ff" textureref="random_texture" >
                <component type="ambient" value="0.9 0.1 0.1 0.9" />
                <component type="diffuse" value="0.9 0.1 0.1 0.9" />
                <component type="specular" value="0.1 0.1 0.1 0.1" />
@@ -106,12 +106,12 @@
           <!-- Primitivas : rectangle, triangle, cylinder, sphere, torus -->
           <!--   Comandos a serem interpretados genericamente como em OpenGL/GLUT, exceto -->
           <!--   o cilindro, que deve adicionalmente ter topos ou tampas) -->
-          <!-- <rectangle xy1="ff ff" xy2="ff ff" />
+          <rectangle xy1="5 5" xy2="10 10"></rectangle>
                
-                <cylinder base="ff" top="ff" height="ff" slices="ii" stacks="ii" /> -->
+          <cylinder base="3" top="3" height="8" slices="10" stacks="10" />
           <!-- deve ter topos -->
-          <!-- <sphere radius="ff" slices="ii" stacks="ii" />
-                <torus inner="ff" outer="ff" slices="ii" loops="ii" />-->
+          <sphere radius="4.5" slices="10" stacks="10" />
+          <torus inner="2.5" outer="10" slices="10" loops="10" />
         </primitives>
 
 
