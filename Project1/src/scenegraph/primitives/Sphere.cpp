@@ -6,6 +6,7 @@ Sphere::Sphere(float radius, int stacks, int slices){
 	this->stacks = stacks;
 	this->slices = slices;
     obj = gluNewQuadric();
+	gluQuadricTexture(obj,1);
 }
 
 void Sphere::draw(){

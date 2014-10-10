@@ -11,7 +11,7 @@ Cylinder::Cylinder(float base, float top, float height, int slices, int stacks)
 	this->slices = slices;
 	this->stacks = stacks;
     obj = gluNewQuadric();
-	
+	gluQuadricTexture(obj,1);
 	vertexBase = new Point2d[slices];
 	
 	float alphaMin = 2*PI/slices;

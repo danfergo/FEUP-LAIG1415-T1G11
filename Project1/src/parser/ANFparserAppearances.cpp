@@ -25,9 +25,12 @@ void ANFparser::parseAppearances(TiXmlElement * anfAppearances, std::map<std::st
 
 
 CGFappearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance,std::map<std::string, Texture *> & textures){
-	float aa[4],dd[4],ss[4];
+	float aa[4],dd[4],ss[4],shininess;
 	parseComponent(anfAppearance,aa,dd,ss);
 	
+	if(anfAppearance->QueryFloatAttribute("shininess",&shininess) != TIXML_SUCCESS){
+		issue("error parsing texture shininess",ERROR);
+	}
 
 	Texture * texture = NULL;
 	std::string textureId = str(anfAppearance->Attribute("textureref"));
@@ -40,7 +43,7 @@ CGFappearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance,std::map
 
 	}
 
-	CGFappearance * appearance = new CGFappearance(aa,dd,ss,NULL);
+	CGFappearance * appearance = new CGFappearance(aa,dd,ss,shininess);
 	appearance->setTexture(texture);
 	return appearance;
 }

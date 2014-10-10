@@ -21,7 +21,7 @@ Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, CGFap
 
 		if(nodeWrappers.find(nodeId) == nodeWrappers.end()){
 			nodeWrappers.insert(std::pair<std::string,NodeWrapper>(nodeId,nodeWrapper));
-		}else{
+		}else{	
 			issue("Node id's must be unique! '"+ nodeId +"' isn't.",ERROR);
 		}
 		node=node->NextSiblingElement();
@@ -44,7 +44,7 @@ bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::No
 				it2 != descendants.end(); it2++){
 				try{
 					(*it).second.node->addDescendants(nodes.at(*it2).node);
-					nodes.at((*it2)).indegree++; // calculating indegree. need in a following verification.
+					nodes.at(*it2).indegree++; // calculating indegree. need in a following verification.
 				}catch(...){
 					issue("Node descendant '"+ (*it).first + "' not found!",ERROR);
 				}
@@ -55,7 +55,8 @@ bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::No
 	try{
 		if(nodes.at(root).indegree != 0){
 			issue("Root can't be a descendant!",ERROR);
-		}else if(nodes.at(root).node->hasAppearance()){
+		}
+		if(!nodes.at(root).node->hasAppearance()){
 			issue("Root doesn't has a Appearance. (default gray could be used)",WARNING);
 		}
 	}catch(...){
@@ -82,7 +83,7 @@ bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::No
 		descendants = node.descendants;
 		for(it2 = descendants.begin(); it2 != descendants.end(); it2++){
 				if((--nodes.at(*it2).indegree) == 0)
-					t.push(nodes.at(*it2));
+					c.push(nodes.at(*it2));
 		}
 	}
 	// the conclusion:
@@ -135,12 +136,12 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 			//lets parse node's descandants then..
 			TiXmlElement * ds = descendants->FirstChildElement();
 			while(ds){
-				if(std::string(ds->Value()) != "noderef"){
+				if(str(ds->Value()) != "noderef"){
 					issue("Invalid block '"+str(ds->Value())+"' found!",WARNING);
-				}else if(std::string(ds->Attribute("id")) == ""){
+				}else if(str(ds->Attribute("id")) == ""){
 					issue("Invalid block noderef found. No id set!",WARNING);
 				}else{
-					ret.descendants.push_back(std::string(ds->Attribute("id")));
+					ret.descendants.push_back(str(ds->Attribute("id")));
 				}
 				ds=ds->NextSiblingElement();
 			}
@@ -160,7 +161,7 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 					issue("Apperance width id '"+appearanceId+"' not found!",ERROR);
 				}
 			}else{
-				issue("Apperanceref 'id' not defined! ('inherit' could be assumed).",ERROR);
+				issue("Apperanceref 'id' not defined! ('inherit' could be assumed).",WARNING);
 			}
 		}else{
 			issue("Block 'appearanceref' not found! ('inherit' will be assumed).",WARNING);
@@ -198,7 +199,7 @@ bool ANFparser::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 			}else node->addTranslation(x,y,z);
 		
 		}else if(type == "rotate"){ // Let's parse a Rotation
-			axis = std::string(transform->Attribute("axis"));
+			axis = str(transform->Attribute("axis"));
 			if(transform->QueryFloatAttribute("angle",&angle)!=TIXML_SUCCESS){ // bad angle value
 				issue("Bad angle found at rotation transform !",WARNING);
 			}else if(!node->addRotation(axis,angle)){ // bad axis value

@@ -40,6 +40,7 @@ bool ANFparser::parse(Scene * scene,const char* filename){
 		}
 		
 
+
 		//Lets process the lights
 		TiXmlElement* anfLights = anfRoot->FirstChildElement("lights");
 		if(!anfLights){

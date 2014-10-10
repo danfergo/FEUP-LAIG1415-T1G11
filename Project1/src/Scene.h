@@ -29,6 +29,7 @@ public:
 	Scene();
 	void init();
 	void display();
+    void update (unsigned long millis);
 	void setRoot(Node * root);
 	bool addLight(std::string title,float aa[4],float dd[4],float ss[4],bool enabled, 
 		float location[4], bool visible,float angle=-1, float exponent=-1,float target[4] = NULL);
@@ -43,6 +44,7 @@ public:
 	void setLightingEnabled(bool lightingEnabled);
 	void setDoubleSidedEnabled(bool doublesidedEnabled);
 	void setLocalIlluminationEnabled(bool localIlliuminationEnabled);
+protected:
 
 
 }; 

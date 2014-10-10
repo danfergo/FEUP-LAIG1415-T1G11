@@ -11,6 +11,21 @@ Node::Node():appearance(NULL)
 
 Node::~Node()
 {
+	/*CGFobject * pri;
+	while(primitives.size()){
+		pri = primitives.back();
+		primitives.pop_back();
+		std::cout << "xalskdasjdl" << std::endl;
+		delete pri;
+	}
+
+	Node * desc;
+	while(descendants.size()){
+		desc = descendants.back();
+		descendants.pop_back();
+		delete desc;
+	}*/
+
 }
 
 void Node::addPrimitive(CGFobject * primitive){
@@ -28,7 +43,7 @@ void Node::processNode(CGFappearance * parentAppearance){
 		
 		// before draw anything lets apply 
 		CGFappearance * currentAppearance = this->appearance?this->appearance: parentAppearance;
-		currentAppearance->apply();
+		if(currentAppearance != NULL)currentAppearance->apply();
 
 		// we are going to draw this node's primitives
 		for(std::vector<CGFobject *>::iterator it = primitives.begin();

@@ -1,6 +1,6 @@
 #include "ANFparser.h"
 
-
+#include <iostream>
 void ANFparser::parseGlobals(TiXmlElement * anfGlobals){
 	// Processing drawing block
 	TiXmlElement * anfDrawing = anfGlobals->FirstChildElement("drawing");
@@ -72,7 +72,7 @@ void ANFparser::parseGlobalsDrawing(TiXmlElement * anfDrawing){
 void ANFparser::parseGlobalsCulling(TiXmlElement * anfCulling){
 	std::string face = str(anfCulling->Attribute("face")),
 		order = str(anfCulling->Attribute("order"));
-	
+
 	//culling mode
 	if(face == "none"){
 		scene->setCullingFace(Scene::NONE);
@@ -90,16 +90,18 @@ void ANFparser::parseGlobalsCulling(TiXmlElement * anfCulling){
 
 	//drawing order
 	if(order == "ccw"){
+
 		scene->setDrawingOrder(Scene::CCW);
 	}else if(order == "cw"){
 		scene->setDrawingOrder(Scene::CW);
 	}else if(order == ""){
+
 		issue("Not defined value for drawing order.(default assumed)",WARNING);
 	}else{
+
 		issue("Bad value for drawing order.(default assumed)",WARNING);
+						std::cout << "asdajsdçld" << std::endl;
 	}
-
-
 
 }
 

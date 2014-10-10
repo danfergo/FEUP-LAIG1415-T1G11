@@ -59,7 +59,6 @@ void ANFparser::parseLight(TiXmlElement * anfLight){
 		//is goes wrong exception is thrown
 		parseComponent(anfLight,aa,dd,ss);
 
-
 		if(type=="spot"){ 
 
 			if(anfLight->QueryFloatAttribute("angle",&angle)!=TIXML_SUCCESS){

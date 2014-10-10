@@ -14,38 +14,38 @@
 
 int main(int argc, char* argv[]) {
 	CGFapplication app = CGFapplication();
-
+		Scene * scene ;			std::string filename;
 	try {
 		app.init(&argc, argv);
-
-		Scene * scene = new Scene();
-
-
-		std::string filename;
-		std::cout << "Insert the ANF filename: \n>";
-		std::cin >> filename;
-
-		std::cout << "---------------------------------------------------" << std::endl;
-		ANFparser parser = ANFparser(ANFparser::PERMISSIVE);
+		while(true){
+			scene = new Scene();
 
 
-		if(!parser.parse(scene,filename.c_str())){
-			std::cout << "Build scene FAILED." << std::endl;
+
+			std::cout << "Insert the ANF filename: \n>";
+			std::cin >> filename;
+
 			std::cout << "---------------------------------------------------" << std::endl;
-		}else{
+			ANFparser parser = ANFparser(ANFparser::PERMISSIVE);
 
-			std::cout << "Build scene DONE." << std::endl;
-			std::cout << "Running..." << std::endl;
-			std::cout << "---------------------------------------------------" << std::endl;	
-			app.setScene(scene);
-			app.setInterface(new Interface());
-			app.run();
+
+			if(!parser.parse(scene,filename.c_str())){
+				std::cout << "Build scene FAILED." << std::endl;
+				std::cout << "---------------------------------------------------" << std::endl;
+			}else{
+
+				std::cout << "Build scene DONE." << std::endl;
+				std::cout << "Running..." << std::endl;
+				std::cout << "---------------------------------------------------" << std::endl;	
+				app.setScene(scene);
+				app.setInterface(new Interface());
+				app.run();
+				app.getMainWindow();
+			}
+
+
+
 		}
-
-		std::cout << "Press any key to continue..." << std::endl;
-		std::cin >> filename;
-
-		
 		// Running CGF scene 
 		
 	}
@@ -58,5 +58,8 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 	
+				std::cout << "Press any key to continue..." << std::endl;
+			std::cin >> filename;
+
 	return 0;
 }

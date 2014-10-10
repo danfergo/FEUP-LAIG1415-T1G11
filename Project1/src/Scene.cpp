@@ -6,6 +6,8 @@
 #include <math.h>
 #include<iostream>
 
+#include "parser\ANFparser.h"
+
 //float pi = acos(-1.0);
 //float deg2rad=pi/180.0;
 
@@ -33,7 +35,7 @@ void Scene::init()
 	if(lightingEnabled) glEnable(GL_LIGHTING);
 
 	// Sets up some lighting parameters
-	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, doublesidedEnabled ? 1 : GL_FALSE);
+	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, (doublesidedEnabled ? GL_TRUE : GL_FALSE));
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);  // Define ambient light
 	glClearColor(backgroundColor[0],backgroundColor[1],backgroundColor[2],backgroundColor[3]);
 	glFrontFace((drawingOrder == CW)? GL_CW : GL_CCW);
@@ -46,7 +48,9 @@ void Scene::init()
 	// Defines a default normal
 //	glNormal3f(0,0,-1);
 
-	glEnable(GL_NORMALIZE);
+	setUpdatePeriod(750);
+
+	//glEnable(GL_NORMALIZE);
 }
 
 void Scene::display() 
@@ -60,6 +64,7 @@ void Scene::display()
 	// Initialize Model-View matrix as identity (no transformation
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
 	//glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, 1);
 	// Apply transformations corresponding to the camera position relative to the origin
 	CGFscene::activeCamera->applyView();
@@ -94,7 +99,7 @@ void Scene::display()
 
 
 void Scene::setRoot(Node * root){
-	delete(this->root);
+	delete this->root;
 	this->root = root;
 }
 
@@ -160,6 +165,16 @@ void Scene::setDoubleSidedEnabled(bool doublesidedEnabled){
 
 void Scene::setLocalIlluminationEnabled(bool localIlluminationEnabled){
 	this->localIlluminationEnabled = localIlluminationEnabled;
+}
+
+void Scene::update (unsigned long millis){
+	/* std::cout << " -------------- refreshing scene -------------- \n " ;
+	ANFparser x(ANFparser::PERMISSIVE);
+	
+	lights.clear();
+
+	x.parse(this,"scene.xml");	
+	init(); */
 }
 
 

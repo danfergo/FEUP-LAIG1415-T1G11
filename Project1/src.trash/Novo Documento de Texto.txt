@@ -1,0 +1,109 @@
+
+		<node id="lard_lad">
+			<transforms>
+				  <transform type="scale" factor="3 3 3" />
+			</transforms>
+			<appearanceref id="random_appearance" />
+			<descendants>
+				<noderef id="lard_lad_head"> </noderef>
+				<noderef id="lard_lad_torso"> </noderef>
+			</descendants>
+		</node>
+		<!--------------- torso ------------------->
+		
+				
+		<node id="lard_lad_torso">
+			<transforms>
+            </transforms>
+			<appearanceref id="blue"/>
+			<primitives>
+				<sphere radius="1.5" slices="50" stacks="50"/>
+			</primitives>
+			<descendants>
+			
+			</descendants>
+		</node>
+		
+		<!------------------------------- head ------------------->
+		<node id="lard_lad_head">
+			<transforms>
+				  <transform type="translate" to="0 2 0" />
+			</transforms>
+			<appearanceref id="random_appearance" />
+			<descendants>
+				<noderef id="lard_lad_head_mouth"> </noderef>
+				<noderef id="left_eye"> </noderef>
+				<noderef id="right_eye"> </noderef>
+				<noderef id="head_background"> </noderef>
+			</descendants> 
+		</node>
+		
+		<node id="head_background">
+			<transforms>
+				<transform type="rotate" axis="xx" angle="50" />
+				<transform type="scale" factor="1 1 0.8" />
+            </transforms>
+			<primitives> 
+				<sphere radius="1" slices="50" stacks="50" />
+			</primitives>
+		</node>
+		
+		
+		<node id="lard_lad_head_mouth">
+			<appearanceref id="random_appearance" />
+			<transforms>
+				<transform type="translate" to="0  -0.2 0.2" />              
+				<transform type="scale" factor="1 1 1.1" />
+				<transform type="rotate" axis="xx" angle="10" />
+				<transform type="scale" factor="0.9 0.55 0.9" /> 
+            </transforms>
+		    <primitives>
+				<sphere radius="1" slices="50" stacks="50" />
+			</primitives>
+			<descendants> </descendants>
+		</node>
+
+		
+		<node id="left_eye">
+			<transforms>
+				<transform type="translate" to="-0.15 0 0" />
+				<transform type="rotate" axis="yy" angle="-30" />
+            </transforms>
+			<descendants><noderef id="eye"> </noderef></descendants>
+		</node>
+		
+		<node id="right_eye">
+			<transforms>
+				<transform type="translate" to="0.15 0 0" />
+				<transform type="rotate" axis="yy" angle="30" />
+			</transforms>
+			<descendants><noderef id="eye"> </noderef></descendants>
+		</node>
+		
+		<node id="eye">
+		    <appearanceref id="white"> </appearanceref>
+			<transforms>
+				<transform type="translate" to="0 0.5 0.5" />              
+				<transform type="rotate" axis="xx" angle="-35"/> 
+				<transform type="scale" factor="1 1 0.5" />
+
+				</transforms>
+		    <primitives>
+					<sphere radius="0.4" slices="50" stacks="50" />
+			</primitives>
+			<descendants>
+				<noderef id="eye_background"/>
+			</descendants>
+		</node>
+		
+		<node id="eye_background">
+		    <appearanceref id="black"> </appearanceref>
+			<transforms>
+				<transform type="translate" to="0 -.05 0.2" />              
+
+				</transforms>
+		    <primitives>
+					<sphere radius="0.25" slices="50" stacks="50" />
+			</primitives>
+			<descendants> </descendants>
+		</node>
