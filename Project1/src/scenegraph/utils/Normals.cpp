@@ -60,3 +60,8 @@ void normals::normalizeVector(Vector3d & vector){
 	vector.y /= norm;
 	vector.z /= norm;
 }
+
+
+double normals::norm(const Vector3d & vector){
+	return sqrt(pow(vector.x,2) + pow(vector.y,2) + pow(vector.z,2));
+}

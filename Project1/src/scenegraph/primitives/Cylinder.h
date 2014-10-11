@@ -10,7 +10,7 @@ private:
 	float base, top, height;
 	unsigned slices, stacks;
 	GLUquadricObj * obj;
-	Point2d * vertexBase;
+	Point2d *vertexBase, *vertexTop;
 
 public:
 	Cylinder(float base, float top, float height, unsigned slices, unsigned stacks);

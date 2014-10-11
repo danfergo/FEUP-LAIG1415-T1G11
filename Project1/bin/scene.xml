@@ -1,32 +1,10 @@
-<!-- Os comentarios devem ter espacos no inicio e no fim, para   -->
-<!--    separar dos hifens                                       -->
-<!-- Nao devem ser usados caracteres especiais (p.ex. acentos)   -->
-<!-- Todas as tags e atributos sao obrigatorios, exceto onde for -->
-<!--    referido o contrario                                     -->
-<!-- Os identificadores "id" nao devem ser repetidos, pelo       -->
-<!--    menos em entidades do mesmo tipo                         -->
-
-
 <anf>
- 
-    <!-- bloco de configuracoes globais -->
-    <!-- a declaracao dos componentes deste bloco e' obrigatoria --> 
      <globals>
-        <!-- Parametros de desenho -->
-        <!-- Valores para mode: "fill" , "line", "point" -->
-        <!-- Valores para shading: "flat", "gouraud" ) --> 
           <drawing mode="fill" shading="flat" background="0 0 0 1" />
- 
-        <!-- Parametros de culling -->
-        <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
-        <!-- Valores para cullorder : "ccw" ou "cw" -->
-           <culling face="back" order="ccw" />
- 
-        <!-- Parametros de iluminacao; seguem os parametros do OpenGL  -->
-            <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
+          <culling face="back" order="ccw" />
+          <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
     </globals> 
     
-    <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial, que tem de existir -->
     <cameras initial="ss" >
         <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
 	
@@ -56,15 +34,23 @@
 
     <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
     <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
-    <textures>       
-           <texture id="random_texture" file="texture.jpg" texlength_s="1" texlength_t="2" />
+    <textures>
+      <texture id="ground" file="src/parking_lot_ground.jpg" texlength_s="80" texlength_t="40" />
+      <texture id="brick_wall" file="src/brick_wall.jpg" texlength_s="20" texlength_t="10" />
+
+      <texture id="police_logo" file="police_logo.jpg" texlength_s="0.8" texlength_t="1 " />
     </textures>
 
-    <!-- bloco de materiais; --> 
+
     <appearances>
-        <!-- deve existir um ou mais blocos "appearance" -->
-        <!-- IMPORTANTE: -->
-        <!--   textureref e opcional, a utilizar caso haja textura associada a esta aparencia -->
+
+      <appearance id="ground_appearance" shininess="1" textureref="ground" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+      
+      
       <appearance id="lightgray" shininess="1" textureref="" >
           <component type="ambient" value="0.5 0.5 0.5 0" />
           <component type="diffuse" value="0.9 0.9 0.9 0" />
@@ -89,7 +75,7 @@
                <component type="specular" value="1 1 0 0" />
         </appearance> 
 		
-		<appearance id="white" shininess="5" textureref="" >
+		<appearance id="white" shininess="5" textureref="police_logo" >
                <component type="ambient" value="0.5 0.5 0.5 0" />
                <component type="diffuse" value="1 1 1 0" />
                <component type="specular" value="1 1 1 0" />
@@ -101,17 +87,106 @@
                <component type="specular" value="0 0 1 0" />
         </appearance> 
 
-		<appearance id="black" shininess="1" textureref="" >
+      
+		  <appearance id="black" shininess="1" textureref="" >
                <component type="ambient" value="0.01 0.01 0.01 0" />
                <component type="diffuse" value="0.05 0.05 0.05 0" />
                <component type="specular" value="0.05 0.05 0.05 0" />
-        </appearance> 
+     </appearance> 
 		
+      <!-- donuts store -->
+
+      <appearance id="brick_wall" shininess="1" textureref="brick_wall" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+      
     </appearances>
 
     <!-- bloco do grafo; "rootid" identifica o no de raiz -->
-    <graph rootid="cop_car">
-		
+    <graph rootid="world">
+
+      <node id="world">
+
+        <descendants>
+          <noderef id="groundparkinglot"/>
+          <noderef id="cop_car" />
+          <noderef id="store" />
+        </descendants>
+      </node>
+
+      <!-- ::::::::::::::::::::::::::::::::::::: DONUTS STORE ::::::::::::::::::::::::::::::: -->
+
+      <node id="store">
+
+        <descendants>
+          <noderef id="front_wall" />
+          <noderef id="left_wall" />
+          <noderef id="right_wall" />
+          <noderef id="back_wall" />
+        </descendants>
+      </node>
+
+
+      <node id="back_wall">
+        <transforms>
+          <transform type="translate" to="26.3 0 6" />
+          <transform type="rotate" axis="yy" angle="180"/>
+        </transforms>
+        <descendants>
+          <noderef id="basic_wall"/>
+        </descendants>
+      </node>
+
+      <node id="right_wall">
+        <appearanceref id="brick_wall"/>
+        <transforms>
+          <transform type="translate" to="26.3 0 28" />
+          <transform type="rotate" axis="yy" angle="90"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 8 " xy2="22 10" />
+          <rectangle xy1="0 0 " xy2="22 3" />
+          <rectangle xy1="0 3 " xy2="0.5 8" />
+          <rectangle xy1="21.5 3 " xy2="22 8" />
+        </primitives>
+      </node>
+
+
+      <node id="left_wall">
+        <transforms>
+          <transform type="translate" to="4.3 0 6" />
+          <transform type="rotate" axis="yy" angle="-90"/>
+        </transforms>
+        <descendants>
+          <noderef id="basic_wall"/>
+        </descendants>
+      </node>
+      
+      <node id="front_wall">
+        <appearanceref id="brick_wall"/>
+        <transforms>
+          <transform type="translate" to="4.3 0 28" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0 " xy2="17 10" />
+          <rectangle xy1="17 8 " xy2="22 10" />
+          <rectangle xy1="21.5 0 " xy2="22 8" />
+        </primitives>
+      </node>
+      
+      
+      <node id="basic_wall">
+        <appearanceref id="brick_wall"/>
+        <primitives>
+          <rectangle xy1="0 0 " xy2="22 10" />
+        </primitives>
+      </node>
+      
+      
+      <!-- ::::::::::::::::::::::::::::::::::::: COP CAR ::::::::::::::::::::::::::::::::::::: -->
+      
 		<node id="cop_car">
 			<transforms>
 					<transform type="translate" to="5 0 5" />
@@ -208,7 +283,7 @@
       <node id="cop_car_wheel_tire" >
         <appearanceref id="darkgray"/>
         <primitives>
-          <torus slices="20" loops="20" outer="0.35" inner="0.1"/>
+          <torus slices="20" loops="20" outer="0.5" inner="0.3"/>
         </primitives>
       </node>
 
@@ -325,6 +400,21 @@
 				<rectangle xy1="0 0 0" xy2="0.8 0.8 0"/>
 			</primitives>
 		</node>
-		
+	
+                <!-- ENVIRONMENT -->
+
+      <node id="groundparkinglot">
+        <appearanceref id="ground_appearance" />
+        <transforms>
+          <transform type="translate" to="0 0 40"/>
+          <transform type="rotate" axis="xx" angle="-90"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="80 40"/>
+        </primitives>
+      </node>
+      
     </graph>
+  
+  
 </anf>

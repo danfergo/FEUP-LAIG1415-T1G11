@@ -7,13 +7,11 @@
 class Toro: public Primitive
 {
 private:
-	Point3d ** vertex;
-	Vector3d ** normal;
-	unsigned slices, loops;
-	float raioCentral, raioLateral;
+	int slices, loops;
+	float inner, outer;
 
 public:
-	Toro(float inner, float outer, unsigned slices, unsigned loops);
+	Toro(float inner, float outer, int slices, int loops);
 	void draw(Texture * texture) const;
 	~Toro(void);
 };

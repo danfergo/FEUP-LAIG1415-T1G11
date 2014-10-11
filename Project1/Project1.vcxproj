@@ -86,6 +86,7 @@
     <ClCompile Include="src\scenegraph\primitives\Sphere.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Toro.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Triangle.cpp" />
+    <ClCompile Include="src\scenegraph\Texture.cpp" />
     <ClCompile Include="src\scenegraph\utils\Normals.cpp" />
   </ItemGroup>
   <ItemGroup>

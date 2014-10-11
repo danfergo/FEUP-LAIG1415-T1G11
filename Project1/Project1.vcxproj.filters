@@ -50,6 +50,9 @@
     <ClCompile Include="src\scenegraph\primitives\Retangle.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenegraph\Texture.cpp">
+      <Filter>scenegraph</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h" />

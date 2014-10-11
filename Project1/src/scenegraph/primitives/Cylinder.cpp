@@ -13,7 +13,8 @@ Cylinder::Cylinder(float base, float top, float height, unsigned slices, unsigne
     obj = gluNewQuadric();
 	gluQuadricTexture(obj,1);
 	vertexBase = new Point2d[slices];
-	
+	vertexTop = new Point2d[slices];
+
 	float alphaMin = 2*PI/slices;
 
 	for(unsigned i=0; i<slices; i++){
@@ -22,7 +23,9 @@ Cylinder::Cylinder(float base, float top, float height, unsigned slices, unsigne
 		vertexBase[i].x = cos(alpha)*base; 
 		vertexBase[i].y = sin(alpha)*base;
 
-		
+		vertexBase[i].x = cos(alpha)*top; 
+		vertexBase[i].y = sin(alpha)*top;
+	
 		
 	}
 }
@@ -40,7 +43,7 @@ void Cylinder::draw(Texture * texture) const{
 	glNormal3d(0,0,1);
 	glBegin(GL_POLYGON);
 		for(unsigned i = 0; i < slices; i++){
-			glVertex3d(vertexBase[i].x,vertexBase[i].y,height);
+			glVertex3d(vertexTop[i].x,vertexTop[i].y,height);
 		}
 	glEnd();
 }

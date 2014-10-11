@@ -98,7 +98,7 @@ Texture * ANFparser::parseTexture(TiXmlElement * anfTexture){
 		return NULL;
 	}
 
-	float s,t;
+	float s = 1,t = 1;
 	if(anfTexture->QueryFloatAttribute("texlength_s",&s) != TIXML_SUCCESS){
 		issue("Bad value of texlength_s found! (texture will be ignored)",WARNING);
 		return NULL;
