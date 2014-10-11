@@ -19,7 +19,7 @@ void ANFparser::initPrimitiveParsers(){
 };
 
 
-CGFobject * ANFparser::parseTriangle(TiXmlElement * anfTriangle){
+Primitive * ANFparser::parseTriangle(TiXmlElement * anfTriangle){
 	const char *valString;
 
 	Point3d data[3] = {{0,0,0},{0,0,0},{0,0,0}};
@@ -37,7 +37,7 @@ CGFobject * ANFparser::parseTriangle(TiXmlElement * anfTriangle){
 	return new Triangle(data);
 }
 
-CGFobject * ANFparser::parseRetangle(TiXmlElement * anfRetangle){
+Primitive * ANFparser::parseRetangle(TiXmlElement * anfRetangle){
 	const char *valString;
 
 	Point2d data[2] = {{0,0},{0,0}};
@@ -55,7 +55,7 @@ CGFobject * ANFparser::parseRetangle(TiXmlElement * anfRetangle){
 	return new Retangle(data);
 }
 
-CGFobject * ANFparser::parseCylinder(TiXmlElement * anfCylinder){
+Primitive * ANFparser::parseCylinder(TiXmlElement * anfCylinder){
 	float base, top, height;
 	int stacks, slices;
 
@@ -78,7 +78,7 @@ CGFobject * ANFparser::parseCylinder(TiXmlElement * anfCylinder){
 	return new Cylinder(base, top, height, stacks, slices);
 }
 
-CGFobject * ANFparser::parseSphere(TiXmlElement * anfSphere){
+Primitive * ANFparser::parseSphere(TiXmlElement * anfSphere){
 	float radius;
 	int stacks, slices;
 
@@ -95,7 +95,7 @@ CGFobject * ANFparser::parseSphere(TiXmlElement * anfSphere){
 	return new Sphere(radius, stacks, slices);
 }
 
-CGFobject * ANFparser::parseToro(TiXmlElement * anfToro){
+Primitive * ANFparser::parseToro(TiXmlElement * anfToro){
 	float inner, outer;
 	int slices, loops;
 

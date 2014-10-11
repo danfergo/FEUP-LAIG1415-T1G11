@@ -25,9 +25,6 @@
     <ClCompile Include="src\parser\ANFparserLights.cpp">
       <Filter>parser</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenegraph\Texture.cpp">
-      <Filter>scenegraph</Filter>
-    </ClCompile>
     <ClCompile Include="src\parser\ANFparserCameras.cpp">
       <Filter>parser</Filter>
     </ClCompile>
@@ -64,9 +61,6 @@
     </ClInclude>
     <ClInclude Include="src\Light.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="src\scenegraph\Texture.h">
-      <Filter>scenegraph</Filter>
-    </ClInclude>
     <ClInclude Include="src\scenegraph\Camera.h">
       <Filter>scenegraph</Filter>
     </ClInclude>
@@ -91,6 +85,15 @@
     </ClInclude>
     <ClInclude Include="src\scenegraph\primitives\Retangle.h">
       <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Texture.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Primitive.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Appearance.h">
+      <Filter>scenegraph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

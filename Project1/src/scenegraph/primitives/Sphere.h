@@ -1,13 +1,13 @@
 #ifndef MYSEMISPHERE_X
 #define MYSEMISPHERE_X
 
-#include "CGFobject.h"
+#include "../Primitive.h"
 #include "CGFappearance.h"
 #include "CGFlight.h"
 #include "../utils/Point.h"
 
 
-class Sphere: public CGFobject{
+class Sphere: public Primitive{
 	private:
 		float radius;
 		int stacks, slices;
@@ -15,7 +15,7 @@ class Sphere: public CGFobject{
 		
 	public:
 		Sphere(float radius, int stacks, int slices);
-		void draw();
+		void draw(Texture * texture) const;
 		~Sphere();
 };
 

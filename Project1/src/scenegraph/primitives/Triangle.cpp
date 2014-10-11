@@ -15,7 +15,7 @@ Triangle::~Triangle(void)
 	
 }
 
-void Triangle::draw(){
+void Triangle::draw(Texture * texture) const{
 	
 	glNormal3f(normal.x,normal.y,normal.z);
 	glBegin(GL_TRIANGLES);

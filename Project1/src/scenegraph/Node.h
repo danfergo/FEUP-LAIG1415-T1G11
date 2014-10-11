@@ -1,24 +1,24 @@
 #ifndef NODE_F_H_
 #define NODE_F_H_
 
-#include "CGFobject.h"
-#include "CGFappearance.h"
+#include "Primitive.h"
+#include "Appearance.h"
 #include <vector>
 
 class Node
 {
 private:
 	std::vector<Node *> descendants;
-	std::vector<CGFobject *> primitives;
+	std::vector<Primitive *> primitives;
 	float transforms[16];
-	CGFappearance * appearance;
+	Appearance * appearance;
 public:
 	Node();
 	~Node();
-	void processNode(CGFappearance * parentAppearance);
-	void addPrimitive(CGFobject * primitive);
+	void processNode(Appearance * parentAppearance);
+	void addPrimitive(Primitive * primitive);
 	void Node::addDescendants(Node * descendant);
-	void setAppearance(CGFappearance * appearance);
+	void setAppearance(Appearance * appearance);
 	bool hasAppearance() const;
 
 	bool addRotation(std::string axis, float angle);

@@ -3,7 +3,7 @@
 
 static float const PI = acos(-1.0);
 
-Cylinder::Cylinder(float base, float top, float height, int slices, int stacks)
+Cylinder::Cylinder(float base, float top, float height, unsigned slices, unsigned stacks)
 {
 	this->base = base;
 	this->top = top;
@@ -27,7 +27,7 @@ Cylinder::Cylinder(float base, float top, float height, int slices, int stacks)
 	}
 }
 
-void Cylinder::draw(){
+void Cylinder::draw(Texture * texture) const{
     gluCylinder(obj, base, top, height, slices, stacks);
 	
 	glNormal3d(0,0,-1);

@@ -8,8 +8,14 @@ class Texture: public CGFtexture
 private:
 	float s, t;
 public:
-	Texture(std::string file, float s, float t);
-	~Texture(void);
+	Texture(std::string file, float s, float t):CGFtexture(file), s(s),t(t){};
+	float getS() const{
+		return s;
+	};
+	float getT() const{
+		return t;
+	};
+	~Texture(void){};
 };
 
 #endif

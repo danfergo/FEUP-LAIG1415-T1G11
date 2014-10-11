@@ -8,8 +8,8 @@
 #include "../Light.h"
 #include "../scenegraph/Texture.h"
 #include "tinyxml.h"
-#include "CGFobject.h"
-#include "CGFappearance.h"
+#include "../scenegraph/Primitive.h"
+#include "../scenegraph/Appearance.h"
 #include <vector>
 #include <string>
 
@@ -21,7 +21,7 @@ private:
 	};
 
 	typedef struct AppearanceWrapper{
-		CGFappearance * appearance;
+		Appearance * appearance;
 		bool used;
 	} AppearanceWrapper;
 
@@ -37,24 +37,24 @@ private:
 	} NodeWrapper;
 	
 	char parseMode;
-	typedef CGFobject* (ANFparser::*PrimitiveParser)(TiXmlElement *);
+	typedef Primitive* (ANFparser::*PrimitiveParser)(TiXmlElement *);
 	std::map<std::string,PrimitiveParser> subParsers;
-	CGFobject * parseTriangle(TiXmlElement * anfTriangle);
-	CGFobject * parseSphere(TiXmlElement * anfSphere);
-	CGFobject * parseToro(TiXmlElement * anfToro);
-	CGFobject * parseCylinder(TiXmlElement * anfCylinder);
-	CGFobject * parseRetangle(TiXmlElement * anfRetangle);
+	Primitive * parseTriangle(TiXmlElement * anfTriangle);
+	Primitive * parseSphere(TiXmlElement * anfSphere);
+	Primitive * parseToro(TiXmlElement * anfToro);
+	Primitive * parseCylinder(TiXmlElement * anfCylinder);
+	Primitive * parseRetangle(TiXmlElement * anfRetangle);
 	void initPrimitiveParsers();
 
 	//Graph
-	NodeWrapper parseNode(TiXmlElement * anfNode,std::map<std::string, CGFappearance *> & appearances);
-	Node * parseGraph(TiXmlElement * anfGraph,std::map<std::string, CGFappearance *> & appearances);
+	NodeWrapper parseNode(TiXmlElement * anfNode,std::map<std::string, Appearance *> & appearances);
+	Node * parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances);
 	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
 	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
 
 	//Appearances
-	CGFappearance * parseAppearance(TiXmlElement * anfAppearance,std::map<std::string, Texture *> & textures);
-	void parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances,
+	Appearance * parseAppearance(TiXmlElement * anfAppearance,std::map<std::string, Texture *> & textures);
+	void parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, Appearance *> & appearances,
 		std::map<std::string, Texture *> & textures);
 	void parseComponent(TiXmlElement * anfParent, float aa[4], float dd[4], float ss[4]);
 

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <queue>
 
-Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, CGFappearance *> & appearances){
+Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances){
 	// init some local variables
 	map<std::string, NodeWrapper> nodeWrappers;
 	NodeWrapper nodeWrapper;
@@ -94,7 +94,7 @@ bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::No
 	return true;
 }
 
-ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std::string, CGFappearance *> & appearances){
+ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std::string, Appearance *> & appearances){
 	// init the return var
 	NodeWrapper ret = {new Node(), std::vector<std::string>(), 0}; 
 
@@ -113,7 +113,7 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 		if (primitives == NULL){
 			issue("Primitives block not found!",WARNING); 
 		}else{
-			CGFobject * primitive;
+			Primitive * primitive;
 			TiXmlElement * pr = primitives->FirstChildElement();
 			while(pr){
 				try{

@@ -11,7 +11,7 @@ Toro::Toro(float inner, float outer, int slices, int loops){
 	this->loops = loops;
 }
 
-void Toro::draw(){
+void Toro::draw(Texture * texture) const{
 	glutSolidTorus(inner, outer, slices, loops);
 }
 

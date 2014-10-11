@@ -61,7 +61,7 @@ bool ANFparser::parse(Scene * scene,const char* filename){
 
 		//If appearances block exist, we call its parser
 		TiXmlElement* anfAppearances = anfRoot->FirstChildElement("appearances");
-		map<std::string,CGFappearance *> appearances;
+		map<std::string,Appearance *> appearances;
 		if(!anfAppearances){
 			issue("Block 'appearances' not found!",WARNING);
 		}else{

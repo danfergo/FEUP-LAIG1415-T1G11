@@ -1,20 +1,20 @@
 #ifndef CYLINDER_F_H
 #define CYLINDER_F_H
 
-#include "CGFobject.h"
+#include "../Primitive.h"
 #include "../utils/Point.h"
 
-class Cylinder: public CGFobject{
+class Cylinder: public Primitive{
 
 private:
 	float base, top, height;
-	int slices, stacks;
+	unsigned slices, stacks;
 	GLUquadricObj * obj;
 	Point2d * vertexBase;
 
 public:
-	Cylinder(float base, float top, float height, int slices, int stacks);
-	void draw();
+	Cylinder(float base, float top, float height, unsigned slices, unsigned stacks);
+	void draw(Texture * texture) const;
 	~Cylinder();
 
 };

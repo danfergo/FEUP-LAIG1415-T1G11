@@ -1,10 +1,10 @@
 #ifndef RETANGLE_F_H
 #define RETANGLE_F_H
 
-#include "CGFobject.h"
+#include "../Primitive.h"
 #include "../utils/Point.h"
 
-class Retangle: public CGFobject
+class Retangle: public Primitive
 {
 private:
 	Point2d vertex[2];
@@ -12,7 +12,7 @@ private:
 
 public:
 	Retangle(Point2d vertex[2]);
-	void draw();
+	void draw(Texture * texture) const;
 	~Retangle(void);
 };
 

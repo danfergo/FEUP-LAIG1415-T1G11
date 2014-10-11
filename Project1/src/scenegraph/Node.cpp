@@ -28,7 +28,7 @@ Node::~Node()
 
 }
 
-void Node::addPrimitive(CGFobject * primitive){
+void Node::addPrimitive(Primitive * primitive){
 	this->primitives.push_back(primitive);
 }
 
@@ -36,19 +36,19 @@ void Node::addDescendants(Node * descendant){
 	this->descendants.push_back(descendant);
 }
 
-void Node::processNode(CGFappearance * parentAppearance){
+void Node::processNode(Appearance * parentAppearance){
 	glPushMatrix();
 		// ok lets apply this node transformations
 		glMultMatrixf(transforms);
 		
 		// before draw anything lets apply 
-		CGFappearance * currentAppearance = this->appearance?this->appearance: parentAppearance;
+		Appearance * currentAppearance = this->appearance?this->appearance: parentAppearance;
 		if(currentAppearance != NULL)currentAppearance->apply();
 
 		// we are going to draw this node's primitives
-		for(std::vector<CGFobject *>::iterator it = primitives.begin();
+		for(std::vector<Primitive *>::iterator it = primitives.begin();
 			it != primitives.end(); it++){
-				(*it)->draw();
+				(*it)->draw(currentAppearance->getTexture());
 		}
 
 		//now we process this node's descendants
@@ -104,7 +104,7 @@ bool Node::addRotation(std::string axis, float angle){
 }
 
 
-void Node::setAppearance(CGFappearance * appearance){
+void Node::setAppearance(Appearance * appearance){
 	delete(this->appearance);
 	this->appearance = appearance;
 }

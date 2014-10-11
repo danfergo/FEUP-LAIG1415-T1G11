@@ -9,9 +9,9 @@ Sphere::Sphere(float radius, int stacks, int slices){
 	gluQuadricTexture(obj,1);
 }
 
-void Sphere::draw(){
+void Sphere::draw(Texture * texture) const{
 	gluSphere(obj, radius, stacks, slices);
 } 
 
-Sphere::~Sphere(){
+Sphere::~Sphere() {
 }

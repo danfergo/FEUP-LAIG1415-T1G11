@@ -1,10 +1,10 @@
 #ifndef TORO_F_H
 #define TORO_F_H
 
-#include "CGFobject.h"
+#include "../Primitive.h"
 #include "../utils/Point.h"
 
-class Toro: public CGFobject
+class Toro: public Primitive
 {
 private:
 	int slices, loops;
@@ -12,7 +12,7 @@ private:
 
 public:
 	Toro(float inner, float outer, int slices, int loops);
-	void draw();
+	void draw(Texture * texture) const;
 	~Toro(void);
 };
 

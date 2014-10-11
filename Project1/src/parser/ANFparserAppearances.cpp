@@ -1,18 +1,18 @@
 #include "ANFparser.h"
 #include <iostream>
 
-void ANFparser::parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, CGFappearance *> & appearances,
+void ANFparser::parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, Appearance *> & appearances,
 	std::map<std::string, Texture *> & textures){
 
 	TiXmlElement * anfAppearance = anfAppearances->FirstChildElement("appearance");
-	CGFappearance  * appearance;
+	Appearance  * appearance;
 	std::string appeId;
 	while(anfAppearance){
 		appeId = str(anfAppearance->Attribute("id"));
 		if(appeId != ""){
 			
 			if((appearance=parseAppearance(anfAppearance,textures))){
-				appearances.insert(std::pair<std::string,CGFappearance *>(appeId,appearance));
+				appearances.insert(std::pair<std::string,Appearance *>(appeId,appearance));
 			}
 
 		}else{
@@ -24,7 +24,7 @@ void ANFparser::parseAppearances(TiXmlElement * anfAppearances, std::map<std::st
 
 
 
-CGFappearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance,std::map<std::string, Texture *> & textures){
+Appearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance,std::map<std::string, Texture *> & textures){
 	float aa[4],dd[4],ss[4],shininess;
 	parseComponent(anfAppearance,aa,dd,ss);
 	
@@ -43,7 +43,7 @@ CGFappearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance,std::map
 
 	}
 
-	CGFappearance * appearance = new CGFappearance(aa,dd,ss,shininess);
+	Appearance * appearance = new Appearance(aa,dd,ss,shininess);
 	appearance->setTexture(texture);
 	return appearance;
 }
