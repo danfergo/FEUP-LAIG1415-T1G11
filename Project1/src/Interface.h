@@ -4,8 +4,6 @@
 
 class Interface: public CGFinterface
 {
-private:
-	int activeCamera;
 public:
 	Interface(void);
 	~Interface(void);

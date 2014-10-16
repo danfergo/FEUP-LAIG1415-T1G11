@@ -39,12 +39,11 @@ void Scene::init()
 	// Defines a default normal
 	// glNormal3f(0,0,-1);
 
+	Camera * aCam = cameraActive;
 	std::vector<Camera *> systemCameras;
 	systemCameras.push_back(new Camera("Debugging camera"));
-	systemCameras.push_back(new CameraOrtho("zzz",-50,50,-50,50,-20,20,CameraOrtho::ZZ));
 	cameras.insert(cameras.begin(),systemCameras.begin(),systemCameras.end());
-
-	activeCamera = cameras.at(0);
+	setActiveCamera(aCam);
 
 	setUpdatePeriod(750);
 
@@ -68,7 +67,7 @@ void Scene::display()
 	glLoadIdentity();
 
 	//set camera
-	activeCamera->applyView();
+	cameraActive->applyView();
 
 	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
 		if(localIlluminationEnabled && lightingEnabled) (*it)->draw(); else (*it)->disable();
@@ -183,26 +182,22 @@ void Scene::addCamera(Camera * camera){
 }
 
 void Scene::setActiveCamera(int cameraPosition){
-	activeCamera = cameras.at(cameraPosition);	
+	cameraActive = cameras.at(cameraPosition);	
+	activeCameraPosition = cameraPosition;
 	CGFapplication::activeApp->forceRefresh();
 }
 
 void Scene::setActiveCamera(Camera * camera){
-	activeCamera = cameras.back();
-	CGFapplication::activeApp->forceRefresh();
-}
-
-
-unsigned Scene::getActiveCameraPosition(){
+	
 	std::vector <Camera *>::iterator it; unsigned i = 0;
-	for(it=cameras.begin(); it != cameras.end();it++){
-		if(*it == cameraActive){
-			return i;
+	for(it=cameras.begin(); it != cameras.end();it++, i++){
+		if(*it == camera){
+			setActiveCamera(i);
+			break;
 		}
-		i++;
 	}
-	return -1;
 }
+
 
 std::vector<Camera *> Scene::getCameras(){
 	return cameras;

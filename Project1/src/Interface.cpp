@@ -17,12 +17,12 @@ Interface::~Interface(void)
 
 void Interface::initGUI()
 {
-	activeCamera = ((Scene *)this->scene)->getActiveCameraPosition();
+
 	std::vector<Light *> lights = ((Scene *)this->scene)->getLights();
 
 
 	int i = 0;
-	GLUI_Panel * panelLights = addPanel("Luzes: ", 1);
+	GLUI_Panel * panelLights = addPanel("Lights: ", 1);
 	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end() ;it++){
 		(*it)->isEnabled();
 		addCheckboxToPanel (panelLights,(char *)((*it)->getIdTitle()).c_str(),(int *)&((*it)->getEnableValue()), i);
@@ -31,10 +31,13 @@ void Interface::initGUI()
 	
 	addColumn();
 
+	int & activeCameraPosition = ((Scene *)this->scene)->activeCameraPosition;
+	std::cout << "active xx camera:"<< ((Scene *)this->scene)->activeCameraPosition;
+
 
 	// Jump the first camera..
 	GLUI_Panel * cameraPanel = addPanel("Cameras: ", 1);
-	GLUI_RadioGroup * rgCameras = addRadioGroupToPanel(cameraPanel,&activeCamera, 123);
+	GLUI_RadioGroup * rgCameras = addRadioGroupToPanel(cameraPanel,&((Scene *)this->scene)->activeCameraPosition, 123);
 	i = 20;
 	
 	std::vector<Camera *> cameras = ((Scene *)this->scene)->getCameras();
@@ -99,7 +102,7 @@ void Interface::initGUI()
 void Interface::processGUI(GLUI_Control *ctrl)
 { 
 	if(ctrl->get_id() == 123){
-		((Scene *)this->scene)->setActiveCamera(activeCamera);	
+		((Scene *)this->scene)->setActiveCamera(((Scene *)this->scene)->activeCameraPosition);	
 	}
 
 }

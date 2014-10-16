@@ -13,11 +13,15 @@ private:
 	std::vector<Light*> lights;
 	std::vector<Camera*> cameras;
 	Camera * cameraActive;
+	
 public:
+	int activeCameraPosition;
 	static enum ShaddingMode{FLAT,GOURAUD};
 	static enum DrawingMode{FILL,LINE,POINT};
 	static enum CullingFace{NONE,BACK,FRONT,BOTH};
 	static enum DrawingOrder{CCW,CW};
+
+
 
 	ShaddingMode shaddingMode;
 	DrawingMode drawingMode;  // applyed 
@@ -43,7 +47,6 @@ public:
 	void addCamera(Camera * camera);
 	void setActiveCamera(Camera * camera);
 	void setActiveCamera(int cameraPosition);
-	unsigned getActiveCameraPosition();
 
 	void setShaddingMode(ShaddingMode shaddingMode);
 	void setDrawingMode(DrawingMode drawingMode);

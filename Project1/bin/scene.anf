@@ -5,7 +5,7 @@
           <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
     </globals> 
     
-    <cameras initial="Side projection" >
+    <cameras initial="Prespective camera" >
         <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
 	
            <perspective id="Prespective camera" near="0.1" far="555" angle="70" pos="50 50 50" target="0 0 0" /> 

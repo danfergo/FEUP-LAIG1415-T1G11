@@ -1,7 +1,5 @@
 #include "ANFparser.h"
 
-#include <iostream>
-
 void ANFparser::parseCameras(TiXmlElement *anfCameras,std::string initialCamera){
 	std::map<std::string,Camera *> tempCameras; 	
 	TiXmlElement * anfCamera = anfCameras->FirstChildElement();
@@ -32,12 +30,11 @@ void ANFparser::parseCameras(TiXmlElement *anfCameras,std::string initialCamera)
 		if(camera){
 			tempCameras.insert(std::pair<std::string,Camera *>(cameraId,camera));	
 		}
-
+		 
 		anfCamera = anfCamera->NextSiblingElement();
 	}
 
 	std::map<std::string,Camera *>::iterator it,it2;
-	std::cout << tempCameras.size();
 	if((it = tempCameras.find(initialCamera)) == tempCameras.end()){
 			issue("Initial camera '"+initialCamera +"' not found! (ignored)",ERROR);
 	}else{
