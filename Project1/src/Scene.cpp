@@ -39,7 +39,7 @@ void Scene::init()
 	// Defines a default normal
 	// glNormal3f(0,0,-1);
 
-	Camera * aCam = cameraActive;
+	Camera * aCam = (Camera *)activeCamera;
 	std::vector<Camera *> systemCameras;
 	systemCameras.push_back(new Camera("Debugging camera"));
 	cameras.insert(cameras.begin(),systemCameras.begin(),systemCameras.end());
@@ -67,7 +67,7 @@ void Scene::display()
 	glLoadIdentity();
 
 	//set camera
-	cameraActive->applyView();
+	activeCamera->applyView();
 
 	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
 		if(localIlluminationEnabled && lightingEnabled) (*it)->draw(); else (*it)->disable();
@@ -182,7 +182,7 @@ void Scene::addCamera(Camera * camera){
 }
 
 void Scene::setActiveCamera(int cameraPosition){
-	cameraActive = cameras.at(cameraPosition);	
+	activeCamera = cameras.at(cameraPosition);	
 	activeCameraPosition = cameraPosition;
 	CGFapplication::activeApp->forceRefresh();
 }

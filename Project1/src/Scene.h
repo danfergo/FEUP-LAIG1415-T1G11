@@ -12,7 +12,6 @@ private:
 	Node * root;
 	std::vector<Light*> lights;
 	std::vector<Camera*> cameras;
-	Camera * cameraActive;
 	
 public:
 	int activeCameraPosition;
