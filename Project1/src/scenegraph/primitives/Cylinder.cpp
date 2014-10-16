@@ -18,13 +18,13 @@ Cylinder::Cylinder(float base, float top, float height, unsigned slices, unsigne
 	float alphaMin = 2*PI/slices;
 
 	for(unsigned i=0; i<slices; i++){
-		float alpha=alphaMin*i + PI/slices;
+		float alpha=alphaMin*i;
 
-		vertexBase[i].x = cos(alpha)*base; 
-		vertexBase[i].y = sin(alpha)*base;
+		vertexBase[i].x = sin(alpha)*base;
+		vertexBase[i].y = cos(alpha)*base; 
 
-		vertexTop[i].x = cos(alpha)*top; 
-		vertexTop[i].y = sin(alpha)*top;
+		vertexTop[i].x = sin(alpha)*top;
+		vertexTop[i].y = cos(alpha)*top;
 	
 		
 	}
@@ -35,15 +35,15 @@ void Cylinder::draw(Texture * texture) const{
 	
 	glNormal3d(0,0,-1);
 	glBegin(GL_POLYGON);
-		for(unsigned i = slices; i > 0; i--){
-			glVertex3d(vertexBase[i-1].x,vertexBase[i-1].y,0);
+		for(unsigned i = 0; i < slices; i++){
+			glVertex3d(vertexBase[i].x,vertexBase[i].y,0);
 		}
 	glEnd();
 
 	glNormal3d(0,0,1);
 	glBegin(GL_POLYGON);
-		for(unsigned i = 0; i < slices; i++){
-			glVertex3d(vertexTop[i].x,vertexTop[i].y,height);
+				for(unsigned i = slices; i > 0; i--){
+			glVertex3d(vertexTop[i-1].x,vertexTop[i-1].y,height);
 		}
 	glEnd();
 }

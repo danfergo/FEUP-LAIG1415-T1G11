@@ -20,8 +20,6 @@ public:
 	static enum CullingFace{NONE,BACK,FRONT,BOTH};
 	static enum DrawingOrder{CCW,CW};
 
-
-
 	ShaddingMode shaddingMode;
 	DrawingMode drawingMode;  // applyed 
 	CullingFace cullingFace;  // applyed

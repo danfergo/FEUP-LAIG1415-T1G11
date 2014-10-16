@@ -21,13 +21,20 @@
               <component type="diffuse" value="1 1 1 1" />
               <component type="specular" value="0 0 0 0" />
             </light>
-      
-            <light id="ss" type="spot" enabled="true" marker="true" pos="5 1 5" target="7 0 7"
+
+      <light id="Ommnnnn2.0" type="omni" enabled="false" marker="true" pos="25 25 25" >
+        <component type="ambient" value="0.1 0.1 0.1 0" />
+        <component type="diffuse" value="1 1 1 1" />
+        <component type="specular" value="0 0 0 0" />
+      </light>
+
+      <light id="ss" type="spot" enabled="true" marker="true" pos="5 1 5" target="7 0 7"
                 angle="10" exponent="9" >
               <component type="ambient" value="0.01 0.01 0.01 0.01" />
               <component type="diffuse" value="0.9 0.9 0.9 0.9" />
               <component type="specular" value="0.9 0.9 0.9 0.9" />
             </light> 
+      
     </lights>
 
     <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
@@ -127,9 +134,23 @@
           <noderef id="cop_car1" />
           <noderef id="cop_car2" />
           <noderef id="store" />
+          <noderef id="magic_donut" />
         </descendants>
       </node>
 
+      <node id="magic_donut" >
+        <appearanceref id="white"/>
+        <transforms>
+          <transform type="translate" to="15 15 15" />
+        </transforms>
+        <primitives>
+          <torus slices="20" loops="20" outer="1" inner="2"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      
+      
       <node id="cop_car1">
         <primitives></primitives>
         <appearanceref id="inherit"/>
@@ -896,7 +917,7 @@
           <transform type="rotate" axis="yy" angle="90"></transform>
         </transforms>
         <primitives>
-          <cylinder base="0.2" top="0.2" height="0.05" slices="20" stacks="20" />
+          <cylinder base="0.2" top="0.2" height="0.05" slices="7" stacks="7" />
         </primitives>
         <descendants></descendants>
       </node>

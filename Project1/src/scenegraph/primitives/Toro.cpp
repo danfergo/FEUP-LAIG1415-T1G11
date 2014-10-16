@@ -28,23 +28,10 @@ Toro::Toro(float inner, float outer, unsigned slices, unsigned loops): slices(sl
 			vertex[i][j].x = fator*cos(beta);
 			vertex[i][j].y = fator*sin(beta);
 			vertex[i][j].z = raioLateral*sin(alpha);
-		}
-	}
 
-	Point3d triangle[3];
-	char arrayfull = 0;
-	for(unsigned i=0; i<=slices; i++){
-		for(unsigned j=0, pos=0; j<=loops; j++, pos=(pos+1)%3){
-			triangle[pos]=vertex[i][j];
-			if(arrayfull>2){
-				normals::calculateSurfaceNormalTriangle(triangle,normal[i][j]);
-			}
-			else {
-				normal[i][j].x=0;
-				normal[i][j].y=0;
-				normal[i][j].z=0;
-				arrayfull++;
-			}
+			normal[i][j].x = fator*cos(beta) - raioCentral*cos(beta);
+			normal[i][j].y = fator*sin(beta) - raioCentral*sin(beta);
+			normal[i][j].z = raioLateral*sin(alpha);
 		}
 	}
 
@@ -54,19 +41,19 @@ void Toro::draw(Texture * texture) const{
 
 	glPushMatrix();
 
-	for(unsigned i=0; i<slices; i++){
-		glPushMatrix();
-		glBegin(GL_TRIANGLE_STRIP);
-		for(unsigned j=0; j<=loops; j++){
-			glNormal3d(normal[i+1][j].x,normal[i+1][j].y,normal[i+1][j].z);
-			glVertex3f(vertex[i+1][j].x,vertex[i+1][j].y,vertex[i+1][j].z);
+		for(unsigned i=0; i<slices; i++){
+			glPushMatrix();
+			glBegin(GL_TRIANGLE_STRIP);
+			for(unsigned j=0; j<=loops; j++){
+				glNormal3d(normal[i+1][j].x,normal[i+1][j].y,normal[i+1][j].z);
+				glVertex3f(vertex[i+1][j].x,vertex[i+1][j].y,vertex[i+1][j].z);
 			
-			glNormal3d(normal[i][j].x,normal[i][j].y,normal[i][j].z);
-			glVertex3f(vertex[i][j].x,vertex[i][j].y,vertex[i][j].z);
+				glNormal3d(normal[i][j].x,normal[i][j].y,normal[i][j].z);
+				glVertex3f(vertex[i][j].x,vertex[i][j].y,vertex[i][j].z);
+			}
+			glEnd();
+			glPopMatrix();
 		}
-		glEnd();
-		glPopMatrix();
-	}
 
 	glPopMatrix();
 }
