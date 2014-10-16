@@ -1,0 +1,1082 @@
+<anf>
+     <globals>
+          <drawing mode="fill" shading="flat" background="0 0 0 1" />
+          <culling face="back" order="ccw" />
+          <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
+    </globals> 
+    
+    <cameras initial="Side projection" >
+        <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
+	
+           <perspective id="Prespective camera" near="0.1" far="555" angle="70" pos="50 50 50" target="0 0 0" /> 
+          <ortho id="Side projection" direction="xx" near="-50" far="50" left="-50" right="0" top="50" bottom="-50" />
+           
+    </cameras>
+
+    <!-- bloco de luzes -->
+    <lights>
+            <!-- Deve existir pelo menos uma luz declarada -->
+            <light id="Ommnnnn" type="omni" enabled="true" marker="true" pos="5 5 5" >
+              <component type="ambient" value="0.1 0.1 0.1 0" />
+              <component type="diffuse" value="1 1 1 1" />
+              <component type="specular" value="0 0 0 0" />
+            </light>
+      
+            <light id="ss" type="spot" enabled="true" marker="true" pos="5 1 5" target="7 0 7"
+                angle="10" exponent="9" >
+              <component type="ambient" value="0.01 0.01 0.01 0.01" />
+              <component type="diffuse" value="0.9 0.9 0.9 0.9" />
+              <component type="specular" value="0.9 0.9 0.9 0.9" />
+            </light> 
+    </lights>
+
+    <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
+    <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
+    <textures>
+      <texture id="ground" file="src/parking_lot_ground.jpg" texlength_s="80" texlength_t="40" />
+      <texture id="brick_wall" file="src/brick_wall.jpg" texlength_s="7" texlength_t="3.5" />
+      <texture id="police_logo" file="src/police_logo.jpg" texlength_s="0.8" texlength_t="1 " />
+      <texture id="gravel_text" file="src/gravel.jpg" texlength_s="0.1" texlength_t="0.1" />
+    </textures>
+
+
+    <appearances>
+
+      <appearance id="ground_appearance" shininess="1" textureref="ground" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+      
+      
+      <appearance id="lightgray" shininess="1" textureref="" >
+          <component type="ambient" value="0.5 0.5 0.5 0" />
+          <component type="diffuse" value="0.9 0.9 0.9 0" />
+          <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+
+      <appearance id="darkgray" shininess="2" textureref="" >
+        <component type="ambient" value="0.05 0.05 0.05 0" />
+        <component type="diffuse" value="0.2 0.2 0.2 0" />
+        <component type="specular" value="0.2 0.2 0.2 0" />
+      </appearance>      
+      
+      <appearance id="redishorange" shininess="4" textureref="" >
+                <component type="ambient" value="0.5 0.1 0 0" />
+                <component type="diffuse" value="1 0.2 0 0" />
+                <component type="specular" value="1 0.2  0 0" />
+      </appearance>
+      
+      <appearance id="yellow" shininess="3" textureref="" >
+               <component type="ambient" value="0.5 0.5 0 0" />
+               <component type="diffuse" value="1 1 0 0" />
+               <component type="specular" value="1 1 0 0" />
+        </appearance> 
+		
+		<appearance id="white" shininess="5" textureref="" >
+               <component type="ambient" value="0.5 0.5 0.5 0" />
+               <component type="diffuse" value="1 1 1 0" />
+               <component type="specular" value="1 1 1 0" />
+        </appearance> 
+		
+		<appearance id="blue" shininess="6" textureref="" >
+               <component type="ambient" value="0 0 0.5 0" />
+               <component type="diffuse" value="0 0 1 0" />
+               <component type="specular" value="0 0 1 0" />
+        </appearance> 
+
+      
+		  <appearance id="black" shininess="1" textureref="" >
+               <component type="ambient" value="0.01 0.01 0.01 0" />
+               <component type="diffuse" value="0.05 0.05 0.05 0" />
+               <component type="specular" value="0.05 0.05 0.05 0" />
+     </appearance> 
+		
+      <!-- gravel -->
+      <appearance id="gravel_appearance" shininess="1" textureref="gravel_text" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+      
+      <!-- donuts store -->
+      <appearance id="cop_door" shininess="5" textureref="police_logo" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="1 1 1 0" />
+        <component type="specular" value="1 1 1 0" />
+      </appearance>
+
+
+      <appearance id="brick_wall" shininess="1" textureref="brick_wall" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+      
+    </appearances>
+
+    <!-- bloco do grafo; "rootid" identifica o no de raiz -->
+    <graph rootid="world">
+
+      <node id="world">
+        <primitives></primitives>
+        <appearanceref id="white"/>
+         <transforms></transforms>
+        <descendants>
+          <noderef id="groundparkinglot"/>
+          <noderef id="cop_car1" />
+          <noderef id="cop_car2" />
+          <noderef id="store" />
+        </descendants>
+      </node>
+
+      <node id="cop_car1">
+        <primitives></primitives>
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="35 0.5 20"/>
+        </transforms>
+        <descendants>
+          <noderef id="cop_car"/>
+        </descendants>
+      </node>
+
+      <node id="cop_car2">
+        <primitives></primitives>
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="55 0.5 20"/>
+        </transforms>
+        <descendants>
+          <noderef id="cop_car"/>
+        </descendants>
+      </node>
+      
+      <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+      <!-- ::::::::::::::::::::::::::::::::::::: DONUTS STORE :::::::::::::::::::::::::::::::: -->
+      <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+      
+      <node id="store">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="4.3 0 6"></transform>
+        </transforms>
+        <descendants>
+          <noderef id="front_wall" />
+          <noderef id="left_wall" />
+          <noderef id="right_wall" />
+          <noderef id="back_wall" />
+          <noderef id="table_bench_strip1"/>
+          <noderef id="table_bench_strip2"/>
+          <noderef id="counter" />
+          <noderef id="comun1" />
+          <noderef id="comun2" />
+          <noderef id="roof" />
+          <noderef id="window_frame" />
+        </descendants>
+      </node>
+
+
+      <node id="window_frame">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+         <noderef id="window_frame_left" />
+          <noderef id="window_frame_right" /> 
+          <noderef id="window_frame_bottom" />
+          <noderef id="window_frame_top" /> 
+        </descendants>
+      </node>
+
+      <node id="window_frame_bottom">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="21.5 0.9 0.4"/>
+          <transform type="scale" factor="0.6 0.2 21.2"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+
+      <node id="window_frame_top">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="21.5 3.9 0.4"/>
+          <transform type="scale" factor="0.6 0.2 21.2"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+
+      <node id="window_frame_right">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="21.5 1.1 0.4"/>
+          <transform type="scale" factor="0.6 2.8 0.2"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+
+      <node id="window_frame_left">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="21.5 1.1 21.4"/>
+          <transform type="scale" factor="0.6 2.8 0.2"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+
+      <node id="roof">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+          <noderef id="roof_base" />
+          <noderef id="roof_side_left" />
+          <noderef id="roof_side_right" />
+          <noderef id="roof_side_front" />
+          <noderef id="roof_side_back" />
+        </descendants>
+      </node>
+
+      <node id="roof_side_left">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-1 6.5 -0.5" />
+          <transform type="scale" factor="0.5 0.5 23.5" />
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+      </node>
+      
+      <node id="roof_side_right">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="22.5 6.5 -1" />
+          <transform type="scale" factor="0.5 0.5 23.5" />
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+      </node>
+      
+      <node id="roof_side_front">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-0.5 6.5 22.5" />
+          <transform type="scale" factor="23.5 0.5 0.5" />
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+
+      </node>
+
+      <node id="roof_side_back">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-1 6.5 -1" />
+          <transform type="scale" factor="23.5 0.5 0.5" />
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+      </node>
+
+
+      <node id="roof_base">
+        <appearanceref id="gravel_appearance"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-1 6 -1" />
+          <transform type="scale" factor="24 0.5 24" />
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+      </node>
+      
+      <node id="comun2">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="15 0 12"/>
+        </transforms>
+        <descendants>
+          <noderef id="column" />
+        </descendants>
+      </node>
+
+      <node id="comun1">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="5 0 12"/>
+        </transforms>
+        <descendants>
+            <noderef id="column" />
+        </descendants>
+      </node>
+
+      <noderef id="column">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="xx" angle="-90"/>
+        </transforms>
+        <primitives>
+          <cylinder base="0.7" top="0.7" height="6" slices="20" stacks="20" />
+        </primitives>
+        <descendants></descendants>
+      </noderef>
+
+
+      <node id="counter">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="2 0 2"/>
+        </transforms>
+        <descendants>
+          <noderef id="counter_long"/>
+          <noderef id="counter_short"/>
+          <noderef id="counter_corner" />
+        </descendants>
+      </node>
+
+      <noderef id="counter_corner">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="15 1.6 3" />
+          <transform type="rotate" axis="xx" angle="90"/>
+        </transforms>
+        <primitives>
+          <cylinder base="0.5" top="0.5" height="0.3" slices="20" stacks="20" />
+        </primitives>
+        <descendants></descendants>
+      </noderef>
+
+      <node id="counter_short">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0 0 2"/>
+          <transform type="scale" factor="15 1 1"/>
+        </transforms>
+        <descendants>
+          <noderef id="counter_segment"/>
+        </descendants>
+      </node>
+      
+      <node id="counter_long">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="14 0 3"/>
+          <transform type="rotate" axis="yy" angle="90"/>
+          <transform type="scale" factor="3 1 1"/>
+        </transforms>
+        <descendants>
+            <noderef id="counter_segment"/>
+        </descendants>
+      </node>
+
+      <node id="counter_segment">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+            <noderef id="counter_segment_top" />
+            <noderef id="counter_segment_bottom" />
+        </descendants>
+      </node>
+
+      
+      <node id="counter_segment_top">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0 1.3 0.5"/>
+          <transform type="scale" factor="1 0.3 1"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+      </node>
+
+
+      <node id="counter_segment_bottom">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="scale" factor="1 1.3 1"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+      </node>
+      
+      <node id="table_bench_strip2">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="20 0 14"/>
+          <transform type="rotate" axis="yy" angle="90" />
+        </transforms>
+        <descendants>
+          <noderef id="table_bench_strip"/>
+        </descendants>
+      </node>
+      
+      
+      <node id="table_bench_strip1">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0.5 0 19"></transform>
+        </transforms>
+        <descendants>
+          <noderef id="table_bench_strip"/>
+        </descendants>
+      </node>
+      
+      <node id="table_bench_strip">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+          <noderef id="table_bench_unit" />
+          <noderef id="table_bench_unit2" />
+          <noderef id="table_bench_unit3" />
+          <noderef id="table_bench_unit4" />
+        </descendants>
+      </node>
+      
+      <node id="table_bench_unit4">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="3.5 0 0"></transform>
+        </transforms>
+        <descendants>
+          <noderef id="table_bench_unit3"/>
+        </descendants>
+      </node>
+
+      <node id="table_bench_unit3">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="3.5 0 0"></transform>
+        </transforms>
+        <descendants>
+          <noderef id="table_bench_unit2"/>
+        </descendants>
+      </node>
+      
+      <node id="table_bench_unit2">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="3.5 0 0"></transform>
+        </transforms>
+        <descendants>
+          <noderef id="table_bench_unit"/>
+        </descendants>
+      </node>
+      
+      
+      <node id="table_bench_unit">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+          <noderef id="table"/>
+          <noderef id="bench"/>
+          <noderef id="other_bench"/>
+        </descendants>
+      </node>
+
+      <node id="other_bench">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="2.9 0 1.5"/>
+          <transform type="rotate" axis="yy" angle="180" />
+        </transforms>
+        <descendants>
+          <noderef id="bench"/>
+        </descendants>
+      </node>
+      
+      
+      <node id="bench">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+          <noderef id="bench_back"/>
+          <noderef id="bench_base"/>
+        </descendants>
+      </node>
+
+      <node id="bench_base">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="scale" factor="1 0.7 1.5"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+
+      <node id="bench_back">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0 -0.1 0"/>
+          <transform type="rotate" axis="zz" angle="5"/>
+          <transform type="scale" factor="0.5 2 1.5"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+
+      <node id="table">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0.75 0 0" />
+        </transforms>
+        <descendants>
+          <noderef id="table_top" />
+          <noderef id="table_leg" />
+        </descendants>
+      </node>
+
+      <node id="table_top">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0 1 0"/>
+          <transform type="scale" factor="1.3 0.1 1.5"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+      
+      <node id="table_leg">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0.6 0 0"/>
+           <transform type="scale" factor="0.1 1 1.5"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+      
+
+      <node id="back_wall">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="22 0 0" />
+          <transform type="rotate" axis="yy" angle="180"/>
+        </transforms>
+        <descendants>
+          <noderef id="basic_wall"/>
+        </descendants>
+      </node>
+
+      <node id="right_wall">
+        <appearanceref id="brick_wall"/>
+        <transforms>
+          <transform type="translate" to="22 0 22" />
+          <transform type="rotate" axis="yy" angle="90"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 4 " xy2="22 6" />
+          <rectangle xy1="0 0 " xy2="22 1" />
+          <rectangle xy1="0 1 " xy2="0.5 4" />
+          <rectangle xy1="21.5 1 " xy2="22 4" />
+        </primitives>
+        <descendants>
+          <noderef id="inside_right_wall"/>
+        </descendants>
+      </node>
+
+      <node id="inside_right_wall">
+        <appearanceref id="white"/>
+        <transforms>
+          <transform type="translate" to="22 0 -0.4"/>
+          <transform type="rotate" axis="yy" angle="180"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="0.4 4 " xy2="21.6 6" />
+          <rectangle xy1="0.4 0 " xy2="21.6 1" />
+          <rectangle xy1="0.4 1 " xy2="0.5 4" />
+          <rectangle xy1="21.5 1 " xy2="21.6 4" />
+        </primitives>
+        <descendants></descendants>
+      </node>      
+
+      <node id="left_wall">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0 0 0" />
+          <transform type="rotate" axis="yy" angle="-90"/>
+        </transforms>
+        <descendants>
+          <noderef id="basic_wall"/>
+        </descendants>
+      </node>
+      
+      <node id="front_wall">
+        <appearanceref id="brick_wall"/>
+        <transforms>
+          <transform type="translate" to="0 0 22" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0 " xy2="18.8 6" />
+          <rectangle xy1="18.8 4 " xy2="22 6" />
+          <rectangle xy1="21.5 0 " xy2="22 4" />
+        </primitives>
+        <descendants>
+          <noderef id="inside_front_wall"/>
+        </descendants>
+      </node>
+
+
+      <node id="inside_front_wall">
+        <appearanceref id="white"/>
+        <transforms>
+          <transform type="translate" to="21.6 0 -0.4"/>
+          <transform type="rotate" axis="yy" angle="180"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="3.2 0 " xy2="21.2 6" />
+          <rectangle xy1="0 4" xy2="3.2 6" />
+          <rectangle xy1="0 0 " xy2="0.1 4" />
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      
+      
+      <node id="basic_wall">
+        <appearanceref id="brick_wall"/>
+        <transforms></transforms>
+        <primitives>
+          <rectangle xy1="0 0 " xy2="22 6" />
+        </primitives>
+        <descendants>
+          <noderef id="inside_basic_wall"/>
+        </descendants>
+      </node>
+
+      <node id="inside_basic_wall">
+        <appearanceref id="white"/>
+        <transforms>
+          <transform type="translate" to="21.6 0 -0.4"/>
+          <transform type="rotate" axis="yy" angle="180"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0 " xy2="21.2 6" />
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      
+      <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+      <!-- :::::::::::::::::::::::::::::::::::: POLICE CAR ::::::::::::::::::::::::::::::::::: -->
+      <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+      
+		<node id="cop_car">
+      <appearanceref id="inherit"/>
+      <primitives></primitives>
+			<transforms>
+					<transform type="translate" to="5 0 5" />
+			</transforms>
+				<descendants>
+					<noderef id="cop_car_chassi_right_side"/>
+				<!--	<noderef id="cop_car_chassi_right_side"/>-->
+				</descendants> 
+		</node>
+		
+		<!--<node id="cop_car_chassi_left_side">
+				<appearanceref id="blue"/>
+			<transforms>
+					<transform type="translate" to="0 0 -2.5" />
+					 <transform type="scale" factor="-1 1 1" />
+					<transform type="rotate" axis="yy" angle="180"/>
+			</transforms>
+				 <descendants>
+					<noderef id="cop_car_chassi_black_bottom"/>
+					<noderef id="cop_car_chassi_black_top"/>
+					<noderef id="cop_car_chassi_white_bottom"/>
+					<noderef id="cop_car_chassi_white_top"/>
+				</descendants> 
+		</node>		-->
+		
+		<node id="cop_car_chassi_right_side">
+      <appearanceref id="inherit"/>
+      <transforms></transforms>
+      <primitives></primitives>
+				<appearanceref id="blue"/>
+				 <descendants>
+					  <noderef id="cop_car_chassi_right_black_bottom"/>
+					  <noderef id="cop_car_chassi_right_black_top"/>
+					  <noderef id="cop_car_chassi_right_white_bottom"/>
+					  <noderef id="cop_car_chassi_right_white_top"/>
+            <noderef id="cop_car_light_front_right"/>
+            <noderef id="cop_car_light_front_left"/>
+            <noderef id="cop_car_light_back_right"/>
+            <noderef id="cop_car_light_back_left"/>
+            <noderef id="cop_car_right_front_wheel" />
+            <noderef id="cop_car_left_front_wheel" />
+            <noderef id="cop_car_right_back_wheel" />
+            <noderef id="cop_car_left_back_wheel" />
+           <noderef id="cop_car_front" />
+         </descendants>
+      <descendants></descendants>
+		</node>
+
+
+      <node id="cop_car_front">
+        <appearanceref id="blue"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0.1 0 0" />
+          <transform type="scale" factor="1.2 0.5 2.5" />
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube"/>
+        </descendants>
+      </node>
+
+      <node id="cop_car_right_front_wheel">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="1 0 0" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_wheel"/>
+        </descendants>
+      </node>
+
+      <node id="cop_car_right_back_wheel">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-1 0 0" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_wheel"/>
+        </descendants>
+      </node>
+      
+      <node id="cop_car_left_back_wheel">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-1 0 -2.3" />
+          <transform type="rotate" axis="yy" angle="180" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_wheel"/>
+        </descendants>
+      </node>
+
+      <node id="cop_car_left_front_wheel">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="1 0 -2.3" />
+          <transform type="rotate" axis="yy" angle="180" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_wheel"/>
+        </descendants>
+      </node>      
+      
+      <node id="cop_car_wheel" >
+        <appearanceref id="lightgray"/>
+        <transforms></transforms>
+        <primitives>
+              <cylinder base="0.4" top="0.4" height="0.05" slices="20" stacks="20" />
+        </primitives>
+        <descendants>
+          <noderef id="cop_car_wheel_tire" />
+        </descendants>
+      </node>
+
+
+      
+      <node id="cop_car_wheel_tire" >
+        <appearanceref id="darkgray"/>
+        <transforms></transforms>
+        <primitives>
+          <torus slices="20" loops="20" outer="0.5" inner="0.3"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+
+      <node id="cop_car_light_back_left">
+        <appearanceref id="redishorange" />
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-2.05 0.7 -2" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_light" />
+        </descendants>
+      </node>
+
+      <node id="cop_car_light_back_right">
+        <appearanceref id="redishorange" />
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-2.05 0.7 -0.3" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_light" />
+        </descendants>
+      </node>
+
+      <node id="cop_car_light_front_left">
+        <appearanceref id="yellow" />
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="2.1 0.5 -2" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_light" />
+        </descendants>
+      </node>      
+      
+      <node id="cop_car_light_front_right">
+        <appearanceref id="yellow" />
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="2.1 0.5 -0.3" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_light" />
+        </descendants>
+      </node>
+
+
+      <node id="cop_car_light">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="yy" angle="90"></transform>
+        </transforms>
+        <primitives>
+          <cylinder base="0.2" top="0.2" height="0.05" slices="20" stacks="20" />
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      
+		<node id="cop_car_chassi_right_black_bottom">
+			<appearanceref id="blue"/>
+      <transforms></transforms>
+			<primitives>
+				<rectangle xy1="-2 0 0" xy2="-1.3 1 0"/>
+				<rectangle xy1="-1.3 0.3 0" xy2="-0.8 1 0"/>
+				
+			<!--	<rectangle xy1="0.8 0.3 0" xy2="1.3 1 0"/>
+				<rectangle xy1="1.3 0 0" xy2="2.1 1 0"/>-->
+
+        <triangle xyz1="-2 0 0" xyz2="-2 1 0" xyz3="-2 1 -2.3"/>
+        <triangle xyz1="-2 0 0" xyz2="-2 1 -2.3" xyz3="-2 0 -2.3"/>
+
+        <triangle xyz1="-2 1 0" xyz2="-1.2 1 0" xyz3="-1.2 1 -2.3" />
+        <triangle xyz1="-2 1 0" xyz2="-1.2 1 -2.3" xyz3="-2 1 -2.3" />
+
+       <!-- <triangle xyz3="2.1 1 0" xyz2="1.2 1 0" xyz1="1.2 1 -2.3" />
+        <triangle xyz3="2.1 1 0" xyz2="1.2 1 -2.3" xyz1="2.1 1 -2.3" />
+
+        <triangle xyz3="2.1 0 0" xyz2="2.1 1 0" xyz1="2.1 1 -2.3"/>
+        <triangle xyz3="2.1 0 0" xyz2="2.1 1 -2.3" xyz1="2.1 0 -2.3"/>-->
+
+      </primitives>
+      <descendants></descendants>
+		</node>
+
+
+		<node id="cop_car_chassi_right_white_bottom">
+			<appearanceref id="cop_door"/>
+      <transforms></transforms>
+			<primitives>
+				<rectangle xy1="-0.8 0" xy2="0 1"/>
+				<rectangle xy1="0 0" xy2="0.8 1"/>
+
+        <triangle xyz1="-0.8 1.797 -0.07" xyz2="0.8 1.797 -0.07" xyz3="-0.8 1.798 -2.3"/>
+        <triangle xyz1="0.8 1.797 -0.07" xyz2="0.8 1.797 -2.3" xyz3="-0.8 1.797 -2.3"/>
+      </primitives>
+      <descendants></descendants>
+		</node>
+
+				
+		<node id="cop_car_chassi_right_black_top">
+      <appearanceref id="inherit"/>
+			<transforms>
+				  <transform type="translate" to="0 1 0" />
+				  <transform type="rotate" axis="xx" angle="-5" />
+			</transforms>
+			<appearanceref id="blue"/>
+			<primitives>
+				<triangle xyz1="-1.2 0 0" xyz2="-0.8 0 0" xyz3="-0.8 0.8 0"/>
+				<triangle xyz1="0.8 0 0" xyz2="1.2 0 0" xyz3="0.8 0.8 0"/>
+      </primitives>
+      <descendants></descendants>
+		</node>
+		
+		<node id="cop_car_chassi_right_white_top">
+      <appearanceref id="inherit"/>
+			<transforms>
+				  <transform type="translate" to="0 1 0" />
+				  <transform type="rotate" axis="xx" angle="-5" />
+			</transforms>
+			<appearanceref id="white"/>
+			<primitives>
+				<rectangle xy1="-0.8 0" xy2="0 0.8"/>
+				<rectangle xy1="0 0" xy2="0.8 0.8"/>
+			</primitives>
+      <descendants></descendants>
+		</node>
+	
+       <!-- AUXILIAR  CUBE-->
+      <node id="unit_cube">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+          <noderef id="bottom_square"/>
+          <noderef id="top_square" />
+          <noderef id="left_square" />
+          <noderef id="right_square" />
+          <noderef id="front_square" />
+          <noderef id="back_square" />
+        </descendants>
+      </node>
+      
+      
+      <node id="top_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="0 1 0" />
+          <transform type="rotate" axis="xx" angle="90" />
+          <transform type="translate" to="0 1 0" />
+          <transform type="rotate" axis="xx" angle="180" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+      <node id="bottom_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="xx" angle="90" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      <node id="right_square" >
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="1 0 0" />
+          <transform type="rotate" axis="yy" angle="-90" />
+          <transform type="translate" to="0 1 0" />
+          <transform type="rotate" axis="xx" angle="180" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      <node id="left_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="yy" angle="-90" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      <node id="back_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="0 1 0" />
+          <transform type="rotate" axis="xx" angle="180" />
+        </transforms>
+        <primitives>
+            <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      <node id="front_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="0 0 1"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+     
+       <!-- ENVIRONMENT -->
+
+      <node id="groundparkinglot">
+        <appearanceref id="ground_appearance" />
+        <transforms>
+          <transform type="translate" to="0 0 40"/>
+          <transform type="rotate" axis="xx" angle="-90"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="80 40"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+    </graph>
+  
+  
+</anf>
+  

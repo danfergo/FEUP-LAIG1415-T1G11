@@ -4,9 +4,12 @@
 
 class Interface: public CGFinterface
 {
+private:
+	int activeCamera;
 public:
 	Interface(void);
 	~Interface(void);
-	void Interface::initGUI();
+	void initGUI();
+	void processGUI(GLUI_Control *ctrl);
 };
 

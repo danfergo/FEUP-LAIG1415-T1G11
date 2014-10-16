@@ -10,6 +10,7 @@
 #include "tinyxml.h"
 #include "../scenegraph/Primitive.h"
 #include "../scenegraph/Appearance.h"
+#include "../scenegraph/Camera.h"
 #include <vector>
 #include <string>
 
@@ -46,6 +47,11 @@ private:
 	Primitive * parseRetangle(TiXmlElement * anfRetangle);
 	void initPrimitiveParsers();
 
+	//Cameras
+	void parseCameras(TiXmlElement *anfCameras,std::string initialCamera);
+	Camera * parseCameraOrtho(TiXmlElement *anfCamera);
+	Camera * parseCameraPrespective(TiXmlElement *anfCamera);
+
 	//Graph
 	NodeWrapper parseNode(TiXmlElement * anfNode,std::map<std::string, Appearance *> & appearances);
 	Node * parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances);
@@ -55,7 +61,7 @@ private:
 	//Appearances
 	Appearance * parseAppearance(TiXmlElement * anfAppearance,std::map<std::string, Texture *> & textures);
 	void parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, Appearance *> & appearances,
-		std::map<std::string, Texture *> & textures);
+	std::map<std::string, Texture *> & textures);
 	void parseComponent(TiXmlElement * anfParent, float aa[4], float dd[4], float ss[4]);
 
 	//Textures

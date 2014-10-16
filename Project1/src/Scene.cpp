@@ -2,18 +2,9 @@
 #include "CGFapplication.h"
 #include "Scene.h"
 #include "scenegraph\primitives\Toro.h"
-
-#include <math.h>
-#include<iostream>
-
+#include "CGFappearance.h"	
 #include "parser\ANFparser.h"
-
-//float pi = acos(-1.0);
-//float deg2rad=pi/180.0;
-
-#include "CGFappearance.h"
-
-//CGFappearance *mat1;
+#include <iostream>
 
 Scene::Scene(): root(NULL), CGFscene(){
 	// Default settings ...
@@ -46,11 +37,22 @@ void Scene::init()
 	glPolygonMode(GL_FRONT_AND_BACK, (drawingMode == POINT) ? GL_POINT : ((drawingMode == LINE) ? GL_LINE : GL_FILL));
 
 	// Defines a default normal
-//	glNormal3f(0,0,-1);
+	// glNormal3f(0,0,-1);
+
+	std::vector<Camera *> systemCameras;
+	systemCameras.push_back(new Camera("Debugging camera"));
+	systemCameras.push_back(new CameraOrtho("zzz",-50,50,-50,50,-20,20,CameraOrtho::ZZ));
+	cameras.insert(cameras.begin(),systemCameras.begin(),systemCameras.end());
+
+	activeCamera = cameras.at(0);
 
 	setUpdatePeriod(750);
 
-	//glEnable(GL_NORMALIZE);
+
+	float position[3] = {20,20,20} , target[3] = {0,0,0};
+	//this->activeCamera = new CameraPerspective("",.1,500,position,target,180.f);
+
+	glEnable(GL_NORMALIZE);
 }
 
 void Scene::display() 
@@ -65,16 +67,8 @@ void Scene::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	//glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, 1);
-	// Apply transformations corresponding to the camera position relative to the origin
-	CGFscene::activeCamera->applyView();
-	
-	/*
-	float light0_pos[4] = {4.0, 6.0, 7.0, 1.0};
-	CGFlight* light0 = new CGFlight(GL_LIGHT5, light0_pos);
-	light0->enable();
-	light0->draw(); */
-
+	//set camera
+	activeCamera->applyView();
 
 	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
 		if(localIlluminationEnabled && lightingEnabled) (*it)->draw(); else (*it)->disable();
@@ -88,8 +82,6 @@ void Scene::display()
 	// Draw Scene
 	if(root != NULL)
 		root->processNode(NULL);
-	
-
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer
@@ -126,6 +118,8 @@ bool Scene::addLight(std::string title,float aa[4],float dd[4],float ss[4],bool 
 	light->setIdTitle(title);
 
 	lights.push_back(light);
+
+
 	return true;
 }
 
@@ -171,6 +165,7 @@ void Scene::update (unsigned long millis){
 	/* std::cout << " -------------- refreshing scene -------------- \n " ;
 	ANFparser x(ANFparser::PERMISSIVE);
 	
+
 	lights.clear();
 
 	x.parse(this,"scene.xml");	
@@ -181,3 +176,35 @@ void Scene::update (unsigned long millis){
 std::vector<Light *> Scene::getLights(){
 	return lights;
 }
+
+
+void Scene::addCamera(Camera * camera){
+	cameras.push_back(camera);
+}
+
+void Scene::setActiveCamera(int cameraPosition){
+	activeCamera = cameras.at(cameraPosition);	
+	CGFapplication::activeApp->forceRefresh();
+}
+
+void Scene::setActiveCamera(Camera * camera){
+	activeCamera = cameras.back();
+	CGFapplication::activeApp->forceRefresh();
+}
+
+
+unsigned Scene::getActiveCameraPosition(){
+	std::vector <Camera *>::iterator it; unsigned i = 0;
+	for(it=cameras.begin(); it != cameras.end();it++){
+		if(*it == cameraActive){
+			return i;
+		}
+		i++;
+	}
+	return -1;
+}
+
+std::vector<Camera *> Scene::getCameras(){
+	return cameras;
+}   
+ 

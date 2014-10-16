@@ -4,12 +4,15 @@
 #include "CGFscene.h"
 #include "scenegraph/Node.h"
 #include "Light.h"
+#include "scenegraph/Camera.h"
 
 class Scene : public CGFscene
 {
 private:
 	Node * root;
 	std::vector<Light*> lights;
+	std::vector<Camera*> cameras;
+	Camera * cameraActive;
 public:
 	static enum ShaddingMode{FLAT,GOURAUD};
 	static enum DrawingMode{FILL,LINE,POINT};
@@ -17,7 +20,7 @@ public:
 	static enum DrawingOrder{CCW,CW};
 
 	ShaddingMode shaddingMode;
-	DrawingMode drawingMode;  // applyed
+	DrawingMode drawingMode;  // applyed 
 	CullingFace cullingFace;  // applyed
 	DrawingOrder drawingOrder; // applyed
 	float backgroundColor[4]; // applyed
@@ -34,6 +37,13 @@ public:
 	bool addLight(std::string title,float aa[4],float dd[4],float ss[4],bool enabled, 
 		float location[4], bool visible,float angle=-1, float exponent=-1,float target[4] = NULL);
 	std::vector<Light *> getLights();
+	std::vector<Camera *> getCameras();
+
+
+	void addCamera(Camera * camera);
+	void setActiveCamera(Camera * camera);
+	void setActiveCamera(int cameraPosition);
+	unsigned getActiveCameraPosition();
 
 	void setShaddingMode(ShaddingMode shaddingMode);
 	void setDrawingMode(DrawingMode drawingMode);

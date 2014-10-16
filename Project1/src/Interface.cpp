@@ -2,6 +2,8 @@
 
 #include "Light.h"
 #include "Scene.h"
+#include "scenegraph/Camera.h"
+#include <iostream>
 
 Interface::Interface(void): CGFinterface()
 {
@@ -15,17 +17,37 @@ Interface::~Interface(void)
 
 void Interface::initGUI()
 {
-
+	activeCamera = ((Scene *)this->scene)->getActiveCameraPosition();
 	std::vector<Light *> lights = ((Scene *)this->scene)->getLights();
 
-	GLUI_Panel * panel= addPanel("Luzes", 1);
+
+	int i = 0;
+	GLUI_Panel * panelLights = addPanel("Luzes: ", 1);
 	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end() ;it++){
 		(*it)->isEnabled();
-		addCheckboxToPanel (panel,(char *)((*it)->getIdTitle()).c_str(),(int *)&((*it)->getEnableValue()), 2);
-		
+		addCheckboxToPanel (panelLights,(char *)((*it)->getIdTitle()).c_str(),(int *)&((*it)->getEnableValue()), i);
 	}
+
 	
+	addColumn();
+
+
+	// Jump the first camera..
+	GLUI_Panel * cameraPanel = addPanel("Cameras: ", 1);
+	GLUI_RadioGroup * rgCameras = addRadioGroupToPanel(cameraPanel,&activeCamera, 123);
+	i = 20;
 	
+	std::vector<Camera *> cameras = ((Scene *)this->scene)->getCameras();
+
+	unsigned size = i + cameras.size();
+	std::vector<Camera *>::iterator it = cameras.begin();	
+	for(; it != cameras.end() ;it++, i++){
+		addRadioButtonToGroup (rgCameras, (char *)(*it)->getTitle().c_str());
+		//if(size == i && size != 19){
+//			addSeparatorToPanel(cameraPanel);
+		//}
+	}
+		
 	//int x; 
 
 
@@ -70,4 +92,14 @@ void Interface::initGUI()
 	lists->add_item(0,"Modelos de Iluminacao");
 	lists->add_item(1,"Smooth Shading");
 	lists->add_item(2,"Ray Casting"); **/
+}
+
+
+
+void Interface::processGUI(GLUI_Control *ctrl)
+{ 
+	if(ctrl->get_id() == 123){
+		((Scene *)this->scene)->setActiveCamera(activeCamera);	
+	}
+
 }

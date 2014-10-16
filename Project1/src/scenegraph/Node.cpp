@@ -42,13 +42,13 @@ void Node::processNode(Appearance * parentAppearance){
 		glMultMatrixf(transforms);
 		
 		// before draw anything lets apply 
-		Appearance * currentAppearance = this->appearance?this->appearance: parentAppearance;
+		Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
 		if(currentAppearance != NULL)currentAppearance->apply();
 
 		// we are going to draw this node's primitives
 		for(std::vector<Primitive *>::iterator it = primitives.begin();
 			it != primitives.end(); it++){
-				(*it)->draw(currentAppearance->getTexture());
+				(*it)->draw(currentAppearance ? currentAppearance->getTexture() : NULL);
 		}
 
 		//now we process this node's descendants

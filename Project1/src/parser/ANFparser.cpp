@@ -39,7 +39,17 @@ bool ANFparser::parse(Scene * scene,const char* filename){
 			parseGlobals(anfGlobals);
 		}
 		
-
+		//Lets process the cameras
+		TiXmlElement* anfCameras = anfRoot->FirstChildElement("cameras");
+		if(!anfCameras){
+			issue("Block 'cameras' not found!",ERROR);
+		}else{
+			std::string firstCameraId = str(anfCameras->Attribute("initial"));
+			if(firstCameraId == "" ){
+				issue("Cameras block must declare the first camera.. ", WARNING);
+			}
+			parseCameras(anfCameras,firstCameraId);
+		}
 
 		//Lets process the lights
 		TiXmlElement* anfLights = anfRoot->FirstChildElement("lights");

@@ -109,7 +109,7 @@
     <ClInclude Include="src\scenegraph\utils\Point.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\scene.xml">
+    <None Include="bin\scene.anf">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

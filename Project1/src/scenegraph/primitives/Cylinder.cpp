@@ -23,8 +23,8 @@ Cylinder::Cylinder(float base, float top, float height, unsigned slices, unsigne
 		vertexBase[i].x = cos(alpha)*base; 
 		vertexBase[i].y = sin(alpha)*base;
 
-		vertexBase[i].x = cos(alpha)*top; 
-		vertexBase[i].y = sin(alpha)*top;
+		vertexTop[i].x = cos(alpha)*top; 
+		vertexTop[i].y = sin(alpha)*top;
 	
 		
 	}

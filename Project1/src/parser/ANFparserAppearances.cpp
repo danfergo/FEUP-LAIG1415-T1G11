@@ -50,7 +50,7 @@ Appearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance,std::map<st
 
 
 void ANFparser::parseComponent(TiXmlElement * anfParent, float aa[4], float dd[4], float ss[4]){
-
+		
 	TiXmlElement * component = anfParent->FirstChildElement("component");
 	std::string type;
 	const char *val;
