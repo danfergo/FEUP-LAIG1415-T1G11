@@ -7,9 +7,9 @@
 class Retangle: public Primitive
 {
 private:
-	Point2d vertex[2];
+	Point2d vertex[4];
 	GLUquadricObj * obj;
-
+	float m;
 public:
 	Retangle(Point2d vertex[2]);
 	void draw(Texture * texture) const;

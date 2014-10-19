@@ -20,7 +20,7 @@ void ANFparser::parseGlobals(TiXmlElement * anfGlobals){
 
 	// Processing lighting block
 	TiXmlElement * anfLighting = anfGlobals->FirstChildElement("lighting");
-	if(anfDrawing){
+	if(anfLighting){
 		parseGlobalsLighting(anfLighting);
 	}else{
 		issue("Globals block 'lighting' no found. (defaults should be assumed)",WARNING);
@@ -106,9 +106,9 @@ void ANFparser::parseGlobalsCulling(TiXmlElement * anfCulling){
 }
 
 void ANFparser::parseGlobalsLighting(TiXmlElement * anfLighting){
-	std::string doublesided = str(anfLighting->Attribute("doublesided")),
-	local = str(anfLighting->Attribute("local")),
-	enabled = str(anfLighting->Attribute("enabled"));
+	std::string doublesided = str(anfLighting->Attribute("doublesided"));
+	std::string local = str(anfLighting->Attribute("local"));
+	std::string enabled = str(anfLighting->Attribute("enabled"));
 
 	//drawing doublesided
 	if(doublesided == "true"){

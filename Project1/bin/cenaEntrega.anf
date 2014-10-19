@@ -1,0 +1,388 @@
+<anf>
+	<globals>
+		<drawing mode="fill" shading="gouraud" background="0.0 0.0 0.0 1.0" />
+		<culling face="front" order="ccw" />
+		<lightning doublesided="false" local="true" ambient="0.5 0.5 0.7 0.5" />
+	</globals>
+
+	<cameras initial="camera1" >
+		<perspective id="camera1" near="0.2" far="10.0" angle="0.0" pos="10.0 10.0 10.0" target="0.0 0.0 0.0" />
+		<ortho id="eixoZ" direction="z" near="10.0" far="0.0" left="0.0" right="10.0" top="10.0" bottom="0.0" />
+	</cameras>
+
+	<lights>
+		<light id="light1" type="omni" enabled="true" marker="true" pos="5.0 10.0 5.0" >
+			<component type="ambient" value="0.0 0.0 0.0 1.0" />
+			<component type="diffuse" value="0.0 0.0 0.0 1.0" />
+			<component type="specular" value="1.0 1.0 0.0 1.0" />
+		</light>
+		<light id="holofote" type="spot" enabled="true" marker="true" pos="4.5 10.0 4.5" target="4.5 0.0 4.5" angle="30.0" exponent="1.0" >
+            <component type="ambient" value="0.0 0.0 0.0 1.0" />
+			<component type="diffuse" value="0.0 0.0 0.0 1.0" />
+			<component type="specular" value="1.0 1.0 0.0 1.0" />
+            </light>
+	</lights>
+
+	<textures>
+		<texture id="roupa" file="tshirt.png" textlength_s="1.0" textlength_t="1.0" />
+	</textures>
+
+	<appearances>
+		<appearance id="engenharia" shininess="1.0">
+			<component type="ambient" value="0.0 0.0 0.0 1.0" />
+			<component type="diffuse" value="1.0 0.25 0.0 1.0" />
+			<component type="specular" value="1.0 0.25 0.0 1.0" />
+		</appearance>
+
+		<appearance id="skin" shininess="1.0">
+			<component type="ambient" value="0.0 0.0 0.0 1.0" />
+			<component type="diffuse" value="1.0 0.8 0.6 1.0" />
+			<component type="specular" value="1.0 0.8 0.6 1.0" />
+		</appearance>
+
+		<appearance id="bsod" shininess="1.0" textureref="roupa" >
+			<component type="ambient" value="0.0 0.0 0.0 1.0" />
+			<component type="diffuse" value="0.0 0.0 1.0 1.0" />
+			<component type="specular" value="0.0 0.0 1.0 1.0" />
+		</appearance>
+		<appearance id="branco" shininess="1.0">
+			<component type="ambient" value="0.0 0.0 0.0 1.0" />
+			<component type="diffuse" value="1.0 1.0 1.0 1.0" />
+			<component type="specular" value="1.0 1.0 1.0 1.0" />
+		</appearance>
+	</appearances>
+
+		<graph rootid="scene">
+
+			<node id="scene">
+				<transforms>
+				</transforms>
+				<!-- <appearanceref id="string" /> -->
+				<descendants>
+					<noderef id="humanoid" />
+					<noderef id="sala" />
+					<!-- <noderef id="alien" /> -->
+				</descendants>
+			</node>
+
+			<node id="sala">
+				<transforms>
+				</transforms>
+				<appearanceref id="branco" />
+				<descendants>
+					<noderef id="paredeN" />
+					<noderef id="paredeS" />
+					<noderef id="paredeE" />
+					<noderef id="paredeO" />
+					<noderef id="chao" />
+				</descendants>
+			</node>
+
+			<node id="paredeN">
+				<transforms>
+				</transforms>
+				 <appearanceref id="inherit" /> 
+				<primitives>
+                <rectangle xy1="0.0 0.0" xy2="10.0 10.0" />
+             	</primitives>
+			</node>
+
+			<node id="paredeS">
+				<transforms>
+					<transform type="translate" to="10.0 0.0 10.0" />
+					<transform type="rotate" axis="y" angle="180.0" />
+				</transforms>
+				 <appearanceref id="inherit" /> 
+				<primitives>
+                <rectangle xy1="0.0 0.0" xy2="10.0 10.0" />
+             	</primitives>
+			</node>
+
+			<node id="paredeE">
+				<transforms>
+					<transform type="translate" to="10.0 0.0 0.0" />
+					<transform type="rotate" axis="y" angle="270.0" />
+				</transforms>
+				 <appearanceref id="inherit" /> 
+				<primitives>
+                <rectangle xy1="0.0 0.0" xy2="10.0 10.0" />
+             	</primitives>
+			</node>
+
+			<node id="paredeO">
+				<transforms>
+					<transform type="translate" to="0.0 0.0 10.0" />
+					<transform type="rotate" axis="y" angle="90.0" />
+				</transforms>
+				 <appearanceref id="inherit" /> 
+				<primitives>
+                <rectangle xy1="0.0 0.0" xy2="10.0 10.0" />
+             	</primitives>
+			</node>
+
+			<node id="chao">
+				<transforms>
+					<transform type="translate" to="0.0 0.0 10.0" />
+					<transform type="rotate" axis="x" angle="270.0" />
+				</transforms>
+				 <appearanceref id="inherit" /> 
+				<primitives>
+                <rectangle xy1="0.0 0.0" xy2="10.0 10.0" />
+             	</primitives>
+			</node>
+
+			<node id="humanoid">
+				<transforms>
+					<transform type="translate" to="4.5 4.5 4.5" />
+				</transforms>
+				<appearanceref id="skin" />
+				<descendants>
+					<noderef id="torso" />
+					<noderef id="rarm" />
+					<noderef id="larm" />
+					<noderef id="rleg" />
+					<noderef id="lleg" />
+					<noderef id="head" />
+				</descendants>
+			</node>
+
+			<node id="torso">
+				<transforms>
+				</transforms>
+				<appearanceref id="inherit" />
+				<descendants>
+					<noderef id="fronttorso" />
+					<noderef id="backtorso" />
+					<noderef id="lefttorso" />
+					<noderef id="righttorso" />
+					<noderef id="toptorso" />
+					<noderef id="bottomtorso" />
+				</descendants>
+			</node>
+
+			<node id="head">
+				<transforms>
+					<transform type="translate" to="0.0 4.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" /> 
+				<descendants>
+					<noderef id="skull" />
+					<noderef id="neck" />
+				</descendants>
+			</node>
+
+			<node id="leftleg">
+				<transforms>
+					<transform type="translate" to="0.5 0.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<descendants>
+					<noderef id="leg" />
+				</descendants>
+			</node>
+
+			<node id="rightleg">
+				<transforms>
+					<transform type="translate" to="-0.5 0.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<descendants>
+					<noderef id="leg" />
+				</descendants>
+			</node>
+
+			<node id="leftarm">
+				<transforms>
+					<transform type="translate" to="1.25 0.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<descendants>
+					<noderef id="arm" />
+				</descendants>
+			</node>
+
+			<node id="rightarm">
+				<transforms>
+					<transform type="translate" to="-1.25 0.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<descendants>
+					<noderef id="arm" />
+				</descendants>
+			</node>
+
+			<node id="arm">
+				<transforms>
+					<transform type="translate" to="0.0 3.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" /> 
+				<descendants>
+					<noderef id="upperarm" />
+					<noderef id="lowerarm" />
+					<noderef id="hand" />
+				</descendants>
+			</node>
+
+			<node id="leg">
+				<transforms>
+				</transforms>
+				<appearanceref id="bsod" />
+				<descendants>
+					<noderef id="upperleg" />
+					<noderef id="lowerleg" />
+					<noderef id="foot" />
+				</descendants>
+			</node>
+
+			<node id="skull">
+				<transforms>
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <sphere radius="0.5" slices="8" stacks="4" />
+             </primitives>
+			</node>
+
+			<node id="neck">
+				<transforms>
+					<transform type="translate" to="0.0 -0.5 0.0" />
+				</transforms>
+				 <appearanceref id="inherit" /> 
+				<primitives>
+                <cylinder base="0.25" top="0.25" height="0.5" slices="8" stacks="1" />      <!-- deve ter topos -->
+             	</primitives>
+			</node>
+
+			<node id="upperarm">
+				<transforms>
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <cylinder base="0.25" top="0.25" height="2.0" slices="8" stacks="4" />      <!-- deve ter topos -->
+             	</primitives>
+			</node>
+
+			<node id="lowerarm">
+				<transforms>
+					<transform type="translate" to="0.0 -2.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <cylinder base="0.15" top="0.25" height="1.0" slices="8" stacks="4" />      <!-- deve ter topos -->
+             	</primitives>
+			</node>
+
+			<node id="hand">
+				<transforms>
+					<transform type="translate" to="0.0 -3.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <sphere radius="0.5" slices="8" stacks="4" />
+             	</primitives>
+			</node>
+
+			<node id="upperleg">
+				<transforms>
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <cylinder base="0.25" top="0.25" height="2.0" slices="8" stacks="4" />      <!-- deve ter topos -->
+             	</primitives>
+			</node>
+
+			<node id="lowerleg">
+				<transforms>
+					<transform type="translate" to="0.0 -2.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <cylinder base="0.15" top="0.25" height="1.0" slices="8" stacks="4" />      <!-- deve ter topos -->
+             	</primitives>
+			</node>
+
+			<node id="foot">
+				<transforms>
+					<transform type="translate" to="0.0 -3.0 0.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <sphere radius="0.5" slices="8" stacks="4" />
+             	</primitives>
+			</node>
+
+			<node id="toptorso">
+				<transforms>
+					<transform type="translate" to="0.0 3.0 0.0" />
+					<transform type="rotate" axis="x" angle="270.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <rectangle xy1="-1.0 -0.5" xy2="1.0 0.5.0" />
+             	</primitives>
+			</node>
+
+			<node id="bottomtorso">
+				<transforms>
+					<transform type="rotate" axis="x" angle="90.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <rectangle xy1="-1.0 -0.5" xy2="1.0 0.5.0" />
+             	</primitives>
+			</node>
+
+			<node id="fronttorso">
+				<transforms>
+					<transform type="translate" to="0.0 1.5 0.5" />
+				</transforms>
+				<appearanceref id="engenharia" />
+				<primitives>
+                <rectangle xy1="-1.0 -1.5" xy2="1.0 1.5" />
+             	</primitives>
+			</node>
+
+			<node id="backtorso">
+				<transforms>
+					<transform type="translate" to="0.0 0.1 -0.5" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <rectangle xy1="1.0 1.5" xy2="-1.0 -1.5" />
+             	</primitives>
+			</node>
+
+			<node id="lefttorso">
+				<transforms>
+					<transform type="translate" to="0.0 1.0 1.0" />
+					<transform type="rotate" axis="y" angle="90.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <rectangle xy1="-0.5 -1.5" xy2="0.5 1.5" />
+             	</primitives>
+			</node>
+
+			<node id="righttorso">
+				<transforms>
+					<transform type="translate" to="0.0 1.0 -1.0" />
+					<transform type="rotate" axis="y" angle="270.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <rectangle xy1="-0.5 -1.5" xy2="0.5 1.5" />
+             	</primitives>
+			</node>
+
+			<node id="upperleg">
+				<transforms>
+					<transform type="translate" to="4.5 7.0 3.0" />
+					<transform type="rotate" axis="y" angle="-90.0" />
+				</transforms>
+				<appearanceref id="inherit" />
+				<primitives>
+                <rectangle xy1="-0.5 -1.5" xy2="0.5 1.5" />
+             	</primitives>
+			</node>
+		</graph>
+</anf>
