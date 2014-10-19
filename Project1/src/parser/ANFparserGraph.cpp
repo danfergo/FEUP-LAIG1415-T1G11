@@ -12,7 +12,7 @@ Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appea
 	if(rootId == "") issue("No attribute 'rootid' in 'graph' defined!", ERROR);
 	
 	// Ok, now lets process all the nodes.
-	TiXmlElement *node = anfGraph->FirstChildElement();
+	TiXmlElement *node = anfGraph->FirstChildElement("node");
 	std::string nodeId;
 	while(node){
 		nodeWrapper = parseNode(node,appearances);
@@ -24,7 +24,7 @@ Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appea
 		}else{	
 			issue("Node id's must be unique! '"+ nodeId +"' isn't.",ERROR);
 		}
-		node=node->NextSiblingElement();
+		node=node->NextSiblingElement("node");
 	}	
 
 	//We got all the nodes and rootid, lets build the sceneGraph.
@@ -46,7 +46,7 @@ bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::No
 					(*it).second.node->addDescendants(nodes.at(*it2).node);
 					nodes.at(*it2).indegree++; // calculating indegree. need in a following verification.
 				}catch(...){
-					issue("Node descendant '"+ (*it).first + "' not found!",ERROR);
+					issue("Node descendant '"+ *it2 + "' not found!",ERROR);
 				}
 			}
 	}

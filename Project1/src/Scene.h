@@ -12,9 +12,12 @@ private:
 	Node * root;
 	std::vector<Light*> lights;
 	std::vector<Camera*> cameras;
-	
+	GLUquadric * quadric;
+
 public:
-	int activeCameraPosition;
+	static int lightsId[8]; 
+	static int drawingModes[3];
+	
 	static enum ShaddingMode{FLAT,GOURAUD};
 	static enum DrawingMode{FILL,LINE,POINT};
 	static enum CullingFace{NONE,BACK,FRONT,BOTH};
@@ -44,6 +47,8 @@ public:
 	void addCamera(Camera * camera);
 	void setActiveCamera(Camera * camera);
 	void setActiveCamera(int cameraPosition);
+	int getActiveCameraPosition();
+	int getDrawingMode();
 
 	void setShaddingMode(ShaddingMode shaddingMode);
 	void setDrawingMode(DrawingMode drawingMode);
@@ -54,6 +59,7 @@ public:
 	void setLightingEnabled(bool lightingEnabled);
 	void setDoubleSidedEnabled(bool doublesidedEnabled);
 	void setLocalIlluminationEnabled(bool localIlliuminationEnabled);
+	GLUquadric * getQuadric();
 protected:
 
 

@@ -14,7 +14,7 @@ class Sphere: public Primitive{
 		GLUquadricObj * obj;
 		
 	public:
-		Sphere(float radius, int stacks, int slices);
+		Sphere(GLUquadric *quadric, float radius, int stacks, int slices);
 		void draw(Texture * texture) const;
 		~Sphere();
 };

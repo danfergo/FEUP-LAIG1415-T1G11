@@ -9,11 +9,11 @@ class Cylinder: public Primitive{
 private:
 	float base, top, height;
 	unsigned slices, stacks;
-	GLUquadricObj * obj;
+	GLUquadric * obj;
 	Point2d *vertexBase, *vertexTop;
 
 public:
-	Cylinder(float base, float top, float height, unsigned slices, unsigned stacks);
+	Cylinder(GLUquadric * quadric, float base, float top, float height, unsigned slices, unsigned stacks);
 	void draw(Texture * texture) const;
 	~Cylinder();
 

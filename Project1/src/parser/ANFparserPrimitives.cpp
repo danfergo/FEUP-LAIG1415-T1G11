@@ -75,7 +75,7 @@ Primitive * ANFparser::parseCylinder(TiXmlElement * anfCylinder){
 		issue("Error parsing Cylinder slices attribute.", ERROR);
 	}
 
-	return new Cylinder(base, top, height, stacks, slices);
+	return new Cylinder(scene->getQuadric(),base, top, height, slices, stacks);
 }
 
 Primitive * ANFparser::parseSphere(TiXmlElement * anfSphere){
@@ -92,7 +92,7 @@ Primitive * ANFparser::parseSphere(TiXmlElement * anfSphere){
 		issue("Error parsing Sphere slices attribute.", ERROR);
 	}
 
-	return new Sphere(radius, stacks, slices);
+	return new Sphere(scene->getQuadric(),radius, stacks, slices);
 }
 
 Primitive * ANFparser::parseToro(TiXmlElement * anfToro){

@@ -3,15 +3,14 @@
 
 static float const PI = acos(-1.0);
 
-Cylinder::Cylinder(float base, float top, float height, unsigned slices, unsigned stacks)
+Cylinder::Cylinder(GLUquadric*quadric, float base, float top, float height, unsigned slices, unsigned stacks)
 {
 	this->base = base;
 	this->top = top;
 	this->height = height;
 	this->slices = slices;
 	this->stacks = stacks;
-    obj = gluNewQuadric();
-	gluQuadricTexture(obj,1);
+    obj = quadric;
 	vertexBase = new Point2d[slices];
 	vertexTop = new Point2d[slices];
 

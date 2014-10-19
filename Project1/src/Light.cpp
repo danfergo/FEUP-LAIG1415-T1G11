@@ -16,10 +16,6 @@ void Light::draw(){
 		CGFlight::update();
 }
 
-void Light::setEnabled(bool enabled){
-	if(enabled){ this->enable(); }else {this->disable();};
-}
-
 void Light::setVisible(bool visible){
 	this->visible = visible;
 }
@@ -50,7 +46,12 @@ std::string Light::getIdTitle(){
 bool Light::isEnabled(){
 	return enabled;
 }
-
+/*
 bool & Light::getEnableValue(){
 	return enabled;
+}
+*/
+
+void Light::setEnabled(bool enable){
+	if(enable) this->enable(); else this->disable();
 }

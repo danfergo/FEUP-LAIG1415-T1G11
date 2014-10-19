@@ -6,11 +6,21 @@
 #include "parser\ANFparser.h"
 #include <iostream>
 
-Scene::Scene(): root(NULL), CGFscene(){
+
+int Scene::lightsId[8] = {GL_LIGHT0,GL_LIGHT1,GL_LIGHT2,GL_LIGHT3,GL_LIGHT4,GL_LIGHT5,GL_LIGHT6,GL_LIGHT7};
+int Scene::drawingModes[3] = {GL_FILL,GL_LINE,GL_POINT};
+
+Scene::Scene(): root(NULL), CGFscene() {
+	quadric = gluNewQuadric();
+	gluQuadricTexture(quadric, GL_TRUE);
+
 	// Default settings ...
 	shaddingMode = GOURAUD;
+	gluQuadricNormals(quadric,GLU_SMOOTH);
 	drawingMode = FILL;
+	gluQuadricDrawStyle(quadric,GLU_FILL);
 	cullingFace = BACK;
+	gluQuadricOrientation(quadric,GLU_OUTSIDE);
 	drawingOrder = CCW;
 	for(unsigned i = 0; i < 4; i++) backgroundColor[i]=0.0;
 	for(unsigned i = 0; i < 4; i++) ambientLight[i]=0.2;
@@ -34,22 +44,16 @@ void Scene::init()
 		glEnable(GL_CULL_FACE);
 		glCullFace((cullingFace == FRONT) ? GL_FRONT : ((cullingFace == BACK) ? GL_BACK : GL_FRONT_AND_BACK ));
 	} else glDisable(GL_CULL_FACE);
-	glPolygonMode(GL_FRONT_AND_BACK, (drawingMode == POINT) ? GL_POINT : ((drawingMode == LINE) ? GL_LINE : GL_FILL));
-
-	// Defines a default normal
-	// glNormal3f(0,0,-1);
+	glPolygonMode(GL_FRONT_AND_BACK, drawingModes[drawingMode]);
+	if(shaddingMode == FLAT) glShadeModel(GL_FLAT); else  glShadeModel(GL_SMOOTH);
 
 	Camera * aCam = (Camera *)activeCamera;
 	std::vector<Camera *> systemCameras;
-	systemCameras.push_back(new Camera("Debugging camera"));
+	systemCameras.push_back(new Camera("[AUTO] Free camera"));
 	cameras.insert(cameras.begin(),systemCameras.begin(),systemCameras.end());
 	setActiveCamera(aCam);
 
 	setUpdatePeriod(750);
-
-
-	float position[3] = {20,20,20} , target[3] = {0,0,0};
-	//this->activeCamera = new CameraPerspective("",.1,500,position,target,180.f);
 
 	glEnable(GL_NORMALIZE);
 }
@@ -61,6 +65,10 @@ void Scene::display()
 	
 	// Clear image and depth buffer everytime we update the scene
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+	//redefining some settings that could be changed true the interface
+	glPolygonMode(GL_FRONT_AND_BACK, drawingModes[drawingMode]);
+	
 
 	// Initialize Model-View matrix as identity (no transformation
 	glMatrixMode(GL_MODELVIEW);
@@ -96,28 +104,25 @@ void Scene::setRoot(Node * root){
 
 bool Scene::addLight(std::string title,float aa[4],float dd[4],float ss[4],bool enabled,
 	float location[4], bool visible,float angle, float exponent,float target[4]){
-	Light * light;
 	if(lights.size() >= 8)
 		return false;	
 
-	unsigned ids[8] = {GL_LIGHT0,GL_LIGHT1,GL_LIGHT2,GL_LIGHT3,GL_LIGHT4,GL_LIGHT5,GL_LIGHT6,GL_LIGHT7};
-	light = new Light(ids[lights.size()],location);
+	Light * light;
+	light = new Light(lightsId[lights.size()],location);
 	light->setAmbient(aa);
 	light->setDiffuse(dd);
 	light->setSpecular(ss);
 	light->setEnabled(enabled);
 	light->setVisible(visible);
 
-
 	if(target!=NULL){
 		light->setTarget(target);
 		light->setAngle(angle);
 		light->setExponent(exponent);
 	}
+
 	light->setIdTitle(title);
-
 	lights.push_back(light);
-
 
 	return true;
 }
@@ -125,15 +130,37 @@ bool Scene::addLight(std::string title,float aa[4],float dd[4],float ss[4],bool 
 
 void Scene::setShaddingMode(ShaddingMode shaddingMode){
 	this->shaddingMode = shaddingMode;
+	switch(shaddingMode){
+		case FLAT: gluQuadricNormals(quadric,GLU_FLAT);
+			break;
+		case GOURAUD: gluQuadricNormals(quadric,GLU_SMOOTH);
+			break;	
+	}
 }
 
 void Scene::setDrawingMode(DrawingMode drawingMode){
 	this->drawingMode = drawingMode;
+	switch(drawingMode){
+		case FILL: gluQuadricDrawStyle(quadric,GLU_FILL);
+			break;
+		case LINE: gluQuadricDrawStyle(quadric,GLU_LINE);
+			break;	
+		case POINT: gluQuadricDrawStyle(quadric,GLU_POINT);
+			break;	
+	}
+
 }
 
 void Scene::setCullingFace(CullingFace cullingFace){
-
 	this->cullingFace = cullingFace;
+	switch(cullingFace){
+	case FRONT:
+		gluQuadricOrientation(quadric,GLU_INSIDE);
+		break;
+	default:
+		gluQuadricOrientation(quadric,GLU_OUTSIDE);
+		break;
+	}
 }
 
 void Scene::setDrawingOrder(DrawingOrder drawingOrder){
@@ -171,6 +198,19 @@ void Scene::update (unsigned long millis){
 	init(); */
 }
 
+int Scene::getActiveCameraPosition(){
+	std::vector <Camera *>::iterator it; unsigned i = 0;
+	for(it=cameras.begin(); it != cameras.end();it++, i++){
+		if(*it == activeCamera){
+			return i;
+		}
+	}
+	return -1;
+}
+
+int Scene::getDrawingMode(){
+	return this->drawingMode;
+}
 
 std::vector<Light *> Scene::getLights(){
 	return lights;
@@ -183,7 +223,6 @@ void Scene::addCamera(Camera * camera){
 
 void Scene::setActiveCamera(int cameraPosition){
 	activeCamera = cameras.at(cameraPosition);	
-	activeCameraPosition = cameraPosition;
 	CGFapplication::activeApp->forceRefresh();
 }
 
@@ -203,3 +242,6 @@ std::vector<Camera *> Scene::getCameras(){
 	return cameras;
 }   
  
+GLUquadric * Scene::getQuadric(){
+	return quadric;
+}

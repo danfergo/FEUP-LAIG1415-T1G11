@@ -19,7 +19,6 @@ class Light: public CGFlight {
 		void setIdTitle(std::string title);
 		std::string getIdTitle();
 		bool isEnabled();
-		bool & getEnableValue();
 		 
 };
 
