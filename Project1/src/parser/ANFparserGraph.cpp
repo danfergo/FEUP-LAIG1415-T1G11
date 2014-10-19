@@ -108,6 +108,8 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 			ANFparser::parseTransforms(ret.node,transforms);
 		}
 
+		bool ePrimitives = false, eDescandants = false;
+
 		// Ok, lets process primitives.
 		TiXmlElement * primitives = anfNode->FirstChildElement("primitives");
 		if (primitives == NULL){
@@ -119,6 +121,7 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 				try{
 					if((primitive = (this->*subParsers.at(pr->Value()))(pr))){
 						ret.node->addPrimitive(primitive);
+						ePrimitives = true;
 					}
 				}catch(std::out_of_range){
 					issue("Invalid primitive '"+str(pr->Value())+"' found!",WARNING);
@@ -131,7 +134,7 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 		//checking if node has descendants block
 		TiXmlElement * descendants  = anfNode->FirstChildElement("descendants");
 		if (descendants == NULL){
-			issue("Block 'descendants' not found!",WARNING);
+			//issue("Block 'descendants' not found!",WARNING);
 		}else{
 			//lets parse node's descandants then..
 			TiXmlElement * ds = descendants->FirstChildElement();
@@ -142,10 +145,14 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 					issue("Invalid block noderef found. No id set!",WARNING);
 				}else{
 					ret.descendants.push_back(str(ds->Attribute("id")));
+					eDescandants = true;
 				}
 				ds=ds->NextSiblingElement();
 			}
 		}
+
+		if(!eDescandants && !ePrimitives)
+			issue("Must exist descandants or primitives!",WARNING);
 
 
 		// lets just apply its appearance before leave
