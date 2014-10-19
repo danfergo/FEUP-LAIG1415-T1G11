@@ -91,11 +91,11 @@ void Node::addTranslation(float x, float y, float z){
 }
 
 bool Node::addRotation(std::string axis, float angle){
-	if(axis == "xx"){
+	if(axis == "x"){
 		addRotationX(angle);
-	}else if(axis == "yy"){
+	}else if(axis == "y"){
 		addRotationY(angle);
-	}else if(axis == "zz"){
+	}else if(axis == "z"){
 		addRotationZ(angle);
 	}else{
 		return false;	

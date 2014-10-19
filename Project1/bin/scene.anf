@@ -7,7 +7,7 @@
     
     <cameras initial="Prespective camera" >
           <perspective id="Prespective camera" near="0.1" far="555" angle="70" pos="50 50 50" target="0 0 0" /> 
-          <ortho id="Side projection" direction="xx" near="-50" far="1" left="50" right="0" top="20" bottom="0" />
+          <ortho id="Side projection" direction="xx" near="-50" far="0" left="50" right="0" top="20" bottom="0" />
     </cameras>
 
     <!-- bloco de luzes -->
@@ -43,7 +43,9 @@
       <texture id="concrete_text" file="src/concrete.jpg" texlength_s="1.5" texlength_t="0.1" />
       <texture id="concrete_text_long" file="src/concrete.jpg" texlength_s="1.5" texlength_t="0.03" />
       <texture id="marble_text" file="src/marble_square.jpg" texlength_s="0.0434711" texlength_t="1" />
-      
+      <texture id="store_floor" file="src/store_floor.jpg" texlength_s="5" texlength_t="5" />
+      <texture id="wood" file="src/wood.jpg" texlength_s="2" texlength_t="2" />
+      <texture id="leather_bench" file="src/leather.jpg" texlength_s="0.5" texlength_t="0.5" />
     </textures>
 
 
@@ -59,7 +61,7 @@
       <appearance id="lightgray" shininess="1" textureref="" >
           <component type="ambient" value="0.5 0.5 0.5 0" />
           <component type="diffuse" value="0.9 0.9 0.9 0" />
-          <component type="specular" value="0.9 0.9  0.9 0" />
+          <component type="specular" value="0.9 0.9 0.9 0" />
       </appearance>
 
       <appearance id="darkgray" shininess="2" textureref="" >
@@ -99,7 +101,16 @@
                <component type="specular" value="0.05 0.05 0.05 0" />
      </appearance> 
 		
-      <!-- gravel -->
+      <!-- inside store -->
+
+      <appearance id="store_foor_app" shininess="1" textureref="store_floor" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+
+      <!-- outside -->
+      
       <appearance id="marble_appearance" shininess="1" textureref="marble_text" >
         <component type="ambient" value="0.5 0.5 0.5 0" />
         <component type="diffuse" value="0.9 0.9 0.9 0" />
@@ -124,6 +135,26 @@
         <component type="specular" value="0.9 0.9  0.9 0" />
       </appearance>
 
+      <appearance id="brick_wall" shininess="1" textureref="brick_wall" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+
+      <appearance id="wood_app" shininess="1" textureref="wood" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+
+
+      <appearance id="leather_bench_app" shininess="5" textureref="leather_bench" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="1 1 1 0" />
+        <component type="specular" value="1 1 1 0" />
+      </appearance>
+
+
       <!-- donuts store -->
       <appearance id="cop_door" shininess="5" textureref="police_logo" >
         <component type="ambient" value="0.5 0.5 0.5 0" />
@@ -132,12 +163,8 @@
       </appearance>
 
 
-      <appearance id="brick_wall" shininess="1" textureref="brick_wall" >
-        <component type="ambient" value="0.5 0.5 0.5 0" />
-        <component type="diffuse" value="0.9 0.9 0.9 0" />
-        <component type="specular" value="0.9 0.9  0.9 0" />
-      </appearance>
       
+
     </appearances>
 
     <!-- bloco do grafo; "rootid" identifica o no de raiz -->
@@ -327,7 +354,7 @@
         <transforms>
           <transform type="translate" to="18.8 0 21.8" /> 
           <transform type="rotate" axis="yy" angle="10"/>
-          <transform type="scale" factor="2.7 4 0.2" />
+          <transform type="scale" factor="2.7 3.9 0.05" />
         </transforms>
         <descendants>
           <noderef id="unit_cube" />
@@ -335,7 +362,7 @@
       </node>
 
       <node id="store_fake_floor">
-        <appearanceref id="white"/>
+        <appearanceref id="store_foor_app"/>
         <primitives>
           <rectangle xy1="0 0" xy2="22 22" />
         </primitives>
@@ -597,9 +624,9 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="-0.5 5.5 22.5" />
-          <transform type="scale" factor="23.5 0.5 0.5" />
-          <transform type="translate" to="1 0 0" />
-          <transform type="rotate" axis="zz" angle="90" />
+          <transform type="translate" to="0 0 0.5" />
+          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="scale" factor="0.5 0.5 23.5" />
         </transforms>
         <descendants>
           <noderef id="unit_cube" />
@@ -611,10 +638,9 @@
         <appearanceref id="inherit"/>
         <primitives></primitives>
         <transforms>
-          <transform type="translate" to="-1 5.5 -1" />
-          <transform type="scale" factor="23.5 0.5 0.5" />
-          <transform type="translate" to="1 0 0" />
-          <transform type="rotate" axis="zz" angle="90" />
+          <transform type="translate" to="-1 5.5 -0.5" />
+          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="scale" factor="0.5 0.5 23.5" />
         </transforms>
         <descendants>
           <noderef id="unit_cube" />
@@ -887,7 +913,7 @@
       
       
       <node id="bench">
-        <appearanceref id="inherit"/>
+        <appearanceref id="leather_bench_app"/>
         <primitives></primitives>
         <transforms></transforms>
         <descendants>
@@ -921,7 +947,7 @@
       </node>
 
       <node id="table">
-        <appearanceref id="inherit"/>
+        <appearanceref id="wood_app"/>
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="0.75 0 0" />

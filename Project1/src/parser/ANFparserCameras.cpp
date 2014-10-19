@@ -82,14 +82,14 @@ Camera * ANFparser::parseCameraOrtho(TiXmlElement *anfCamera){
 
 	ee = str(anfCamera->Attribute("direction"));
 
-	if(ee == "xx"){
+	if(ee == "z"){
 		axis = CameraOrtho::XX;
-	}else if(ee == "yy"){
+	}else if(ee == "y"){
 		axis = CameraOrtho::YY;
-	}else if(ee == "zz"){
+	}else if(ee == "z"){
 		axis = CameraOrtho::ZZ;
 	}else{
-		issue("attribute of orho camera must be xx or yy or zz", ERROR);
+		issue("attribute of orho camera must be x or y or z", ERROR);
 	}
 	
 

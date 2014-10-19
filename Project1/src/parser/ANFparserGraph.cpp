@@ -158,7 +158,7 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 				try{
 					ret.node->setAppearance(appearances.at(appearanceId));
 				}catch(...){
-					issue("Apperance width id '"+appearanceId+"' not found!",ERROR);
+					issue("Apperance with id '"+appearanceId+"' not found!",ERROR);
 				}
 			}else{
 				issue("Apperanceref 'id' not defined! ('inherit' could be assumed).",WARNING);
@@ -189,24 +189,24 @@ bool ANFparser::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 		if(type == "scale"){ // Let's parse a Scaling
 			factor = transform->Attribute("factor");
 			if(!factor || sscanf(factor,"%f %f %f",&x, &y, &z)!=3){
-				issue("Error parsing scaling factor.",WARNING);
+				issue("Error parsing scaling factor.",ERROR);
 			}else node->addScaling(x,y,z);
 		
 		}else if(type == "translate"){ // Let's parse a Translation
 			to = transform->Attribute("to");
 			if(!to || sscanf(to,"%f %f %f",&x, &y, &z)!=3){
-				issue("Error parsing translate coordinates.",WARNING);
+				issue("Error parsing translate coordinates.",ERROR);
 			}else node->addTranslation(x,y,z);
 		
 		}else if(type == "rotate"){ // Let's parse a Rotation
 			axis = str(transform->Attribute("axis"));
 			if(transform->QueryFloatAttribute("angle",&angle)!=TIXML_SUCCESS){ // bad angle value
-				issue("Bad angle found at rotation transform !",WARNING);
+				issue("Bad angle found at rotation transform !",ERROR);
 			}else if(!node->addRotation(axis,angle)){ // bad axis value
-				issue("Bad axis found at rotation transform !",WARNING);
+				issue("Bad axis found at rotation transform !",ERROR);
 			}
 		}else{ // Must be an invalid transform type.
-			issue("Invalid transform type found '" + type + "' !",WARNING); 
+			issue("Invalid transform type found '" + type + "' !",ERROR); 
 		}
 
 		transform = transform->NextSiblingElement("transform");

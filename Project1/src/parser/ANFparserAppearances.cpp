@@ -38,7 +38,7 @@ Appearance * ANFparser::parseAppearance(TiXmlElement * anfAppearance,std::map<st
 		try{
 			texture = textures.at(textureId);
 		}catch(...){
-			issue("Texture width id='"+textureId+" not found . will not be ignored'.",WARNING);
+			issue("Texture with id='"+textureId+" not found . Will be ignored'.",WARNING);
 		}		
 
 	}
