@@ -7,7 +7,7 @@
     
     <cameras initial="Prespective camera" >
           <perspective id="Prespective camera" near="0.1" far="555" angle="70" pos="50 50 50" target="0 0 0" /> 
-          <ortho id="Side projection" direction="xx" near="-50" far="0" left="50" right="0" top="20" bottom="0" />
+          <ortho id="Side projection" direction="x" near="-50" far="0" left="50" right="0" top="20" bottom="0" />
     </cameras>
 
     <!-- bloco de luzes -->
@@ -189,7 +189,7 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="36.6 0 20.4"/>
-          <transform type="rotate" axis="yy" angle="3" />
+          <transform type="rotate" axis="y" angle="3" />
         </transforms>
         <descendants>
           <noderef id="cop_car"/>
@@ -201,7 +201,7 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="42.9 0 15.9"/>
-          <transform type="rotate" axis="yy" angle="176" />
+          <transform type="rotate" axis="y" angle="176" />
         </transforms>
         <descendants>
           <noderef id="cop_car"/>
@@ -266,7 +266,7 @@
           <transform type="translate" to="0 0 -4" />
           <transform type="scale" factor="0.5 2 8"/>
           <transform type="translate" to="0 0 1" />
-          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="rotate" axis="y" angle="90" />
         </transforms>
         <primitives></primitives>
         <descendants>
@@ -278,7 +278,7 @@
         <appearanceref id="white"/>
         <transforms>
           <transform type="translate" to="0.3 3.5 0" />
-          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="rotate" axis="y" angle="90" />
         </transforms>
         <primitives>
           <torus outer="2" inner="1" slices="20" loops="20" />
@@ -342,7 +342,7 @@
           <cylinder stacks="2" slices="20" height="0.2" base="1" top="1" />
         </primitives>
         <transforms>
-          <transform type="rotate" axis="xx" angle="90" />
+          <transform type="rotate" axis="x" angle="90" />
         </transforms>
         <descendants>
         </descendants>
@@ -353,7 +353,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="18.8 0 21.8" /> 
-          <transform type="rotate" axis="yy" angle="10"/>
+          <transform type="rotate" axis="y" angle="10"/>
           <transform type="scale" factor="2.7 3.9 0.05" />
         </transforms>
         <descendants>
@@ -368,7 +368,7 @@
         </primitives>
         <transforms>
           <transform type="translate" to="0 0.0001 22" />
-          <transform type="rotate" axis="xx" angle="-90"/>
+          <transform type="rotate" axis="x" angle="-90"/>
         </transforms>
         <descendants></descendants>
       </node>
@@ -380,7 +380,7 @@
         </primitives>
         <transforms>
           <transform type="translate" to="-0.5 5.51 22.5" />
-          <transform type="rotate" axis="xx" angle="-90"/>
+          <transform type="rotate" axis="x" angle="-90"/>
         </transforms>
         <descendants></descendants>
       </node>
@@ -392,7 +392,7 @@
         </primitives>
         <transforms>
           <transform type="translate" to="0 4.99 0" />
-          <transform type="rotate" axis="xx" angle="90"/>
+          <transform type="rotate" axis="x" angle="90"/>
         </transforms>
         <descendants></descendants>
       </node>
@@ -403,7 +403,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="23 -0.1 -1" />
-          <transform type="rotate" angle="-90" axis="yy" />
+          <transform type="rotate" angle="-90" axis="y" />
         </transforms>
         <descendants>
           <noderef id="store_sidewalk" />
@@ -415,7 +415,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="0 -0.1 0" />
-          <transform type="rotate" angle="-90" axis="yy" />
+          <transform type="rotate" angle="-90" axis="y" />
         </transforms>
         <descendants>
           <noderef id="store_sidewalk" />
@@ -478,7 +478,7 @@
           <transform type="translate" to="0 3.9 0"/>
           <transform type="scale" factor="2.7 0.2 0.5"/>
           <transform type="translate" to="0 0 1" />
-          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="rotate" axis="y" angle="90" />
         </transforms>
         <descendants>
           <noderef id="unit_cube" />
@@ -492,7 +492,7 @@
           <transform type="translate" to="-0.2 0 0"/>
           <transform type="scale" factor="0.2 4.1 0.5"/>
           <transform type="translate" to="0 1 0" />
-          <transform type="rotate" axis="xx" angle="90" />
+          <transform type="rotate" axis="x" angle="90" />
         </transforms>
         <descendants>
           <noderef id="unit_cube" />
@@ -506,7 +506,7 @@
           <transform type="translate" to="2.7 0 0"/>
           <transform type="scale" factor="0.2 4.1 0.5"/>
           <transform type="translate" to="0 1 0" />
-          <transform type="rotate" axis="xx" angle="90" />
+          <transform type="rotate" axis="x" angle="90" />
         </transforms>
         <descendants>
           <noderef id="unit_cube" />
@@ -558,7 +558,7 @@
           <transform type="translate" to="21.6 1.1 0.4"/>
           <transform type="scale" factor="0.5 2.8 0.2"/>
           <transform type="translate" to="0 0 1" />
-          <transform type="rotate" axis="xx" angle="-90" />     
+          <transform type="rotate" axis="x" angle="-90" />     
         </transforms>
         <descendants>
           <noderef id="unit_cube"/>
@@ -572,7 +572,7 @@
           <transform type="translate" to="21.6 1.1 21.4"/>
           <transform type="scale" factor="0.5 2.8 0.2"/>
           <transform type="translate" to="0 0 1" />
-          <transform type="rotate" axis="xx" angle="-90" />
+          <transform type="rotate" axis="x" angle="-90" />
         </transforms>
         <descendants>
           <noderef id="unit_cube"/>
@@ -625,7 +625,7 @@
         <transforms>
           <transform type="translate" to="-0.5 5.5 22.5" />
           <transform type="translate" to="0 0 0.5" />
-          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="rotate" axis="y" angle="90" />
           <transform type="scale" factor="0.5 0.5 23.5" />
         </transforms>
         <descendants>
@@ -639,7 +639,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="-1 5.5 -0.5" />
-          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="rotate" axis="y" angle="90" />
           <transform type="scale" factor="0.5 0.5 23.5" />
         </transforms>
         <descendants>
@@ -680,7 +680,7 @@
           <transform type="translate" to="-0.5 5 22" />
           <transform type="scale" factor="23.5 0.5 1" />
           <transform type="translate" to="1 0 0" />
-          <transform type="rotate" axis="zz" angle="90" />
+          <transform type="rotate" axis="z" angle="90" />
         </transforms>
         <descendants>
           <noderef id="unit_cube" />
@@ -695,7 +695,7 @@
           <transform type="translate" to="-1 5 -1" />
           <transform type="scale" factor="23.5 0.5 1" />
           <transform type="translate" to="1 0 0" />
-          <transform type="rotate" axis="zz" angle="90" />
+          <transform type="rotate" axis="z" angle="90" />
         </transforms>
         <descendants>
           <noderef id="unit_cube" />
@@ -727,7 +727,7 @@
       <node id="column">
         <appearanceref id="gravel_appearance"/>
         <transforms>
-          <transform type="rotate" axis="xx" angle="-90"/>
+          <transform type="rotate" axis="x" angle="-90"/>
         </transforms>
         <primitives>
           <cylinder base="0.7" top="0.7" height="5" slices="10" stacks="10" />
@@ -753,7 +753,7 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="15 1.6 3" />
-          <transform type="rotate" axis="xx" angle="90"/>
+          <transform type="rotate" axis="x" angle="90"/>
         </transforms>
         <primitives>
           <cylinder base="0.5" top="0.5" height="0.3" slices="20" stacks="20" />
@@ -778,7 +778,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="14 0 3"/>
-          <transform type="rotate" axis="yy" angle="90"/>
+          <transform type="rotate" axis="y" angle="90"/>
           <transform type="scale" factor="3 1 1"/>
         </transforms>
         <descendants>
@@ -824,7 +824,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="20 0 14"/>
-          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="rotate" axis="y" angle="90" />
         </transforms>
         <descendants>
           <noderef id="table_bench_strip"/>
@@ -904,7 +904,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="2.9 0 1.5"/>
-          <transform type="rotate" axis="yy" angle="180" />
+          <transform type="rotate" axis="y" angle="180" />
         </transforms>
         <descendants>
           <noderef id="bench"/>
@@ -938,7 +938,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="0 -0.1 0"/>
-          <transform type="rotate" axis="zz" angle="5"/>
+          <transform type="rotate" axis="z" angle="5"/>
           <transform type="scale" factor="0.5 2 1.5"/>
         </transforms>
         <descendants>
@@ -988,7 +988,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="22 0 0" />
-          <transform type="rotate" axis="yy" angle="180"/>
+          <transform type="rotate" axis="y" angle="180"/>
         </transforms>
         <descendants>
           <noderef id="basic_wall"/>
@@ -999,7 +999,7 @@
         <appearanceref id="brick_wall"/>
         <transforms>
           <transform type="translate" to="22 0 22" />
-          <transform type="rotate" axis="yy" angle="90"/>
+          <transform type="rotate" axis="y" angle="90"/>
         </transforms>
         <primitives>
           <rectangle xy1="0 4 " xy2="22 5" />
@@ -1016,7 +1016,7 @@
         <appearanceref id="white"/>
         <transforms>
           <transform type="translate" to="22 0 -0.4"/>
-          <transform type="rotate" axis="yy" angle="180"/>
+          <transform type="rotate" axis="y" angle="180"/>
         </transforms>
         <primitives>
           <rectangle xy1="0.4 4 " xy2="21.6 5" />
@@ -1032,7 +1032,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="0 0 0" />
-          <transform type="rotate" axis="yy" angle="-90"/>
+          <transform type="rotate" axis="y" angle="-90"/>
         </transforms>
         <descendants>
           <noderef id="basic_wall"/>
@@ -1059,7 +1059,7 @@
         <appearanceref id="white"/>
         <transforms>
           <transform type="translate" to="21.6 0 -0.4"/>
-          <transform type="rotate" axis="yy" angle="180"/>
+          <transform type="rotate" axis="y" angle="180"/>
         </transforms>
         <primitives>
           <rectangle xy1="3 0 " xy2="21.2 5" />
@@ -1085,7 +1085,7 @@
         <appearanceref id="white"/>
         <transforms>
           <transform type="translate" to="21.6 0 -0.4"/>
-          <transform type="rotate" axis="yy" angle="180"/>
+          <transform type="rotate" axis="y" angle="180"/>
         </transforms>
         <primitives>
           <rectangle xy1="0 0 " xy2="21.2 5" />
@@ -1257,7 +1257,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="-1.1 0 0" />
-          <transform type="rotate" axis="yy" angle="180" />
+          <transform type="rotate" axis="y" angle="180" />
         </transforms>
         <descendants>
           <noderef id="cop_car_wheel"/>
@@ -1269,7 +1269,7 @@
         <primitives></primitives>
         <transforms>
           <transform type="translate" to="1.2 0 0" />
-          <transform type="rotate" axis="yy" angle="180" />
+          <transform type="rotate" axis="y" angle="180" />
         </transforms>
         <descendants>
           <noderef id="cop_car_wheel"/>
@@ -1345,7 +1345,7 @@
       <node id="cop_car_light">
         <appearanceref id="inherit"/>
         <transforms>
-          <transform type="rotate" axis="yy" angle="90"></transform>
+          <transform type="rotate" axis="y" angle="90"></transform>
         </transforms>
         <primitives>
           <cylinder base="0.2" top="0.2" height="0.05" slices="7" stacks="7" />
@@ -1357,7 +1357,7 @@
 			<appearanceref id="white"/>
       <transforms>
         <transform type="translate" to="-0.8 1.5387 2.349764" />
-        <transform type="rotate" axis="xx" angle="-90" />
+        <transform type="rotate" axis="x" angle="-90" />
       </transforms>
 			<primitives>
         <rectangle xy1="0 0" xy2="1.6 2.199528" />
@@ -1371,7 +1371,7 @@
       <appearanceref id="inherit"/>
 			<transforms>
 				  <transform type="translate" to="0 0.8 2.48" />
-				  <transform type="rotate" axis="xx" angle="-10" />
+				  <transform type="rotate" axis="x" angle="-10" />
 			</transforms>
 			<primitives>
         <triangle xyz1="-1.18 0 0" xyz2="-0.8 0 0" xyz3="-0.8 0.75 0"/>
@@ -1389,7 +1389,7 @@
       <node id="cop_car_middle_top_left">
         <appearanceref id="inherit"/>
         <transforms>
-          <transform type="rotate" axis="yy" angle="180" />
+          <transform type="rotate" axis="y" angle="180" />
           <transform type="translate" to="0 0 -2.5" />
         </transforms>
         <primitives> </primitives>
@@ -1402,8 +1402,8 @@
         <appearanceref id="darkgray"/>
         <transforms>
           <transform type="translate" to="1.2 0.75 2.349764" />
-          <transform type="rotate" axis="zz" angle="26.9" />
-          <transform type="rotate" axis="yy" angle="90" />
+          <transform type="rotate" axis="z" angle="26.9" />
+          <transform type="rotate" axis="y" angle="90" />
         </transforms>
         <primitives>
           <rectangle xy1="0 0" xy2="2.199528 0.8843346" />
@@ -1415,8 +1415,8 @@
         <appearanceref id="darkgray"/>
         <transforms>
           <transform type="translate" to="-1.2 0.75 0.150236" />
-          <transform type="rotate" axis="zz" angle="-26.9" />
-          <transform type="rotate" axis="yy" angle="-90" />
+          <transform type="rotate" axis="z" angle="-26.9" />
+          <transform type="rotate" axis="y" angle="-90" />
         </transforms>
         <primitives>
           <rectangle xy1="0 0" xy2="2.199528 0.8843346" />
@@ -1456,9 +1456,9 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="0 0.9848 0" />
-          <transform type="rotate" axis="xx" angle="90" />
+          <transform type="rotate" axis="x" angle="90" />
           <transform type="translate" to="1 0 0" />
-          <transform type="rotate" axis="yy" angle="180" />
+          <transform type="rotate" axis="y" angle="180" />
         </transforms>
         <primitives>
           <rectangle xy1="0.173648 0" xy2="0.826352 1"/>
@@ -1469,7 +1469,7 @@
       <node id="bottom_trap_prism">
         <appearanceref id="inherit"/>
         <transforms>
-          <transform type="rotate" axis="xx" angle="90" />
+          <transform type="rotate" axis="x" angle="90" />
         </transforms>
         <primitives>
           <rectangle xy1="0 0" xy2="1 1"/>
@@ -1481,10 +1481,10 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="1 0 0" />
-          <transform type="rotate" axis="zz" angle="10" />
-          <transform type="rotate" axis="yy" angle="-90" />
+          <transform type="rotate" axis="z" angle="10" />
+          <transform type="rotate" axis="y" angle="-90" />
           <transform type="translate" to="0 1 0" />
-          <transform type="rotate" axis="xx" angle="180" />
+          <transform type="rotate" axis="x" angle="180" />
         </transforms>
         <primitives>
           <rectangle xy1="0 0" xy2="1 1"/>
@@ -1495,8 +1495,8 @@
       <node id="left_trap_prism">
         <appearanceref id="inherit"/>
         <transforms>
-          <transform type="rotate" axis="zz" angle="-10" />
-          <transform type="rotate" axis="yy" angle="-90" />
+          <transform type="rotate" axis="z" angle="-10" />
+          <transform type="rotate" axis="y" angle="-90" />
         </transforms>
         <primitives>
           <rectangle xy1="0 0" xy2="1 1"/>
@@ -1508,7 +1508,7 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="1 0 0" />
-          <transform type="rotate" axis="yy" angle="180" />
+          <transform type="rotate" axis="y" angle="180" />
           <transform type="translate" to="0 0 -1" />
         </transforms>
         <primitives> </primitives>
@@ -1555,9 +1555,9 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="0 1 0" />
-          <transform type="rotate" axis="xx" angle="90" />
+          <transform type="rotate" axis="x" angle="90" />
           <transform type="translate" to="0 1 0" />
-          <transform type="rotate" axis="xx" angle="180" />
+          <transform type="rotate" axis="x" angle="180" />
         </transforms>
         <primitives>
           <rectangle xy1="0 0" xy2="1 1"/>
@@ -1568,7 +1568,7 @@
       <node id="bottom_square">
         <appearanceref id="inherit"/>
         <transforms>
-          <transform type="rotate" axis="xx" angle="90" />
+          <transform type="rotate" axis="x" angle="90" />
         </transforms>
         <primitives>
           <rectangle xy1="0 0" xy2="1 1"/>
@@ -1580,9 +1580,9 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="1 0 0" />
-          <transform type="rotate" axis="yy" angle="-90" />
+          <transform type="rotate" axis="y" angle="-90" />
           <transform type="translate" to="0 1 0" />
-          <transform type="rotate" axis="xx" angle="180" />
+          <transform type="rotate" axis="x" angle="180" />
         </transforms>
         <primitives>
           <rectangle xy1="1 0" xy2="0 1"/>
@@ -1593,7 +1593,7 @@
       <node id="left_square">
         <appearanceref id="inherit"/>
         <transforms>
-          <transform type="rotate" axis="yy" angle="-90" />
+          <transform type="rotate" axis="y" angle="-90" />
         </transforms>
         <primitives>
           <rectangle xy1="1 0" xy2="0 1"/>
@@ -1605,7 +1605,7 @@
         <appearanceref id="inherit"/>
         <transforms>
           <transform type="translate" to="0 1 0" />
-          <transform type="rotate" axis="xx" angle="180" />
+          <transform type="rotate" axis="x" angle="180" />
         </transforms>
         <primitives>
             <rectangle xy1="0 0" xy2="1 1"/>
@@ -1634,8 +1634,8 @@
         <appearanceref id="inherit" />
         <transforms>
           <transform type="translate" to="49.1 7 0.1"/>
-          <transform type="rotate" axis="yy" angle="-45" />
-          <transform type="rotate" axis="xx" angle="20" />
+          <transform type="rotate" axis="y" angle="-45" />
+          <transform type="rotate" axis="x" angle="20" />
           <transform type="scale" factor="0.5 0.5 0.5" />
         </transforms>
         <primitives></primitives>
@@ -1648,8 +1648,8 @@
         <appearanceref id="inherit" />
         <transforms>
           <transform type="translate" to="6 4.8 26.3"/>
-          <transform type="rotate" axis="yy" angle="85" />
-          <transform type="rotate" axis="xx" angle="7" />
+          <transform type="rotate" axis="y" angle="85" />
+          <transform type="rotate" axis="x" angle="7" />
           <transform type="scale" factor="0.5 0.5 0.5" />
         </transforms> 
         <primitives></primitives>
@@ -1802,7 +1802,7 @@
         <appearanceref id="ground_appearance" />
         <transforms>
           <transform type="translate" to="0 0 30"/>
-          <transform type="rotate" axis="xx" angle="-90"/>
+          <transform type="rotate" axis="x" angle="-90"/>
         </transforms>
         <primitives>
           <rectangle xy1="0 0" xy2="50 30"/>

@@ -113,7 +113,7 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 		// Ok, lets process primitives.
 		TiXmlElement * primitives = anfNode->FirstChildElement("primitives");
 		if (primitives == NULL){
-			issue("Primitives block not found!",WARNING); 
+			//issue("Primitives block not found!",WARNING); 
 		}else{
 			Primitive * primitive;
 			TiXmlElement * pr = primitives->FirstChildElement();

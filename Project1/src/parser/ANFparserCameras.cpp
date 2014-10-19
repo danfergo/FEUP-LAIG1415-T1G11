@@ -82,7 +82,7 @@ Camera * ANFparser::parseCameraOrtho(TiXmlElement *anfCamera){
 
 	ee = str(anfCamera->Attribute("direction"));
 
-	if(ee == "z"){
+	if(ee == "x"){
 		axis = CameraOrtho::XX;
 	}else if(ee == "y"){
 		axis = CameraOrtho::YY;
