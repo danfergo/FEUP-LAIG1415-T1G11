@@ -38,18 +38,20 @@ Toro::Toro(float inner, float outer, unsigned slices, unsigned loops): slices(sl
 }
 
 void Toro::draw(Texture * texture) const{
-
 	glPushMatrix();
-
-		for(unsigned i=0; i<slices; i++){
+		for(unsigned j=0; j<loops; j++){
+		
 			glPushMatrix();
 			glBegin(GL_TRIANGLE_STRIP);
-			for(unsigned j=0; j<=loops; j++){
-				glNormal3d(normal[i+1][j].x,normal[i+1][j].y,normal[i+1][j].z);
-				glVertex3f(vertex[i+1][j].x,vertex[i+1][j].y,vertex[i+1][j].z);
+				for(unsigned i=0; i<=slices; i++){
+					glTexCoord2d((i)*(1/(float)slices),0);
+					glNormal3d(normal[i][j].x,normal[i][j].y,normal[i][j].z);
+					glVertex3f(vertex[i][j].x,vertex[i][j].y,vertex[i][j].z);
+
+					glTexCoord2d((i +1)*(1/(float)slices),1);
+					glNormal3d(normal[i][j+1].x,normal[i][j+1].y,normal[i][j+1].z);
+					glVertex3f(vertex[i][j+1].x,vertex[i][j+1].y,vertex[i][j+1].z);
 			
-				glNormal3d(normal[i][j].x,normal[i][j].y,normal[i][j].z);
-				glVertex3f(vertex[i][j].x,vertex[i][j].y,vertex[i][j].z);
 			}
 			glEnd();
 			glPopMatrix();

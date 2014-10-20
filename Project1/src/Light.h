@@ -14,7 +14,6 @@ class Light: public CGFlight {
 		void setEnabled(bool enabled);
 		void setVisible(bool visible);
 		void setTarget(float target[4]);
-		void setAngle(float angle);
 		void setExponent(float exponent);
 		void setIdTitle(std::string title);
 		std::string getIdTitle();

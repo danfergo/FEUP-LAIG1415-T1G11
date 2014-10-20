@@ -28,9 +28,6 @@ void Light::setTarget(float target[4]){
 	this->direction[2] = direction[2];
 }
 
-void Light::setAngle(float angle){
-	this->angle = angle;
-}
 void Light::setExponent(float exponent){
 	glLightf(this->id,GL_SPOT_EXPONENT,exponent);
 }
@@ -46,11 +43,6 @@ std::string Light::getIdTitle(){
 bool Light::isEnabled(){
 	return enabled;
 }
-/*
-bool & Light::getEnableValue(){
-	return enabled;
-}
-*/
 
 void Light::setEnabled(bool enable){
 	if(enable) this->enable(); else this->disable();

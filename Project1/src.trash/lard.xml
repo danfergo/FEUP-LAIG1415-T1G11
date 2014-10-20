@@ -1,9 +1,0 @@
-<anf>
-	<graph rootid="ball">
-		<node id="lard_lad">
-			<primitives>
-				<cylinder base="3" top="3" height="8" slices="10" stacks="10"/>
-			</primitives>			
-		</node>
-	</graph>
-</anf>

@@ -15,6 +15,8 @@ private:
 	GLUquadric * quadric;
 
 public:
+	int showAxis;
+
 	static int lightsId[8]; 
 	static int drawingModes[3];
 	
@@ -49,6 +51,7 @@ public:
 	void setActiveCamera(int cameraPosition);
 	int getActiveCameraPosition();
 	int getDrawingMode();
+	int getShaddingMode();
 
 	void setShaddingMode(ShaddingMode shaddingMode);
 	void setDrawingMode(DrawingMode drawingMode);

@@ -23,12 +23,10 @@ void CameraOrtho::updateProjectionMatrix(int width, int height){
 
 
 void CameraOrtho::applyView(){
-
-
-	if(axis == YY){
+	if(axis == XX){
+		glRotated(-90,0,1,0);
+	}else if(axis == YY){
 		glRotated(90,1,0,0);
-	}else if(axis == ZZ){
-		glRotated(90,0,1,0);
 	}
 }
 

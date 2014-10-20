@@ -9,7 +9,7 @@ class Interface: public CGFinterface
 private:
 	std::vector<Light *> lights;
 	int * lightsState;
-	int drawingMode;
+	int drawingMode,shaddingMode;
 	int activeCameraPosition;
 public:
 	Interface(void);

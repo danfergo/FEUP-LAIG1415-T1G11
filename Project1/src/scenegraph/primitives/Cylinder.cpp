@@ -35,6 +35,7 @@ void Cylinder::draw(Texture * texture) const{
 	glNormal3d(0,0,-1);
 	glBegin(GL_POLYGON);
 		for(unsigned i = 0; i < slices; i++){
+			glTexCoord2d(vertexBase[i].x,vertexBase[i].y);
 			glVertex3d(vertexBase[i].x,vertexBase[i].y,0);
 		}
 	glEnd();
@@ -42,6 +43,7 @@ void Cylinder::draw(Texture * texture) const{
 	glNormal3d(0,0,1);
 	glBegin(GL_POLYGON);
 				for(unsigned i = slices; i > 0; i--){
+					glTexCoord2d(vertexTop[i-1].x,vertexTop[i-1].y);
 			glVertex3d(vertexTop[i-1].x,vertexTop[i-1].y,height);
 		}
 	glEnd();

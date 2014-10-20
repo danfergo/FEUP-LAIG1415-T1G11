@@ -10,7 +10,7 @@
 int Scene::lightsId[8] = {GL_LIGHT0,GL_LIGHT1,GL_LIGHT2,GL_LIGHT3,GL_LIGHT4,GL_LIGHT5,GL_LIGHT6,GL_LIGHT7};
 int Scene::drawingModes[3] = {GL_FILL,GL_LINE,GL_POINT};
 
-Scene::Scene(): root(NULL), CGFscene() {
+Scene::Scene(): root(NULL), CGFscene(), showAxis(1){
 	quadric = gluNewQuadric();
 	gluQuadricTexture(quadric, GL_TRUE);
 
@@ -68,7 +68,7 @@ void Scene::display()
 
 	//redefining some settings that could be changed true the interface
 	glPolygonMode(GL_FRONT_AND_BACK, drawingModes[drawingMode]);
-	
+	if(shaddingMode == FLAT) glShadeModel(GL_FLAT); else  glShadeModel(GL_SMOOTH);
 
 	// Initialize Model-View matrix as identity (no transformation
 	glMatrixMode(GL_MODELVIEW);
@@ -80,9 +80,8 @@ void Scene::display()
 	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
 		if(localIlluminationEnabled && lightingEnabled) (*it)->draw(); else (*it)->disable();
 	
-	//(new Toro(5,7,10,10))->draw();
 	// Draw axis
-	axis.draw();
+	if(showAxis==0) axis.draw();
 	
     // ---- END Background, camera and axis setup
 
@@ -210,6 +209,10 @@ int Scene::getActiveCameraPosition(){
 
 int Scene::getDrawingMode(){
 	return this->drawingMode;
+}
+
+int Scene::getShaddingMode(){
+	return this->shaddingMode;
 }
 
 std::vector<Light *> Scene::getLights(){
