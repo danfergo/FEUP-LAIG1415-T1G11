@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Node::Node():appearance(NULL)
+Node::Node():appearance(NULL),displayListId(-1), isDisplayList(false)
 {
 	for(unsigned i=0; i<16; i++)
 		transforms[i] = (i%5 == 0) ? 1 : 0 ;
@@ -36,42 +36,60 @@ void Node::addDescendants(Node * descendant){
 	this->descendants.push_back(descendant);
 }
 
-void Node::processNode(Appearance * parentAppearance){
-	
-	//Ok, this a displayList and it is initialized, we apply it .
-	if(displayListId >= 0){
-		glCallList (displayListId);
-	}else{
-	
-		// we are going to record the actions
-		if(isDisplayList){
-			displayListId = glGenLists(1);
-			glNewList(displayListId,GL_COMPILE_AND_EXECUTE);
-		}
-				// ok lets apply this node transformations
-				glMultMatrixf(transforms);
-		
-					// before draw anything lets apply 
-					Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
-					if(currentAppearance != NULL)currentAppearance->apply();
+void Node::processNodeInitialization(Appearance * parentAppearance){
 
-					// we are going to draw this node's primitives
-					for(std::vector<Primitive *>::iterator it = primitives.begin();
-						it != primitives.end(); it++){
-							(*it)->draw(currentAppearance ? currentAppearance->getTexture() : NULL);
-					}
 
-					//now we process this node's descendants
-					for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
-						(*it)->processNode(currentAppearance);
-					}
-
-				glPopMatrix();
-
-		if(isDisplayList) glEndList();
+	// we visit all the descendants and initialize it,
+	for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
+		(*it)->processNodeInitialization(parentAppearance);
 	}
 
+	// now we can "record" the display list relative to this node. 
+	// if any descendant is a display list then, it should be already recorded and, 
+	// it should be called during this node recording.
+	if(displayListId == 0){
+		.
+			3.3.333
+			33
+		int displayListId = glGenLists(1);
+		glNewList(displayListId,GL_COMPILE);
+			processNode(parentAppearance);
+			this->displayListId = displayListId;
+		glEndList();
+	}
+}
 
+
+
+
+void Node::processNode(Appearance * parentAppearance){
+	
+		if(displayListId > 0){
+			glCallList(displayListId);
+			return;
+		}
+		
+		glPushMatrix();
+			// ok lets apply this node transformations
+			glMultMatrixf(transforms);
+		
+
+			// before draw anything lets apply
+			Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
+			if(currentAppearance != NULL)currentAppearance->apply();
+
+			// we are going to draw this node's primitives
+			for(std::vector<Primitive *>::iterator it = primitives.begin();
+				it != primitives.end(); it++){
+					(*it)->draw(currentAppearance ? currentAppearance->getTexture() : NULL);
+			}
+
+			//now we process this node's descendants
+			for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
+				(*it)->processNode(currentAppearance);
+			}
+
+		glPopMatrix();
 
 }
 
@@ -128,3 +146,8 @@ void Node::setAppearance(Appearance * appearance){
 bool Node::hasAppearance()  const{
 	return appearance!=NULL;
 };
+
+
+void Node::setDisplayList(){
+	if(displayListId < 0) displayListId = 0;
+}

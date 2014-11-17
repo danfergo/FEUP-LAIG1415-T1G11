@@ -7,7 +7,7 @@
 #include <exception>
  
 #include "CGFapplication.h"
-#include "Scene.h"
+#include "scenegraph/Scene.h"
 #include "parser/ANFparser.h"
 #include "Interface.h"
 

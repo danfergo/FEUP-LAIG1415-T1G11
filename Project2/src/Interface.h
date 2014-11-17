@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CGFinterface.h"
-#include "Light.h"
+#include "scenegraph/Light.h"
 
 class Interface: public CGFinterface
 {

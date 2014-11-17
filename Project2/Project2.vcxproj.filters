@@ -57,6 +57,13 @@
     <ClCompile Include="src\scenegraph\Scene.cpp">
       <Filter>scenegraph</Filter>
     </ClCompile>
+    <ClCompile Include="..\Project1\src\scenegraph\primitives\Plane.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Project1\src\scenegraph\primitives\Patch.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\parser\ANFparser.h">
@@ -105,6 +112,13 @@
     <ClInclude Include="src\scenegraph\Light.h">
       <Filter>scenegraph</Filter>
     </ClInclude>
+    <ClInclude Include="..\Project1\src\scenegraph\primitives\Plane.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Project1\src\scenegraph\primitives\Patch.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="parser">

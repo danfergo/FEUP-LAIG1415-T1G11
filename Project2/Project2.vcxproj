@@ -68,6 +68,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Project1\src\scenegraph\primitives\Patch.cpp" />
+    <ClCompile Include="..\Project1\src\scenegraph\primitives\Plane.cpp" />
+    <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Interface.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\parser\ANFparser.cpp" />
@@ -90,6 +93,9 @@
     <ClCompile Include="src\scenegraph\utils\Normals.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Project1\src\scenegraph\primitives\Patch.h" />
+    <ClInclude Include="..\Project1\src\scenegraph\primitives\Plane.h" />
+    <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\Interface.h" />
     <ClInclude Include="src\parser\ANFparser.h" />
     <ClInclude Include="src\scenegraph\Appearance.h" />

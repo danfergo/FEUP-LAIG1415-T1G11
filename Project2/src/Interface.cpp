@@ -1,7 +1,7 @@
 #include "Interface.h"
 
-#include "Light.h"
-#include "Scene.h"
+#include "scenegraph/Light.h"
+#include "scenegraph/Scene.h"
 #include "scenegraph/Camera.h"
 #include <iostream>
 #include "CGFapplication.h"

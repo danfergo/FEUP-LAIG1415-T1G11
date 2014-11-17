@@ -2,9 +2,9 @@
 #define SCENE_H
 
 #include "CGFscene.h"
-#include "scenegraph/Node.h"
+#include "Node.h"
 #include "Light.h"
-#include "scenegraph/Camera.h"
+#include "Camera.h"
 
 class Scene : public CGFscene
 {

@@ -17,11 +17,14 @@ private:
 public:
 	Node();
 	~Node();
+	void processNodeInitialization(Appearance * parentAppearance);
 	void processNode(Appearance * parentAppearance);
 	void addPrimitive(Primitive * primitive);
 	void Node::addDescendants(Node * descendant);
 	void setAppearance(Appearance * appearance);
 	bool hasAppearance() const;
+	void setDisplayList();
+
 
 	bool addRotation(std::string axis, float angle);
 	void addRotationX(float angle);

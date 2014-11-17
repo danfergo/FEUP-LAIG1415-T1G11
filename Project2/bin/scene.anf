@@ -501,7 +501,7 @@
       </node>
 
 
-      <node id="store_sidewalk">
+      <node id="store_sidewalk" displaylist="true">
         <appearanceref id="marble_appearance"/>
         <primitives></primitives>
         <transforms>
@@ -1613,7 +1613,7 @@
       <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
       <!-- :::::::::::::::::::::::::::::::::::::   UNIT CUBE  :::::::::::::::::::::::::::::::: -->
       <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
-      <node id="unit_cube">
+      <node id="unit_cube" displaylist="true">
         <appearanceref id="inherit"/>
         <primitives></primitives>
         <transforms></transforms>

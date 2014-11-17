@@ -155,6 +155,11 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 			issue("Must exist descandants or primitives!",WARNING);
 
 
+		std::string displayList = str(anfNode->Attribute("displaylist"));
+		if(displayList == "true") ret.node->setDisplayList();
+		else if(displayList != "" && displayList != "false") issue("Bad value found at displaylist attribute", WARNING);
+
+
 		// lets just apply its appearance before leave
 		TiXmlElement * appearanceBlock  = anfNode->FirstChildElement("appearanceref");
 		if(appearanceBlock){

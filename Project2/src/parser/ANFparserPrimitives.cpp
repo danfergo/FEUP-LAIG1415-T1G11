@@ -7,7 +7,9 @@
 #include "../scenegraph/primitives/Toro.h"
 #include "../scenegraph/primitives/Cylinder.h"
 #include "../scenegraph/primitives/Sphere.h"
-
+/*#include "../scenegraph/primitives/Patch.h"
+#include "../scenegraph/primitives/Plane.h"
+*/
 void ANFparser::initPrimitiveParsers(){
 	
 	//insert here all the primitive's parser funcition
@@ -113,4 +115,52 @@ Primitive * ANFparser::parseToro(TiXmlElement * anfToro){
 	}
 
 	return new Toro(inner, outer, slices, loops);
+}
+
+Primitive * ANFparser::parsePatch(TiXmlElement * anfPatch){
+	/*int order, partsU, partsV;
+	std::string computeStr;
+	Compute compute;
+
+	if(anfPatch->QueryIntAttribute("order", &order) != TIXML_SUCCESS){
+		issue("Error parsing Patch order attribute.", ERROR);
+	}
+	if(anfPatch->QueryIntAttribute("partsU", &partsU) != TIXML_SUCCESS){
+		issue("Error parsing Patch partsU attribute.", ERROR);
+	}
+	if(anfPatch->QueryIntAttribute("partsV", &partsV) != TIXML_SUCCESS){
+		issue("Error parsing Patch partsV attribute.", ERROR);
+	}
+	computeStr = str(anfPatch->Attribute("compute"));
+	if()
+	{}
+	else if()
+	{}
+	else if()
+	{}
+	else{
+		issue("Error parsing Patch Compute attribute.", ERROR);
+	}
+	
+	Patch pacote = new Patch(order, partsU,p artsV, compute);
+
+	TiXmlElement * controlpoint = anfPatch->FirstChildElement("controlpoint");
+
+	while(controlpoint){
+			int x, y, z;
+			if(controlpoint->QueryIntAttribute("x", &x) != TIXML_SUCCESS){
+			issue("Error parsing Controlpoint x attribute.", ERROR);
+		}
+			if(controlpoint->QueryIntAttribute("y", &y) != TIXML_SUCCESS){
+			issue("Error parsing Controlpoint y attribute.", ERROR);
+		}
+			if(controlpoint->QueryIntAttribute("z", &z) != TIXML_SUCCESS){
+			issue("Error parsing Controlpoint z attribute.", ERROR);
+		}
+	
+
+		controlpoint = controlpoint->NextSiblingElement("controlpoint");
+	}
+	return;*/
+	return NULL;
 }

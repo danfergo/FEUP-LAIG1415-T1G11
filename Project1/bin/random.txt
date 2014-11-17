@@ -1,0 +1,130 @@
+﻿<anf>
+    <globals>
+	<!-- definicoes globais de renderizacao-->
+          <drawing mode="fill" shading="gouraud" background="0 0 0 1" /> 
+          <culling face="back" order="ccw" />
+          <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
+    </globals> 
+
+ <lights>        <!-- uma luz, e' obrigatorio pela linguagem e e' para o parser nao se passar (nnc testei sem a declarar)-->
+        <light id="Moon reflex" type="omni" enabled="true" marker="false" pos="30 50 0" >
+          	<component type="ambient" value="0.01 0.01 0.015 0" />
+          	<component type="diffuse" value="0.7 0.7 0.8 1" />
+          	<component type="specular" value="0.1 0.1 0.1 0" />
+        </light>
+ </lights>
+	
+<textures>
+	<texture id="face_texture" file="photo.jpg" texlength_s="2" texlength_t="1" />
+</textures>
+  <cameras initial="Sky view" >
+    <perspective id="Sky view" near="0.1" far="555" angle="70" pos="55 10 35" target="0 0 0" />
+  </cameras>
+
+  <appearances>
+
+       <appearance id="white" shininess="5" textureref="" >
+               <component type="ambient" value="0.5 0.5 0.5 0" />
+               <component type="diffuse" value="1 1 1 0" />
+               <component type="specular" value="1 1 1 0" />
+        </appearance>
+
+    <appearance id="branco_cara" shininess="5" textureref="face_texture" >
+      <component type="ambient" value="0.5 0.5 0.5 0" />
+      <component type="diffuse" value="1 1 1 0" />
+      <component type="specular" value="1 1 1 0" />
+    </appearance>
+
+    <appearance id="vermelho" shininess="5" textureref="" >
+               <component type="ambient" value="0.5 0 0 0" />
+               <component type="diffuse" value="1 0 0 0" />
+               <component type="specular" value="1 0 0 0" />
+     </appearance> 
+</appearances>
+	<graph rootid="root">
+
+		<node id="frontface">
+			<appearanceref id="white" />
+			<primitives>
+				<rectangle xy1="0 0" xy2="1 1" />
+			</primitives>
+			<descandants>
+			</descandants>
+		</node>
+
+
+
+		<node id="root">
+      <transforms></transforms>
+			<appearanceref id="white" />
+			<primitives>
+				<rectangle xy1="5 5" xy2="10 10" />
+			</primitives>
+			<descendants>
+				<noderef id="piramide_triangular" />
+				<noderef id="piramide_triangular_tunning" />
+				<noderef id="um_cilindro" />
+        <noderef id="um_donut" />
+        <noderef id="uma_esfera" />
+			</descendants>
+		</node>
+
+
+		<node id="piramide_triangular">
+      <transforms></transforms>
+			<appearanceref id="inherit" /> <!-- herda a aparencia do pai -->
+			<primitives>
+				<triangle xyz1="-1 0 -1" xyz2="1 0 -1" xyz3="0 0 1" />
+				<triangle xyz1="0 0 1" xyz2="1 0 -1" xyz3="0 2 0" />
+				<triangle xyz1="-1 0 -1" xyz2="0 0 1" xyz3="0 2 0" />
+        <triangle xyz1="1 0 -1" xyz2="-1 0 -1" xyz3="0 2 0" />
+
+      </primitives>
+		</node>
+
+
+      <node id="piramide_triangular_tunning">
+			<appearanceref id="vermelho" />
+                        <transforms> <!-- as transformacoes são executadas comecando na mais a baixo e vai subindo (algebra/matrizes shit)-->
+				<transform type="translate" to="5 3 4" />
+				<transform type="scale" factor="3 5 2" />
+				<transform type="rotate" axis="x" angle="90" />
+				<transform type="rotate" axis="z" angle="45" />
+			</transforms>
+			<descendants>
+				<noderef id="piramide_triangular" />
+			</descendants>
+		</node>
+
+		<node id="um_cilindro">
+      <transforms></transforms>
+			<appearanceref id="branco_cara" /> <!-- herda a aparencia do pai -->
+			<primitives>
+				<cylinder base="5" height="3" top="2"  stacks="2" slices="5"/>
+			</primitives> 
+		</node>
+
+
+		<node id="uma_esfera">
+			<transforms>
+ 				<transform type="translate" to="0 0 -3"/>
+			</transforms>
+			<appearanceref id="inherit" /> <!-- herda a aparencia do pai -->
+			<primitives>
+				<sphere radius="2.0" stacks="7" slices="5"/>
+			</primitives>
+		</node>
+
+		<node id="um_donut">
+			<transforms>
+ 				<transform type="translate" to="0 0 5"/>
+			</transforms>
+			<appearanceref id="inherit" /> <!-- herda a aparencia do pai -->
+			<primitives>
+				<torus slices="4" loops="6" inner="2" outer="3"/>
+			</primitives>
+		</node>
+
+	</graph>
+
+</anf>

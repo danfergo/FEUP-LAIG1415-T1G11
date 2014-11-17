@@ -1,14 +1,16 @@
 ﻿
 #include "CGFapplication.h"
 #include "Scene.h"
-#include "scenegraph\primitives\Toro.h"
+#include "primitives/Toro.h"
 #include "CGFappearance.h"	
-#include "parser\ANFparser.h"
+#include "../parser/ANFparser.h"
 #include <iostream>
 
 
 int Scene::lightsId[8] = {GL_LIGHT0,GL_LIGHT1,GL_LIGHT2,GL_LIGHT3,GL_LIGHT4,GL_LIGHT5,GL_LIGHT6,GL_LIGHT7};
 int Scene::drawingModes[3] = {GL_FILL,GL_LINE,GL_POINT};
+
+
 
 Scene::Scene(): root(NULL), CGFscene(), showAxis(1){
 	quadric = gluNewQuadric();
@@ -58,6 +60,8 @@ void Scene::init()
 	glEnable(GL_NORMALIZE);
 }
 
+
+bool firstDisplay = true;
 void Scene::display() 
 {
 
@@ -86,8 +90,16 @@ void Scene::display()
     // ---- END Background, camera and axis setup
 
 	// Draw Scene
-	if(root != NULL)
-		root->processNode(NULL);
+	if(root != NULL){
+		if(firstDisplay){
+			root->processNodeInitialization(NULL);
+			firstDisplay = false;
+		}else{
+			root->processNode(NULL);
+
+		}
+	}
+		
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer

@@ -4,8 +4,8 @@
 #include <map>
 
 #include "../scenegraph/utils/Point.h"
-#include "../Scene.h"
-#include "../Light.h"
+#include "../scenegraph/Scene.h"
+#include "../scenegraph/Light.h"
 #include "../scenegraph/Texture.h"
 #include "tinyxml.h"
 #include "../scenegraph/Primitive.h"
@@ -45,6 +45,7 @@ private:
 	Primitive * parseToro(TiXmlElement * anfToro);
 	Primitive * parseCylinder(TiXmlElement * anfCylinder);
 	Primitive * parseRetangle(TiXmlElement * anfRetangle);
+	Primitive * parsePatch(TiXmlElement * anfPatch);
 	void initPrimitiveParsers();
 
 	//Cameras
