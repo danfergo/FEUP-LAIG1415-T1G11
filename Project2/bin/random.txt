@@ -1,0 +1,57 @@
+﻿<anf>
+    <globals>
+	<!-- definicoes globais de renderizacao-->
+          <drawing mode="fill" shading="gouraud" background="0 0 0 1" /> 
+          <culling face="back" order="ccw" />
+          <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
+    </globals> 
+
+ <lights>        <!-- uma luz, e' obrigatorio pela linguagem e e' para o parser nao se passar (nnc testei sem a declarar)-->
+        <light id="Moon reflex" type="omni" enabled="true" marker="false" pos="30 50 0" >
+          	<component type="ambient" value="0.01 0.01 0.015 0" />
+          	<component type="diffuse" value="0.7 0.7 0.8 1" />
+          	<component type="specular" value="0.1 0.1 0.1 0" />
+        </light>
+ </lights>
+	
+<textures>
+
+</textures>
+  <cameras initial="Sky view" >
+    <perspective id="Sky view" near="0.1" far="555" angle="70" pos="5 5 5" target="0 0 0" />
+  </cameras>
+
+  <appearances>
+
+       <appearance id="white" shininess="5" textureref="" >
+               <component type="ambient" value="0.5 0.5 0.5 0" />
+               <component type="diffuse" value="1 1 1 0" />
+               <component type="specular" value="1 1 1 0" />
+        </appearance>
+
+    <appearance id="branco_cara" shininess="5" textureref="" >
+      <component type="ambient" value="0.5 0.5 0.5 0" />
+      <component type="diffuse" value="1 1 1 0" />
+      <component type="specular" value="1 1 1 0" />
+    </appearance>
+
+    <appearance id="vermelho" shininess="5" textureref="" >
+               <component type="ambient" value="0.5 0 0 0" />
+               <component type="diffuse" value="1 0 0 0" />
+               <component type="specular" value="1 0 0 0" />
+     </appearance> 
+</appearances>
+	<graph rootid="root">
+
+		<node id="root">
+			<transforms> 
+			</transforms>
+			<appearanceref id="vermelho" /> <!-- herda a aparencia do pai -->
+			<primitives>
+				<rectangle xy1="0 0" xy2="1 1"/>
+			</primitives>
+		</node>
+
+	</graph>
+
+</anf>

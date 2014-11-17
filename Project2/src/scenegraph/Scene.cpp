@@ -5,7 +5,7 @@
 #include "CGFappearance.h"	
 #include "../parser/ANFparser.h"
 #include <iostream>
-
+#include "primitives/Patch.h"
 
 int Scene::lightsId[8] = {GL_LIGHT0,GL_LIGHT1,GL_LIGHT2,GL_LIGHT3,GL_LIGHT4,GL_LIGHT5,GL_LIGHT6,GL_LIGHT7};
 int Scene::drawingModes[3] = {GL_FILL,GL_LINE,GL_POINT};
@@ -36,6 +36,10 @@ void Scene::init()
 {
 	// Enables lighting computations
 	if(lightingEnabled) glEnable(GL_LIGHTING);
+
+	glEnable(GL_MAP2_VERTEX_3);
+	glEnable(GL_MAP2_NORMAL);
+	glEnable(GL_MAP2_COLOR_4);
 
 	// Sets up some lighting parameters
 	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, (doublesidedEnabled ? GL_TRUE : GL_FALSE));
@@ -88,6 +92,19 @@ void Scene::display()
 	if(showAxis==0) axis.draw();
 	
     // ---- END Background, camera and axis setup
+
+
+	Point3d points[9] = {
+		{0,0,0},{0,0,1},{0,0,2},
+		{1,1,0},{1,1,1},{1,1,2},
+		{2,0,0},{2,0,1},{2,0,2}
+		};
+
+	Patch * xx = new Patch(2,50, 60, Patch::FILL, points);
+
+	xx->draw(NULL);
+
+
 
 	// Draw Scene
 	if(root != NULL){

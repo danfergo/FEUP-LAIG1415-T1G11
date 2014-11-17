@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\parser\ANFparser.cpp">
       <Filter>parser</Filter>
     </ClCompile>
@@ -60,10 +59,12 @@
     <ClCompile Include="..\Project1\src\scenegraph\primitives\Plane.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="..\Project1\src\scenegraph\primitives\Patch.cpp">
+    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Patch.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\FlagShadder.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\parser\ANFparser.h">
@@ -115,10 +116,11 @@
     <ClInclude Include="..\Project1\src\scenegraph\primitives\Plane.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="..\Project1\src\scenegraph\primitives\Patch.h">
+    <ClInclude Include="src\Animation.h" />
+    <ClInclude Include="src\scenegraph\primitives\Patch.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="src\Animation.h" />
+    <ClInclude Include="src\FlagShadder.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="parser">

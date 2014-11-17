@@ -48,9 +48,6 @@ void Node::processNodeInitialization(Appearance * parentAppearance){
 	// if any descendant is a display list then, it should be already recorded and, 
 	// it should be called during this node recording.
 	if(displayListId == 0){
-		.
-			3.3.333
-			33
 		int displayListId = glGenLists(1);
 		glNewList(displayListId,GL_COMPILE);
 			processNode(parentAppearance);
