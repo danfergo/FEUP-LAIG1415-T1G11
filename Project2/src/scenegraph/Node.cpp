@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Node::Node():appearance(NULL),isDisplayList(false)
+Node::Node():appearance(NULL),isDisplayList(false),currentAnimationIndex(0),lastEndTime(0)
 {
 	for(unsigned i=0; i<16; i++)
 		transforms[i] = (i%5 == 0) ? 1 : 0 ;
@@ -93,14 +93,14 @@ void Node::processNode(Appearance * parentAppearance){
 		glPushMatrix();
 			// ok lets apply this node transformations
 			glMultMatrixf(transforms);
-		
 
 			// before draw anything lets apply
 			if(currentAppearance != NULL)currentAppearance->apply();
 
 			glPushMatrix();
-				for(std::vector<Animation *>::iterator it = animations.begin(); it != animations.end(); it++)
-					(*it)->animate();
+				//for(std::vector<Animation *>::iterator it = animations.begin(); it != animations.end(); it++)
+				if(animations.size() > 0) animations[currentAnimationIndex]->animate();
+
 
 				// we are going to draw this node's primitives
 				for(std::vector<Primitive *>::iterator it = primitives.begin();
@@ -190,6 +190,19 @@ unsigned  Node::getLastAnimationEndTime() const{
 void Node::update(unsigned time){
 	for(std::vector<Animation *>::iterator it = animations.begin(); it != animations.end(); it++)
 		(*it)->update(time);
+	
+	if(time == 0){
+		 currentAnimationIndex = 0;
+		if(animations.size() > 0) lastEndTime = animations[0]->getEndTime();
+	}
+	else if(time > lastEndTime && (currentAnimationIndex+1) < animations.size()){
+		currentAnimationIndex++;
+		lastEndTime = animations[currentAnimationIndex]->getEndTime();
+	}
+	
+	if(animations.size() > 0){
+		animations[currentAnimationIndex]->update(time);
+	}
 
 	for(std::vector<Node *>::iterator it  = descendants.begin(); it != descendants.end(); it++)
 		(*it)->update(time);

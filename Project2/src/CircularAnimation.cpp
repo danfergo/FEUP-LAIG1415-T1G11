@@ -31,7 +31,7 @@ void CircularAnimation::animate() const{
 void CircularAnimation::update(unsigned long time){
 	if(time >= startingTime && time <= endingTime){
 		double currentAngleDeg = fmod(startAngle + angularVelocity*(time-startingTime),(double)360);
-		double currentAngleRad = PI*(double)currentAngleDeg/180;
+		double currentAngleRad = (PI*(double)currentAngleDeg)/180;
 		currentPosition.x = center.x + radius*sin(currentAngleRad);
 		currentPosition.y = center.y;
 		currentPosition.z = center.z + radius*cos(currentAngleRad);
@@ -43,5 +43,5 @@ void CircularAnimation::update(unsigned long time){
 }
 
 Animation * CircularAnimation::clone(unsigned newStartTime){
-	return new CircularAnimation(newStartTime,this->duration/1000,this->center,this->radius,this->startAngle,this->endAngle);
+	return new CircularAnimation(newStartTime/1000,this->duration/1000,this->center,this->radius,this->startAngle,this->endAngle);
 }

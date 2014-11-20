@@ -61,14 +61,6 @@
     </lights>
 
 
-  <animations>
-    <animation id="copcar_movingsegments" span="6" type="linear">
-      <controlpoint xx="40" yy="0"  zz="22" />
-      <controlpoint xx="30" yy="0"  zz="10" />
-    </animation>
-
-  </animations>
-
 
   <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
     <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
@@ -232,51 +224,70 @@
       
     </appearances>
 
+
+
+
+  <animations>
+    <animation id="copcar_movingsegments" span="6" type="linear">
+      <controlpoint xx="60" yy="0"  zz="40" />
+      <controlpoint xx="55" yy="0"  zz="14" />
+      <controlpoint xx="44" yy="0"  zz="12" />
+    </animation>
+
+
+    <animation id="vei_1" span="6" type="circular" center="0 0 0" radius="10" startang="0" rotang="270" />
+    <animation id="vei_2" span="5" type="linear">
+      <controlpoint xx="-10" yy="0"  zz="0" />
+      <controlpoint xx="-6" yy="-2"  zz="6" />
+      <controlpoint xx="0" yy="-4"  zz="10" />
+      <controlpoint xx="6" yy="-6"  zz="6" />
+      <controlpoint xx="10" yy="-8"  zz="1" />
+    </animation>
+
+  </animations>
+  
     <!-- bloco do grafo; "rootid" identifica o no de raiz -->
     <graph rootid="world">
+      
+      <node id="bush">
+        <appearanceref id="leather_bench_app"/>
+        <primitives>
+            <patch order="3" partsU="30" partsV="40" compute="fill">
+              <controlpoint x="-1" y="0" z="-1" />
+              <controlpoint x="-1.5" y="0" z="-0.5" />
+              <controlpoint x="-0.7" y="0" z="0.5" />
+              <controlpoint x="-1" y="0" z="1" />
 
+              <controlpoint x="-0.3" y="0" z="-1.3" />
+              <controlpoint x="-0.2" y="4" z="-0.2" />
+              <controlpoint x="-0.2" y="4" z="0.2" />
+              <controlpoint x="-0.6" y="0" z="0.9" />
+              
+              
+              <controlpoint x="0.4" y="0" z="-0.1" />
+              <controlpoint x="0.2" y="4" z="-0.2" />
+              <controlpoint x="0.2" y="4" z="0.2" />
+              <controlpoint x="0.2" y="0" z="0.5" />
+              
+              <controlpoint x="1" y="0" z="-1" />
+              <controlpoint x="-0.4" y="0" z="-0.5" />
+              <controlpoint x="-1.3" y="0" z="0.5" />
+              <controlpoint x="1" y="0" z="1" />
+            </patch>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="15 0 15"/>
+        </transforms>
+        <descendants>  </descendants>
+      </node>
+      
+      
+      
+      
+      
       <node id="world">
-        <appearanceref id="donut_app"/>
+        <appearanceref id="white"/>
         <primitives> 
-          <flag texture="src/flag.png" />
-
-          <!-- <patch order="3" partsU="30" partsV="40" compute="fill">
-            <controlpoint x="-2" y="0" z="-2" />
-            <controlpoint x="-2" y="0" z="-1" />
-            <controlpoint x="-2" y="0" z="1" />
-            <controlpoint x="-2" y="0" z="2" />
-
-            <controlpoint x="-1" y="0" z="-2" />
-            <controlpoint x="-1" y="2" z="-1" />
-            <controlpoint x="-1" y="2" z="1" />
-            <controlpoint x="-1" y="0" z="2" />
-
-            <controlpoint x="1" y="0" z="-2" />
-            <controlpoint x="1" y="2" z="-1" />
-            <controlpoint x="1" y="2" z="1" />
-            <controlpoint x="1" y="0" z="2" />
-
-            <controlpoint x="2" y="0" z="-2" />
-            <controlpoint x="2" y="0" z="-1" />
-            <controlpoint x="2" y="0" z="1" />
-            <controlpoint x="2" y="0" z="2" />
-
-          </patch> -->
-<!--
-          <patch order="2" partsU="30" partsV="40" compute="fill">
-            <controlpoint x="-0.5" y="0" z="-0.5" />
-            <controlpoint x="-0.5" y="0" z="0" />
-            <controlpoint x="-0.5" y="0" z="0.5" />
-            
-            <controlpoint x="0" y="1" z="-0.5" />
-            <controlpoint x="0" y="1" z="0" />
-            <controlpoint x="0" y="1" z="0.5" />
-
-            <controlpoint x="0.5" y="0" z="-0.5" />
-            <controlpoint x="0.5" y="0" z="0" />
-            <controlpoint x="0.5" y="0" z="0.5" />
-            
-          </patch>-->
           
         </primitives>
         
@@ -289,21 +300,88 @@
           <noderef id="camera_store" />
           <noderef id="camera_door" />
           <noderef id="camera_parkinglot" />
+          <noderef id="flying_vehicle" />
+          <noderef id="flagg" />
+          <noderef id="bush" />
+
         </descendants>
       </node>
+
+      <node id="flagg">
+        <appearanceref id="white"/>
+        <primitives>
+          <flag texture="src/flag.png" />
+        </primitives>
+        <transforms>
+          <transform type="translate" to="22 2 26.2"/>
+          <transform type="scale" factor="1 1 0.1" />
+          <transform type="rotate" axis="x" angle="90" />
+          
+        </transforms>
+        <descendants> </descendants>
+      </node>
+
+
+      <node id="flying_vehicle">
+
+        <animationref id="vei_1" />
+        <animationref id="vei_2" />
+        <primitives>
+        </primitives>
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="10 15 10"/>
+        </transforms>
+        <descendants>
+          <noderef id="flying_vehicle_repos"/>
+        </descendants>
+
+      </node>
       
+      <node id="flying_vehicle_repos">
+
+        <primitives>
+          <vehicle />
+        </primitives>
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="y" angle="-180" />
+          <transform type="scale" factor="0.5 0.5 0.5" />
+        </transforms>
+        <descendants>
+        </descendants>
+
+      </node>    
+      
+      
+
+
       <node id="cop_car1">
+
         <animationref id="copcar_movingsegments" />
         <primitives></primitives>
         <appearanceref id="inherit"/>
         <transforms>
-          <transform type="translate" to="36.6 0 20.4"/>
-          <transform type="rotate" axis="y" angle="3" />
+        </transforms>
+        <descendants>
+          <noderef id="cop_car_rotated"/>
+        </descendants>
+      </node>
+
+
+      <node id="cop_car_rotated">
+        <primitives></primitives>
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="-1.2 0 0"/>
+          <transform type="rotate" angle="-90" axis="y" /> 
         </transforms>
         <descendants>
           <noderef id="cop_car"/>
         </descendants>
       </node>
+      
+
 
       <node id="cop_car2">
         <primitives></primitives>
@@ -485,6 +563,28 @@
       <node id="store_fake_terrace">
         <appearanceref id="gravel_appearance"/>
         <primitives>
+          <patch order="3" partsU="30" partsV="40" compute="fill">
+            <controlpoint x="3" y="3" z="0" />
+            <controlpoint x="4" y="3" z="0" />
+            <controlpoint x="5" y="3" z="0" />
+            <controlpoint x="6" y="3" z="0" />
+
+            <controlpoint x="3" y="4" z="0" />
+            <controlpoint x="4" y="4" z="1" />
+            <controlpoint x="5" y="4" z="1" />
+            <controlpoint x="6" y="4" z="0" />
+
+            <controlpoint x="3" y="5" z="0" />
+            <controlpoint x="4" y="5" z="1" />
+            <controlpoint x="5" y="5" z="1" />
+            <controlpoint x="6" y="5" z="0" />
+
+            <controlpoint x="3" y="6" z="0" />
+            <controlpoint x="4" y="6" z="0" />
+            <controlpoint x="5" y="6" z="0" />
+            <controlpoint x="6" y="6" z="0" />
+
+          </patch>
           <rectangle xy1="0 0" xy2="23 23" />
         </primitives>
         <transforms>

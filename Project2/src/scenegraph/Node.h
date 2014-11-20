@@ -17,6 +17,8 @@ private:
 	float transforms[16];
 	Appearance * appearance;
 	bool isDisplayList;
+	int currentAnimationIndex;
+	int lastEndTime;
 public:
 	Node();
 	~Node();

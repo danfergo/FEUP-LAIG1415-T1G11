@@ -9,6 +9,8 @@ Vehicle::Vehicle(void)
 	heliceG = new Cylinder( this->quadric,  0.1, 0.25, 8, 4, 4);
 	heliceS = new Cylinder( this->quadric,  0.07, 0.15, 2, 4, 4);
 	traseira = new Cylinder( this->quadric,  0.07, 0.15, 0.5, 4, 4);
+	Point3d center = {0,0,0};
+	//animation = CircularAnimation(long st,long dur, center, 0, 60,360);
 }
 
 

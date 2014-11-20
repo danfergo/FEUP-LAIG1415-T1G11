@@ -100,7 +100,7 @@ void LinearAnimation::update(unsigned long time){
 }
 
 Animation * LinearAnimation::clone(unsigned newStartTime){
-	LinearAnimation * animation = new LinearAnimation(newStartTime, this->duration/1000);
+	LinearAnimation * animation = new LinearAnimation(newStartTime/1000, this->duration/1000);
 	for(std::vector<Point3d>::iterator it = controlPoints.begin(); it != controlPoints.end(); it++ ){
 		animation->addControlPoint(*it);
 	}
