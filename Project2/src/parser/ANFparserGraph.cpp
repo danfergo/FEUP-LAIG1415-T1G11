@@ -129,18 +129,23 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode, std::map<std
 
 		// lets just apply its animation before leave
 		TiXmlElement * animationBlock  = anfNode->FirstChildElement("animationref");
-		if(animationBlock){
+		Animation * ani;
+		while(animationBlock){
 			std::string animationId = str(animationBlock->Attribute("id"));	
 			if(animationId != ""){
 				try{
-					ret.node->addAnimation(animations.at(animationId));
+					ani = NULL;
+					ani = animations.at(animationId);
+					if(ani != NULL)ret.node->addAnimation(ani);
 				}catch(...){
 					issue("Animation with id '"+animationId+"' not found!",ERROR);
 				}
 			}else{
 				issue("Animation 'id' not defined!", ERROR);
 			}
-		}else{/*NOTHINIG HAPPENS*/}
+			animationBlock = animationBlock->NextSiblingElement("animationref");
+		}
+
 
 		return ret;
 	

@@ -58,7 +58,6 @@ Animation * ANFparser::parseAnimation(TiXmlElement * anfAnimation)
 			newControlPoint.x = xx; newControlPoint.y = yy; newControlPoint.z = zz;
 			animate->addControlPoint(newControlPoint);
 		
-			std::cout << "aslkdjasljs " << std::endl;
 			controlPoint = controlPoint->NextSiblingElement("controlpoint");
 		}
 	

@@ -103,40 +103,7 @@ void Scene::display()
 	
 	// Draw axis
 	if(showAxis==0) axis.draw();
-	
-//	axis.draw();
-//	glScaled(5,0.5,5);
-	//f->draw(NULL);
-	//a->animate();
-	//Toro * t = new Toro(0.5, 1, 5, 5);
-	//t->draw(NULL);
 
-
-    // ---- END Background, camera and axis setup
-	/*
-	FlagShader * flagShader = new FlagShader();
-	Flag * f = new Flag(flagShader);
-	f->draw(NULL);
-	*/
-	/*
-
-	
-	*/
-	
-	/*
-	Point3d points[9] = {
-			{0,0,0},{0,0,1},{0,0,2},
-			{1,1,0},{1,1,1},{1,1,2},
-			{2,0,0},{2,0,1},{2,0,2}
-			};
-
-		Patch * xx = new Patch(2,50, 60, Patch::FILL, points);
-		FlagShadder * yy = new FlagShadder();
-		yy->bind();
-		xx->draw(NULL);
-	yy->unbind();
-
-	*/
 	// Draw Scene
 	if(root != NULL){
 		if(firstDisplay){

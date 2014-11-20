@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "Appearance.h"
 #include "../Animation.h"
+#include <map>
 #include <vector>
 
 class Node
@@ -12,10 +13,10 @@ private:
 	std::vector<Node *> descendants;
 	std::vector<Primitive *> primitives;
 	std::vector<Animation *> animations;
+	std::map<Appearance *, int> displayListsIds;
 	float transforms[16];
 	Appearance * appearance;
 	bool isDisplayList;
-	int displayListId;
 public:
 	Node();
 	~Node();

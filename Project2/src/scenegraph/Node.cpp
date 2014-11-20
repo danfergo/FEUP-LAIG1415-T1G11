@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Node::Node():appearance(NULL),displayListId(-1), isDisplayList(false)
+Node::Node():appearance(NULL),isDisplayList(false)
 {
 	for(unsigned i=0; i<16; i++)
 		transforms[i] = (i%5 == 0) ? 1 : 0 ;
@@ -37,22 +37,36 @@ void Node::addDescendants(Node * descendant){
 }
 
 void Node::processNodeInitialization(Appearance * parentAppearance){
-
+	
+	Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
+	
 
 	// we visit all the descendants and initialize it,
 	for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
-		(*it)->processNodeInitialization(parentAppearance);
+		(*it)->processNodeInitialization(currentAppearance);
 	}
 
 	// now we can "record" the display list relative to this node. 
 	// if any descendant is a display list then, it should be already recorded and, 
 	// it should be called during this node recording.
-	if(displayListId == 0){
+	/**if(displayListId == 0){
 		int displayListId = glGenLists(1);
 		glNewList(displayListId,GL_COMPILE);
 			processNode(parentAppearance);
 			this->displayListId = displayListId;
 		glEndList();
+	}**/
+
+	if(isDisplayList){
+		try{
+			displayListsIds.at(currentAppearance); // tries to find displayList with parentAppearance
+		}catch(...){ 
+			int dspId = glGenLists(1);
+			glNewList(dspId,GL_COMPILE);
+				processNode(parentAppearance);
+				displayListsIds.insert(std::pair<Appearance *,int>(currentAppearance,dspId));
+			glEndList();
+		}
 	}
 }
 
@@ -60,10 +74,20 @@ void Node::processNodeInitialization(Appearance * parentAppearance){
 
 
 void Node::processNode(Appearance * parentAppearance){
-	
+		/*
 		if(displayListId > 0){
 			glCallList(displayListId);
 			return;
+		}
+		*/
+		Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
+
+		if(isDisplayList){
+			try{
+				int id = this->displayListsIds.at(currentAppearance); 
+				glCallList(id);
+				return;
+			}catch(...){ /** continue and draw it . **/ }
 		}
 		
 		glPushMatrix();
@@ -72,7 +96,6 @@ void Node::processNode(Appearance * parentAppearance){
 		
 
 			// before draw anything lets apply
-			Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
 			if(currentAppearance != NULL)currentAppearance->apply();
 
 			glPushMatrix();
@@ -150,7 +173,8 @@ bool Node::hasAppearance()  const{
 
 
 void Node::setDisplayList(){
-	if(displayListId < 0) displayListId = 0;
+	//if(displayListId < 0) displayListId = 0;
+	isDisplayList = true;
 }
 
 
