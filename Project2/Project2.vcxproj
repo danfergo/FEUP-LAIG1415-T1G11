@@ -68,12 +68,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Project1\src\scenegraph\primitives\Plane.cpp" />
     <ClCompile Include="src\Animation.cpp" />
-    <ClCompile Include="src\FlagShadder.cpp" />
+    <ClCompile Include="src\CircularAnimation.cpp" />
+    <ClCompile Include="src\FlagShader.cpp" />
     <ClCompile Include="src\Interface.cpp" />
+    <ClCompile Include="src\LinearAnimation.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\parser\ANFparser.cpp" />
+    <ClCompile Include="src\parser\ANFparserAnimations.cpp" />
     <ClCompile Include="src\parser\ANFparserAppearances.cpp" />
     <ClCompile Include="src\parser\ANFparserCameras.cpp" />
     <ClCompile Include="src\parser\ANFparserGlobals.cpp" />
@@ -84,20 +86,24 @@
     <ClCompile Include="src\scenegraph\Light.cpp" />
     <ClCompile Include="src\scenegraph\Node.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Cylinder.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Flag.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Patch.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Plane.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Retangle.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Sphere.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Toro.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Triangle.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Vehicle.cpp" />
     <ClCompile Include="src\scenegraph\Scene.cpp" />
     <ClCompile Include="src\scenegraph\Texture.cpp" />
     <ClCompile Include="src\scenegraph\utils\Normals.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Project1\src\scenegraph\primitives\Plane.h" />
     <ClInclude Include="src\Animation.h" />
-    <ClInclude Include="src\FlagShadder.h" />
+    <ClInclude Include="src\CircularAnimation.h" />
+    <ClInclude Include="src\FlagShader.h" />
     <ClInclude Include="src\Interface.h" />
+    <ClInclude Include="src\LinearAnimation.h" />
     <ClInclude Include="src\parser\ANFparser.h" />
     <ClInclude Include="src\scenegraph\Appearance.h" />
     <ClInclude Include="src\scenegraph\Camera.h" />
@@ -105,17 +111,22 @@
     <ClInclude Include="src\scenegraph\Node.h" />
     <ClInclude Include="src\scenegraph\Primitive.h" />
     <ClInclude Include="src\scenegraph\primitives\Cylinder.h" />
+    <ClInclude Include="src\scenegraph\primitives\Flag.h" />
     <ClInclude Include="src\scenegraph\primitives\Patch.h" />
+    <ClInclude Include="src\scenegraph\primitives\Plane.h" />
     <ClInclude Include="src\scenegraph\primitives\Retangle.h" />
     <ClInclude Include="src\scenegraph\primitives\Sphere.h" />
     <ClInclude Include="src\scenegraph\primitives\Toro.h" />
     <ClInclude Include="src\scenegraph\primitives\Triangle.h" />
+    <ClInclude Include="src\scenegraph\primitives\Vehicle.h" />
     <ClInclude Include="src\scenegraph\Scene.h" />
     <ClInclude Include="src\scenegraph\Texture.h" />
     <ClInclude Include="src\scenegraph\utils\Normals.h" />
     <ClInclude Include="src\scenegraph\utils\Point.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\flagshader.frag" />
+    <None Include="bin\flagshader.vert" />
     <None Include="bin\scene.anf">
       <SubType>Designer</SubType>
     </None>

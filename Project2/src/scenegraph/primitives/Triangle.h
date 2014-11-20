@@ -13,7 +13,7 @@ private:
 public:
 	Triangle(Point3d vertex[3]);
 	~Triangle(void);
-	void draw(Texture * texture) const;
+	void draw(Texture * texture);
 };
 
 #endif

@@ -12,7 +12,7 @@ private:
 	float m;
 public:
 	Retangle(Point2d vertex[2]);
-	void draw(Texture * texture) const;
+	void draw(Texture * texture);
 	~Retangle(void);
 };
 

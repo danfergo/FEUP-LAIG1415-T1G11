@@ -16,8 +16,9 @@ private:
 	GLenum compute;
 	float * controlPoints;
 public:
-	Patch(int order, int partsU, int partsV, Compute compute, Point3d * controlpoints);
-	void draw(Texture * texture) const;
+	Patch(int order, int partsU, int partsV, Compute compute, Point3d * controlpoints = NULL);
+	virtual void draw(Texture * texture);
+	void setControlPoints(Point3d * controlpoints);
 	~Patch(void);
 };
 

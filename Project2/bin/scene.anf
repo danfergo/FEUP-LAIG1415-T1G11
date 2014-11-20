@@ -60,7 +60,17 @@
 
     </lights>
 
-    <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
+
+  <animations>
+    <animation id="copcar_movingsegments" span="6" type="linear">
+      <controlpoint xx="40" yy="0"  zz="22" />
+      <controlpoint xx="30" yy="0"  zz="10" />
+    </animation>
+
+  </animations>
+
+
+  <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
     <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
     <textures>
       <texture id="ground" file="src/parkinglot.jpg" texlength_s="50" texlength_t="30" />
@@ -226,8 +236,50 @@
     <graph rootid="world">
 
       <node id="world">
-        <primitives></primitives>
-        <appearanceref id="white"/>
+        <appearanceref id="donut_app"/>
+        <primitives> 
+          <flag texture="src/flag.png" />
+
+          <!-- <patch order="3" partsU="30" partsV="40" compute="fill">
+            <controlpoint x="-2" y="0" z="-2" />
+            <controlpoint x="-2" y="0" z="-1" />
+            <controlpoint x="-2" y="0" z="1" />
+            <controlpoint x="-2" y="0" z="2" />
+
+            <controlpoint x="-1" y="0" z="-2" />
+            <controlpoint x="-1" y="2" z="-1" />
+            <controlpoint x="-1" y="2" z="1" />
+            <controlpoint x="-1" y="0" z="2" />
+
+            <controlpoint x="1" y="0" z="-2" />
+            <controlpoint x="1" y="2" z="-1" />
+            <controlpoint x="1" y="2" z="1" />
+            <controlpoint x="1" y="0" z="2" />
+
+            <controlpoint x="2" y="0" z="-2" />
+            <controlpoint x="2" y="0" z="-1" />
+            <controlpoint x="2" y="0" z="1" />
+            <controlpoint x="2" y="0" z="2" />
+
+          </patch> -->
+<!--
+          <patch order="2" partsU="30" partsV="40" compute="fill">
+            <controlpoint x="-0.5" y="0" z="-0.5" />
+            <controlpoint x="-0.5" y="0" z="0" />
+            <controlpoint x="-0.5" y="0" z="0.5" />
+            
+            <controlpoint x="0" y="1" z="-0.5" />
+            <controlpoint x="0" y="1" z="0" />
+            <controlpoint x="0" y="1" z="0.5" />
+
+            <controlpoint x="0.5" y="0" z="-0.5" />
+            <controlpoint x="0.5" y="0" z="0" />
+            <controlpoint x="0.5" y="0" z="0.5" />
+            
+          </patch>-->
+          
+        </primitives>
+        
         <transforms></transforms>
         <descendants>
           <noderef id="groundparkinglot"/>
@@ -241,6 +293,7 @@
       </node>
       
       <node id="cop_car1">
+        <animationref id="copcar_movingsegments" />
         <primitives></primitives>
         <appearanceref id="inherit"/>
         <transforms>

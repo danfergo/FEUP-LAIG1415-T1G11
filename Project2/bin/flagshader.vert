@@ -1,22 +1,15 @@
-//uniform float normScale;
-//uniform sampler2D secondImage;
+uniform int time;
+uniform int wind;
+uniform float pi;
+varying float coordY;
 
 void main() 
 {
-	//vec4 offset=vec4(0.0,0.0,0.0,0.0);
-	
-	// change vertex offset based on texture information
-	//if (texture2D(secondImage, vec2(1.0,1.0)-gl_MultiTexCoord0.st).b > 0.5)
-	//	offset.xyz=gl_Normal*normScale*0.1;
+	vec4 wave_vertex = gl_Vertex;
+	float y_coord = gl_Vertex.x + 0.001*float(time);
+	wave_vertex.y = sin(2.0*float(wind)*mod(y_coord,2.0*pi));
+	gl_Position = gl_ProjectionMatrix*gl_ModelViewMatrix*wave_vertex;
+	coordY = wave_vertex.y;
 
-	// Set the position of the current vertex 
-	//gl_Position = gl_ModelViewProjectionMatrix * (gl_Vertex+offset);
-
-	// pass texture coordinates from VS to FS.
-	// "gl_MultiTexCoord0" has the texture coordinates assigned to this vertex in the first set of coordinates.
-	// This index has to do with the set of texture COORDINATES, it is NOT RELATED to the texture UNIT.
-	// "gl_TexCoord[0]" is a built-in varying that will be interpolated in the FS.
-	//gl_TexCoord[0] = gl_MultiTexCoord0;
-	
-	gl_Position = gl_ProjectionMatrix*gl_ModelViewMatrix*gl_Vertex;
+	gl_TexCoord[0] = gl_MultiTexCoord0;
 }

@@ -6,10 +6,18 @@
 #include "../parser/ANFparser.h"
 #include <iostream>
 #include "primitives/Patch.h"
+#include "primitives/Plane.h"
+#include "primitives/Flag.h"
+#include "../LinearAnimation.h"
+#include "../CircularAnimation.h"
 
 int Scene::lightsId[8] = {GL_LIGHT0,GL_LIGHT1,GL_LIGHT2,GL_LIGHT3,GL_LIGHT4,GL_LIGHT5,GL_LIGHT6,GL_LIGHT7};
 int Scene::drawingModes[3] = {GL_FILL,GL_LINE,GL_POINT};
 
+
+
+
+long startTime = 0;
 
 
 Scene::Scene(): root(NULL), CGFscene(), showAxis(1){
@@ -40,6 +48,8 @@ void Scene::init()
 	glEnable(GL_MAP2_VERTEX_3);
 	glEnable(GL_MAP2_NORMAL);
 	glEnable(GL_MAP2_COLOR_4);
+	glEnable(GL_MAP2_COLOR_4);
+	glEnable(GL_MAP2_TEXTURE_COORD_2);
 
 	// Sets up some lighting parameters
 	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, (doublesidedEnabled ? GL_TRUE : GL_FALSE));
@@ -59,9 +69,12 @@ void Scene::init()
 	cameras.insert(cameras.begin(),systemCameras.begin(),systemCameras.end());
 	setActiveCamera(aCam);
 
-	setUpdatePeriod(750);
+	setUpdatePeriod(30);
+
+	Flag::shader = new FlagShader();
 
 	glEnable(GL_NORMALIZE);
+	glEnable(GL_AUTO_NORMAL);
 }
 
 
@@ -91,21 +104,39 @@ void Scene::display()
 	// Draw axis
 	if(showAxis==0) axis.draw();
 	
+//	axis.draw();
+//	glScaled(5,0.5,5);
+	//f->draw(NULL);
+	//a->animate();
+	//Toro * t = new Toro(0.5, 1, 5, 5);
+	//t->draw(NULL);
+
+
     // ---- END Background, camera and axis setup
+	/*
+	FlagShader * flagShader = new FlagShader();
+	Flag * f = new Flag(flagShader);
+	f->draw(NULL);
+	*/
+	/*
 
-
+	
+	*/
+	
+	/*
 	Point3d points[9] = {
-		{0,0,0},{0,0,1},{0,0,2},
-		{1,1,0},{1,1,1},{1,1,2},
-		{2,0,0},{2,0,1},{2,0,2}
-		};
+			{0,0,0},{0,0,1},{0,0,2},
+			{1,1,0},{1,1,1},{1,1,2},
+			{2,0,0},{2,0,1},{2,0,2}
+			};
 
-	Patch * xx = new Patch(2,50, 60, Patch::FILL, points);
+		Patch * xx = new Patch(2,50, 60, Patch::FILL, points);
+		FlagShadder * yy = new FlagShadder();
+		yy->bind();
+		xx->draw(NULL);
+	yy->unbind();
 
-	xx->draw(NULL);
-
-
-
+	*/
 	// Draw Scene
 	if(root != NULL){
 		if(firstDisplay){
@@ -116,7 +147,7 @@ void Scene::display()
 
 		}
 	}
-		
+
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer
@@ -216,14 +247,14 @@ void Scene::setLocalIlluminationEnabled(bool localIlluminationEnabled){
 }
 
 void Scene::update (unsigned long millis){
-	/* std::cout << " -------------- refreshing scene -------------- \n " ;
-	ANFparser x(ANFparser::PERMISSIVE);
-	
+	if(startTime == 0) startTime = millis;
+	root->update(millis-startTime);
+	FlagShader::time = millis-startTime;
+}
 
-	lights.clear();
 
-	x.parse(this,"scene.xml");	
-	init(); */
+void Scene::resetAnimations(){
+	startTime = 0;
 }
 
 int Scene::getActiveCameraPosition(){
@@ -277,3 +308,4 @@ std::vector<Camera *> Scene::getCameras(){
 GLUquadric * Scene::getQuadric(){
 	return quadric;
 }
+

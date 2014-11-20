@@ -2,6 +2,155 @@
 #include <iostream>
 #include <queue>
 
+
+
+
+Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances, std::map<std::string, Animation *> & animations){
+	// init some local variables
+	map<std::string, NodeWrapper> nodeWrappers;
+	NodeWrapper nodeWrapper;
+
+	// getting root id
+	std::string rootId = str(anfGraph->Attribute("rootid"));
+	if(rootId == "") issue("No attribute 'rootid' in 'graph' defined!", ERROR);
+	
+	// Ok, now lets process all the nodes.
+	TiXmlElement *node = anfGraph->FirstChildElement("node");
+	std::string nodeId, nodeDispList;
+	while(node){
+		nodeWrapper = parseNode(node,appearances, animations);
+		nodeId = str(node->Attribute("id"));
+		if(nodeId == "") issue("Each node must have an id!",ERROR);
+
+		nodeDispList = str(node->Attribute("displaylist"));
+		if(nodeDispList == "true"){/*DO SOMETHING WITH display List*/}
+		else {/*IGNORE*/}
+
+		if(nodeWrappers.find(nodeId) == nodeWrappers.end()){
+			nodeWrappers.insert(std::pair<std::string,NodeWrapper>(nodeId,nodeWrapper));
+		}else{	
+			issue("Node id's must be unique! '"+ nodeId +"' isn't.",ERROR);
+		}
+		node=node->NextSiblingElement("node");
+	}	
+
+	//We got all the nodes and rootid, lets build the sceneGraph.
+	buildSceneGraph(rootId,nodeWrappers);
+
+	return nodeWrappers.at(rootId).node;
+} 
+
+ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode, std::map<std::string, Appearance *> & appearances, std::map<std::string, Animation *> & animations){
+	// init the return var
+	NodeWrapper ret = {new Node(), std::vector<std::string>(), 0}; 
+
+	try {
+
+		// Lets process the transforms block
+		TiXmlElement * transforms = anfNode->FirstChildElement("transforms");
+		if (transforms == NULL){
+			issue("Transforms block not found!",WARNING); 
+		}else{
+			ANFparser::parseTransforms(ret.node,transforms);
+		}
+
+		bool ePrimitives = false, eDescandants = false;
+
+		// Ok, lets process primitives.
+		TiXmlElement * primitives = anfNode->FirstChildElement("primitives");
+		if (primitives == NULL){
+			//issue("Primitives block not found!",WARNING); 
+		}else{
+			Primitive * primitive;
+			TiXmlElement * pr = primitives->FirstChildElement();
+			while(pr){
+				try{
+					if((primitive = (this->*subParsers.at(pr->Value()))(pr))){
+						ret.node->addPrimitive(primitive);
+						ePrimitives = true;
+					}
+				}catch(std::out_of_range){
+					issue("Invalid primitive '"+str(pr->Value())+"' found!",WARNING);
+				}
+				pr=pr->NextSiblingElement();
+			}
+		}
+
+
+		//checking if node has descendants block
+		TiXmlElement * descendants  = anfNode->FirstChildElement("descendants");
+		if (descendants == NULL){
+			//issue("Block 'descendants' not found!",WARNING);
+		}else{
+			//lets parse node's descandants then..
+			TiXmlElement * ds = descendants->FirstChildElement();
+			while(ds){
+				if(str(ds->Value()) != "noderef"){
+					issue("Invalid block '"+str(ds->Value())+"' found!",WARNING);
+				}else if(str(ds->Attribute("id")) == ""){
+					issue("Invalid block noderef found. No id set!",WARNING);
+				}else{
+					ret.descendants.push_back(str(ds->Attribute("id")));
+					eDescandants = true;
+				}
+				ds=ds->NextSiblingElement();
+			}
+		}
+
+		if(!eDescandants && !ePrimitives)
+			issue("Must exist descandants or primitives!",WARNING);
+
+		
+
+		std::string displayList = str(anfNode->Attribute("displaylist"));
+		if(displayList == "true") ret.node->setDisplayList();
+		else if(displayList != "" && displayList != "false") issue("Bad value found at displaylist attribute", WARNING);
+
+
+
+		// lets just apply its appearance before leave
+		TiXmlElement * appearanceBlock  = anfNode->FirstChildElement("appearanceref");
+		if(appearanceBlock){
+			std::string appearanceId = str(appearanceBlock->Attribute("id"));	
+			if(appearanceId == "inherit"){
+				// nothing needs to be done here.
+			}else if(appearanceId != ""){
+				try{
+					ret.node->setAppearance(appearances.at(appearanceId));
+				}catch(...){
+					issue("Apperance with id '"+appearanceId+"' not found!",ERROR);
+				}
+			}else{
+				issue("Apperanceref 'id' not defined! ('inherit' could be assumed).",WARNING);
+			}
+		}else{
+			issue("Block 'appearanceref' not found! ('inherit' will be assumed).",WARNING);
+		}
+
+		// lets just apply its animation before leave
+		TiXmlElement * animationBlock  = anfNode->FirstChildElement("animationref");
+		if(animationBlock){
+			std::string animationId = str(animationBlock->Attribute("id"));	
+			if(animationId != ""){
+				try{
+					ret.node->addAnimation(animations.at(animationId));
+				}catch(...){
+					issue("Animation with id '"+animationId+"' not found!",ERROR);
+				}
+			}else{
+				issue("Animation 'id' not defined!", ERROR);
+			}
+		}else{/*NOTHINIG HAPPENS*/}
+
+		return ret;
+	
+	}catch(ParseExep & e){
+		delete(ret.node); // releasing memory before leave
+		throw(e);
+	}	
+	return ret;
+}
+/**
 Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances){
 	// init some local variables
 	map<std::string, NodeWrapper> nodeWrappers;
@@ -32,7 +181,7 @@ Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appea
 
 	return nodeWrappers.at(rootId).node;
 } 
-
+*/
 bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::NodeWrapper> & nodes){
 	//matching node descendantas. here we  also catch bad node's ids and such.
 	std::vector<std::string> descendants;
@@ -93,7 +242,7 @@ bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::No
 
 	return true;
 }
-
+/**
 ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std::string, Appearance *> & appearances){
 	// init the return var
 	NodeWrapper ret = {new Node(), std::vector<std::string>(), 0}; 
@@ -187,7 +336,7 @@ ANFparser::NodeWrapper ANFparser::parseNode(TiXmlElement * anfNode,std::map<std:
 	}	
 	return ret;
 }
-
+*/
 bool ANFparser::parseTransforms(Node * node, TiXmlElement * anfTransforms){
 	TiXmlElement * transform = anfTransforms->FirstChildElement("transform");
 	std::string type, axis;

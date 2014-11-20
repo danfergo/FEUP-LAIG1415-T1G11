@@ -3,14 +3,18 @@
 #include "scenegraph/Light.h"
 #include "scenegraph/Scene.h"
 #include "scenegraph/Camera.h"
+#include "FlagShader.h"
+
 #include <iostream>
 #include "CGFapplication.h"
 
-#define LIGHTS_BASE_ID 55
+#define LIGHTS_BASE_ID 55 // to 63
 #define CAMERAS_ID	   325
 #define DRAWINGMODE_ID	   576
 #define SHADDINGMODE_ID	   778
 #define SHOWAXIS_ID	   1234
+#define RESETANIMATIONS_ID  327
+#define WIND_ID  329
 
 
 Interface::Interface(void): CGFinterface()
@@ -20,6 +24,7 @@ Interface::Interface(void): CGFinterface()
 
 Interface::~Interface(void)
 {
+	
 }
 
 
@@ -79,7 +84,18 @@ void Interface::initGUI()
 	GLUI_RadioGroup * rgAxisMode = addRadioGroupToPanel(axisModePanel,&scene->showAxis, SHOWAXIS_ID);
 	addRadioButtonToGroup (rgAxisMode, "Show");
 	addRadioButtonToGroup (rgAxisMode, "Hide");
+
+	addColumn();
+	GLUI_Panel * animationsPanel = addPanel("Animations: ", 1);
+	addButtonToPanel(animationsPanel,"Reset",RESETANIMATIONS_ID);
 	
+	
+	wind = FlagShader::wind;
+	addColumn();
+	GLUI_Panel * flagPanel = addPanel("Flag: ", 1);
+	GLUI_Spinner * windSpinner = addSpinnerToPanel (flagPanel,"Wind", 2, &wind, WIND_ID);
+	windSpinner->set_int_limits(0,10);
+
 }
 
 
@@ -99,6 +115,12 @@ void Interface::processGUI(GLUI_Control *ctrl)
 				scene->setShaddingMode((Scene::ShaddingMode)shaddingMode);		
 			break;
 		case SHOWAXIS_ID:
+			break;
+		case RESETANIMATIONS_ID:
+			scene->resetAnimations();
+			break;
+		case WIND_ID:
+			FlagShader::wind = wind;
 			break;
 		default:
 		if(id >= LIGHTS_BASE_ID  && id <= (LIGHTS_BASE_ID + lights.size())){

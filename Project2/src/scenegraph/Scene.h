@@ -13,7 +13,6 @@ private:
 	std::vector<Light*> lights;
 	std::vector<Camera*> cameras;
 	GLUquadric * quadric;
-
 public:
 	int showAxis;
 
@@ -45,7 +44,6 @@ public:
 	std::vector<Light *> getLights();
 	std::vector<Camera *> getCameras();
 
-
 	void addCamera(Camera * camera);
 	void setActiveCamera(Camera * camera);
 	void setActiveCamera(int cameraPosition);
@@ -53,6 +51,8 @@ public:
 	int getDrawingMode();
 	int getShaddingMode();
 
+
+	void resetAnimations();
 	void setShaddingMode(ShaddingMode shaddingMode);
 	void setDrawingMode(DrawingMode drawingMode);
 	void setCullingFace(CullingFace cullingFace);

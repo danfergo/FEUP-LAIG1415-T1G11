@@ -14,7 +14,7 @@ private:
 
 public:
 	Cylinder(GLUquadric * quadric, float base, float top, float height, unsigned slices, unsigned stacks);
-	void draw(Texture * texture) const;
+	void draw(Texture * texture);
 	~Cylinder();
 
 };

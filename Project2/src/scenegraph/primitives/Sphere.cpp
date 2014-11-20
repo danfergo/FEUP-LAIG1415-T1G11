@@ -8,7 +8,7 @@ Sphere::Sphere(GLUquadric *quadric, float radius, int stacks, int slices){
     obj = quadric;
 }
 
-void Sphere::draw(Texture * texture) const{
+void Sphere::draw(Texture * texture){
 	gluSphere(obj, radius, stacks, slices);
 } 
 

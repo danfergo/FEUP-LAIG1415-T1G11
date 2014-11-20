@@ -1,17 +1,8 @@
-//uniform sampler2D baseImage;
-//uniform sampler2D secondImage;
-
+uniform sampler2D baseImage;
+varying float coordY;
 void main()
 {
-	//vec4 color=texture2D(baseImage, gl_TexCoord[0].st);
-
-	// notice the coordinate conversion to flip the image horizontally and vertically
-	//vec4 filter=texture2D(secondImage, vec2(1.0,1.0)-gl_TexCoord[0].st);
-
-	//if (filter.b > 0.5)
-	//	color=vec4(0.52,0.18,0.11,1.0);
-	
-	//gl_FragColor = color; 
-	
-	gl_FragColor = vec4(0.5,0.0,0.0,1.0) * gl_LightSource[0].diffuse;
+	float attenuation = (coordY+1.0)*0.6 + 0.4; // values between 0.4 and 1
+	vec4 original_text = texture2D(baseImage,gl_TexCoord[0].st);
+	gl_FragColor = vec4(original_text.xyz*attenuation,1.0);
 }

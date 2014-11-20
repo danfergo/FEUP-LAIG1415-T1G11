@@ -14,7 +14,7 @@ private:
 
 public:
 	Toro(float inner, float outer, unsigned slices, unsigned loops);
-	void draw(Texture * texture) const;
+	void draw(Texture * texture);
 	~Toro(void);
 };
 

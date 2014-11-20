@@ -7,7 +7,7 @@ class Primitive: public CGFobject
 {
 public:
 	Primitive(void){};
-	virtual void draw(Texture * texture) const = 0;
+	virtual void draw(Texture * texture) = 0;
 	~Primitive(void){};
 };
 

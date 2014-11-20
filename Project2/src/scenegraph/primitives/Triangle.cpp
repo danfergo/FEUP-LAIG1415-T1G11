@@ -28,7 +28,7 @@ Triangle::~Triangle(void)
 	
 }
 
-void Triangle::draw(Texture * texture) const{
+void Triangle::draw(Texture * texture) {
 	float textS = (texture==NULL || texture->getS()==0) ? 0 : this->base/texture->getS();
 	float textT3 = (texture==NULL || texture->getT()==0)? 0 : this->height/texture->getT();
 	float textS3 = (texture==NULL || texture->getS()==0) ? 0 : this->semibase/texture->getS();

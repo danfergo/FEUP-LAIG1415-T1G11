@@ -61,7 +61,20 @@ void normals::normalizeVector(Vector3d & vector){
 	vector.z /= norm;
 }
 
-
 double normals::norm(const Vector3d & vector){
 	return sqrt(pow(vector.x,2) + pow(vector.y,2) + pow(vector.z,2));
 }
+
+void normals::normalizeVector(Vector2d & vector){
+	float norm = sqrt(pow(vector.x,2) + pow(vector.y,2));
+	if(norm == 0) return; // just in case O.o
+	vector.x /= norm;
+	vector.y /= norm;
+}
+
+double normals::norm(const Vector2d & vector){
+	return sqrt(pow(vector.x,2) + pow(vector.y,2));
+}
+
+
+

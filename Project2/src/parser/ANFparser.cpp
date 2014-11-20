@@ -78,13 +78,22 @@ bool ANFparser::parse(Scene * scene,const char* filename){
 			parseAppearances(anfAppearances,appearances,textures);
 		}
 		
+		//If animations extist, we process it
+		TiXmlElement* anfAnimations = anfRoot->FirstChildElement("animations");
+		map<std::string,Animation *> animations;
+		if(!anfAnimations){
+			issue("Block 'animations' not found!",WARNING);
+		}else{
+			parseAnimations(anfAnimations,animations);
+		}
+
 
 		//If graph block exist, we call its parser
 		TiXmlElement* anfGraph = anfRoot->FirstChildElement("graph");
 		if(!anfGraph){
 			issue("Block 'graph' not found!",ERROR);
 		}else{
-			this->scene->setRoot(parseGraph(anfGraph,appearances));
+			this->scene->setRoot(parseGraph(anfGraph,appearances,animations));
 		}
 
 		return true; 

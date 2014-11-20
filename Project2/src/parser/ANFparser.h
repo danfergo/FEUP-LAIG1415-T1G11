@@ -11,6 +11,8 @@
 #include "../scenegraph/Primitive.h"
 #include "../scenegraph/Appearance.h"
 #include "../scenegraph/Camera.h"
+#include "../LinearAnimation.h"
+#include "../CircularAnimation.h"
 #include <vector>
 #include <string>
 
@@ -40,13 +42,25 @@ private:
 	char parseMode;
 	typedef Primitive* (ANFparser::*PrimitiveParser)(TiXmlElement *);
 	std::map<std::string,PrimitiveParser> subParsers;
+
 	Primitive * parseTriangle(TiXmlElement * anfTriangle);
 	Primitive * parseSphere(TiXmlElement * anfSphere);
 	Primitive * parseToro(TiXmlElement * anfToro);
 	Primitive * parseCylinder(TiXmlElement * anfCylinder);
 	Primitive * parseRetangle(TiXmlElement * anfRetangle);
+
+		
+	/** PROJECT 2 - new primitives **/
+	Primitive * parsePlane(TiXmlElement * anfPlane);
 	Primitive * parsePatch(TiXmlElement * anfPatch);
+	Primitive * parseFlag(TiXmlElement * anfFlag);
+	Primitive * parseVehicle(TiXmlElement * anfVehicle);
+
 	void initPrimitiveParsers();
+
+	//Animations
+	Animation * parseAnimation(TiXmlElement * anfAnimation);
+	void parseAnimations(TiXmlElement * anfAnimations, map<std::string,Animation *> & animations);
 
 	//Cameras
 	void parseCameras(TiXmlElement *anfCameras,std::string initialCamera);
@@ -54,8 +68,8 @@ private:
 	Camera * parseCameraPrespective(TiXmlElement *anfCamera);
 
 	//Graph
-	NodeWrapper parseNode(TiXmlElement * anfNode,std::map<std::string, Appearance *> & appearances);
-	Node * parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances);
+	NodeWrapper parseNode(TiXmlElement * anfNode,std::map<std::string, Appearance *> & appearances, std::map<std::string, Animation *> & animations);
+	Node * parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances, std::map<std::string, Animation *> & animations);
 	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
 	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
 

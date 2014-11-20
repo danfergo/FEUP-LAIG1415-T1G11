@@ -22,7 +22,7 @@ Retangle::Retangle(Point2d v[2])
 
 }
 
-void Retangle::draw(Texture * texture) const{
+void Retangle::draw(Texture * texture){
 	float textS = 0,textT  = 0;
 	if(m>=0 && !(texture==NULL || texture->getS()==0)){
 		textS = abs(vertex[1].x-vertex[0].x)/texture->getS();

@@ -29,7 +29,7 @@ Cylinder::Cylinder(GLUquadric*quadric, float base, float top, float height, unsi
 	}
 }
 
-void Cylinder::draw(Texture * texture) const{
+void Cylinder::draw(Texture * texture){
     gluCylinder(obj, base, top, height, slices, stacks);
 	
 	glNormal3d(0,0,-1);

@@ -56,15 +56,24 @@
     <ClCompile Include="src\scenegraph\Scene.cpp">
       <Filter>scenegraph</Filter>
     </ClCompile>
-    <ClCompile Include="..\Project1\src\scenegraph\primitives\Plane.cpp">
-      <Filter>scenegraph\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Patch.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\FlagShadder.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Plane.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Flag.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FlagShader.cpp" />
+    <ClCompile Include="src\LinearAnimation.cpp" />
+    <ClCompile Include="src\CircularAnimation.cpp" />
+    <ClCompile Include="src\parser\ANFparserAnimations.cpp">
+      <Filter>parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\parser\ANFparser.h">
@@ -113,14 +122,20 @@
     <ClInclude Include="src\scenegraph\Light.h">
       <Filter>scenegraph</Filter>
     </ClInclude>
-    <ClInclude Include="..\Project1\src\scenegraph\primitives\Plane.h">
-      <Filter>scenegraph\primitives</Filter>
-    </ClInclude>
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\scenegraph\primitives\Patch.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="src\FlagShadder.h" />
+    <ClInclude Include="src\scenegraph\primitives\Plane.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Flag.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FlagShader.h" />
+    <ClInclude Include="src\LinearAnimation.h" />
+    <ClInclude Include="src\CircularAnimation.h" />
+    <ClInclude Include="src\scenegraph\primitives\Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="parser">
@@ -141,6 +156,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\scene.anf">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="bin\flagshader.vert">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="bin\flagshader.frag">
       <Filter>resources</Filter>
     </None>
   </ItemGroup>

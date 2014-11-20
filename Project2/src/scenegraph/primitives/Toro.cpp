@@ -37,7 +37,7 @@ Toro::Toro(float inner, float outer, unsigned slices, unsigned loops): slices(sl
 
 }
 
-void Toro::draw(Texture * texture) const{
+void Toro::draw(Texture * texture){
 	glPushMatrix();
 		for(unsigned j=0; j<loops; j++){
 		

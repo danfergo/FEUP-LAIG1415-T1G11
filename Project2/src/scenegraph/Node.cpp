@@ -75,17 +75,21 @@ void Node::processNode(Appearance * parentAppearance){
 			Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
 			if(currentAppearance != NULL)currentAppearance->apply();
 
-			// we are going to draw this node's primitives
-			for(std::vector<Primitive *>::iterator it = primitives.begin();
-				it != primitives.end(); it++){
-					(*it)->draw(currentAppearance ? currentAppearance->getTexture() : NULL);
-			}
+			glPushMatrix();
+				for(std::vector<Animation *>::iterator it = animations.begin(); it != animations.end(); it++)
+					(*it)->animate();
 
-			//now we process this node's descendants
-			for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
-				(*it)->processNode(currentAppearance);
-			}
+				// we are going to draw this node's primitives
+				for(std::vector<Primitive *>::iterator it = primitives.begin();
+					it != primitives.end(); it++){
+						(*it)->draw(currentAppearance ? currentAppearance->getTexture() : NULL);
+				}
 
+				//now we process this node's descendants
+				for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
+					(*it)->processNode(currentAppearance);
+				}
+			glPopMatrix();
 		glPopMatrix();
 
 }
@@ -147,4 +151,23 @@ bool Node::hasAppearance()  const{
 
 void Node::setDisplayList(){
 	if(displayListId < 0) displayListId = 0;
+}
+
+
+void Node::addAnimation(Animation * animation){
+	animations.push_back(animation->clone(getLastAnimationEndTime()));
+}
+
+unsigned  Node::getLastAnimationEndTime() const{
+	if(animations.size() == 0) return 0;
+	return animations.back()->getEndTime();	
+}
+
+void Node::update(unsigned time){
+	for(std::vector<Animation *>::iterator it = animations.begin(); it != animations.end(); it++)
+		(*it)->update(time);
+
+	for(std::vector<Node *>::iterator it  = descendants.begin(); it != descendants.end(); it++)
+		(*it)->update(time);
+
 }

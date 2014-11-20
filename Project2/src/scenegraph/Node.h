@@ -3,6 +3,7 @@
 
 #include "Primitive.h"
 #include "Appearance.h"
+#include "../Animation.h"
 #include <vector>
 
 class Node
@@ -10,6 +11,7 @@ class Node
 private:
 	std::vector<Node *> descendants;
 	std::vector<Primitive *> primitives;
+	std::vector<Animation *> animations;
 	float transforms[16];
 	Appearance * appearance;
 	bool isDisplayList;
@@ -22,9 +24,12 @@ public:
 	void addPrimitive(Primitive * primitive);
 	void Node::addDescendants(Node * descendant);
 	void setAppearance(Appearance * appearance);
+	void addAnimation(Animation * animation);
+	unsigned getLastAnimationEndTime() const;
 	bool hasAppearance() const;
 	void setDisplayList();
 
+	void update(unsigned time);
 
 	bool addRotation(std::string axis, float angle);
 	void addRotationX(float angle);
