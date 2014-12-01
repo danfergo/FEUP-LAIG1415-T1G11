@@ -1,29 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\parser\ANFparser.cpp">
-      <Filter>parser</Filter>
-    </ClCompile>
-    <ClCompile Include="src\parser\ANFparserAppearances.cpp">
-      <Filter>parser</Filter>
-    </ClCompile>
-    <ClCompile Include="src\parser\ANFparserGlobals.cpp">
-      <Filter>parser</Filter>
-    </ClCompile>
-    <ClCompile Include="src\parser\ANFparserGraph.cpp">
-      <Filter>parser</Filter>
-    </ClCompile>
     <ClCompile Include="src\scenegraph\Node.cpp">
       <Filter>scenegraph</Filter>
-    </ClCompile>
-    <ClCompile Include="src\parser\ANFparserPrimitives.cpp">
-      <Filter>parser</Filter>
-    </ClCompile>
-    <ClCompile Include="src\parser\ANFparserLights.cpp">
-      <Filter>parser</Filter>
-    </ClCompile>
-    <ClCompile Include="src\parser\ANFparserCameras.cpp">
-      <Filter>parser</Filter>
     </ClCompile>
     <ClCompile Include="src\scenegraph\Camera.cpp">
       <Filter>scenegraph</Filter>
@@ -31,7 +10,6 @@
     <ClCompile Include="src\scenegraph\utils\Normals.cpp">
       <Filter>scenegraph\utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\Interface.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Sphere.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
@@ -47,16 +25,12 @@
     <ClCompile Include="src\scenegraph\primitives\Retangle.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenegraph\Texture.cpp">
-      <Filter>scenegraph</Filter>
-    </ClCompile>
     <ClCompile Include="src\scenegraph\Light.cpp">
       <Filter>scenegraph</Filter>
     </ClCompile>
     <ClCompile Include="src\scenegraph\Scene.cpp">
       <Filter>scenegraph</Filter>
     </ClCompile>
-    <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\scenegraph\primitives\Patch.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
@@ -67,18 +41,50 @@
     <ClCompile Include="src\scenegraph\primitives\Flag.cpp">
       <Filter>scenegraph\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\FlagShader.cpp" />
-    <ClCompile Include="src\LinearAnimation.cpp" />
-    <ClCompile Include="src\CircularAnimation.cpp" />
-    <ClCompile Include="src\parser\ANFparserAnimations.cpp">
-      <Filter>parser</Filter>
+    <ClCompile Include="src\scenegraph\primitives\Vehicle.cpp">
+      <Filter>scenegraph\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenegraph\primitives\Vehicle.cpp" />
+    <ClCompile Include="src\scenegraph\animations\LinearAnimation.cpp">
+      <Filter>scenegraph\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\animations\Animation.cpp">
+      <Filter>scenegraph\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\animations\CircularAnimation.cpp">
+      <Filter>scenegraph\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserAnimations.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserAppearances.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserCameras.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserGlobals.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserGraph.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserLights.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserPrimitives.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparser.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\appearances\Texture.cpp">
+      <Filter>scenegraph\appearances</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\appearances\Appearance.cpp">
+      <Filter>scenegraph\appearances</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\parser\ANFparser.h">
-      <Filter>parser</Filter>
-    </ClInclude>
     <ClInclude Include="src\scenegraph\Node.h">
       <Filter>scenegraph</Filter>
     </ClInclude>
@@ -91,7 +97,6 @@
     <ClInclude Include="src\scenegraph\utils\Normals.h">
       <Filter>scenegraph\utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\Interface.h" />
     <ClInclude Include="src\scenegraph\primitives\Sphere.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
@@ -107,22 +112,12 @@
     <ClInclude Include="src\scenegraph\primitives\Retangle.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="src\scenegraph\Texture.h">
-      <Filter>scenegraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenegraph\Primitive.h">
-      <Filter>scenegraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenegraph\Appearance.h">
-      <Filter>scenegraph</Filter>
-    </ClInclude>
     <ClInclude Include="src\scenegraph\Scene.h">
       <Filter>scenegraph</Filter>
     </ClInclude>
     <ClInclude Include="src\scenegraph\Light.h">
       <Filter>scenegraph</Filter>
     </ClInclude>
-    <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\scenegraph\primitives\Patch.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
@@ -132,15 +127,32 @@
     <ClInclude Include="src\scenegraph\primitives\Flag.h">
       <Filter>scenegraph\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="src\FlagShader.h" />
-    <ClInclude Include="src\LinearAnimation.h" />
-    <ClInclude Include="src\CircularAnimation.h" />
-    <ClInclude Include="src\scenegraph\primitives\Vehicle.h" />
+    <ClInclude Include="src\scenegraph\primitives\Vehicle.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\animations\CircularAnimation.h">
+      <Filter>scenegraph\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\animations\LinearAnimation.h">
+      <Filter>scenegraph\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\animations\Animation.h">
+      <Filter>scenegraph\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\parser\ANFparser.h">
+      <Filter>scenegraph\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Primitive.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\appearances\Appearance.h">
+      <Filter>scenegraph\appearances</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\appearances\Texture.h">
+      <Filter>scenegraph\appearances</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="parser">
-      <UniqueIdentifier>{31a93751-5453-45c6-b4e3-7369d12722d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="scenegraph">
       <UniqueIdentifier>{c8330cfa-333b-41b7-b737-220ac0f8cee8}</UniqueIdentifier>
     </Filter>
@@ -152,6 +164,15 @@
     </Filter>
     <Filter Include="scenegraph\primitives">
       <UniqueIdentifier>{d9ee1a75-0f85-4703-9a5f-043526ccb881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\animations">
+      <UniqueIdentifier>{3b6af1b4-e097-4860-8836-770d6813fdd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\parser">
+      <UniqueIdentifier>{660b8705-cfc6-48de-a038-9003242578a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\appearances">
+      <UniqueIdentifier>{efce7e70-7459-4ad0-a080-b8173996e1cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
