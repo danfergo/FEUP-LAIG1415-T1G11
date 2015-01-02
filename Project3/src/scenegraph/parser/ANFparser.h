@@ -3,16 +3,16 @@
 
 #include <map>
 
-#include "../scenegraph/utils/Point.h"
-#include "../scenegraph/Scene.h"
-#include "../scenegraph/Light.h"
-#include "../scenegraph/Texture.h"
+#include "../utils/Point.h"
+#include "../Scene.h"
+#include "../Light.h"
+#include "../appearances/Texture.h"
 #include "tinyxml.h"
-#include "../scenegraph/Primitive.h"
-#include "../scenegraph/Appearance.h"
-#include "../scenegraph/Camera.h"
-#include "../LinearAnimation.h"
-#include "../CircularAnimation.h"
+#include "../primitives/Primitive.h"
+#include "../appearances/Appearance.h"
+#include "../Camera.h"
+#include "../animations/LinearAnimation.h"
+#include "../animations/CircularAnimation.h"
 #include <vector>
 #include <string>
 

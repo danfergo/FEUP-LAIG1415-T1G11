@@ -1,7 +1,7 @@
 #ifndef RETANGLE_F_H
 #define RETANGLE_F_H
 
-#include "../Primitive.h"
+#include "Primitive.h"
 #include "../utils/Point.h"
 
 class Retangle: public Primitive

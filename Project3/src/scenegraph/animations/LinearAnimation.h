@@ -1,6 +1,6 @@
 #pragma once
 #include "Animation.h"
-#include "scenegraph/utils/Point.h"
+#include "../utils/Point.h"
 #include <vector>
 class LinearAnimation: public Animation
 {

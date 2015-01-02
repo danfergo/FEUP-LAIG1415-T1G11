@@ -1,5 +1,5 @@
 #include "ANFparser.h"
-#include "../LinearAnimation.h"
+#include "../animations/LinearAnimation.h"
 #include <iostream>
 
 void ANFparser::parseAnimations(TiXmlElement * anfAnimations, map<std::string,Animation *> & animations){

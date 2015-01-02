@@ -1,7 +1,7 @@
 #ifndef TTRIANGLEP_F_H_
 #define TTRIANGLEP_F_H_
 
-#include "../Primitive.h"
+#include "Primitive.h"
 #include "../utils/Point.h"
 
 class Triangle: public Primitive

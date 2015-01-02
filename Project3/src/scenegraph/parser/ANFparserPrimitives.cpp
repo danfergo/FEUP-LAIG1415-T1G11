@@ -2,15 +2,15 @@
 #include <iostream>
 #include <map>
 #include <queue>
-#include "../scenegraph/primitives/Triangle.h"
-#include "../scenegraph/primitives/Retangle.h"
-#include "../scenegraph/primitives/Toro.h"
-#include "../scenegraph/primitives/Cylinder.h"
-#include "../scenegraph/primitives/Sphere.h"
-#include "../scenegraph/primitives/Patch.h"
-#include "../scenegraph/primitives/Plane.h"
-#include "../scenegraph/primitives/Flag.h"
-#include "../scenegraph/primitives/Vehicle.h"
+#include "../primitives/Triangle.h"
+#include "../primitives/Retangle.h"
+#include "../primitives/Toro.h"
+#include "../primitives/Cylinder.h"
+#include "../primitives/Sphere.h"
+#include "../primitives/Patch.h"
+#include "../primitives/Plane.h"
+#include "../primitives/Flag.h"
+#include "../primitives/Vehicle.h"
 
 
 void ANFparser::initPrimitiveParsers(){

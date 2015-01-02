@@ -15,6 +15,8 @@ private:
 	GLUquadric * quadric;
 public:
 	int showAxis;
+	bool firstDisplay;
+	long startTime;
 
 	static int lightsId[8]; 
 	static int drawingModes[3];
@@ -34,9 +36,10 @@ public:
 	bool doublesidedEnabled; // applyed
 	bool localIlluminationEnabled; //applyed
 
-	Scene();
+	Scene();	
 	void init();
 	void display();
+	void prepareSelection(std::vector<Node *> & nodes);
     void update (unsigned long millis);
 	void setRoot(Node * root);
 	bool addLight(std::string title,float aa[4],float dd[4],float ss[4],bool enabled, 
@@ -44,13 +47,13 @@ public:
 	std::vector<Light *> getLights();
 	std::vector<Camera *> getCameras();
 
+	int addTouchableNode(Node * node);
 	void addCamera(Camera * camera);
 	void setActiveCamera(Camera * camera);
 	void setActiveCamera(int cameraPosition);
 	int getActiveCameraPosition();
 	int getDrawingMode();
 	int getShaddingMode();
-
 
 	void resetAnimations();
 	void setShaddingMode(ShaddingMode shaddingMode);

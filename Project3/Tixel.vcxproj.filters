@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\scenegraph\Node.cpp">
+      <Filter>scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\Camera.cpp">
+      <Filter>scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\utils\Normals.cpp">
+      <Filter>scenegraph\shaders\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Sphere.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Toro.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Triangle.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Cylinder.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Retangle.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\Light.cpp">
+      <Filter>scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\Scene.cpp">
+      <Filter>scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Patch.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Plane.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Flag.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\primitives\Vehicle.cpp">
+      <Filter>scenegraph\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\animations\LinearAnimation.cpp">
+      <Filter>scenegraph\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\animations\Animation.cpp">
+      <Filter>scenegraph\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\animations\CircularAnimation.cpp">
+      <Filter>scenegraph\animations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserAnimations.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserAppearances.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserCameras.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserGlobals.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserGraph.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserLights.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparserPrimitives.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\parser\ANFparser.cpp">
+      <Filter>scenegraph\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\appearances\Texture.cpp">
+      <Filter>scenegraph\appearances</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\appearances\Appearance.cpp">
+      <Filter>scenegraph\appearances</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\Interface.cpp">
+      <Filter>scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph\shaders\FlagShader.cpp">
+      <Filter>scenegraph\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\view\Board.cpp">
+      <Filter>game\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\view\BoardPiece.cpp">
+      <Filter>game\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\view\ConcaveCube.cpp">
+      <Filter>game\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\IAInterface.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Connection.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\controller\MatchController.cpp">
+      <Filter>game\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\GameState.cpp">
+      <Filter>game\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\model\Move.cpp" />
+    <ClCompile Include="src\game\controller\TixelController.cpp">
+      <Filter>game\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\view\TixelScene.cpp">
+      <Filter>game\view</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\scenegraph\Node.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Camera.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\utils\Point.h">
+      <Filter>scenegraph\shaders\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\utils\Normals.h">
+      <Filter>scenegraph\shaders\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Sphere.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Toro.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Triangle.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Cylinder.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Retangle.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Scene.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Light.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Patch.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Plane.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Flag.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Vehicle.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\animations\CircularAnimation.h">
+      <Filter>scenegraph\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\animations\LinearAnimation.h">
+      <Filter>scenegraph\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\animations\Animation.h">
+      <Filter>scenegraph\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\parser\ANFparser.h">
+      <Filter>scenegraph\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\appearances\Appearance.h">
+      <Filter>scenegraph\appearances</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\appearances\Texture.h">
+      <Filter>scenegraph\appearances</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\Interface.h">
+      <Filter>scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\shaders\FlagShader.h">
+      <Filter>scenegraph\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenegraph\primitives\Primitive.h">
+      <Filter>scenegraph\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\view\Board.h">
+      <Filter>game\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\view\BoardPiece.h">
+      <Filter>game\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\view\ConcaveCube.h">
+      <Filter>game\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\IAInterface.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Connection.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\controller\MatchController.h">
+      <Filter>game\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\GameState.h">
+      <Filter>game\model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\model\Move.h" />
+    <ClInclude Include="src\game\controller\TixelController.h">
+      <Filter>game\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\view\TixelScene.h">
+      <Filter>game\view</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="scenegraph">
+      <UniqueIdentifier>{c8330cfa-333b-41b7-b737-220ac0f8cee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{7f625083-6e7b-4ce4-b754-5957d03aed71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\primitives">
+      <UniqueIdentifier>{d9ee1a75-0f85-4703-9a5f-043526ccb881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\animations">
+      <UniqueIdentifier>{3b6af1b4-e097-4860-8836-770d6813fdd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\parser">
+      <UniqueIdentifier>{660b8705-cfc6-48de-a038-9003242578a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\appearances">
+      <UniqueIdentifier>{efce7e70-7459-4ad0-a080-b8173996e1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\shaders">
+      <UniqueIdentifier>{20943f91-e05f-4e1c-9271-322257ad5f5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{98bd38de-a5fc-49a4-8c8c-1a2dd31de50c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\model">
+      <UniqueIdentifier>{f4f37d05-2614-4512-81f7-547aea875c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\controller">
+      <UniqueIdentifier>{9c1aeb6d-8aea-4943-988e-a372f26b93d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\view">
+      <UniqueIdentifier>{5800ed7d-619a-4fd7-942b-c08ccc7afc9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenegraph\shaders\utils">
+      <UniqueIdentifier>{6744e67b-ea74-4d3b-83bd-a0e1bf0234c3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\scene.anf">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="bin\flagshader.vert">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="bin\flagshader.frag">
+      <Filter>resources</Filter>
+    </None>
+  </ItemGroup>
+</Project>

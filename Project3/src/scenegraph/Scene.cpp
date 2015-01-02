@@ -3,24 +3,20 @@
 #include "Scene.h"
 #include "primitives/Toro.h"
 #include "CGFappearance.h"	
-#include "../parser/ANFparser.h"
+#include "parser/ANFparser.h"
 #include <iostream>
 #include "primitives/Patch.h"
 #include "primitives/Plane.h"
+#include "primitives/Retangle.h"
 #include "primitives/Flag.h"
-#include "../LinearAnimation.h"
-#include "../CircularAnimation.h"
+#include "animations/LinearAnimation.h"
+#include "animations/CircularAnimation.h"
 
 int Scene::lightsId[8] = {GL_LIGHT0,GL_LIGHT1,GL_LIGHT2,GL_LIGHT3,GL_LIGHT4,GL_LIGHT5,GL_LIGHT6,GL_LIGHT7};
 int Scene::drawingModes[3] = {GL_FILL,GL_LINE,GL_POINT};
 
 
-
-
-long startTime = 0;
-
-
-Scene::Scene(): root(NULL), CGFscene(), showAxis(1){
+Scene::Scene(): root(NULL), CGFscene(), showAxis(1),firstDisplay(true), startTime(0){
 	quadric = gluNewQuadric();
 	gluQuadricTexture(quadric, GL_TRUE);
 
@@ -39,10 +35,15 @@ Scene::Scene(): root(NULL), CGFscene(), showAxis(1){
 	localIlluminationEnabled = true;
 }
 
+void Scene::prepareSelection(std::vector<Node *> & nodes){
+	glInitNames();
+	root->processNode(NULL,false,&nodes);
+}
 
 void Scene::init() 
 {
 	// Enables lighting computations
+
 	if(lightingEnabled) glEnable(GL_LIGHTING);
 
 	glEnable(GL_MAP2_VERTEX_3);
@@ -63,22 +64,20 @@ void Scene::init()
 	glPolygonMode(GL_FRONT_AND_BACK, drawingModes[drawingMode]);
 	if(shaddingMode == FLAT) glShadeModel(GL_FLAT); else  glShadeModel(GL_SMOOTH);
 
-	Camera * aCam = (Camera *)activeCamera;
 	std::vector<Camera *> systemCameras;
 	systemCameras.push_back(new Camera("[AUTO] Free camera"));
 	cameras.insert(cameras.begin(),systemCameras.begin(),systemCameras.end());
-	setActiveCamera(aCam);
+	setActiveCamera(0);
 
 	setUpdatePeriod(30);
-
-	Flag::shader = new FlagShader();
 
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_AUTO_NORMAL);
 }
 
 
-bool firstDisplay = true;
+
+
 void Scene::display() 
 {
 
@@ -93,16 +92,13 @@ void Scene::display()
 
 	// Initialize Model-View matrix as identity (no transformation
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 
 	//set camera
+	glLoadIdentity();
 	activeCamera->applyView();
 
 	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end(); it++)
 		if(localIlluminationEnabled && lightingEnabled) (*it)->draw(); else (*it)->disable();
-	
-	// Draw axis
-	if(showAxis==0) axis.draw();
 
 	// Draw Scene
 	if(root != NULL){
@@ -110,11 +106,13 @@ void Scene::display()
 			root->processNodeInitialization(NULL);
 			firstDisplay = false;
 		}else{
-			root->processNode(NULL);
-
+			root->processNode(NULL,false,NULL);
 		}
 	}
 
+	// Draw axis
+	if(showAxis==0) axis.draw();
+	
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer

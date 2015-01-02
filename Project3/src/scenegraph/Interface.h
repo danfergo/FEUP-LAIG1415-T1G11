@@ -1,7 +1,8 @@
 #pragma once
 
 #include "CGFinterface.h"
-#include "scenegraph/Light.h"
+#include "Light.h"
+#include "Node.h"
 
 class Interface: public CGFinterface
 {
@@ -14,8 +15,11 @@ private:
 	int activeCameraPosition;
 public:
 	Interface(void);
-	~Interface(void);
-	void initGUI();
-	void processGUI(GLUI_Control *ctrl);
+	virtual void initGUI();
+	virtual void processGUI(GLUI_Control *ctrl);
+	void performPicking(int x, int y);
+	void processHits (std::vector<Node *> & nodes, GLint hits, GLuint buffer[]) ;
+	virtual void processMouse(int button, int state, int x, int y) ;
+	
 };
 

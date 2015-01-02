@@ -1,5 +1,5 @@
 #pragma once
-#include "../../FlagShader.h"
+#include "../shaders/FlagShader.h"
 #include "Plane.h"
 
 class Flag: public Plane

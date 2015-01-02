@@ -1,5 +1,5 @@
 #include "LinearAnimation.h"
-#include "scenegraph/utils/Normals.h"
+#include "../utils/Normals.h"
 #include "CGFobject.h"
 #include <math.h>
 #include <limits>

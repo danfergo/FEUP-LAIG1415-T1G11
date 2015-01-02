@@ -2,9 +2,9 @@
 
 #include "Sphere.h"
 #include "Cylinder.h"
-#include "../Primitive.h"
+#include "Primitive.h"
 #include "../utils/Point.h"
-#include "../../CircularAnimation.h"
+#include "../animations/CircularAnimation.h"
 
 class Vehicle: public Primitive
 {

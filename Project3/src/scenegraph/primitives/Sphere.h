@@ -1,7 +1,7 @@
 #ifndef MYSEMISPHERE_X
 #define MYSEMISPHERE_X
 
-#include "../Primitive.h"
+#include "Primitive.h"
 #include "CGFappearance.h"
 #include "CGFlight.h"
 #include "../utils/Point.h"

@@ -1,7 +1,7 @@
 #ifndef PATCH_F_H
 #define PATCH_F_H
 
-#include "../Primitive.h"
+#include "Primitive.h"
 #include "../utils/Point.h"
 
 class Patch: public Primitive

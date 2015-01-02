@@ -1,13 +1,15 @@
 #pragma once
 
 #include "CGFobject.h"
-#include "Texture.h"
+#include "../appearances/Texture.h"
 
 class Primitive: public CGFobject
 {
+private:
+	bool visible;
+	bool touchable;
 public:
-	Primitive(void){};
+
 	virtual void draw(Texture * texture) = 0;
-	~Primitive(void){};
 };
 

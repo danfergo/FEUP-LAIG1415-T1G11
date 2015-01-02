@@ -1,7 +1,7 @@
 #ifndef CYLINDER_F_H
 #define CYLINDER_F_H
 
-#include "../Primitive.h"
+#include "Primitive.h"
 #include "../utils/Point.h"
 
 class Cylinder: public Primitive{

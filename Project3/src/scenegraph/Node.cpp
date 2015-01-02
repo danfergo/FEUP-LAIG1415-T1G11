@@ -2,29 +2,14 @@
 
 #include <iostream>
 
-Node::Node():appearance(NULL),isDisplayList(false),currentAnimationIndex(0),lastEndTime(0)
+Node::Node():appearance(NULL),isDisplayList(false),currentAnimationIndex(0),lastEndTime(0), name(0), touchable(false)
 {
 	for(unsigned i=0; i<16; i++)
 		transforms[i] = (i%5 == 0) ? 1 : 0 ;
 }
 
 
-Node::~Node()
-{
-	/*CGFobject * pri;
-	while(primitives.size()){
-		pri = primitives.back();
-		primitives.pop_back();
-		std::cout << "xalskdasjdl" << std::endl;
-		delete pri;
-	}
-
-	Node * desc;
-	while(descendants.size()){
-		desc = descendants.back();
-		descendants.pop_back();
-		delete desc;
-	}*/
+Node::~Node() { 
 
 }
 
@@ -49,13 +34,6 @@ void Node::processNodeInitialization(Appearance * parentAppearance){
 	// now we can "record" the display list relative to this node. 
 	// if any descendant is a display list then, it should be already recorded and, 
 	// it should be called during this node recording.
-	/**if(displayListId == 0){
-		int displayListId = glGenLists(1);
-		glNewList(displayListId,GL_COMPILE);
-			processNode(parentAppearance);
-			this->displayListId = displayListId;
-		glEndList();
-	}**/
 
 	if(isDisplayList){
 		try{
@@ -63,7 +41,7 @@ void Node::processNodeInitialization(Appearance * parentAppearance){
 		}catch(...){ 
 			int dspId = glGenLists(1);
 			glNewList(dspId,GL_COMPILE);
-				processNode(parentAppearance);
+				processNode(parentAppearance,false, 0);
 				displayListsIds.insert(std::pair<Appearance *,int>(currentAppearance,dspId));
 			glEndList();
 		}
@@ -71,26 +49,26 @@ void Node::processNodeInitialization(Appearance * parentAppearance){
 }
 
 
+void Node::processNode(Appearance * parentAppearance, bool parentIsTouchable, std::vector<Node *> * nodes){
 
-
-void Node::processNode(Appearance * parentAppearance){
-		/*
-		if(displayListId > 0){
-			glCallList(displayListId);
-			return;
-		}
-		*/
 		Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
+		bool currentTouchable = (parentIsTouchable || this->touchable);
 
 		if(isDisplayList){
 			try{
 				int id = this->displayListsIds.at(currentAppearance); 
 				glCallList(id);
 				return;
-			}catch(...){ /** continue and draw it . **/ }
+			}catch(...){
+				/** continue and draw it . **/ 
+			}
 		}
 		
 		glPushMatrix();
+		if(nodes != NULL && this->touchable){ 
+			glPushName(nodes->size()); 
+			nodes->push_back(this); 
+		}
 			// ok lets apply this node transformations
 			glMultMatrixf(transforms);
 
@@ -103,49 +81,69 @@ void Node::processNode(Appearance * parentAppearance){
 
 
 				// we are going to draw this node's primitives
-				for(std::vector<Primitive *>::iterator it = primitives.begin();
-					it != primitives.end(); it++){
-						(*it)->draw(currentAppearance ? currentAppearance->getTexture() : NULL);
+				if(nodes == NULL || currentTouchable){
+					for(std::vector<Primitive *>::iterator it = primitives.begin();
+						it != primitives.end(); it++){
+							(*it)->draw(currentAppearance ? currentAppearance->getTexture() : NULL);
+					}
 				}
 
 				//now we process this node's descendants
 				for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
-					(*it)->processNode(currentAppearance);
+					(*it)->processNode(currentAppearance,currentTouchable,nodes);
 				}
+				
 			glPopMatrix();
+			if(nodes != NULL  && this->touchable){ 
+				glPopName(); 
+			}
 		glPopMatrix();
 
 }
 
 void Node::addRotationX(float angle){
+	float temp[16];
+	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
 	glLoadMatrixf(transforms);
 	glRotatef(angle, 1,0,0);
-
 	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
+	glLoadMatrixf(transforms);
 }
 
 void Node::addRotationY(float angle){
+	float temp[16];
+	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
 	glLoadMatrixf(transforms);
 	glRotatef(angle, 0,1,0);
 	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
+	glLoadMatrixf(transforms);
 }
 
 void Node::addRotationZ(float angle){
+	float temp[16];
+	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
 	glLoadMatrixf(transforms);
 	glRotatef(angle, 0,0,1);
 	glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
+	glLoadMatrixf(transforms);
 }
 
 void Node::addScaling(float x, float y, float z){
+	float temp[16];
+	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
 	glLoadMatrixf(transforms);
 	glScalef(x,y,z);
 	glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
+	glLoadMatrixf(transforms);
 }
 
 void Node::addTranslation(float x, float y, float z){
+	float temp[16];
+	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
 	glLoadMatrixf(transforms);
 	glTranslatef(x, y, z);
 	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
+	glLoadMatrixf(temp);
 }
 
 bool Node::addRotation(std::string axis, float angle){
@@ -207,4 +205,13 @@ void Node::update(unsigned time){
 	for(std::vector<Node *>::iterator it  = descendants.begin(); it != descendants.end(); it++)
 		(*it)->update(time);
 
+}
+
+
+void Node::setTouchable(bool touchable){
+	this->touchable = touchable;
+}
+
+bool Node::clickHandler(){
+	return true;
 }

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3A4F1E3F-8862-4892-A1EA-E3EE90BE15AB}</ProjectGuid>
+    <RootNamespace>CGFexample</RootNamespace>
+    <ProjectName>Tixel</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\</OutDir>
+    <LibraryPath>lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;C:\Program Files\SICStus Prolog VC12 4.3.0\bin</LibraryPath>
+    <IncludePath>include\CGF;include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;C:\Program Files\SICStus Prolog VC12 4.3.0\include</IncludePath>
+    <IntDir>..\buildtemp\$(ProjectName)\</IntDir>
+    <ExtensionsToDeleteOnClean>*.cdf;*.cache;*.obj;*.ilk;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml,*.pdb</ExtensionsToDeleteOnClean>
+    <TargetName>$(ProjectName)</TargetName>
+    <SourcePath>C:\Program Files\SICStus Prolog VC12 4.3.0\bin;$(SourcePath)</SourcePath>
+    <ExecutablePath>C:\Program Files\SICStus Prolog VC12 4.3.0\bin;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;tinyxml.lib;CGFlib.lib;ws2_32.lib;sprt4-3-0_static.lib;sprt4-3-0.lib;spnative.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\game\Connection.cpp" />
+    <ClCompile Include="src\game\controller\MatchController.cpp" />
+    <ClCompile Include="src\game\controller\TixelController.cpp" />
+    <ClCompile Include="src\game\IAInterface.cpp" />
+    <ClCompile Include="src\game\model\GameState.cpp" />
+    <ClCompile Include="src\game\model\Move.cpp" />
+    <ClCompile Include="src\game\view\Board.cpp" />
+    <ClCompile Include="src\game\view\BoardPiece.cpp" />
+    <ClCompile Include="src\game\view\ConcaveCube.cpp" />
+    <ClCompile Include="src\game\view\TixelScene.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenegraph\animations\Animation.cpp" />
+    <ClCompile Include="src\scenegraph\animations\CircularAnimation.cpp" />
+    <ClCompile Include="src\scenegraph\animations\LinearAnimation.cpp" />
+    <ClCompile Include="src\scenegraph\appearances\Appearance.cpp" />
+    <ClCompile Include="src\scenegraph\appearances\Texture.cpp" />
+    <ClCompile Include="src\scenegraph\Camera.cpp" />
+    <ClCompile Include="src\scenegraph\Interface.cpp" />
+    <ClCompile Include="src\scenegraph\Light.cpp" />
+    <ClCompile Include="src\scenegraph\Node.cpp" />
+    <ClCompile Include="src\scenegraph\parser\ANFparser.cpp" />
+    <ClCompile Include="src\scenegraph\parser\ANFparserAnimations.cpp" />
+    <ClCompile Include="src\scenegraph\parser\ANFparserAppearances.cpp" />
+    <ClCompile Include="src\scenegraph\parser\ANFparserCameras.cpp" />
+    <ClCompile Include="src\scenegraph\parser\ANFparserGlobals.cpp" />
+    <ClCompile Include="src\scenegraph\parser\ANFparserGraph.cpp" />
+    <ClCompile Include="src\scenegraph\parser\ANFparserLights.cpp" />
+    <ClCompile Include="src\scenegraph\parser\ANFparserPrimitives.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Cylinder.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Flag.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Patch.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Plane.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Retangle.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Sphere.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Toro.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Triangle.cpp" />
+    <ClCompile Include="src\scenegraph\primitives\Vehicle.cpp" />
+    <ClCompile Include="src\scenegraph\Scene.cpp" />
+    <ClCompile Include="src\scenegraph\shaders\FlagShader.cpp" />
+    <ClCompile Include="src\scenegraph\utils\Normals.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\game\Connection.h" />
+    <ClInclude Include="src\game\controller\MatchController.h" />
+    <ClInclude Include="src\game\controller\TixelController.h" />
+    <ClInclude Include="src\game\IAInterface.h" />
+    <ClInclude Include="src\game\model\GameState.h" />
+    <ClInclude Include="src\game\model\Move.h" />
+    <ClInclude Include="src\game\view\Board.h" />
+    <ClInclude Include="src\game\view\BoardPiece.h" />
+    <ClInclude Include="src\game\view\ConcaveCube.h" />
+    <ClInclude Include="src\game\view\TixelScene.h" />
+    <ClInclude Include="src\scenegraph\animations\Animation.h" />
+    <ClInclude Include="src\scenegraph\animations\CircularAnimation.h" />
+    <ClInclude Include="src\scenegraph\animations\LinearAnimation.h" />
+    <ClInclude Include="src\scenegraph\appearances\Appearance.h" />
+    <ClInclude Include="src\scenegraph\appearances\Texture.h" />
+    <ClInclude Include="src\scenegraph\Camera.h" />
+    <ClInclude Include="src\scenegraph\Interface.h" />
+    <ClInclude Include="src\scenegraph\Light.h" />
+    <ClInclude Include="src\scenegraph\Node.h" />
+    <ClInclude Include="src\scenegraph\parser\ANFparser.h" />
+    <ClInclude Include="src\scenegraph\primitives\Cylinder.h" />
+    <ClInclude Include="src\scenegraph\primitives\Flag.h" />
+    <ClInclude Include="src\scenegraph\primitives\Patch.h" />
+    <ClInclude Include="src\scenegraph\primitives\Plane.h" />
+    <ClInclude Include="src\scenegraph\primitives\Primitive.h" />
+    <ClInclude Include="src\scenegraph\primitives\Retangle.h" />
+    <ClInclude Include="src\scenegraph\primitives\Sphere.h" />
+    <ClInclude Include="src\scenegraph\primitives\Toro.h" />
+    <ClInclude Include="src\scenegraph\primitives\Triangle.h" />
+    <ClInclude Include="src\scenegraph\primitives\Vehicle.h" />
+    <ClInclude Include="src\scenegraph\Scene.h" />
+    <ClInclude Include="src\scenegraph\shaders\FlagShader.h" />
+    <ClInclude Include="src\scenegraph\utils\Normals.h" />
+    <ClInclude Include="src\scenegraph\utils\Point.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\flagshader.frag" />
+    <None Include="bin\flagshader.vert" />
+    <None Include="bin\scene.anf">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
