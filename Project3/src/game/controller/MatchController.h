@@ -1,26 +1,36 @@
 #pragma once
 #include "../IAInterface.h"
-#include "MatchController.h"
+#include "../view/Board.h"
 
+class Board;
 class MatchController
 {
 private:
 	IAInterface iaInterface;
-	enum PState {ChoosingPiece, ChoosingWhereToGo, ChoosingEndAngle};
-	bool waiting;
-	std::vector<GameState *> game;
+	enum PState {ChoosingPiece, ChoosingWhereToGo, ChoosingAngle};
+	Board * board;
+	std::vector<GameState *> gameStates;
 	enum PState playingState;
+	IJ curStart, curEnd;
+	int curAngle;
 public:
-	MatchController(void);
+	MatchController(Board * board);
 	void update();
 
-	void switchToChoosingPiece();
+	/**  **/
+	void play();
+	void pcPlay();
+	void playerPlay();
+	void makeMove();
+	void setControlsChooseEnd();
+	void setControlsChooseAngle();
+
 
 	/** Notifications receivers **/
-	void selectedBoardPiece(int i, int j);
-	void selectedBoardHouse(int i, int j);
-	void selectedAnglePosition(int anglePosition);
+	void selectBoardCoords(int i, int j);
+	void selectAngle(int angle);
 	void animationEnded();
-	void refresh();
+	
+	void setBoard(Board * board);  
 };
 

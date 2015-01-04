@@ -26,7 +26,7 @@ public:
 	Node();
 	~Node();
 	void processNodeInitialization(Appearance * parentAppearance);
-	void processNode(Appearance * parentAppearance, bool parentIsTouchable, std::vector<Node *> * nodes);
+	void processNode(Appearance * parentAppearance, bool parentIsVisible, bool parentIsTouchable, std::vector<Node *> * nodes);
 	void addPrimitive(Primitive * primitive);
 	void addDescendants(Node * descendant);
 	void setAppearance(Appearance * appearance);
@@ -35,8 +35,9 @@ public:
 	bool hasAppearance() const;
 	void setDisplayList();
 
-	void update(unsigned time);
+	virtual void update(unsigned time);
 
+	void resetTransformations();
 	bool addRotation(std::string axis, float angle);
 	void addRotationX(float angle);
 	void addRotationY(float angle);
@@ -45,7 +46,9 @@ public:
 	void addTranslation(float x, float y, float z);
 
 	void setTouchable(bool touchable);
-	
+	void setVisible(bool visible);
+
+	virtual void animationCallback(){};
 
 	virtual bool clickHandler();
 };

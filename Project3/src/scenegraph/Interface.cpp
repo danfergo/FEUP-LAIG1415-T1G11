@@ -158,7 +158,7 @@ void Interface::performPicking(int x, int y)
 	glGetIntegerv(GL_VIEWPORT, viewport);
 
 	// this is multiplied in the projection matrix
-	gluPickMatrix ((GLdouble) x, (GLdouble) (CGFapplication::height - y), 5.0, 5.0, viewport);
+	gluPickMatrix ((GLdouble) x, (GLdouble) (CGFapplication::height - y), 2.0, 2.0, viewport);
 
 	// multiply the projection matrix stored in our array to ensure same conditions as in normal render
 	glMultMatrixf(projmat);
@@ -209,11 +209,11 @@ void Interface::processHits (std::vector<Node *> & nodes, GLint hits, GLuint buf
 	{
 		// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
 		// possibly invoking a method on the scene class and passing "selected" and "nselected"
-		/**printf("Picked ID's: ");
+		printf("Picked ID's: ");
 		for (int i=0; i<nselected; i++)
 			printf("%d ",selected[i]);
 		printf("\n");
-		**/
+		
 		for (int i=nselected-1; i>=0; i--){ /** from the inner to the outter **/
 			if(!nodes[selected[i]]->clickHandler()){
 				break;

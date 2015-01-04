@@ -13,6 +13,7 @@ public:
 	bool hasExtraMove();
 	bool gameIsOver();
 	int result();
+	int currentPlayer();
 	std::string toString();
 };
 

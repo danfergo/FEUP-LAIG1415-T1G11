@@ -200,7 +200,15 @@ bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::No
 					(*it).second.node->addDescendants(nodes.at(*it2).node);
 					nodes.at(*it2).indegree++; // calculating indegree. need in a following verification.
 				}catch(...){
-					issue("Node descendant '"+ *it2 + "' not found!",ERROR);
+					if(*it2 == "tixel_game_board"){
+						boardFound = new Board();
+						NodeWrapper wrapper = {boardFound, std::vector<std::string>(), 1};
+						nodes.insert(std::pair<std::string,NodeWrapper>("tixel_game_board",wrapper));
+						(*it).second.node->addDescendants(boardFound);
+					}else{
+						issue("Node descendant '"+ *it2 + "' not found!",ERROR);
+					}
+					
 				}
 			}
 	}

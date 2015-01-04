@@ -1,5 +1,7 @@
 #include "ANFparser.h"
 
+#include "../../game/view/GameCamera.h"
+
 void ANFparser::parseCameras(TiXmlElement *anfCameras,std::string initialCamera){
 	std::map<std::string,Camera *> tempCameras; 	
 	TiXmlElement * anfCamera = anfCameras->FirstChildElement();
@@ -21,7 +23,7 @@ void ANFparser::parseCameras(TiXmlElement *anfCameras,std::string initialCamera)
 
 		if(cameraTag == "ortho"){ //process ortho camera
 			camera = parseCameraOrtho(anfCamera);
-		}else if(cameraTag == "perspective"){ //process prespective camera
+		}else if(cameraTag == "perspective" || cameraTag == "gamecamera"){ //process prespective camera
 			camera = parseCameraPrespective(anfCamera);
 		}else{ // we've got a problem, sir
 			issue("there is no such camera type '" + cameraTag + "'. (ignored!)",WARNING);
@@ -52,15 +54,15 @@ Camera * ANFparser::parseCameraOrtho(TiXmlElement *anfCamera){
 	//<ortho id="ss" direction="ee" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" />
 	std::string id, ee;
 	CameraOrtho::Axis axis;
-	float near,far,left,right,top,bottom;
+	float nearr,farr,left,right,top,bottom;
 	
 	id = str(anfCamera->Attribute("id"));
 	
-	if(anfCamera->QueryFloatAttribute("near",&near) != TIXML_SUCCESS) {
+	if(anfCamera->QueryFloatAttribute("near",&nearr) != TIXML_SUCCESS) {
 		issue("we've got a problem parsing near attribute", ERROR);
 	}
 
-	if(anfCamera->QueryFloatAttribute("far",&far) != TIXML_SUCCESS) {
+	if(anfCamera->QueryFloatAttribute("far",&farr) != TIXML_SUCCESS) {
 		issue("we've got a problem parsing far attribute", ERROR);
 	}
 
@@ -93,23 +95,23 @@ Camera * ANFparser::parseCameraOrtho(TiXmlElement *anfCamera){
 	}
 	
 
-	return new CameraOrtho(id,near,far,left,right,bottom,top,axis);
+	return new CameraOrtho(id,nearr,farr,left,right,bottom,top,axis);
 }
 Camera * ANFparser::parseCameraPrespective(TiXmlElement *anfCamera){
 	std::string id;
-	float near,far,angle, pos[3],targ[3];
+	float nearr,farr,angle, pos[3],targ[3];
 	const char *position, *target;
 	id = str(anfCamera->Attribute("id"));
 	
-	if(anfCamera->QueryFloatAttribute("near",&near) != TIXML_SUCCESS) {
+	if(anfCamera->QueryFloatAttribute("near",&nearr) != TIXML_SUCCESS) {
 		issue("we've got a problem parsing near attribute", ERROR);
 	}
 
-	if(anfCamera->QueryFloatAttribute("near",&near) != TIXML_SUCCESS) {
+	if(anfCamera->QueryFloatAttribute("near",&nearr) != TIXML_SUCCESS) {
 		issue("we've got a problem parsing near attribute", ERROR);
 	}
 
-	if(anfCamera->QueryFloatAttribute("far",&far) != TIXML_SUCCESS) {
+	if(anfCamera->QueryFloatAttribute("far",&farr) != TIXML_SUCCESS) {
 		issue("we've got a problem parsing far attribute", ERROR);
 	}
 
@@ -130,5 +132,5 @@ Camera * ANFparser::parseCameraPrespective(TiXmlElement *anfCamera){
 		issue("we've got a problem parsing angle attribute", ERROR);
 	}
 
-	return new CameraPerspective(id,near,far,pos,targ,angle);
+	return  (str(anfCamera->Value()) == "gamecamera")? new GameCamera(id,nearr,farr,pos,targ,angle) : new CameraPerspective(id,nearr,farr,pos,targ,angle);
 }

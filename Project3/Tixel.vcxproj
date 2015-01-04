@@ -78,10 +78,11 @@
     <ClCompile Include="src\game\IAInterface.cpp" />
     <ClCompile Include="src\game\model\GameState.cpp" />
     <ClCompile Include="src\game\model\Move.cpp" />
+    <ClCompile Include="src\game\view\AngleChooser.cpp" />
     <ClCompile Include="src\game\view\Board.cpp" />
     <ClCompile Include="src\game\view\BoardPiece.cpp" />
     <ClCompile Include="src\game\view\ConcaveCube.cpp" />
-    <ClCompile Include="src\game\view\TixelScene.cpp" />
+    <ClCompile Include="src\game\view\GameCamera.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\scenegraph\animations\Animation.cpp" />
     <ClCompile Include="src\scenegraph\animations\CircularAnimation.cpp" />
@@ -120,10 +121,11 @@
     <ClInclude Include="src\game\IAInterface.h" />
     <ClInclude Include="src\game\model\GameState.h" />
     <ClInclude Include="src\game\model\Move.h" />
+    <ClInclude Include="src\game\view\AngleChooser.h" />
     <ClInclude Include="src\game\view\Board.h" />
     <ClInclude Include="src\game\view\BoardPiece.h" />
     <ClInclude Include="src\game\view\ConcaveCube.h" />
-    <ClInclude Include="src\game\view\TixelScene.h" />
+    <ClInclude Include="src\game\view\GameCamera.h" />
     <ClInclude Include="src\scenegraph\animations\Animation.h" />
     <ClInclude Include="src\scenegraph\animations\CircularAnimation.h" />
     <ClInclude Include="src\scenegraph\animations\LinearAnimation.h" />

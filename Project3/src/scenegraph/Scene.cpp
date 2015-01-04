@@ -35,15 +35,12 @@ Scene::Scene(): root(NULL), CGFscene(), showAxis(1),firstDisplay(true), startTim
 	localIlluminationEnabled = true;
 }
 
-void Scene::prepareSelection(std::vector<Node *> & nodes){
-	glInitNames();
-	root->processNode(NULL,false,&nodes);
-}
 
 void Scene::init() 
 {
 	// Enables lighting computations
 
+	for(int i = 0; i < 8; i++) glDisable(lightsId[i]);
 	if(lightingEnabled) glEnable(GL_LIGHTING);
 
 	glEnable(GL_MAP2_VERTEX_3);
@@ -67,7 +64,7 @@ void Scene::init()
 	std::vector<Camera *> systemCameras;
 	systemCameras.push_back(new Camera("[AUTO] Free camera"));
 	cameras.insert(cameras.begin(),systemCameras.begin(),systemCameras.end());
-	setActiveCamera(0);
+	/**setActiveCamera(0);**/
 
 	setUpdatePeriod(30);
 
@@ -75,8 +72,20 @@ void Scene::init()
 	glEnable(GL_AUTO_NORMAL);
 }
 
+void Scene::prepareSelection(std::vector<Node *> & nodes){
 
+	// Clear image and depth buffer everytime we update the scene
+	 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT); 
 
+	// Initialize Model-View matrix as identity (no transformation
+	glMatrixMode(GL_MODELVIEW);
+	
+	//set camera
+	glLoadIdentity();
+	activeCamera->applyView();
+
+	root->processNode(NULL,true,false,&nodes);
+}
 
 void Scene::display() 
 {
@@ -106,7 +115,7 @@ void Scene::display()
 			root->processNodeInitialization(NULL);
 			firstDisplay = false;
 		}else{
-			root->processNode(NULL,false,NULL);
+			root->processNode(NULL,true,false,NULL);
 		}
 	}
 
@@ -212,14 +221,26 @@ void Scene::setLocalIlluminationEnabled(bool localIlluminationEnabled){
 }
 
 void Scene::update (unsigned long millis){
-	if(startTime == 0) startTime = millis;
-	root->update(millis-startTime);
+	if(startTime == 0){
+		lastTime = startTime = millis;
+	} 
+	root->update(millis-lastTime);
 	FlagShader::time = millis-startTime;
+	
+
+	for(std::vector<Camera *>::iterator it = cameras.begin(); it != cameras.end(); it++){
+		(*it)->update(millis-lastTime);
+	}
+	lastTime = millis;
 }
 
 
 void Scene::resetAnimations(){
 	startTime = 0;
+}
+
+Camera * Scene::getTheActiveCamera(){
+	return (Camera *)this->activeCamera;
 }
 
 int Scene::getActiveCameraPosition(){

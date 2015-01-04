@@ -16,7 +16,7 @@ private:
 public:
 	int showAxis;
 	bool firstDisplay;
-	long startTime;
+	long startTime, lastTime;
 
 	static int lightsId[8]; 
 	static int drawingModes[3];
@@ -51,7 +51,9 @@ public:
 	void addCamera(Camera * camera);
 	void setActiveCamera(Camera * camera);
 	void setActiveCamera(int cameraPosition);
+	Camera * getTheActiveCamera();
 	int getActiveCameraPosition();
+
 	int getDrawingMode();
 	int getShaddingMode();
 

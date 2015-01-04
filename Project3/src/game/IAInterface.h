@@ -18,8 +18,14 @@ public:
 	GameState * initialize(enum Mode mode);
 	std::vector<IJ> availablePiecesToMove(GameState * gamestate);
 	std::vector<IJ> availableMoves(GameState * gamestate, IJ coords);
-	std::vector<int> availableAngles(GameState * gamestate, IJ from, IJ to);	
-	GameState * chooseMove(Mode * move);
-	GameState * makeMove(Mode * move);
+	std::vector<int> availableAngles(GameState * gamestate, IJ from, IJ to);
+	bool isHumanPlaying(GameState * gamestate);
+	
+	GameState * chooseMove(GameState * gamestate, Move * move);
+	GameState * makeMove(GameState * gamestate, Move * move );
+
+	static void parseListIJ(const char * buff, std::vector<IJ> & list);
+	static void parseListAngles(const char * buff, std::vector<int>&  list);
+	static void parseListStrings(const char * buff, std::vector<std::string>  & list);
 };
 

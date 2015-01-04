@@ -26,6 +26,9 @@ float deg2rad = pi/180.0;
 
 void ConcaveCube::draw(Texture * texture){
 	glPushMatrix();
+		glScaled(0.01,0.01,0.01);
+		glTranslatef(-2,0,-2);
+	glPushMatrix();
 		glBegin(GL_TRIANGLE_STRIP);
 			for(int i=0; i<19; i++){
 				glVertex3d(xis[i],1,zes[i]);
@@ -79,5 +82,7 @@ void ConcaveCube::draw(Texture * texture){
 		glVertex3d(0,1,4);
 		glVertex3d(0,1,0);
 	glEnd();
+
+	glPopMatrix();
 }
 

@@ -28,7 +28,9 @@ void CircularAnimation::animate() const{
 }
 
 
-void CircularAnimation::update(unsigned long time){
+void CircularAnimation::update(unsigned long ticks){
+	time += ticks;
+
 	if(time >= startingTime && time <= endingTime){
 		double currentAngleDeg = fmod(startAngle + angularVelocity*(time-startingTime),(double)360);
 		double currentAngleRad = (PI*(double)currentAngleDeg)/180;
@@ -39,9 +41,25 @@ void CircularAnimation::update(unsigned long time){
 	}else if(time > endingTime){
 		this->currentPosition = endPosition;
 		this->currentAngle = endPositionAngle;
+		state = 2;
 	}
 }
 
 Animation * CircularAnimation::clone(unsigned newStartTime){
 	return new CircularAnimation(newStartTime/1000,this->duration/1000,this->center,this->radius,this->startAngle,this->endAngle);
+}
+
+void CircularAnimation::getTransformationMatrix(float * matrix) const{
+	float temp[16];
+	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
+		glLoadIdentity();
+		glTranslated(currentPosition.x,currentPosition.y,currentPosition.z);
+		glRotated(currentAngle,0,1,0);
+	glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
+	glLoadMatrixf(temp);
+}
+
+
+Point3d CircularAnimation::getCurrentPosition(){
+	return this->currentPosition;
 }

@@ -1122,13 +1122,36 @@ serverLoop(Stream) :-
 	[pivot,[Ipv,Jpv],PivAngle].
 **/
 
+switch_state_to_game_over(_,GameState,game_over):-
+		game_over(GameState,en), !.
+switch_state_to_game_over(State,_,State):-!.
 
-complete_make_move([_,_, [Gb,CurPl|T]], [slide,[Is,Js],[If,Jf],AngPos] , [extra_move,[If,Jf],GameState1]):- 0 is AngPos mod 2,
-		make_move([Gb,CurPl|T],[slide,[Is,Js],[If,Jf],AngPos],GameState1), !.
 
-complete_make_move([_,_, GameState], [Type,[If,Jf]|T] ,[regular_move,[If,Jf],GameState2]):-
+what_move_type(If-Jf,[GSboard|_],activate):-
+		gameboard_select(GSboard,If,Jf,[_,AngPos]), 
+		0 is AngPos mod 2, !.
+what_move_type(_,_,[_|_],pivot):-!.
+
+move_convert_format([[If,Jf],[If,If],Angle],[_,_, GameState],[MoveType,[If,Jf],Angle]):-
+		what_move_type(If-Jf,Angle,GameState,MoveType),!.
+move_convert_format([[Is,Js],[If,Jf],Angle],_,[slide,[Is,Js],[If,Jf],Angle]):-!.
+move_convert_format([[If,Jf],Angle],_,[place,[If,Jf],Angle]):-!.
+move_convert_format([[If,Jf]],_,[pick,[If,Jf]]):-!.
+
+
+complete_make_move([_,_, GameState], [slide,[Is,Js],[If,Jf],AngPos] , [FinalState,[If,Jf],GameState1]):- 0 is AngPos mod 2,
+		make_move(GameState,[slide,[Is,Js],[If,Jf],AngPos],GameState1), 
+		switch_state_to_game_over(extra_move, GameState1,FinalState),!.
+
+complete_make_move([_,_, GameState], [slide,[Is,Js],[If,Jf],AngPos] ,[FinalState,[If,Jf],GameState2]):-
+		make_move(GameState,[slide,[Is,Js],[If,Jf],AngPos],GameState1), 
+		switch_player(GameState1,GameState2),
+		switch_state_to_game_over(regular_move, GameState2,FinalState),!.
+
+complete_make_move([_,_, GameState], [Type,[If,Jf]|T] ,[FinalState,[If,Jf],GameState2]):-
 		make_move(GameState,[Type,[If,Jf]|T],GameState1),
-		switch_player(GameState1,GameState2),!.
+		switch_player(GameState1,GameState2),
+		switch_state_to_game_over(regular_move, GameState2,FinalState),!.
 
 
 /** initialize connection **/
@@ -1137,55 +1160,75 @@ parse_input(initialize(Mode), [regular_move,none,GameState]) :-
 
 
 /** Available Pieces To Move **/
-parse_input(available_pieces([regular_move,_, GameState]), AvailablePieces) :- 
+parse_input(available_pieces([regular_move,_, GameState]), AvailableCoords) :- 
 		findall(Is-Js,valid_move(slide,GameState,[_,[Is,Js]|_]), AP),
-		remove_dups(AP,AvailablePieces), !.
+		remove_dups(AP,AvailableCoords), !.
 
-parse_input(available_pieces([extra_move,LPP, GameState]), AvailablePieces) :- 
+parse_input(available_pieces([extra_move,LPP, GameState]), AvailableCoords) :- 
 		findall(Is-Js,valid_extra_move(slide,GameState,LPP,[_,[Is,Js],_,_]), AP1),
 		findall(Is-Js,valid_extra_move(pick,GameState,LPP,[_,[Is,Js]]), AP2),
 		findall(Is-Js,valid_extra_move(activate,GameState,LPP,[_,[Is,Js],_]), AP3),
 		findall(Is-Js,valid_extra_move(pivot,GameState,LPP,[_,[Is,Js],_]), AP4),
 		append(AP1,AP2,AP12), append(AP12,AP3,AP123), append(AP123,AP4,AP1234), 
-		remove_dups(AP1234,AvailablePieces), !.
+		remove_dups(AP1234,AvailableCoords), !.
 
 
 
 		
 /** available moves for a given piece **/
-parse_input(available_moves(place,[regular_move,_, GameState]), AvailablePieces) :- 
-		findall(If-Jf,valid_move(place,GameState,[_,[If,Jf],_]), AP1),
-		remove_dups(AP1,AvailablePieces), !.
-parse_input(available_moves(Is-Js,[regular_move,_, GameState]), AvailablePieces) :- 
+parse_input(available_moves([Is,Js],[regular_move,_, GameState]), AvailableCoords) :- Js >= 0 , Js < 6 , 
 		findall(If-Jf,valid_move(slide,GameState,[_,[Is,Js],[If,Jf],_]), AP1),
-		remove_dups(AP1,AvailablePieces), !.
+		remove_dups(AP1,AvailableCoords), !.
+parse_input(available_moves(_,[regular_move,_, GameState]), AvailableCoords) :- 
+		findall(If-Jf,valid_move(place,GameState,[_,[If,Jf],_]), AP1),
+		remove_dups(AP1,AvailableCoords), !.
 
-
-parse_input(available_moves(place,[extra_move,LPP, GameState]), AvailablePieces) :- 
-		findall(If-Jf,valid_extra_move(place,GameState,LPP,[_,[If,Jf],_]), AP1),
-		remove_dups(AP1,AvailablePieces), !.
-parse_input(available_moves(Is-Js,[extra_move,LPP, GameState]), AvailablePieces) :- 
+parse_input(available_moves([Is,Js],[extra_move,LPP, GameState]), AvailableCoords) :- Js >= 0 , Js < 6 , 
 		findall(If-Jf,valid_extra_move(slide,GameState,LPP,[_,[Is,Js],[If,Jf],_]), AP1),
 		findall(If-Jf,valid_extra_move(pick,GameState,LPP,[_,[If,Jf],_]), AP2),
 		findall(If-Jf,valid_extra_move(activate,GameState,LPP,[_,[If,Jf],_]), AP3),
 		findall(If-Jf,valid_extra_move(pivot,GameState,LPP,[_,[If,Jf],_]), AP4),
 		append(AP1,AP2,AP12), append(AP12,AP3,AP123), append(AP123,AP4,AP1234), 
-		remove_dups(AP1234,AvailablePieces), !.
+		remove_dups(AP1234,AvailableCoords), !.
+parse_input(available_moves(_,[extra_move,LPP, GameState]), AvailableCoords) :- 
+		findall(If-Jf,valid_extra_move(place,GameState,LPP,[_,[If,Jf],_]), AP1),
+		remove_dups(AP1,AvailableCoords), !.
 
+ 
+/** available angle for a given par of coordinates **/
+parse_input(available_angles([I,J],[I,J],[regular_move,_,_]), []):- !.
+parse_input(available_angles([I,J],[I,J],[extra_move,LPP, GameState]), AvailableCoords) :- 
+		findall(A,valid_extra_move(activate,GameState,LPP,[_,[I,J],A]), AP1),
+		findall(A,valid_extra_move(pivot,GameState,LPP,[_,[I,J],A]), AP2),
+		append(AP1,AP2,AP12),
+		remove_dups(AP12,AvailableCoords), !.
+
+parse_input(available_angles([Is,Js],[If,Jf],[_,LPP, GameState]), AvailableCoords) :- Js >= 0 , Js < 6 ,  
+		findall(A,valid_extra_move(slide,GameState,LPP,[_,[Is,Js],[If,Jf],A]), AP),
+		remove_dups(AP,AvailableCoords), !.
+parse_input(available_angles([_,_],[If,Jf],[_,LPP, GameState]), AvailableCoords) :- 
+		findall(A,valid_extra_move(place,GameState,LPP,[_,[If,Jf],A]), AP),
+		remove_dups(AP,AvailableCoords), !.
 
 /** play given move **/ 
-parse_input(play_move([regular_move,LPP, GameState]), [Move,GameState1]) :- 
-		choose_move(GameState,Move,en),
-		complete_make_move([regular_move,LPP, GameState],Move,GameState1), !.
+parse_input(play_move(ExtMove,GameState), GameState1) :- 
+		move_convert_format(ExtMove,GameState,Move),
+		complete_make_move(GameState,Move,GameState1), !.
 
 
 
 /** choose & play a move  **/
-parse_input(choose_move([MoveType,LPP, GameState]), [Move,CompleteGameState1]) :- 
+parse_input(choose_move([MoveType,LPP, GameState]), [ExtMove,CompleteGameState1]) :- 
 		choose_move(GameState,Move,en),
+		move_convert_format(ExtMove,GameState,Move),
 		complete_make_move([MoveType,LPP, GameState],Move,CompleteGameState1), !.
 
 
+
+parse_input(player_type([_,_, [_,_,_,_,_,0,_,_]]), human) :- !.
+
+
+parse_input(game_result([_,_, [_,_,_,_,_,_,[Result],_]]), Result) :-  !.
 
 /** leaving connection **/ 
 parse_input(quit, good_bye) :- !.

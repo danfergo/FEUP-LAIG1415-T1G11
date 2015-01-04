@@ -16,10 +16,16 @@
 #include <vector>
 #include <string>
 
+#include "../../game/view/Board.h"
+
+
 
 class ANFparser{
-
+public:
+	static Board * boardFound;
 private:
+
+
 	class ParseExep{ 
 	};
 
@@ -58,59 +64,51 @@ private:
 
 	void initPrimitiveParsers();
 
-	//Animations
+	/** Animations **/ 
 	Animation * parseAnimation(TiXmlElement * anfAnimation);
 	void parseAnimations(TiXmlElement * anfAnimations, map<std::string,Animation *> & animations);
 
-	//Cameras
+	/** Cameras **/
 	void parseCameras(TiXmlElement *anfCameras,std::string initialCamera);
 	Camera * parseCameraOrtho(TiXmlElement *anfCamera);
 	Camera * parseCameraPrespective(TiXmlElement *anfCamera);
 
-	//Graph
+	/** Graph **/
 	NodeWrapper parseNode(TiXmlElement * anfNode,std::map<std::string, Appearance *> & appearances, std::map<std::string, Animation *> & animations);
 	Node * parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances, std::map<std::string, Animation *> & animations);
 	bool parseTransforms(Node * node, TiXmlElement * anfTransforms);
 	bool buildSceneGraph(std::string root, map<std::string, NodeWrapper> & nodes);
 
-	//Appearances
+	/** Appearances **/
 	Appearance * parseAppearance(TiXmlElement * anfAppearance,std::map<std::string, Texture *> & textures);
 	void parseAppearances(TiXmlElement * anfAppearances, std::map<std::string, Appearance *> & appearances,
 	std::map<std::string, Texture *> & textures);
 	void parseComponent(TiXmlElement * anfParent, float aa[4], float dd[4], float ss[4]);
 
-	//Textures
+	/** Textures **/
 	Texture * parseTexture(TiXmlElement * anfTexture);
 	void parseTextures(TiXmlElement * anfTextures, map<std::string,Texture *> & textures);
 
-	//Lights
+	/** Lights **/
 	void parseLights(TiXmlElement * anfLights);
 	void parseLight(TiXmlElement * anfLight);
 	
-	//Globals
+	/* Globals */
 	void parseGlobals(TiXmlElement * anfGlobals);
 	void parseGlobalsDrawing(TiXmlElement * anfDrawing);
 	void parseGlobalsCulling(TiXmlElement * anfCulling);
 	void parseGlobalsLighting(TiXmlElement * anfLighting);
  
-	//Cameras 
-	//void parseCameras(TiXmlElement * anfCameras);
-	//CameraOrtho * parseCameraOrtho(TiXmlElement * anfCamera);
-	//CameraPrespective * parseCameraPrespective(TiXmlElement * anfCamera);
 
-	//Error handling
-	const static char WARNING;
-	const static char ERROR;
+	/* Error handling */
+	const static char WARNING,ERR;
 	void issue(std::string err, const char flag);
 
-	//safe char* -> std::string
 	static std::string str(const char * str);
 
 	Scene * scene;
 public:
-	const static char STRICT;
-	const static char PERMISSIVE;
-	const static char SILENT;
+	const static char STRIC, PERMISSIVE,SILENT;
 	ANFparser(const char parseMode);
 	bool parse(Scene * scene,const char* filename);
 };

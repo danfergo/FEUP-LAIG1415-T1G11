@@ -16,7 +16,7 @@ private:
 	SOCKET m_socket;
 	int bufferMaxSize;
 public:
-	Connection(int bufferMaxSize) throw(ServerNotFound());
+	Connection(int bufferMaxSize);
 	~Connection(void);
 	bool open();
 	void send(const char * msg);

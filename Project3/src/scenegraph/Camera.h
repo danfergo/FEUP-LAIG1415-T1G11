@@ -12,6 +12,7 @@ public:
 	Camera(std::string title): CGFcamera(), title(title){};
 	Camera(std::string title, float near, float far);
 	std::string getTitle() const;
+	virtual void update(unsigned long ticks){};
 };
 
 class CameraOrtho: public Camera
@@ -25,11 +26,12 @@ public:
 	CameraOrtho(std::string title, float near, float far, float left, float right,float bottom, float top, Axis axis);
 	virtual void applyView();
 	virtual void updateProjectionMatrix(int width, int height);
+	
 };
 
 
 class CameraPerspective: public Camera{
-private:
+protected:
 	float targ[3],pos[3];
 	float angle,aspectRatio;
 public:

@@ -1,12 +1,37 @@
 #include "BoardPiece.h"
 
 #include "../../scenegraph/primitives/Retangle.h"
+
 #include "ConcaveCube.h"
 
-BoardPiece::BoardPiece(void)
+BoardPiece::BoardPiece(Board * board): angle(2), board(board)
 {
-	Point2d vertexes[2] = {{-1,-1}, {1,1}};
 	this->addPrimitive(new ConcaveCube());
 }
 
 
+void BoardPiece::animationCallback(){
+	this->board->unsetSelectableAll();
+	this->board->getController()->animationEnded();
+}
+
+
+int BoardPiece::getAngle(){
+	return this->angle;
+}
+
+void BoardPiece::setAngle(int angle){
+	this->angle;
+}
+
+void BoardPiece::rotAngle(int angle){
+	this->angle = (this->angle+angle)%8;
+}
+
+
+bool BoardPiece::clickHandler(){
+	int i, j;
+	this->board->getCoords(this,i,j);
+	this->board->getController()->selectBoardCoords(i,j);
+	return true;
+}

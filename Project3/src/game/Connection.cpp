@@ -1,7 +1,7 @@
 #include "Connection.h"
 #include <string>
 
-Connection::Connection(int bufferMaxSize) throw(ServerNotFound()): connected(false), bufferMaxSize(bufferMaxSize) 
+Connection::Connection(int bufferMaxSize): connected(false), bufferMaxSize(bufferMaxSize) 
 {
 	if(!this->open()){
 		throw ServerNotFound();

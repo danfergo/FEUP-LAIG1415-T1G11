@@ -1,7 +1,7 @@
 #include "TixelController.h"
+#include "../view/GameCamera.h"
 
-
-TixelController::TixelController(void):CGFapplication(), matchController()
+TixelController::TixelController(void):CGFapplication()
 {
 
 
@@ -19,12 +19,30 @@ void TixelController::init(int argc, char* argv[]){
 
 	CGFapplication::init(&argc,argv);
 
-	Scene * s = new TixelScene();
-	s->setRoot(new Board());
+	Scene * natureWorld = new Scene();
+	Scene * lardLadWorld = new Scene();
 	
-	CGFapplication::setScene(s);
-	CGFapplication::setInterface(new Interface());
+	
+
+
+	
+	ANFparser parser = ANFparser(0);
+	if(parser.parse(natureWorld,"resources/scenes/nature.world")){
+			
+		if(parser.parse(lardLadWorld,"resources/scenes/lardlad.world")){
+		
+			CGFapplication::setScene(lardLadWorld);
+		}
+
+		CGFapplication::setScene(natureWorld);
+		CGFapplication::setInterface(new Interface()); 
+	}
+	
+	ANFparser::boardFound->setController(new MatchController(ANFparser::boardFound));
+		 
+
+	 ((GameCamera *)natureWorld->getTheActiveCamera())->produceRotation(180,10); 
 }
-void TixelController::update(){
-	this->matchController.update();
-}
+
+
+

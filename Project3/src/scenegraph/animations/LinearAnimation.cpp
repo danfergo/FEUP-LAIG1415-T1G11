@@ -8,7 +8,7 @@
 
 static float const PI = acos(-1.0);
 
-LinearAnimation::LinearAnimation(long startingTime, long duration):Animation(startingTime,duration),currentPositionIndex(0)
+LinearAnimation::LinearAnimation(long startingTime, long duration):Animation(startingTime,duration),currentPositionIndex(0), directional(true)
 {
 	currentAngleDirectionXZ = 0;
 
@@ -16,6 +16,11 @@ LinearAnimation::LinearAnimation(long startingTime, long duration):Animation(sta
 	currentPosition.y = 0;
 	currentPosition.z = 0;
 }
+
+LinearAnimation::LinearAnimation(long startingTime, long duration, bool dir):Animation(startingTime,duration),currentPositionIndex(0), directional(dir){
+
+}
+
 
 void LinearAnimation::addControlPoint(Point3d point){
 	controlPoints.push_back(point);
@@ -59,13 +64,19 @@ void LinearAnimation::calcMilestones(){
 
 void LinearAnimation::animate() const{
 	glTranslated(currentPosition.x,currentPosition.y,currentPosition.z);
-	glRotated(currentAngleDirectionXZ,0,1,0);
+	if(directional)glRotated(currentAngleDirectionXZ,0,1,0);
 }
 
 
-void LinearAnimation::update(unsigned long time){
+void LinearAnimation::update(unsigned long ticks){
+	if(state == 0){
+		state = 1;
+		calcMilestones();
+	}
+	time += ticks;
+
 	if(time >= startingTime && time < endingTime){
-		long nextPosTime = milestones[currentPositionIndex+1];;
+		unsigned long nextPosTime = milestones[currentPositionIndex+1];;
 		while(time >= nextPosTime){ // switches to next controlpoint, prevents uge lag case.
 			currentPositionIndex++;
 			nextPosTime =  milestones[currentPositionIndex+1];
@@ -95,6 +106,7 @@ void LinearAnimation::update(unsigned long time){
 			currentPositionIndex = 0;
 			currentAngleDirectionXZ = lastAngleDirectionXZ;
 			currentPosition = lastPosition;
+			state = 2;
 	}
 
 }
@@ -107,6 +119,18 @@ Animation * LinearAnimation::clone(unsigned newStartTime){
 	animation->calcMilestones();
 	return animation;
 }
+
+void LinearAnimation::getTransformationMatrix(float * matrix) const{
+	float temp[16];
+	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
+		glLoadIdentity();
+		glTranslated(currentPosition.x,currentPosition.y,currentPosition.z);
+		if(directional)glRotated(currentAngleDirectionXZ,0,1,0);
+	glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
+	glLoadMatrixf(temp);
+}
+
+
 
 
 LinearAnimation::~LinearAnimation(void)

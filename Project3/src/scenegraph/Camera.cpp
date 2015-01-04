@@ -53,6 +53,5 @@ void CameraPerspective::updateProjectionMatrix(int width, int height)
 
 
 void CameraPerspective::applyView(){
-
 	gluLookAt(pos[0],pos[1],pos[2],targ[0],targ[1],targ[2],0,1,0);
 }

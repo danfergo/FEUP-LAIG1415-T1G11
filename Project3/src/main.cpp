@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
 	try {
 		TixelController tixel = TixelController();
 		tixel.init(argc, argv);
-		tixel.run();
+		tixel.run(); 
 
 
 			/** while(true){

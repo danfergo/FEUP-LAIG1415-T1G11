@@ -1,19 +1,26 @@
 #pragma once
 
 #include "../../scenegraph/Node.h"
-
+#include "Board.h"
 
 #include <iostream>
 
+class Board;
+
 class BoardPiece: public Node
 {
-
+private:
+	int angle;
+	Board * board;
+	
+	
 public:
-	BoardPiece(void);
-
-	virtual bool clickHandler(){
-		std::cout << "board piece " << std::endl;
-		return false;
-	}
+	
+	BoardPiece(Board * board);
+	void animationCallback();
+	int getAngle();
+	void setAngle(int angle);
+	void rotAngle(int angle);
+	virtual bool clickHandler();
 };
 

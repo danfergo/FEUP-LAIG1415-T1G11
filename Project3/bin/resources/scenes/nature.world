@@ -1,0 +1,849 @@
+<anf>
+     <globals>
+          <drawing mode="fill" shading="gouraud" background="0.48 0.85 0.99 1" />
+          <culling face="back" order="ccw" />
+          <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
+    </globals> 
+    
+    <cameras initial="Sky view" >
+          <gamecamera id="Sky view" near="0.1" far="555" angle="70" pos="5 10 5" target="0 0 0" />
+    </cameras>
+
+    <!-- bloco de luzes -->
+    <lights>
+        <!-- Deve existir pelo menos uma luz declarada -->
+        <light id="Moon reflex" type="omni" enabled="true" marker="false" pos="30 50 0" >
+          <component type="ambient" value="0.01 0.01 0.015 0" />
+          <component type="diffuse" value="0.7 0.7 0.8 1" />
+          <component type="specular" value="0.1 0.1 0.1 0" />
+        </light>
+    </lights>
+
+
+  <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
+    <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
+    <textures>
+      <texture id="gravel_text" file="resources/textures/gravel.jpg" texlength_s="0.2" texlength_t="0.2" />
+      <texture id="leaf" file="resources/textures/tree.jpg" texlength_s="1" texlength_t="1" />
+      <texture id="forestground" file="resources/textures/forestground.jpg" texlength_s="10" texlength_t="10" />
+      <texture id="trunk" file="resources/textures/trunk.jpg" texlength_s="1" texlength_t="1" />
+    </textures>
+
+
+    <appearances>
+      <appearance id="white" shininess="5" textureref="" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="1 1 1 0" />
+        <component type="specular" value="1 1 1 0" />
+      </appearance>
+
+      <appearance id="gravel_appearance" shininess="1" textureref="gravel_text" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.9 0.9 0.9 0" />
+        <component type="specular" value="0.9 0.9  0.9 0" />
+      </appearance>
+
+      <appearance id="leaf" shininess="5" textureref="leaf" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.8 1 0.8 0" />
+        <component type="specular" value="0.5 0.5 0.5 0" />
+      </appearance>
+
+      <appearance id="trunk" shininess="3" textureref="trunk" >
+        <component type="ambient" value="0.2 0.1 0.1 0" />
+        <component type="diffuse" value="1 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5 0.5 0" />
+      </appearance>
+
+      <appearance id="forestground" shininess="5" textureref="forestground" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 1 0.5 0" />
+        <component type="specular" value="0.5 0.5 0.5 0" />
+      </appearance>
+      
+    </appearances>
+
+    <animations></animations>
+  
+    <!-- bloco do grafo; "rootid" identifica o no de raiz -->
+    <graph rootid="world">
+
+      <node id="world">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+          <noderef id="curve" />
+          <noderef id="table" />
+          <noderef id="chair" />
+          <noderef id="chair2" />
+          <noderef id="ground" />
+          <noderef id="group_trees" />
+          <noderef id="group_trees1" />
+          <noderef id="group_trees2" />
+          <noderef id="group_trees3" />
+          <noderef id="group_trees4" />
+          <noderef id="group_trees5" />
+          <noderef id="group_trees6" />
+          <noderef id="group_trees7" />
+          <noderef id="group_trees9" />
+          <noderef id="group_trees10" />
+          <noderef id="group_trees11" />
+          <noderef id="group_trees12" />
+          <noderef id="group_trees13" />
+          <noderef id="group_trees14" />
+          <noderef id="group_trees15" />
+          <noderef id="group_trees16" />
+          <noderef id="group_trees17" />
+          <noderef id="group_trees18" />
+          <noderef id="group_trees19" />
+          <noderef id="group_trees21" />
+          <noderef id="group_trees22" />
+          <noderef id="group_trees23" />
+          <noderef id="group_trees24" />
+          <noderef id="group_trees25" />
+          <noderef id="group_trees8" />
+        </descendants>
+      </node>
+
+      <node id="group_trees8">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="5 0 27"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+      
+      <node id="group_trees">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+      
+      <node id="group_trees1">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="60 0 60"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees4">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="30 0 30"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+      
+      <node id="group_trees2">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-30 0 -30"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+      
+      <node id="group_trees3">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-60 0 -60"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+      
+      <node id="group_trees5">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-60 0 -30"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees6">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-59 0 -1"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees7">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-60 0 30"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+      
+      <node id="group_trees13">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0 0 -60"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees12">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-30 0 60"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees11">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-27 0 33"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees10">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-30 0 0"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees9">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-30 0 -60"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees14">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0 0 -30"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees15">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="-60 0 60"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees16">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="1 0 63"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees17">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="33 0 -2"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees18">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="30 0 -60"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees19">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="30 0 -30"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees21">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="32 0 63"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees22">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="65 0 -57"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees23">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="57 0 -33"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees24">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="58 0 -5"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+
+      <node id="group_trees25">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="62 0 32"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree" />
+          <noderef id="tree1" />
+          <noderef id="tree2" />
+          <noderef id="tree3" />
+          <noderef id="tree4" />
+          <noderef id="tree5" />
+          <noderef id="tree6" />
+        </descendants>
+      </node>
+      
+      <node id="curve">
+        <appearanceref id="white"/>
+        <transforms></transforms>
+        <primitives>
+          <patch order="3" partsU="10" partsV="10" compute="fill">
+            <controlpoint x="0" y="0" z="0" />
+            <controlpoint x="0" y="0.1" z="0" />
+            <controlpoint x="0" y="0.2" z="0" />
+            <controlpoint x="0" y="0.3" z="0" />
+
+            <controlpoint x="0.3333" y="0" z="0.45" />
+            <controlpoint x="0.3333" y="0.1" z="0.45" />
+            <controlpoint x="0.3333" y="0.2" z="0.45" />
+            <controlpoint x="0.3333" y="0.3" z="0.45" />
+
+            <controlpoint x="0.6666" y="0.0" z="0.45" />
+            <controlpoint x="0.6666" y="0.1" z="0.45" />
+            <controlpoint x="0.6666" y="0.2" z="0.45" />
+            <controlpoint x="0.6666" y="0.3" z="0.45" />
+
+            <controlpoint x="1" y="0" z="0" />
+            <controlpoint x="1" y="0.1" z="0" />
+            <controlpoint x="1" y="0.2" z="0" />
+            <controlpoint x="1" y="0.3" z="0" />
+          </patch>
+        </primitives>
+        <descendants></descendants>
+      </node>
+      
+      <node id="chair">
+        <appearanceref id="gravel_appearance"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="10 0 8"/>
+          <transform type="scale" factor="1 1 4"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+      </node>
+
+      <node id="chair2">
+        <appearanceref id="gravel_appearance"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="6 0 8"/>
+          <transform type="scale" factor="1 1 4"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+        </descendants>
+      </node>
+
+      <node id="table">
+        <appearanceref id="gravel_appearance"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="7.25 0 8"/>
+          <transform type="scale" factor="2.5 2.5 4"/>
+        </transforms>
+        <descendants>
+          <noderef id="unit_cube" />
+		  <noderef id="tixel_game_board" />
+        </descendants>
+      </node>
+
+      <node id="ground">
+        <appearanceref id="forestground"/>
+        <transforms>
+          <transform type="rotate" axis="x" angle="-90" />
+          <transform type="translate" to="0 -20 0" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="-70 -70" xy2="90 90"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+
+      <node id="tree">
+        <appearanceref id="inherit"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="1 0 1"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree_top2" />
+          <noderef id="tree_bottom" />
+        </descendants>
+      </node>
+
+      <node id="tree1">
+        <appearanceref id="inherit"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="8 0 3"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree_top2" />
+          <noderef id="tree_bottom" />
+        </descendants>
+      </node>
+
+      <node id="tree2">
+        <appearanceref id="inherit"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="7 0 7"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree_top" />
+          <noderef id="tree_bottom" />
+        </descendants>
+      </node>
+
+      <node id="tree3">
+        <appearanceref id="inherit"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="2 0 7"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree_top1" />
+          <noderef id="tree_bottom" />
+        </descendants>
+      </node>
+      
+      <node id="tree4">
+        <appearanceref id="inherit"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="6 0 16"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree_top1" />
+          <noderef id="tree_bottom" />
+        </descendants>
+      </node>
+      
+      <node id="tree5">
+        <appearanceref id="inherit"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="13 0 3"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree_top" />
+          <noderef id="tree_bottom" />
+        </descendants>
+      </node>
+
+      <node id="tree6">
+        <appearanceref id="inherit"/>
+        <primitives>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="12 0 15"/>
+        </transforms>
+        <descendants>
+          <noderef id="tree_top2" />
+          <noderef id="tree_bottom" />
+        </descendants>
+      </node>
+
+      <node id="tree_top">
+        <appearanceref id="leaf"/>
+        <primitives>
+          <sphere stacks="15" slices="15" radius="1,5" />
+        </primitives>
+        <transforms>
+          <transform type="translate" to="0 7 0" />
+          <transform type="scale" factor="1.75 3 1.75" />
+        </transforms>
+        <descendants></descendants>
+      </node>
+
+      <node id="tree_top1">
+        <appearanceref id="leaf"/>
+        <primitives>
+          <sphere stacks="15" slices="15" radius="1,5" />
+        </primitives>
+        <transforms>
+          <transform type="translate" to="0 7 0" />
+          <transform type="scale" factor="1.9 2 1.9" />
+        </transforms>
+        <descendants></descendants>
+      </node>
+
+      <node id="tree_top2">
+        <appearanceref id="leaf"/>
+        <primitives>
+          <sphere stacks="15" slices="15" radius="1,5" />
+        </primitives>
+        <transforms>
+          <transform type="translate" to="0 5 0" />
+          <transform type="scale" factor="1.5 2 1.55" />
+        </transforms>
+        <descendants></descendants>
+      </node>
+      
+      <node id="tree_bottom">
+        <appearanceref id="trunk"/>
+        <primitives>
+          <cylinder stacks="10" slices="20" height="5" base="0.25" top="0.25" />
+        </primitives>
+        <transforms>
+          <transform type="translate" to="0 5 0" />
+          <transform type="rotate" axis="x" angle="90" />
+        </transforms>
+        <descendants></descendants>
+      </node>
+
+      <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+      <!-- :::::::::::::::::::::::::::::::::::::   UNIT CUBE  :::::::::::::::::::::::::::::::: -->
+      <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+      <node id="unit_cube" displaylist="true">
+        <appearanceref id="inherit"/>
+        <primitives></primitives>
+        <transforms></transforms>
+        <descendants>
+          <noderef id="bottom_square"/>
+          <noderef id="top_square" />
+          <noderef id="left_square" />
+          <noderef id="right_square" />
+          <noderef id="front_square" />
+          <noderef id="back_square" />
+        </descendants>
+      </node>
+
+
+      <node id="top_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="0 1 0" />
+          <transform type="rotate" axis="x" angle="90" />
+          <transform type="translate" to="0 1 0" />
+          <transform type="rotate" axis="x" angle="180" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+      <node id="bottom_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="x" angle="90" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+      <node id="right_square" >
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="1 0 0" />
+          <transform type="rotate" axis="y" angle="-90" />
+          <transform type="translate" to="0 1 0" />
+          <transform type="rotate" axis="x" angle="180" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="1 0" xy2="0 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+      <node id="left_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="y" angle="-90" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="1 0" xy2="0 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+      <node id="back_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="0 1 0" />
+          <transform type="rotate" axis="x" angle="180" />
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+      <node id="front_square">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="0 0 1"/>
+        </transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 1"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+    
+    </graph>
+  
+  
+</anf>
+  

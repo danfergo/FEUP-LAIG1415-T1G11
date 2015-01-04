@@ -11,7 +11,9 @@ private:
 public:
 	CircularAnimation(long startingTime,long duration, Point3d center, float radius, float startAngle,float endAngle);
 	virtual void animate() const;
-	virtual void update(unsigned long time);
+	virtual void update(unsigned long ticks);
 	virtual Animation * clone(unsigned newStartTime);
+	void getTransformationMatrix(float *) const;
+	Point3d getCurrentPosition();
 };
 

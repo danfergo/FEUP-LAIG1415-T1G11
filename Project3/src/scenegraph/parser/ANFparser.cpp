@@ -2,13 +2,14 @@
 #include <iostream>
 #include <map>
 
+Board * ANFparser::boardFound = NULL;
 
-const char ANFparser::STRICT = 0;
+const char ANFparser::STRIC = 0;
 const char ANFparser::PERMISSIVE = 1;
 const char ANFparser::SILENT = 2;
 
 const char ANFparser::WARNING = 0;
-const char ANFparser::ERROR = 1;
+const char ANFparser::ERR = 1;
 
 ANFparser::ANFparser(const char parseMode): parseMode(parseMode){
 	initPrimitiveParsers();
@@ -107,7 +108,7 @@ std::string ANFparser::str(const char * str){
 }
 
 void ANFparser::issue(std::string err, const char flag) {
-	std::string prefix = (flag == ERROR)? " ERROR! " : " WARNING! "; 
+	std::string prefix = (flag == ERR)? " ERROR! " : " WARNING! "; 
 	std::cout << prefix << err << std::endl;
-	if(flag == ERROR || (parseMode == STRICT)) throw ParseExep();
+	if(flag == ERROR || (parseMode == STRIC)) throw ParseExep();
 }; 

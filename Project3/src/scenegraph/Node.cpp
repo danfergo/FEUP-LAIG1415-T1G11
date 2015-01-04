@@ -2,10 +2,9 @@
 
 #include <iostream>
 
-Node::Node():appearance(NULL),isDisplayList(false),currentAnimationIndex(0),lastEndTime(0), name(0), touchable(false)
+Node::Node():appearance(NULL),isDisplayList(false),currentAnimationIndex(0),lastEndTime(0), name(0), touchable(false), visible(true)
 {
-	for(unsigned i=0; i<16; i++)
-		transforms[i] = (i%5 == 0) ? 1 : 0 ;
+	this->resetTransformations();
 }
 
 
@@ -41,7 +40,7 @@ void Node::processNodeInitialization(Appearance * parentAppearance){
 		}catch(...){ 
 			int dspId = glGenLists(1);
 			glNewList(dspId,GL_COMPILE);
-				processNode(parentAppearance,false, 0);
+				processNode(parentAppearance,true,false, 0);
 				displayListsIds.insert(std::pair<Appearance *,int>(currentAppearance,dspId));
 			glEndList();
 		}
@@ -49,11 +48,12 @@ void Node::processNodeInitialization(Appearance * parentAppearance){
 }
 
 
-void Node::processNode(Appearance * parentAppearance, bool parentIsTouchable, std::vector<Node *> * nodes){
-
+void Node::processNode(Appearance * parentAppearance, bool parentIsVisible, bool parentIsTouchable, std::vector<Node *> * nodes){
+		bool callAnimationCallback = false;
 		Appearance * currentAppearance = this->appearance ? this->appearance: parentAppearance;
 		bool currentTouchable = (parentIsTouchable || this->touchable);
-
+		bool currentVisible = (parentIsVisible && this->visible);
+		float temp[16], matrix[16];
 		if(isDisplayList){
 			try{
 				int id = this->displayListsIds.at(currentAppearance); 
@@ -64,11 +64,13 @@ void Node::processNode(Appearance * parentAppearance, bool parentIsTouchable, st
 			}
 		}
 		
-		glPushMatrix();
+
 		if(nodes != NULL && this->touchable){ 
 			glPushName(nodes->size()); 
 			nodes->push_back(this); 
 		}
+		glPushMatrix();
+			
 			// ok lets apply this node transformations
 			glMultMatrixf(transforms);
 
@@ -77,11 +79,28 @@ void Node::processNode(Appearance * parentAppearance, bool parentIsTouchable, st
 
 			glPushMatrix();
 				//for(std::vector<Animation *>::iterator it = animations.begin(); it != animations.end(); it++)
-				if(animations.size() > 0) animations[currentAnimationIndex]->animate();
+				/** if(animations.size() > 0) animations[currentAnimationIndex]->animate(); **/
+				for(std::vector<Animation *>::iterator it = animations.begin(); it != animations.end(); ){
+					(*it)->getTransformationMatrix(matrix);
+					glMultMatrixf(matrix);
+					if((*it)->complete()){	
+						glGetFloatv(GL_MODELVIEW_MATRIX, temp);
+						glLoadMatrixf(transforms);
+						glMultMatrixf(matrix);
+						glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
+						glLoadMatrixf(temp);
 
+						delete *it;
+						it = animations.erase(it);
+						if(animations.size() == 0) 	callAnimationCallback = true;
+					}else{
+						it++;
+					}
+				}
+					
 
 				// we are going to draw this node's primitives
-				if(nodes == NULL || currentTouchable){
+				if((nodes == NULL && currentVisible) || (nodes != NULL && currentTouchable)){
 					for(std::vector<Primitive *>::iterator it = primitives.begin();
 						it != primitives.end(); it++){
 							(*it)->draw(currentAppearance ? currentAppearance->getTexture() : NULL);
@@ -90,15 +109,17 @@ void Node::processNode(Appearance * parentAppearance, bool parentIsTouchable, st
 
 				//now we process this node's descendants
 				for(std::vector<Node *>::iterator it = descendants.begin(); it != descendants.end(); it++){
-					(*it)->processNode(currentAppearance,currentTouchable,nodes);
+					(*it)->processNode(currentAppearance,currentVisible,currentTouchable,nodes);
 				}
 				
 			glPopMatrix();
-			if(nodes != NULL  && this->touchable){ 
-				glPopName(); 
-			}
+			
 		glPopMatrix();
+		if(nodes != NULL  && this->touchable){ 
+			glPopName(); 
+		}
 
+		if(callAnimationCallback) animationCallback();
 }
 
 void Node::addRotationX(float angle){
@@ -177,7 +198,8 @@ void Node::setDisplayList(){
 
 
 void Node::addAnimation(Animation * animation){
-	animations.push_back(animation->clone(getLastAnimationEndTime()));
+	/** animation->clone(getLastAnimationEndTime()) **/
+	animations.push_back(animation);
 }
 
 unsigned  Node::getLastAnimationEndTime() const{
@@ -188,7 +210,7 @@ unsigned  Node::getLastAnimationEndTime() const{
 void Node::update(unsigned time){
 	for(std::vector<Animation *>::iterator it = animations.begin(); it != animations.end(); it++)
 		(*it)->update(time);
-	
+	/**
 	if(time == 0){
 		 currentAnimationIndex = 0;
 		if(animations.size() > 0) lastEndTime = animations[0]->getEndTime();
@@ -202,6 +224,7 @@ void Node::update(unsigned time){
 		animations[currentAnimationIndex]->update(time);
 	}
 
+	**/ 
 	for(std::vector<Node *>::iterator it  = descendants.begin(); it != descendants.end(); it++)
 		(*it)->update(time);
 
@@ -212,6 +235,15 @@ void Node::setTouchable(bool touchable){
 	this->touchable = touchable;
 }
 
+void Node::setVisible(bool visible){
+	this->visible = visible;
+}
+
 bool Node::clickHandler(){
 	return true;
+}
+
+void Node::resetTransformations(){
+	for(unsigned i=0; i<16; i++)
+		transforms[i] = (i%5 == 0) ? 1 : 0 ;
 }
