@@ -7,8 +7,6 @@
 BoardHouse::BoardHouse(Board * board, int i, int j): board(board), i(i), j(j) {
 	setEnabled(false);
 
-
-	
 }
 
 
@@ -127,7 +125,7 @@ void Board::unsetSelectableAll(){
 	for(int i = 0 ; i < 6; i++){
 		for(int j = -2; j < 8; j++){
 			if(piece(i,j) != NULL){
-				piece(i,j)->setTouchable(false);
+				this->piece(i,j)->setTouchable(false);
 			}
 		}
 	} 

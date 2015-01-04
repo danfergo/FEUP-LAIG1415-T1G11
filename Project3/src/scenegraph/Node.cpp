@@ -235,8 +235,8 @@ void Node::update(unsigned time){
 }
 
 
-void Node::setTouchable(bool touchable){
-	this->touchable = touchable;
+void Node::setTouchable(bool t){
+	this->touchable = t;
 }
 
 void Node::setVisible(bool visible){

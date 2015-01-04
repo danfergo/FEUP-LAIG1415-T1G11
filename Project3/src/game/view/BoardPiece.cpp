@@ -11,7 +11,6 @@ BoardPiece::BoardPiece(Board * board): angle(2), board(board)
 
 
 void BoardPiece::animationCallback(){
-	this->board->unsetSelectableAll();
 	this->board->getController()->animationEnded();
 }
 

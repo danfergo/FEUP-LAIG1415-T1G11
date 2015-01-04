@@ -12,7 +12,9 @@ MatchController::MatchController(Board * board): iaInterface()
 		this->board->addPiece(i,6);
 		this->board->addPiece(i,7);
 	}
+	this->board->unsetSelectableAll();
 	this->playerPlay();
+	
 }
 
 
@@ -51,7 +53,6 @@ void MatchController::playerPlay(){
 	std::vector<IJ> outCoords = this->board->getOutsidePieces(gameStates.back()->currentPlayer());
 	coords.insert(coords.begin(), outCoords.begin(), outCoords.end());
 	board->setSelectable(coords);
-	std::cout << "--ll------" << coords.size() << std::endl;
 	
 	playingState = ChoosingPiece;
 }
@@ -73,7 +74,6 @@ void MatchController::setControlsChooseEnd(){
 		std::vector<IJ> outCoords = this->board->getOutsidePieces(gameStates.back()->currentPlayer());
 		coords.insert(coords.begin(), outCoords.begin(), outCoords.end()); 
 	}
-	
 	
 	this->board->setSelectableHouses(coords);
 }
@@ -122,11 +122,11 @@ void MatchController::selectBoardCoords(int i, int j){
 			break;
 	}
 	
-	std::cout << "Selected coords (" << i << "," << j << ")" << std::endl;
 }
 void MatchController::selectAngle(int angle){
 	std::cout << "Selected angle " << angle << std::endl;
 	board->getAngleChooser()->disableAll();
+
 	this->curAngle = angle;
 	switch(playingState){
 		case ChoosingAngle:
