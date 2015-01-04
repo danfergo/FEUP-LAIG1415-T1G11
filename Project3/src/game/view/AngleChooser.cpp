@@ -5,10 +5,10 @@
 
 
 AngleChooserBtn::AngleChooserBtn(AngleChooser * chooser,int angle): chooser(chooser), angle(angle){
-	Point3d points[3] = {{1,0,0},{0,0,-1},{-1,0,0}};
+	Point3d points[3] = {{0.01,0,0},{0,0,-0.01},{-0.01,0,0}};
 	this->addPrimitive(new Triangle(points));
 	this->addRotationY(-45*angle);
-	this->addTranslation(0, 0,-4);
+	this->addTranslation(0, 0,-0.03);
 }
 
 bool AngleChooserBtn::clickHandler(){

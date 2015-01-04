@@ -109,6 +109,7 @@ void MatchController::selectBoardCoords(int i, int j){
 			} else{
 				delay = board->slidePiece(0,curStart.i,curStart.j, curEnd.i,curEnd.j);
 				board->pullDownPiece(delay,curEnd.i,curEnd.j);
+				this->board->pushUpPiece(delay,curEnd.i,curEnd.j);
 			}
 
 

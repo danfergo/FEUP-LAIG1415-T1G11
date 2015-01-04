@@ -1239,5 +1239,9 @@ parse_input(end_of_file, good_bye) :- !.
 parse_input(_ClientMsg, bad_request) :- !.
 
 
+tetserverloop:- 
+	repeat,
+		server,
+		fail.
 
-:-server.
+:-tetserverloop.

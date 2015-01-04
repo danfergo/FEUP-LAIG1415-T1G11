@@ -26,7 +26,8 @@ float deg2rad = pi/180.0;
 
 void ConcaveCube::draw(Texture * texture){
 	glPushMatrix();
-		glScaled(0.01,0.01,0.01);
+		glScaled(0.05,0.05,0.05);
+		glScaled(0.25,0.25,0.25);
 		glTranslatef(-2,0,-2);
 	glPushMatrix();
 		glBegin(GL_TRIANGLE_STRIP);

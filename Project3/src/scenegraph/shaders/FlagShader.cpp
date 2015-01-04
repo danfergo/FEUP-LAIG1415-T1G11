@@ -15,7 +15,7 @@ CGFtexture * FlagShader::activeTexture = NULL;
 
 FlagShader::FlagShader()
 {
-	init("flagshader.vert", "flagshader.frag");
+	init("resources/shaders/flagshader.vert", "resources/shaders/flagshader.frag");
 
 	timeLoc = glGetUniformLocation(id(),"time");
 	piLoc = glGetUniformLocation(id(),"pi");

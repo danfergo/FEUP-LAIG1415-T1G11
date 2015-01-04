@@ -6,6 +6,9 @@
 
 BoardHouse::BoardHouse(Board * board, int i, int j): board(board), i(i), j(j) {
 	setEnabled(false);
+
+
+	
 }
 
 
@@ -24,10 +27,10 @@ bool BoardHouse::clickHandler(){
 Board::Board(){
 	
 	outPadding = 0.01f;
-	cellSize  = .04f;
+	cellSize  = .05f;
 	innerPadding = cellSize/(float)6;
 	float x, z;
-	Point2d points[2] = {{-2,-2},{2,2}};
+	Point2d points[2] = {{-cellSize/2,-cellSize/2},{cellSize/2,cellSize/2}};
 	Retangle * r = new Retangle(points);
 	for(int i = 0 ; i < 6; i++){
 		for(int j = -2; j < 8; j++){
@@ -45,10 +48,22 @@ Board::Board(){
 		}
 	} 
 	
+	Point2d vertexes[2] = {{-0.5,-0.5},{0.5,0.5}};
+	Node * ground = new Node(new Retangle(vertexes));
 
 	angleChooser = new AngleChooser(this);
 	this->addDescendants(angleChooser);
 	this->addTranslation(-2.5*cellSize,0,-2.5*cellSize);
+
+
+
+	ground->addTranslation(2.5*cellSize,0,2.5*cellSize); 
+	ground->addScaling(54*cellSize/5,0, 30*cellSize/5); 
+	ground->addRotationX(-90);
+
+	this->addDescendants(ground);
+	
+
 }
 
 
@@ -168,7 +183,7 @@ AngleChooser * Board::getAngleChooser(){
 }
 
 int Board::pushUpPiece(int delay, int i,int j){
-	Point3d points[2] = {{0,0,0},{0,1,0}}; 
+	Point3d points[2] = {{0,0,0},{0,cellSize,0}}; 
 	LinearAnimation * animation = new LinearAnimation(delay,1);
 	animation->addControlPoint(points[0]);
 	animation->addControlPoint(points[1]);
@@ -178,7 +193,7 @@ int Board::pushUpPiece(int delay, int i,int j){
 
 
 int Board::pullDownPiece(int delay, int i,int j){
-	Point3d points[2] = {{0,0,0},{0,-1,0}}; 
+	Point3d points[2] = {{0,0,0},{0,-cellSize,0}}; 
 	LinearAnimation * animation = new LinearAnimation(delay,1);
 	animation->addControlPoint(points[0]);
 	animation->addControlPoint(points[1]);

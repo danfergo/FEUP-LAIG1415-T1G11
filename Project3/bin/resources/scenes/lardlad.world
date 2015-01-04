@@ -6,13 +6,14 @@
     </globals> 
     
     <cameras initial="Sky view" >
-          <perspective id="Sky view" near="0.1" far="555" angle="70" pos="55 10 35" target="0 0 0" />
+          <gamecamera id="Sky view" near="0.1" far="555" angle="70" pos="12 3 15" target="13 1.2 15" />
           <perspective id="Surveillance cam 1" near="0.1" far="555" angle="60" pos="6.5 4.8 5.5" target="25 0 25" />
           <perspective id="Surveillance cam 2" near="0.1" far="555" angle="70" pos="6.8 4.8 26.3" target="50 0 30" />
           <perspective id="Surveillance cam 3" near="0.1" far="555" angle="70" pos="50 10 0" target="25 0 25" />
           <ortho id="Side projection" direction="x" near="-50" far="0" left="-30" right="0" top="20" bottom="0" />
           <ortho id="Frontal projection" direction="z" near="-50" far="0" left="0" right="50" top="20" bottom="0" />
           <ortho id="Top projection" direction="y" near="-50" far="0" left="0" right="50" top="0" bottom="-30" />
+		  
     </cameras>
 
     <!-- bloco de luzes -->
@@ -65,21 +66,23 @@
   <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
     <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
     <textures>
-      <texture id="ground" file="src/parkinglot.jpg" texlength_s="50" texlength_t="30" />
-      <texture id="brick_wall" file="src/brick_wall.jpg" texlength_s="7" texlength_t="3.5" />
-      <texture id="police_logo" file="src/police_logo.jpg" texlength_s="0.8" texlength_t="0.8 " />
-      <texture id="gravel_text" file="src/gravel.jpg" texlength_s="1.5" texlength_t="1.5" />
-      <texture id="concrete_text" file="src/concrete.jpg" texlength_s="1.5" texlength_t="0.1" />
-      <texture id="concrete_text_long" file="src/concrete.jpg" texlength_s="1.5" texlength_t="0.03" />
-      <texture id="marble_text" file="src/marble_square.jpg" texlength_s="0.0434711" texlength_t="1" />
-      <texture id="store_floor" file="src/store_floor.jpg" texlength_s="5" texlength_t="5" />
-      <texture id="wood" file="src/wood.jpg" texlength_s="2" texlength_t="2" />
-      <texture id="leather_bench" file="src/leather.jpg" texlength_s="0.5" texlength_t="0.5" />
-      <texture id="donut" file="src/donut.jpg" texlength_s="1" texlength_t="1" />
-      <texture id="forties" file="src/forties.jpg" texlength_s="2.5" texlength_t="5" />
-      <texture id="granito" file="src/granito.jpg" texlength_s="0.1" texlength_t="1" />
-      <texture id="granito_short" file="src/granito.jpg" texlength_s="0.2" texlength_t="1" />
-      <texture id="cleanwall" file="src/cleanwall.jpg" texlength_s="0.2" texlength_t="1" />
+      <texture id="ground" file="resources/textures/parkinglot.jpg" texlength_s="50" texlength_t="30" />
+      <texture id="brick_wall" file="resources/textures/brick_wall.jpg" texlength_s="7" texlength_t="3.5" />
+      <texture id="police_logo" file="resources/textures/police_logo.jpg" texlength_s="0.8" texlength_t="0.8 " />
+      <texture id="gravel_text" file="resources/textures/gravel.jpg" texlength_s="1.5" texlength_t="1.5" />
+      <texture id="concrete_text" file="resources/textures/concrete.jpg" texlength_s="1.5" texlength_t="0.1" />
+      <texture id="concrete_text_long" file="resources/textures/concrete.jpg" texlength_s="1.5" texlength_t="0.03" />
+      <texture id="marble_text" file="resources/textures/marble_square.jpg" texlength_s="0.0434711" texlength_t="1" />
+      <texture id="store_floor" file="resources/textures/store_floor.jpg" texlength_s="5" texlength_t="5" />
+      <texture id="wood" file="resources/textures/wood.jpg" texlength_s="2" texlength_t="2" />
+      <texture id="leather_bench" file="resources/textures/leather.jpg" texlength_s="0.5" texlength_t="0.5" />
+      <texture id="donut" file="resources/textures/donut.jpg" texlength_s="1" texlength_t="1" />
+      <texture id="forties" file="resources/textures/forties.jpg" texlength_s="2.5" texlength_t="5" />
+      <texture id="granito" file="resources/textures/granito.jpg" texlength_s="0.1" texlength_t="1" />
+      <texture id="granito_short" file="resources/textures/granito.jpg" texlength_s="0.2" texlength_t="1" />
+      <texture id="cleanwall" file="resources/textures/cleanwall.jpg" texlength_s="0.2" texlength_t="1" />
+	  
+	   <texture id="boardtex" file="resources/textures/board.jpg" texlength_s="1" texlength_t="1" />
     </textures>
 
     <appearances>
@@ -120,6 +123,14 @@
                <component type="diffuse" value="1 1 1 0" />
                <component type="specular" value="1 1 1 0" />
         </appearance> 
+		
+		
+		<appearance id="board" shininess="5" textureref="boardtex" >
+               <component type="ambient" value="0.5 0.5 0.5 0" />
+               <component type="diffuse" value="1 1 1 0" />
+               <component type="specular" value="0.9 0.9 0.9 0" />
+        </appearance> 
+		
 		
 		<appearance id="blue" shininess="6" textureref="" >
                <component type="ambient" value="0 0 0.5 0" />
@@ -249,7 +260,7 @@
     <!-- bloco do grafo; "rootid" identifica o no de raiz -->
     <graph rootid="world">
       
-      <node id="bush">
+   <!--   <node id="bush">
         <appearanceref id="leather_bench_app"/>
         <primitives>
             <patch order="3" partsU="30" partsV="40" compute="fill">
@@ -279,7 +290,7 @@
           <transform type="translate" to="15 0 15"/>
         </transforms>
         <descendants>  </descendants>
-      </node>
+      </node>-->
       
       
       
@@ -300,17 +311,34 @@
           <noderef id="camera_store" />
           <noderef id="camera_door" />
           <noderef id="camera_parkinglot" />
-          <noderef id="flying_vehicle" />
+         <!-- <noderef id="flying_vehicle" />-->
           <noderef id="flagg" />
-          <noderef id="bush" />
-
+         <!-- <noderef id="bush" />-->
+			<noderef id="board" />
         </descendants>
       </node>
 
+	  
+		<node id="board">
+			<appearanceref id="board"/>
+			<primitives> 
+			  
+			</primitives>
+			
+			<transforms>
+			 <transform type="translate" to="13 1 15"/>
+				 <transform type="scale" factor="4 4 4" />
+				
+			</transforms>
+			<descendants>    
+				<noderef id="tixel_game_board" />
+			</descendants>
+      </node>
+	  
       <node id="flagg">
         <appearanceref id="white"/>
         <primitives>
-          <flag texture="src/flag.png" />
+          <flag texture="resources/textures/flag.png" />
         </primitives>
         <transforms>
           <transform type="translate" to="22 2 26.2"/>
@@ -320,7 +348,7 @@
         </transforms>
         <descendants> </descendants>
       </node>
-
+<!--
 
       <node id="flying_vehicle">
 
@@ -353,7 +381,7 @@
 
       </node>    
       
-      
+      -->
 
 
       <node id="cop_car1">

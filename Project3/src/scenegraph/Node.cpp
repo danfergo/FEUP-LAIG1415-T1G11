@@ -7,6 +7,10 @@ Node::Node():appearance(NULL),isDisplayList(false),currentAnimationIndex(0),last
 	this->resetTransformations();
 }
 
+Node::Node(Primitive * primitive):appearance(NULL),isDisplayList(false),currentAnimationIndex(0),lastEndTime(0), name(0), touchable(false), visible(true){
+	this->resetTransformations();
+	this->addPrimitive(primitive);
+}
 
 Node::~Node() { 
 
@@ -125,45 +129,45 @@ void Node::processNode(Appearance * parentAppearance, bool parentIsVisible, bool
 void Node::addRotationX(float angle){
 	float temp[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
-	glLoadMatrixf(transforms);
-	glRotatef(angle, 1,0,0);
-	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
-	glLoadMatrixf(transforms);
+		glLoadMatrixf(transforms);
+		glRotatef(angle, 1,0,0);
+		glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
+	glLoadMatrixf(temp);
 }
 
 void Node::addRotationY(float angle){
 	float temp[16];
-	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
-	glLoadMatrixf(transforms);
-	glRotatef(angle, 0,1,0);
-	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
-	glLoadMatrixf(transforms);
+		glGetFloatv(GL_MODELVIEW_MATRIX, temp);
+		glLoadMatrixf(transforms);
+		glRotatef(angle, 0,1,0);
+		glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
+	glLoadMatrixf(temp);
 }
 
 void Node::addRotationZ(float angle){
 	float temp[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
-	glLoadMatrixf(transforms);
-	glRotatef(angle, 0,0,1);
-	glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
-	glLoadMatrixf(transforms);
+		glLoadMatrixf(transforms);
+		glRotatef(angle, 0,0,1);
+		glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
+	glLoadMatrixf(temp);
 }
 
 void Node::addScaling(float x, float y, float z){
 	float temp[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
-	glLoadMatrixf(transforms);
-	glScalef(x,y,z);
-	glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
-	glLoadMatrixf(transforms);
+		glLoadMatrixf(transforms);
+		glScalef(x,y,z);
+		glGetFloatv(GL_MODELVIEW_MATRIX, transforms); 
+	glLoadMatrixf(temp);
 }
 
 void Node::addTranslation(float x, float y, float z){
 	float temp[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, temp);
-	glLoadMatrixf(transforms);
-	glTranslatef(x, y, z);
-	glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
+		glLoadMatrixf(transforms);
+		glTranslatef(x, y, z);
+		glGetFloatv(GL_MODELVIEW_MATRIX, transforms);
 	glLoadMatrixf(temp);
 }
 

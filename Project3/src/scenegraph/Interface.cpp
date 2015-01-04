@@ -221,8 +221,8 @@ void Interface::processHits (std::vector<Node *> & nodes, GLint hits, GLuint buf
 		}
 
 	}
-	else
-		printf("Nothing selected while picking \n");	
+	/** else
+		printf("Nothing selected while picking \n");	**/
 }
 
 

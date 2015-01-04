@@ -5,8 +5,6 @@ TixelController::TixelController(void):CGFapplication()
 {
 
 
-
-
 }
 
 
@@ -22,10 +20,6 @@ void TixelController::init(int argc, char* argv[]){
 	Scene * natureWorld = new Scene();
 	Scene * lardLadWorld = new Scene();
 	
-	
-
-
-	
 	ANFparser parser = ANFparser(0);
 	if(parser.parse(natureWorld,"resources/scenes/nature.world")){
 			
@@ -34,14 +28,14 @@ void TixelController::init(int argc, char* argv[]){
 			CGFapplication::setScene(lardLadWorld);
 		}
 
-		CGFapplication::setScene(natureWorld);
+		/** CGFapplication::setScene(natureWorld); **/
 		CGFapplication::setInterface(new Interface()); 
 	}
 	
 	ANFparser::boardFound->setController(new MatchController(ANFparser::boardFound));
-		 
+	((GameCamera *)lardLadWorld->getTheActiveCamera())->produceRotation(180,20);  
+	
 
-	 ((GameCamera *)natureWorld->getTheActiveCamera())->produceRotation(180,10); 
 }
 
 

@@ -23,6 +23,7 @@ private:
 	bool visible;
 	int name;
 public:
+	Node(Primitive * primitive);
 	Node();
 	~Node();
 	void processNodeInitialization(Appearance * parentAppearance);
