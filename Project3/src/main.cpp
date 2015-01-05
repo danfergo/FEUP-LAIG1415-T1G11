@@ -1,16 +1,23 @@
 #include <iostream>
 #include <exception>
- 
+
 #include "CGFapplication.h"
 #include "scenegraph/Scene.h"
 #include "scenegraph/parser/ANFparser.h"
 #include "scenegraph/Interface.h"
 #include "game/view/Board.h"
 #include "game/controller/TixelController.h"
+#include <stdlib.h>     /* atexit */
+
+
+void fnExit1 (void)
+{
+
+}
 
 
 int main(int argc, char* argv[]) {
-		
+	atexit (fnExit1);
 	try {
 		TixelController tixel = TixelController();
 		tixel.init(argc, argv);
@@ -52,6 +59,7 @@ int main(int argc, char* argv[]) {
 			
 		}**/
 
+
 		
 	} catch(ServerNotFound & e){
 		std::cout << "Server Offline " << std::endl;
@@ -59,10 +67,10 @@ int main(int argc, char* argv[]) {
 	} catch(GLexception& ex) {
 		cout << "Erro: " << ex.what();
 		return -1;
-	} catch(exception& ex) {
-		cout << "Erro inesperado: " << ex.what();
+	} catch(...) {
+		cout << "Erro inesperado. ";
 		return -1;
-	}
+	} 
 
 	return 0;
 }

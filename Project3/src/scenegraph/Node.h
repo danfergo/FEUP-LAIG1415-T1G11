@@ -24,6 +24,7 @@ private:
 	int name;
 public:
 	Node(Primitive * primitive);
+	Node::Node(Node * subnode);
 	Node();
 	~Node();
 	void processNodeInitialization(Appearance * parentAppearance);

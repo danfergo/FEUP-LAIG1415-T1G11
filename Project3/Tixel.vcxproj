@@ -82,7 +82,9 @@
     <ClCompile Include="src\game\view\Board.cpp" />
     <ClCompile Include="src\game\view\BoardPiece.cpp" />
     <ClCompile Include="src\game\view\ConcaveCube.cpp" />
+    <ClCompile Include="src\game\view\Cube.cpp" />
     <ClCompile Include="src\game\view\GameCamera.cpp" />
+    <ClCompile Include="src\game\view\MenuButton.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\scenegraph\animations\Animation.cpp" />
     <ClCompile Include="src\scenegraph\animations\CircularAnimation.cpp" />
@@ -125,7 +127,9 @@
     <ClInclude Include="src\game\view\Board.h" />
     <ClInclude Include="src\game\view\BoardPiece.h" />
     <ClInclude Include="src\game\view\ConcaveCube.h" />
+    <ClInclude Include="src\game\view\Cube.h" />
     <ClInclude Include="src\game\view\GameCamera.h" />
+    <ClInclude Include="src\game\view\MenuButton.h" />
     <ClInclude Include="src\scenegraph\animations\Animation.h" />
     <ClInclude Include="src\scenegraph\animations\CircularAnimation.h" />
     <ClInclude Include="src\scenegraph\animations\LinearAnimation.h" />

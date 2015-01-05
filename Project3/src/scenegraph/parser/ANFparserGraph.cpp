@@ -3,7 +3,12 @@
 #include <queue>
 
 
-
+Board * ANFparser::boardFound = NULL;
+MenuButton * ANFparser::buttonFound0 = NULL;
+MenuButton * ANFparser::buttonFound1 = NULL;
+MenuButton * ANFparser::buttonFound2 = NULL;
+MenuButton * ANFparser::buttonFound3 = NULL;
+Node  * ANFparser::pieceModelFound = NULL;
 
 Node * ANFparser::parseGraph(TiXmlElement * anfGraph,std::map<std::string, Appearance *> & appearances, std::map<std::string, Animation *> & animations){
 	// init some local variables
@@ -197,7 +202,19 @@ bool ANFparser::buildSceneGraph(std::string root, map<std::string, ANFparser::No
 			for(it2 = descendants.begin(); 
 				it2 != descendants.end(); it2++){
 				try{
-					(*it).second.node->addDescendants(nodes.at(*it2).node);
+					if(*it2 == "option1"){
+						(*it).second.node->addDescendants(ANFparser::buttonFound0 = new MenuButton(nodes.at(*it2).node,0));
+					}else if(*it2 == "option2"){
+						(*it).second.node->addDescendants(ANFparser::buttonFound1 = new MenuButton(nodes.at(*it2).node,1));
+					}else if(*it2 == "option3"){
+						(*it).second.node->addDescendants(ANFparser::buttonFound2 = new MenuButton(nodes.at(*it2).node,2));
+					}else if(*it2 == "option4"){
+						(*it).second.node->addDescendants(ANFparser::buttonFound3 = new MenuButton(nodes.at(*it2).node,3));
+					}else if(*it2 == "tixel_game_board_piece"){
+						(*it).second.node->addDescendants(ANFparser::pieceModelFound = nodes.at(*it2).node);
+					}else{
+						(*it).second.node->addDescendants(nodes.at(*it2).node);
+					}
 					nodes.at(*it2).indegree++; // calculating indegree. need in a following verification.
 				}catch(...){
 					if(*it2 == "tixel_game_board"){

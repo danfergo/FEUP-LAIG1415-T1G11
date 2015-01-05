@@ -18,7 +18,11 @@ LinearAnimation::LinearAnimation(long startingTime, long duration):Animation(sta
 }
 
 LinearAnimation::LinearAnimation(long startingTime, long duration, bool dir):Animation(startingTime,duration),currentPositionIndex(0), directional(dir){
+	currentAngleDirectionXZ = 0;
 
+	currentPosition.x = 0;
+	currentPosition.y = 0;
+	currentPosition.z = 0;
 }
 
 
@@ -108,7 +112,6 @@ void LinearAnimation::update(unsigned long ticks){
 			currentPosition = lastPosition;
 			state = 2;
 	}
-
 }
 
 Animation * LinearAnimation::clone(unsigned newStartTime){

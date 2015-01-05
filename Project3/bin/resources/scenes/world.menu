@@ -1,0 +1,118 @@
+<anf>
+     <globals>
+          <drawing mode="fill" shading="gouraud" background="0 0 0 1" />
+          <culling face="back" order="ccw" />
+          <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
+    </globals> 
+    
+    <cameras initial="Sky view" >
+      <ortho id="Sky view" direction="y" near="0" far="14" left="0" right="12" top="0" bottom="-30" />
+    </cameras>
+
+    <!-- bloco de luzes -->
+    <lights>
+        <!-- Deve existir pelo menos uma luz declarada -->
+        <light id="Moon reflex" type="omni" enabled="true" marker="false" pos="30 50 0" >
+          <component type="ambient" value="0.01 0.01 0.015 0" />
+          <component type="diffuse" value="0.7 0.7 0.8 1" />
+          <component type="specular" value="0.1 0.1 0.1 0" />
+        </light>
+    </lights>
+
+
+  <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
+    <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
+    <textures>
+      <texture id="ambi" file="resources/labels/Ambiente.jpg" texlength_s="4.40" texlength_t="3.84" />
+      <texture id="forest" file="resources/labels/Floresta.jpg" texlength_s="3.13" texlength_t="3.2" />
+      <texture id="lard" file="resources/labels/LardLadDonuts.jpg" texlength_s="4.89" texlength_t="3.16" />
+    </textures>
+
+
+    <appearances>
+      <appearance id="white" shininess="5" textureref="" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="1 1 1 0" />
+        <component type="specular" value="1 1 1 0" />
+      </appearance>
+
+      <appearance id="ambi" shininess="1" textureref="ambi" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5  0.5 0" />
+      </appearance>
+
+      <appearance id="forest" shininess="1" textureref="forest" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5  0.5 0" />
+      </appearance>
+
+      <appearance id="lard" shininess="1" textureref="lard" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5  0.5 0" />
+      </appearance>
+      
+    </appearances>
+
+    <animations></animations>
+  
+    <!-- bloco do grafo; "rootid" identifica o no de raiz -->
+    <graph rootid="menu">
+
+      <node id="menu">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="1.5 0 15" />
+          <transform type="rotate" axis="x" angle="-90"/>
+          <transform type="translate" to="0.5 0 0"/>
+        </transforms>
+        <descendants>
+          <noderef id="title" />
+          <noderef id="option1" />
+          <noderef id="option2" />
+        </descendants>
+      </node>
+      
+      <node id="title">
+        <appearanceref id="ambi"/>
+        <primitives>
+          <rectangle xy1="0 9" xy2="4.40 12.84"/>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="1.8 1 0"/>
+        </transforms>
+        <descendants>
+        </descendants>
+      </node>
+      
+      <node id="option1">
+        <appearanceref id="forest"/>
+        <primitives>
+          <rectangle xy1="0 4" xy2="3.13 7.2"/>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="2.5 0 0"/>
+        </transforms>
+        <descendants>
+        </descendants>
+      </node>
+      
+      <node id="option2">
+        <appearanceref id="lard"/>
+        <primitives>
+          <rectangle xy1="0 0" xy2="4.89 3.16"/>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="1.5 0 0"/>
+        </transforms>
+        <descendants>
+        </descendants>
+      </node>
+
+    </graph>
+  
+</anf>
+  

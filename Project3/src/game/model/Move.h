@@ -17,7 +17,6 @@ class IJ {
 class Move
 {
 	public:
-		GameState *start, *end;
 		IJ from, to;
 		int fromA, toA;
 		

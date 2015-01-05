@@ -15,7 +15,7 @@ private:
 	
 	
 public:
-	
+	Node * inner;
 	BoardPiece(Board * board);
 	void animationCallback();
 	int getAngle();

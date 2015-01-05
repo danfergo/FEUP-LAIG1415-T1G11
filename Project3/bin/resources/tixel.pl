@@ -623,13 +623,13 @@ rotate_adj(Gameboard,I,J,DirI,DirJ,NewGameboard):-
 		rotate_adjpieceslidin(TmpGameboard,RNi,RNj,Nk,NewGameboard).
 
 
-animate_slide([Gameboard|ExtData],I,J,I,J,UniDi,UniDj,Color,AngPos,ResBoard):-
+animate_slide([Gameboard|_],I,J,I,J,UniDi,UniDj,Color,AngPos,ResBoard):-
 		FlipI is -1*UniDi,	
 		rotate_adj(Gameboard,I,J,FlipI,UniDj,TmpBoard0),
 		coords_angle(FlipI,UniDj,TmpAng),
 		gameboard_update(TmpBoard0,I,J,[Color,TmpAng],TmpBoard1),
-		display_game([TmpBoard1|ExtData]),
-		sleep(1),
+		/** display_game([TmpBoard1|ExtData]),
+		sleep(1), **/
 		gameboard_update(TmpBoard1,I,J,[Color,AngPos],ResBoard),!.
 
 animate_slide([Gameboard|ExtData],Is,Js,Ie,Je,UniDi,UniDj,Color,AngPos,ResBoard):-
@@ -639,8 +639,8 @@ animate_slide([Gameboard|ExtData],Is,Js,Ie,Je,UniDi,UniDj,Color,AngPos,ResBoard)
 		rotate_adj(Gameboard,Is,Js,FlipI,UniDj,TmpBoard0),
 		coords_angle(FlipI,UniDj,TmpAng),
 		gameboard_update(TmpBoard0,Is,Js,[Color,TmpAng],TmpBoard1),
-		display_game([TmpBoard1|ExtData]),
-		sleep(1),
+		/** display_game([TmpBoard1|ExtData]),
+		sleep(1), **/
 		gameboard_update(TmpBoard1,Is,Js,[],TmpBoard2),
 		animate_slide([TmpBoard2|ExtData],NextI,NextJ,Ie,Je,UniDi,UniDj,Color,AngPos,ResBoard).
 
@@ -993,31 +993,31 @@ choose_move_details(_,_,_,Lang):-
 
 
 
-game_over([GSBoard,_,PcsLft,[C1,C2],PndDrw,Md,[Rs0,Rs1],FrstPl],Lang):-
+game_over([GSBoard,_,PcsLft,[C1,C2],PndDrw,Md,[Rs0,Rs1],FrstPl],[NGSBoard,NFrstPl,[10-10],[C2,C1],0,Md,[Rs0,RsN],NFrstPl]):-
 		player_pieces_left(0,PcsLft,N),
 		N =\= 10,
 		not(valid_move([GSBoard,0,PcsLft,[C1,C2],PndDrw,Md,[Rs0,Rs1],FrstPl], [slide|_])),
 		RsN is Rs1+1,
 		toggle(FrstPl,NFrstPl),
-		gameboard_new(NGSBoard),
-
+		gameboard_new(NGSBoard).
+/**
 		clean_page,
 		write('Game is over.\n The winner is Player 1'), nl,
 		write(RsN), write(' Player 1'), nl,
 		write(Rs1), write(' Player 2'),nl,
 		read(_),
 
-		!, play_turn([NGSBoard,NFrstPl,[10-10],[C2,C1],0,Md,[Rs0,RsN],NFrstPl],Lang).
+		!, play_turn([NGSBoard,NFrstPl,[10-10],[C2,C1],0,Md,[Rs0,RsN],NFrstPl],Lang).**/
 
-game_over([GSBoard,_,PcsLft,[C1,C2],PndDrw,Md,[Rs0,Rs1],FrstPl],Lang):-
+game_over([GSBoard,_,PcsLft,[C1,C2],PndDrw,Md,[Rs0,Rs1],FrstPl],[NGSBoard,NFrstPl,[10-10],[C2,C1],0,Md,[RsN,Rs1],NFrstPl]):-
 		player_pieces_left(1,PcsLft,N),
 		N =\= 10,
 		not(valid_move([GSBoard,1,PcsLft,[C1,C2],PndDrw,Md,[Rs0,Rs1],FrstPl], [slide|_])),
 		RsN is Rs0+1,
 		toggle(FrstPl,NFrstPl),
-		gameboard_new(NGSBoard),		
+		gameboard_new(NGSBoard).		
 		
-		clean_page,
+		/**clean_page,
 		write('Game is over.\n The winner is Player 2'), nl,
 		write(RsN), write(' Player 2'), nl,
 		write(Rs0), write(' Player 1'),nl,
@@ -1122,9 +1122,9 @@ serverLoop(Stream) :-
 	[pivot,[Ipv,Jpv],PivAngle].
 **/
 
-switch_state_to_game_over(_,GameState,game_over):-
-		game_over(GameState,en), !.
-switch_state_to_game_over(State,_,State):-!.
+switch_state_to_game_over(_,GameState,game_over,GameState1):-
+		game_over(GameState,GameState1), !.
+switch_state_to_game_over(State,GameState,State,GameState):-!.
 
 
 what_move_type(If-Jf,[GSboard|_],activate):-
@@ -1139,19 +1139,19 @@ move_convert_format([[If,Jf],Angle],_,[place,[If,Jf],Angle]):-!.
 move_convert_format([[If,Jf]],_,[pick,[If,Jf]]):-!.
 
 
-complete_make_move([_,_, GameState], [slide,[Is,Js],[If,Jf],AngPos] , [FinalState,[If,Jf],GameState1]):- 0 is AngPos mod 2,
+complete_make_move([_,_, GameState], [slide,[Is,Js],[If,Jf],AngPos] , [FinalState,[If,Jf],GameState2]):- 0 is AngPos mod 2,
 		make_move(GameState,[slide,[Is,Js],[If,Jf],AngPos],GameState1), 
-		switch_state_to_game_over(extra_move, GameState1,FinalState),!.
+		switch_state_to_game_over(extra_move, GameState1,FinalState,GameState2),!.
 
-complete_make_move([_,_, GameState], [slide,[Is,Js],[If,Jf],AngPos] ,[FinalState,[If,Jf],GameState2]):-
+complete_make_move([_,_, GameState], [slide,[Is,Js],[If,Jf],AngPos] ,[FinalState,[If,Jf],GameState3]):-
 		make_move(GameState,[slide,[Is,Js],[If,Jf],AngPos],GameState1), 
 		switch_player(GameState1,GameState2),
-		switch_state_to_game_over(regular_move, GameState2,FinalState),!.
+		switch_state_to_game_over(regular_move, GameState2,FinalState,GameState3),!.
 
-complete_make_move([_,_, GameState], [Type,[If,Jf]|T] ,[FinalState,[If,Jf],GameState2]):-
+complete_make_move([_,_, GameState], [Type,[If,Jf]|T] ,[FinalState,[If,Jf],GameState3]):-
 		make_move(GameState,[Type,[If,Jf]|T],GameState1),
 		switch_player(GameState1,GameState2),
-		switch_state_to_game_over(regular_move, GameState2,FinalState),!.
+		switch_state_to_game_over(regular_move, GameState2,FinalState,GameState3),!.
 
 
 /** initialize connection **/

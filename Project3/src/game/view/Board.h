@@ -5,11 +5,24 @@
 #include <iostream>
 #include "../model/Move.h"
 #include "AngleChooser.h"
+#include "Cube.h"
+
 
 class AngleChooser;
 class BoardPiece;
 class MatchController;
 class Board;
+
+class BackButton: public Node
+{
+private:
+	Board * board;
+public:
+	BackButton(Board * board);
+	bool clickHandler();
+
+};
+
 
 class BoardHouse: public Node
 {
@@ -17,6 +30,7 @@ private:
 	int i, j;
 	Board * board;
 public:
+	
 	BoardHouse(Board * board, int i, int j);
 	bool clickHandler();
 	void setEnabled(bool val);
@@ -30,10 +44,12 @@ public:
 	BoardPiece * boardPieces[6][10];
 	BoardHouse * boardHouses[6][10];
 	AngleChooser * angleChooser;
-
+	Cube * leftScore,  * rightScore;
 	float cellSize, outPadding, innerPadding;
 	void coordsConvert(int i, int j, float &  xx, float & zz);
 public:
+	Node * modelPiece;
+
 	Board();
 	BoardPiece * addPiece(int i, int j);
 	BoardPiece *& piece(int i, int j);

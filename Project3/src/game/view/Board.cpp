@@ -3,6 +3,19 @@
 #include "../../scenegraph/animations/LinearAnimation.h"
 #include "../../scenegraph/animations/CircularAnimation.h"
 #include "../../scenegraph/primitives/Retangle.h"
+#include "Cube.h"
+
+
+
+
+BackButton::BackButton(Board * board): Node(new BackCube()){
+	
+}
+
+bool BackButton::clickHandler(){
+	board->getController()->goBack();
+	return true;
+}
 
 BoardHouse::BoardHouse(Board * board, int i, int j): board(board), i(i), j(j) {
 	setEnabled(false);
@@ -14,7 +27,7 @@ void BoardHouse::setEnabled(bool val){
 	this->setVisible(val);
 	this->setTouchable(val);
 }
-
+  
 
 bool BoardHouse::clickHandler(){
 	this->board->getController()->selectBoardCoords(i,j);
@@ -53,8 +66,27 @@ Board::Board(){
 	this->addDescendants(angleChooser);
 	this->addTranslation(-2.5*cellSize,0,-2.5*cellSize);
 
+	leftScore = new Cube();
+	Node * node = new Node(leftScore);
+	node->addTranslation(0,0.05,-1.5*cellSize);
+	node->addScaling(0.05,0.05,0.05); 
+	this->addDescendants(node);
 
 
+	rightScore = new Cube();
+	node = new Node(leftScore);
+	node->addTranslation(cellSize*5,0.05,-1.5*cellSize);
+	node->addScaling(0.05,0.05,0.05); 
+	this->addDescendants(node);
+
+	node = new BackButton(this);
+	node->addTranslation(cellSize*2.5,0.05,6.5*cellSize);
+	node->addScaling(0.05,0.05,0.05); 
+	this->addDescendants(node);
+
+	
+
+	
 	ground->addTranslation(2.5*cellSize,0,2.5*cellSize); 
 	ground->addScaling(54*cellSize/5,0, 30*cellSize/5); 
 	ground->addRotationX(-90);
@@ -74,9 +106,9 @@ void Board::coordsConvert(int i, int j, float &  xx, float & zz){
 	}else{
 
 		if(j < 0) {
-			xx = -1*outPadding +  cellSize*j + innerPadding*(j-1);
+			xx =  cellSize*j + innerPadding*(j-1);
 		}else{
-			xx = 6*cellSize + outPadding +  (cellSize)*(j-6) + innerPadding*(j-5);
+			xx = 6*cellSize + (cellSize)*(j-6) + innerPadding*(j-5);
 		}
 		zz = cellSize*i + innerPadding*(i+1);
 	}
@@ -94,11 +126,10 @@ BoardHouse * & Board::house(int i, int j){
 BoardPiece* Board::addPiece(int i, int j){
 	float x, z;
 	coordsConvert(i,j,x,z);
-	BoardPiece * boardPiece = new BoardPiece(this);
-	boardPiece->addTranslation(x,0,z);
-	piece(i,j) = boardPiece;
-	this->addDescendants(boardPiece);
-	return boardPiece;
+	piece(i,j) = new BoardPiece(this);
+	piece(i,j)->addTranslation(x,0,z);
+	this->addDescendants(piece(i,j));
+	return piece(i,j);
 }
 
 
@@ -182,7 +213,7 @@ AngleChooser * Board::getAngleChooser(){
 
 int Board::pushUpPiece(int delay, int i,int j){
 	Point3d points[2] = {{0,0,0},{0,cellSize,0}}; 
-	LinearAnimation * animation = new LinearAnimation(delay,1);
+	LinearAnimation * animation = new LinearAnimation(delay,1,false);
 	animation->addControlPoint(points[0]);
 	animation->addControlPoint(points[1]);
 	piece(i,j)->addAnimation(animation);
@@ -192,7 +223,7 @@ int Board::pushUpPiece(int delay, int i,int j){
 
 int Board::pullDownPiece(int delay, int i,int j){
 	Point3d points[2] = {{0,0,0},{0,-cellSize,0}}; 
-	LinearAnimation * animation = new LinearAnimation(delay,1);
+	LinearAnimation * animation = new LinearAnimation(delay,1,false);
 	animation->addControlPoint(points[0]);
 	animation->addControlPoint(points[1]);
 	piece(i,j)->addAnimation(animation);
@@ -220,8 +251,10 @@ int Board::slidePiece(int delay, int fromI,int fromJ, int toI, int toJ){
 
 int Board::rotatePiece(int delay, int i,int j, int rot){
 	Point3d center = {0,0,0};
-	CircularAnimation * animation = new CircularAnimation(delay,1,center,0, -45*piece(i,j)->getAngle(),-45*rot);
-	piece(i,j)->addAnimation(animation); 
+	float endAngle =  -45*(rot - piece(i,j)->getAngle());
+
+	CircularAnimation * animation = new CircularAnimation(delay,1,center,0,0, endAngle);
+	piece(i,j)->inner->addAnimation(animation); 
 	piece(i,j)->setAngle(rot);
 	return 1;
 }

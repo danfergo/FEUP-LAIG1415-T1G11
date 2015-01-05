@@ -15,5 +15,7 @@ public:
 	int result();
 	int currentPlayer();
 	std::string toString();
+
+	bool getHouseAngle(int i, int j, int & a);
 };
 

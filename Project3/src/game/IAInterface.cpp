@@ -88,7 +88,7 @@ GameState * IAInterface::makeMove(GameState * gamestate, Move * move ){
 
 	std::string mv;
 	mv  = "[";
-	for(int i = 0 ; i < subdata.size(); i++){
+	for(unsigned i = 0 ; i < subdata.size(); i++){
 		if(i != 0) mv += ",";
 		mv += subdata[i];
 	}

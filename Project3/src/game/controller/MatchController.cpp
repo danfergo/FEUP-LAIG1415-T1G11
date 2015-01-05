@@ -53,24 +53,21 @@ void MatchController::playerPlay(){
 	std::vector<IJ> outCoords = this->board->getOutsidePieces(gameStates.back()->currentPlayer());
 	coords.insert(coords.begin(), outCoords.begin(), outCoords.end());
 	board->setSelectable(coords);
-	
+	currentMove = new Move();
 	playingState = ChoosingPiece;
 }
 
 void MatchController::makeMove(){
-	Move * move = new Move();
-	move->from = curStart;
-	move->from = curEnd;
-	move->toA = curAngle;
-	gameStates.push_back(this->iaInterface.makeMove(gameStates.back(),move));
+
+	gameStates.push_back(this->iaInterface.makeMove(gameStates.back(),currentMove));
 
 	play();
 }
 
 void MatchController::setControlsChooseEnd(){
-	std::vector<IJ> coords = this->iaInterface.availableMoves(gameStates.back(),curStart);
+	std::vector<IJ> coords = this->iaInterface.availableMoves(gameStates.back(),this->currentMove->from);
 	
-	if(!curStart.isOutOfBoard()){
+	if(!this->currentMove->from.isOutOfBoard()){
 		std::vector<IJ> outCoords = this->board->getOutsidePieces(gameStates.back()->currentPlayer());
 		coords.insert(coords.begin(), outCoords.begin(), outCoords.end()); 
 	}
@@ -79,9 +76,9 @@ void MatchController::setControlsChooseEnd(){
 }
 
 void MatchController::setControlsChooseAngle(){
-	std::vector<int> angles = this->iaInterface.availableAngles(gameStates.back(),curStart,curEnd);
+	std::vector<int> angles = this->iaInterface.availableAngles(gameStates.back(),this->currentMove->from,this->currentMove->to);
 
-	this->board->moveAngleChooserTo(curEnd.i,curEnd.j);
+	this->board->moveAngleChooserTo(this->currentMove->to.i,this->currentMove->to.j);
 	this->board->getAngleChooser()->enable(angles);
 }
 
@@ -94,28 +91,30 @@ void MatchController::selectBoardCoords(int i, int j){
 
 	switch(playingState){
 		case ChoosingPiece:
-			this->curStart.set(i,j);
-			this->board->pushUpPiece(0,curStart.i,curStart.j);
+			this->currentMove->fromA = board->piece(i,j)->getAngle();
+			this->currentMove->from.set(i,j);
+			this->board->pushUpPiece(0,this->currentMove->from.i,this->currentMove->from.j);
 			playingState = ChoosingWhereToGo;
 			break;
 		case ChoosingWhereToGo:
-			this->curEnd.set(i,j);
-			if(curStart.i == curEnd.i && curStart.j == curEnd.j){
-				
-			}if(!curEnd.isOutOfBoard() && !curStart.isOutOfBoard()){
-				delay = board->pullDownPiece(0,curStart.i,curStart.j);
-				delay += board->slidePiece(delay,curStart.i,curStart.j, curEnd.i,curEnd.j);
-				this->board->pushUpPiece(delay,curEnd.i,curEnd.j);
+			this->currentMove->to.set(i,j);
+			if(this->currentMove->from.i == this->currentMove->to.i && this->currentMove->from.j == this->currentMove->to.j){
+				// keep in the same position
+			}if(!this->currentMove->to.isOutOfBoard() && !this->currentMove->from.isOutOfBoard()){
+				delay = board->pullDownPiece(0,this->currentMove->from.i,this->currentMove->from.j);
+				delay += board->slidePiece(delay,this->currentMove->from.i,this->currentMove->from.j, this->currentMove->to.i,this->currentMove->to.j); 
+				this->board->pushUpPiece(delay,this->currentMove->to.i,this->currentMove->to.j);
 			} else{
-				delay = board->slidePiece(0,curStart.i,curStart.j, curEnd.i,curEnd.j);
-				board->pullDownPiece(delay,curEnd.i,curEnd.j);
-				this->board->pushUpPiece(delay,curEnd.i,curEnd.j);
+				delay = board->slidePiece(0,this->currentMove->from.i,this->currentMove->from.j, this->currentMove->to.i,this->currentMove->to.j);
+				board->pullDownPiece(delay,this->currentMove->to.i,this->currentMove->to.j);
+				this->board->pushUpPiece(delay,this->currentMove->to.i,this->currentMove->to.j);
 			}
 
 
 			
-			if(curEnd.isOutOfBoard()){
-				
+			if(this->currentMove->to.isOutOfBoard()){
+				// we dont need a final angle. skip that.
+				makeMove();
 			}else{
 				playingState = ChoosingAngle;
 			}
@@ -124,15 +123,19 @@ void MatchController::selectBoardCoords(int i, int j){
 	
 }
 void MatchController::selectAngle(int angle){
-	std::cout << "Selected angle " << angle << std::endl;
 	board->getAngleChooser()->disableAll();
 
-	this->curAngle = angle;
+	this->currentMove->toA = angle;
 	switch(playingState){
 		case ChoosingAngle:
-			board->pullDownPiece(0,curEnd.i,curEnd.j);
-			board->rotatePiece(0,curEnd.i, curEnd.j,curAngle);
+			board->pullDownPiece(0,this->currentMove->to.i,this->currentMove->to.j);
+			board->rotatePiece(0,this->currentMove->to.i, this->currentMove->to.j,this->currentMove->toA);
 			makeMove();
 			break;
 	}
+}
+
+void MatchController::goBack(){
+
+
 }

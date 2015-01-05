@@ -4,9 +4,12 @@
 
 #include "ConcaveCube.h"
 
-BoardPiece::BoardPiece(Board * board): angle(2), board(board)
+BoardPiece::BoardPiece(Board * board): angle(0), board(board)
 {
-	this->addPrimitive(new ConcaveCube());
+	inner = new Node(board->modelPiece);
+	inner->addScaling(0.05,0.05,0.05);
+	this->addDescendants(inner);
+	
 }
 
 
@@ -20,7 +23,7 @@ int BoardPiece::getAngle(){
 }
 
 void BoardPiece::setAngle(int angle){
-	this->angle;
+	this->angle = angle%8;
 }
 
 void BoardPiece::rotAngle(int angle){

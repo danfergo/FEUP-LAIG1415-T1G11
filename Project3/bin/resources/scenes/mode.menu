@@ -1,0 +1,156 @@
+<anf>
+     <globals>
+          <drawing mode="fill" shading="gouraud" background="0 0 0 1" />
+          <culling face="back" order="ccw" />
+          <lighting doublesided="false" local="true" enabled="true" ambient="0.8 0.8 0.8 1" />			
+    </globals> 
+    
+    <cameras initial="Sky view" >
+      <ortho id="Sky view" direction="y" near="0" far="14" left="0" right="12" top="0" bottom="-30" />
+    </cameras>
+
+    <!-- bloco de luzes -->
+    <lights>
+        <!-- Deve existir pelo menos uma luz declarada -->
+        <light id="Moon reflex" type="omni" enabled="true" marker="false" pos="30 50 0" >
+          <component type="ambient" value="0.01 0.01 0.015 0" />
+          <component type="diffuse" value="0.7 0.7 0.8 1" />
+          <component type="specular" value="0.1 0.1 0.1 0" />
+        </light>
+    </lights> 
+
+
+  <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
+    <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
+    <textures>
+      <texture id="jvsc" file="resources/labels/JvsC.jpg" texlength_s="9.37" texlength_t="4.56" />
+      <texture id="jvsj" file="resources/labels/JvsJ.jpg" texlength_s="8.16" texlength_t="4.72" />
+      <texture id="cvsc" file="resources/labels/CvsC.jpg" texlength_s="10.64" texlength_t="4.80" />
+      <texture id="jvscf" file="resources/labels/JvsCf.jpg" texlength_s="9.36" texlength_t="4.52" />
+      <texture id="modo" file="resources/labels/Modo.jpg" texlength_s="5.80" texlength_t="4.42" />
+    </textures>
+
+
+    <appearances>
+      <appearance id="white" shininess="5" textureref="" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="1 1 1 0" />
+        <component type="specular" value="1 1 1 0" />
+      </appearance>
+
+      <appearance id="jvsc" shininess="1" textureref="jvsc" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5  0.5 0" />
+      </appearance>
+
+      <appearance id="jvsj" shininess="1" textureref="jvsj" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5  0.5 0" />
+      </appearance>
+
+      <appearance id="cvsc" shininess="1" textureref="cvsc" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5  0.5 0" />
+      </appearance>
+
+      <appearance id="jvscf" shininess="1" textureref="jvscf" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5  0.5 0" />
+      </appearance>
+      
+      <appearance id="modo" shininess="1" textureref="modo" >
+        <component type="ambient" value="0.5 0.5 0.5 0" />
+        <component type="diffuse" value="0.5 0.5 0.5 0" />
+        <component type="specular" value="0.5 0.5  0.5 0" />
+      </appearance>
+      
+    </appearances>
+
+    <animations></animations>
+  
+    <!-- bloco do grafo; "rootid" identifica o no de raiz -->
+    <graph rootid="menu">
+
+      <node id="menu">
+        <appearanceref id="white"/>
+        <primitives></primitives>
+        <transforms>
+          <transform type="translate" to="0 0 28" />
+          <transform type="rotate" axis="x" angle="-90"/>
+          <transform type="translate" to="0.5 0 0"/>
+        </transforms>
+        <descendants>
+          <noderef id="title" />
+          <noderef id="option1" />
+          <noderef id="option2" />
+          <noderef id="option3" />
+          <noderef id="option4" />
+        </descendants>
+      </node>
+      
+      <node id="title">
+        <appearanceref id="modo"/>
+        <primitives>
+          <rectangle xy1="0 20" xy2="5.80 24.40"/>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="2.5 1 0"/>
+        </transforms>
+        <descendants>
+        </descendants>
+      </node>
+      
+      <node id="option1">
+        <appearanceref id="jvsj"/>
+        <primitives>
+          <rectangle xy1="0 15" xy2="8.16 19.52"/>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="1.25 0 0"/>
+        </transforms>
+        <descendants>
+        </descendants>
+      </node>
+      
+      <node id="option2">
+        <appearanceref id="jvscf"/>
+        <primitives>
+          <rectangle xy1="0 10" xy2="9.36 14.52"/>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="1.25 0 0"/>
+        </transforms>
+        <descendants>
+        </descendants>
+      </node>
+
+      <node id="option3">
+        <appearanceref id="jvsc"/>
+        <primitives>
+          <rectangle xy1="0 5" xy2="9.37 9.56"/>
+        </primitives>
+        <transforms>
+          <transform type="translate" to="1.25 0 0"/>
+        </transforms>
+        <descendants>
+        </descendants>
+      </node>
+
+      <node id="option4">
+        <appearanceref id="cvsc"/>
+        <primitives>
+          <rectangle xy1="0 0" xy2="10.64 4.80"/>
+        </primitives>
+        <transforms></transforms>
+        <descendants>
+        </descendants>
+      </node>
+      
+    </graph>
+  
+</anf>
+  

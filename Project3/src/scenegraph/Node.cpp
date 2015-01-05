@@ -12,6 +12,11 @@ Node::Node(Primitive * primitive):appearance(NULL),isDisplayList(false),currentA
 	this->addPrimitive(primitive);
 }
 
+Node::Node(Node * subnode):appearance(NULL),isDisplayList(false),currentAnimationIndex(0),lastEndTime(0), name(0), touchable(false), visible(true){
+	this->resetTransformations();
+	this->addDescendants(subnode);
+}
+
 Node::~Node() { 
 
 }

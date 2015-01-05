@@ -18,7 +18,7 @@ Animation(st,dur), center(center), radius(radius),startAngle(startAngle),endAngl
 	endPosition.x = center.x + radius*sin(endAngleRad);
 	endPosition.y = center.y;
 	endPosition.z = center.z + radius*cos(endAngleRad);
-	this->endPositionAngle = endAngle + 90;
+	this->endPositionAngle = endAngle; // + 90;
 }
 
 
@@ -37,7 +37,7 @@ void CircularAnimation::update(unsigned long ticks){
 		currentPosition.x = center.x + radius*sin(currentAngleRad);
 		currentPosition.y = center.y;
 		currentPosition.z = center.z + radius*cos(currentAngleRad);
-		this->currentAngle = currentAngleDeg + 90;
+		this->currentAngle = currentAngleDeg; // + 90;**/
 	}else if(time > endingTime){
 		this->currentPosition = endPosition;
 		this->currentAngle = endPositionAngle;

@@ -122,6 +122,12 @@
     <ClCompile Include="src\game\view\GameCamera.cpp">
       <Filter>game\view</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\view\MenuButton.cpp">
+      <Filter>game\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\view\Cube.cpp">
+      <Filter>game\view</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\scenegraph\Node.h">
@@ -227,6 +233,12 @@
       <Filter>game\view</Filter>
     </ClInclude>
     <ClInclude Include="src\game\view\GameCamera.h">
+      <Filter>game\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\view\MenuButton.h">
+      <Filter>game\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\view\Cube.h">
       <Filter>game\view</Filter>
     </ClInclude>
   </ItemGroup>

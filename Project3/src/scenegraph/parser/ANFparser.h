@@ -17,17 +17,25 @@
 #include <string>
 
 #include "../../game/view/Board.h"
+#include "../../game/view/MenuButton.h"
 
+class MenuButton;
 
+class ParseExep{ 
+};
 
 class ANFparser{
 public:
 	static Board * boardFound;
+	static MenuButton * buttonFound0;
+	static MenuButton * buttonFound1;
+	static MenuButton * buttonFound2;
+	static MenuButton * buttonFound3;
+	static Node  * pieceModelFound;
 private:
 
 
-	class ParseExep{ 
-	};
+	
 
 	typedef struct AppearanceWrapper{
 		Appearance * appearance;

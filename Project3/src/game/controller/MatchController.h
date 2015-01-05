@@ -11,8 +11,7 @@ private:
 	Board * board;
 	std::vector<GameState *> gameStates;
 	enum PState playingState;
-	IJ curStart, curEnd;
-	int curAngle;
+	Move * currentMove;
 public:
 	MatchController(Board * board);
 	void update();
@@ -30,6 +29,8 @@ public:
 	void selectBoardCoords(int i, int j);
 	void selectAngle(int angle);
 	void animationEnded();
+
+	void goBack();
 	
 	void setBoard(Board * board);  
 };

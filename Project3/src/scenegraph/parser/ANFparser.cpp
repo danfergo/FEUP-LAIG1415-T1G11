@@ -2,14 +2,14 @@
 #include <iostream>
 #include <map>
 
-Board * ANFparser::boardFound = NULL;
-
 const char ANFparser::STRIC = 0;
 const char ANFparser::PERMISSIVE = 1;
 const char ANFparser::SILENT = 2;
 
 const char ANFparser::WARNING = 0;
 const char ANFparser::ERR = 1;
+
+
 
 ANFparser::ANFparser(const char parseMode): parseMode(parseMode){
 	initPrimitiveParsers();

@@ -292,7 +292,146 @@
         <descendants>  </descendants>
       </node>-->
       
+
+	  <node id="tixel_game_board_piece">
+        <appearanceref id="inherit"/>
+        <transforms>
+			 <transform type="translate" to="-0.5 0 -0.5"/>
+		</transforms>
+        <primitives></primitives>
+        <descendants>
+          <noderef id="tixel_game_board_piece_uncentered"/>
+        </descendants>
+      </node>
+	  
+	  <node id="tixel_game_board_piece_uncentered">
+        <appearanceref id="inherit"/>
+        <transforms></transforms>
+        <primitives></primitives>
+        <descendants>
+          <noderef id="curve_piece" />
+          <noderef id="top_piece" />
+          <noderef id="bot_piece" />
+          <noderef id="rigth_piece"/>
+          <noderef id="left_piece"/>
+          <noderef id="back_piece"/>
+        </descendants>
+      </node>
       
+      <node id="rigth_piece">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="y" angle="-90"/>
+        </transforms>
+        <primitives></primitives>
+        <descendants>
+          <noderef id="side_piece"/>
+        </descendants>
+      </node>
+
+      <node id="left_piece">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="1 0 1" />
+          <transform type="rotate" axis="y" angle="90"/>
+        </transforms>
+        <primitives></primitives>
+        <descendants>
+          <noderef id="side_piece"/>
+        </descendants>
+      </node>
+
+      <node id="back_piece">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="translate" to="0 0 1"/>
+        </transforms>
+        <primitives></primitives>
+        <descendants>
+          <noderef id="side_piece"/>
+        </descendants>
+      </node>
+      
+      <node id="side_piece">
+        <appearanceref id="inherit"/>
+        <transforms></transforms>
+        <primitives>
+          <rectangle xy1="0 0" xy2="1 0.3"/>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+      <node id="curve_piece">
+        <appearanceref id="inherit"/>
+        <transforms></transforms>
+        <primitives>
+          <patch order="3" partsU="10" partsV="10" compute="fill">
+            <controlpoint x="0" y="0" z="0" />
+            <controlpoint x="0" y="0.1" z="0" />
+            <controlpoint x="0" y="0.2" z="0" />
+            <controlpoint x="0" y="0.3" z="0" />
+
+            <controlpoint x="0.276142" y="0" z="0.276142" />
+            <controlpoint x="0.276142" y="0.1" z="0.276142" />
+            <controlpoint x="0.276142" y="0.2" z="0.276142" />
+            <controlpoint x="0.276142" y="0.3" z="0.276142" />
+
+            <controlpoint x="0.723858" y="0.0" z="0.276142" />
+            <controlpoint x="0.723858" y="0.1" z="0.276142" />
+            <controlpoint x="0.723858" y="0.2" z="0.276142" />
+            <controlpoint x="0.723858" y="0.3" z="0.276142" />
+
+            <controlpoint x="1" y="0" z="0" />
+            <controlpoint x="1" y="0.1" z="0" />
+            <controlpoint x="1" y="0.2" z="0" />
+            <controlpoint x="1" y="0.3" z="0" />
+          </patch>
+        </primitives>
+        <descendants></descendants>
+      </node>
+
+      <node id="bot_piece">
+        <appearanceref id="inherit"/>
+        <transforms>
+          <transform type="rotate" axis="y" angle="180"/>
+          <transform type="translate" to="-1 0.3 0"/>
+          <transform type="rotate" axis="x" angle="180"/>
+        </transforms>
+        <primitives></primitives>
+        <descendants>
+          <noderef id="top_piece"/>
+        </descendants>
+      </node>
+      
+      <node id="top_piece">
+        <appearanceref id="inherit"/>
+        <transforms></transforms>
+        <primitives>
+          <patch order="3" partsU="10" partsV="10" compute="fill">
+
+            <controlpoint x="0" y="0.3" z="0" />
+            <controlpoint x="0" y="0.3" z="0.333" />
+            <controlpoint x="0" y="0.3" z="0.666" />
+            <controlpoint x="0" y="0.3" z="1" />
+
+            <controlpoint x="0.333" y="0.3" z="0.276142" />
+            <controlpoint x="0.333" y="0.3" z="0.5" />
+            <controlpoint x="0.333" y="0.3" z="0.75" />
+            <controlpoint x="0.333" y="0.3" z="1" />
+            
+            <controlpoint x="0.666" y="0.3" z="0.276142" />
+            <controlpoint x="0.666" y="0.3" z="0.5" />
+            <controlpoint x="0.666" y="0.3" z="0.75" />
+            <controlpoint x="0.666" y="0.3" z="1" />
+
+            <controlpoint x="1" y="0.3" z="0" />
+            <controlpoint x="1" y="0.3" z="0.333" />
+            <controlpoint x="1" y="0.3" z="0.666" />
+            <controlpoint x="1" y="0.3" z="1" />
+          </patch>
+        </primitives>
+        <descendants></descendants>
+      </node>
       
       
       
@@ -315,6 +454,7 @@
           <noderef id="flagg" />
          <!-- <noderef id="bush" />-->
 			<noderef id="board" />
+			<noderef id="tixel_game_board_piece" />
         </descendants>
       </node>
 

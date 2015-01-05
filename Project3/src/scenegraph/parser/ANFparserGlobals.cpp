@@ -100,7 +100,6 @@ void ANFparser::parseGlobalsCulling(TiXmlElement * anfCulling){
 	}else{
 
 		issue("Bad value for drawing order.(default assumed)",WARNING);
-						std::cout << "asdajsdçld" << std::endl;
 	}
 
 }
